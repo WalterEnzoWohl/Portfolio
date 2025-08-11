@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" 
+    integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- MENU ENCABEZADO -->
+     <div class="contenedor-header">
+        <header>
+            <div class="logo">
+                <a href="#">Walter Enzo Wohl</a>
+            </div>
+            <nav id="nav">
+                <ul>
+                    <li><a href="#home" onclick="seleccionar()">home</a></li>
+                    <li><a href="#aboutme" onclick="seleccionar()">About Me</a></li>
+                    <li><a href="#skills" onclick="seleccionar()">Skills</a></li>
+                    <li><a href="#curriculum" onclick="seleccionar()">CV</a></li>
+                    <li><a href="#portfolio" onclick="seleccionar()">Portfolio</a></li>
+                    <li><a href="#contacto" onclick="seleccionar()">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-responsive"  onclick="mostrarOcultarMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </header>
+     </div>
+     <!-- SECCION DE INICIO -->
+      <section class="home" id="home">
+        <div class="contenedor-banner">
+            <div class="contenedor-img">
+                <img src="img/FotodePerfilAzul.png" alt="">
+            </div>
+            <h1>Walter Enzo Wohl</h1>
+            <h2>Analista de Datos Junior - Desarrollador web Fullstack</h2>
+            <div class="redes">
+                <a href="https://www.linkedin.com/in/walterenzowohl"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com/WalterEnzoWohl"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+      </section>
+      <!-- SECCION ABOUT ME -->
+       <section id="aboutme" class="aboutme">
+        <div class="contenedor-seccion">
+            <h2>About Me</h2>
+            <p><span>Hola, Soy Walter Enzo Wohl.</span> 
+                Soy un estudiante de programación con una base sólida en tecnología y
+                análisis de datos. Actualmente estoy en formación sobre arquitectura
+                cloud y automatización de pipelines con Azure DevOps, en camino hacia
+                un rol de Data Engineer. Mi experiencia incluye moderación y validación
+                de contenido automatizado en plataformas de alto tráfico, con
+                capacidad de autogestión mientras trabajo con herramientas de
+                reportes y métricas. Me caracterizo por mi pensamiento analítico, mi
+                curiosidad por la tecnología, mi compromiso con la mejora continua y la
+                proactividad. Sin embargo, mi especialidad es la buena comunicación
+                con equipos multidisciplinarios.</p>
+
+                <div class="fila">
+                    <!-- Datos personales -->
+                    <div class="col">
+                        <h3>Datos personales</h3>
+                        <ul>
+                            <li>
+                                <strong>Cumpleaños</strong>
+                                15-05-2001
+                            </li>
+                            <li>
+                                <strong>Telefono</strong>
+                                1141419407
+                            </li>
+                            <li>
+                                <strong>Email</strong>
+                                walterenzowohl@gmail.com
+                            </li>
+                            <li>
+                                <strong>Website</strong>
+                                www.Wohlf.com
+                            </li>
+                            <li>
+                                <strong>Direccion</strong>
+                                GBA, Buenos Aires, Argentina
+                            </li>
+                            <li>
+                                <strong>Cargo actual</strong>
+                                <span>Analista de Datos Junior</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Intereses -->
+                     <div class="col">
+                        <h3>Intereses</h3>
+                        <div class="contenedor-intereses">
+                            <div class="interes">
+                                <i class="fa-solid fa-gamepad"></i>
+                                <span>Juegos</span>
+                            </div>
+                            <div class="interes">
+                                <i class="fa-solid fa-basketball"></i>
+                                <span>Basketball</span>
+                            </div>
+                            <div class="interes">
+                                <i class="fa-solid fa-plane"></i>
+                                <span>Viajar</span>
+                            </div>
+                            <div class="interes">
+                                <i class="fa-solid fa-book"></i>
+                                <span>Leer</span>
+                            </div>
+                            <div class="interes">
+                                <i class="fa-solid fa-utensils"></i>
+                                <span>Cocinar</span>
+                            </div>
+                            <div class="interes">
+                                <i class="fa-solid fa-code"></i>
+                                <span>Programar</span>
+                            </div>
+                            <div class="interes">
+                                <i class="fa-solid fa-dumbbell"></i>
+                                <span>GYM</span>
+                            </div>
+                            <div class="interes">
+                                <img src="img/mate-svgrepo-com.svg" alt="Mate" class="icono-interes">
+                                <span>Mate</span>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+                <button>
+                    DESCARGAR CV <i class="fa-solid fa-download"></i>
+                    <span class="overlay"></span>
+                </button>
+        </div>
+       </section>
+       <!-- SECCION SKILLS -->
+        <section id="skills" class="skills">
+            <div class="contenedor-seccion">
+                <h2>Skills</h2>
+                <div class="fila">
+                    <!-- Technical Skills -->
+                     <div class="col">
+                        <h3>Technical Skils</h3>
+                        <div class="skill">
+                            <span>Javascript</span>
+                            <div class="barra-skill">
+                                <div class="progreso">
+                                    <span>37%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <span>HTML & CSS</span>
+                            <div class="barra-skill">
+                                <div class="progreso">
+                                    <span>78%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <span>Excel</span>
+                            <div class="barra-skill">
+                                <div class="progreso">
+                                    <span>74%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <span>SQL</span>
+                            <div class="barra-skill">
+                                <div class="progreso">
+                                    <span>72%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <span>Power BI</span>
+                            <div class="barra-skill">
+                                <div class="progreso">
+                                    <span>81%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <span>Python</span>
+                            <div class="barra-skill">
+                                <div class="progreso">
+                                    <span>22%</span>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                     <!-- Professional Skills -->
+                     <div class="col">
+                        <h3>Professional Skils</h3>
+                        <div class="skill">
+                            <span>Trabajo en equipo</span>
+                            <div class="barra-skill">
+                                <div class="progreso">
+                                    <span>91%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <span>Comunicación</span>
+                            <div class="barra-skill">
+                                <div class="progreso">
+                                    <span>94%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <span>Organizacion & Prioizacion de tareas</span>
+                            <div class="barra-skill">
+                                <div class="progreso">
+                                    <span>87%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <span>Manejo del tiempo</span>
+                            <div class="barra-skill">
+                                <div class="progreso">
+                                    <span>85%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <span>Tolerancia a la frustracion</span>
+                            <div class="barra-skill">
+                                <div class="progreso">
+                                    <span>80%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <span>Aplicacion de Metodologias Agiles</span>
+                            <div class="barra-skill">
+                                <div class="progreso">
+                                    <span>83%</span>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </section>
+        <!-- SECCION CURRICULUM -->
+         <section id="curriculum" class="curriculum">
+            <div class="contenedor-seccion">
+                <h2>Curriculum</h2>
+                <div class="fila">
+                    <div class="col izquierda">
+                        <h3>Formacion Academica</h3>
+                        <div class="item izq">
+                            <h4>Diplomatura en Desarrollo Web Full Stack</h4>
+                            <span class="casa">Universidad Tecnologica Nacional</span>
+                            <span class="fecha">20 de Marzo 2023 - 13 de Diciembre 2023</span>
+                            <p>
+                                Diplomatura en Desarrollo Web Full Stack (UTN – Fundación Empujar)
+Curso integral orientado al desarrollo de aplicaciones web tanto del lado del cliente (frontend) como del servidor (backend). 
+Adquirí conocimientos en HTML, CSS, JavaScript, Git, GitHub, Node.js y bases de datos, trabajando en proyectos prácticos con metodologías ágiles como Scrum.
+El enfoque estuvo puesto en la lógica de programación, la colaboración en equipo y el uso de herramientas de control de versiones y despliegue web.
+                            </p>
+                            <div class="conectori">
+                                <div class="circuloi"></div>
+                            </div>
+                        </div>
+                        <div class="item izq">
+                            <h4>Curso de Análisis de Datos</h4>
+                            <span class="casa">CREHANA</span>
+                            <span class="fecha">2024 - 2025</span>
+                            <p>
+                                Curso enfocado en el análisis y visualización de datos mediante herramientas clave del sector. 
+                                Aprendí a manipular y analizar grandes volúmenes de información utilizando Excel, SQL, Power BI y Python, desarrollando habilidades prácticas para la toma de decisiones basadas en datos. 
+                                Este curso fortaleció mi perfil como analista de datos y potenció mi capacidad para trabajar en proyectos orientados a resultados concretos.
+                            </p>
+                            <div class="conectori">
+                                <div class="circuloi"></div>
+                            </div>
+                        </div> 
+                        <div class="item izq">
+                            <h4>Técnico Electromecánico</h4>
+                            <span class="casa">Escuela de Educación Secundaria Técnica N°3</span>
+                            <span class="fecha">2012 - 2019</span>
+                            <p>
+                                Formación técnica con enfoque en sistemas eléctricos, mecánicos y automatización industrial. 
+                                Durante la carrera adquirí una sólida base en resolución de problemas, interpretación de planos, programación de PLC y fundamentos de electrónica, lo cual fortaleció mi pensamiento lógico y analítico. 
+                                Estas habilidades resultaron claves para mi posterior transición al mundo de la programación y el desarrollo web.
+                            </p>
+                            <div class="conectori">
+                                <div class="circuloi"></div>
+                            </div>
+                        </div>                                               
+                    </div>
+                    <div class="col derecha">
+                        <h3>Experiencia</h3>
+                        <div class="item der">
+                            <h4>ANALISTA DE DATOS JUNIOR</h4>
+                            <span class="casa">ARBUSTA S.A.</span>
+                            <span class="fecha">AGOSTO DE 2024 - ACTUALIDAD</span>
+                            <p>Analisis de datos para Arbusta en colaboración con el proyecto MTC
+                                para control y moderacion de productos en Mercado Libre.
+                                Participación activa en proyectos internos utilizando Excel - SQL 
+                               Power BI para el análisis y visualizacion de grandes volúmenes de
+                                datos y seguimiento de KPIs. 
+                               Desarrollo de reportes automatizados en Google Sheets y
+                                dashboards interactivos en Power BI para visualizar métricas
+                                operativas clave.
+                                Lidero una iniciativa propia (Reviews) dando onboarding, donde
+                                capacito a nuevos compañeros en procedimientos, buenas prácticas
+                                y uso eficiente de herramientas de trabajo.
+                                Realizo tareas de control de calidad (QA) sobre el trabajo del equipo
+                                en la iniciativa, asegurando la precisión y consistencia.
+                                Trabajo en equipo bajo metodologías ágiles, adaptándome a
+                                cambios dinámicos en los flujos de trabajo y prioridades del cliente.
+                                Participación en procesos de extracción, transformación y carga
+                                (ETL) de datos para alimentar dashboards de métricas en Power BI.
+                            </p>
+                            <div class="conectord">
+                                <div class="circulod"></div>
+                            </div>
+                        </div>
+                        <div class="item der">
+                            <h4>DESARROLLADOR IoT EN PASANTIA</h4>
+                            <span class="casa">GRUPO MSA S.A</span>
+                            <span class="fecha"> FEBRERO - MARZO 2024</span>
+                            <p>
+                                Desarrollo de una aplicación IoT para validación de identidad
+                                mediante DNI y huella.
+                                Implementación en entorno Ubuntu; trabajo colaborativo con
+                                metodologías ágiles.
+                                Desarrollo de soluciones creativas para control de acceso
+                                Utilización de Html - Css - Javascript - Python (lenguaje de
+                                programacion).
+                            </p>
+                            <div class="conectord">
+                                <div class="circulod"></div>
+                            </div>
+                        </div>
+                        <div class="item der">
+                            <h4>ENCARGADO DE BARRA EN EVENTOS</h4>
+                            <span class="casa">RIKI WOHL.</span>
+                            <span class="fecha">20 de Marzo 2023 - 13 de Diciembre 2023</span>
+                            <p> Coordinación de equipos en eventos con más de 300 asistentes.
+                                Gran habilidad de priorización de tareas
+                                Resolución de imprevistos operativos bajo presión.
+                                Planificación y organización de trabajo y de personal a cargo
+                                Interacción constante con clientes en idioma inglés.
+                            <div class="conectord">
+                                <div class="circulod"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </section>
+         <!-- SECCION PORTAFOLIO -->
+          <section id="portfolio" class="portfolio">
+            <div class="contenedor-seccion">
+                <h2>PORTAFOLIO</h2>
+                <div class="galeria">
+                    <div class="proyecto">
+                        <img src="img/D1.jpg" alt="">
+                        <div class="overlay">
+                            <h3>Informe de Gestion</h3>
+                            <p>PowerBI + Excel</p>
+                        </div>
+                    </div>
+                    <div class="proyecto">
+                        <img src="img/D2.jpg" alt="">
+                        <div class="overlay">
+                            <h3>Seguimiento de reportes por recurso</h3>
+                            <p>PowerBI + SQL + Python</p>
+                        </div>
+                    </div>
+                    <div class="proyecto">
+                        <img src="img/D3.jpg" alt="">
+                        <div class="overlay">
+                            <h3>Rendimiento de Equipos de Futbol</h3>
+                            <p>PowerBI + Excel</p>
+                        </div>
+                    </div>
+                    <div class="proyecto">
+                        <img src="img/D4.jpg" alt="">
+                        <div class="overlay">
+                            <h3>Canciones mas escuchadas en Spotify</h3>
+                            <p>PowerBI + SQL</p>
+                        </div>
+                    </div>
+                    <div class="proyecto">
+                        <img src="img/D5.jpg" alt="">
+                        <div class="overlay">
+                            <h3>Informe de Ventas</h3>
+                            <p>PowerBI + Excel</p>
+                        </div>
+                    </div>
+                    <div class="proyecto">
+                        <img src="img/D6.jpg" alt="">
+                        <div class="overlay">
+                            <h3>Informe de Ventas por segmento</h3>
+                            <p>PowerBI + SQL + Python</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </section>
+          <!-- SECCION CONTACTO -->
+           <section id="contacto" class="contacto">
+            <div class="contenedor-seccion">
+                <h2>CONTACTO</h2>
+                <div class="fila">
+                    <!-- Formulario -->
+                    <div class="col">
+                        <input type="text" placeholder="Tu nombre">
+                        <input type="text" placeholder="Número de Telefono">
+                        <input type="text" placeholder="Direccion de correo">
+                        <input type="text" placeholder="Asunto">
+                        <textarea name="" id="" cols="30" rows="10" placeholder="Mensaje"></textarea>
+                        <button>
+                            Enviar mensaje<i class="fa-solid fa-paper-plane"></i>
+                            <span class="overlay"></span>
+                        </button>
+                    </div>
+                    <!-- info Contacto -->
+                     <div class="col">
+                        <div class="info">
+                            <ul>
+                                <li>
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    GBA | Buenos Aires | Argentina
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-phone"></i>
+                                    Llamame: 11 4141 9407
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-envelope"></i>
+                                    Manda un mail al: walterenzowohl@gmail.com
+                                </li>
+                            </ul>
+                        </div>
+                     </div>
+                </div>
+            </div>
+           </section>
+           <!-- FOOTER -->
+            <footer>
+                <a href="#home" class="arriba">
+                    <i class="fa-solid fa-angles-up"></i>
+                </a>
+                <div class="redes">
+                    <a href="https://www.linkedin.com/in/walterenzowohl"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://github.com/WalterEnzoWohl"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </footer>
+            </section>
+            <script src="script.js"></script>
+</body>
+</html>
