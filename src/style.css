@@ -19,7 +19,7 @@ html{
     z-index: 99;
 }
 .contenedor-header header{
-    max-width: 1100px;
+    max-width: 1200px;
     margin: auto;
     display: flex;
     justify-content: space-around;
@@ -147,15 +147,16 @@ html{
 }
 .aboutme .fila .col ul li{
     margin: 12px 0;
+    position: relative;
 }
 .aboutme .fila .col ul li strong{
     display: inline-block;
     color: #1CB698;
-    width: 130px;
+    width: 100%;
 }
-.aboutme .fila .col ul li span{
+.aboutme .fila .col ul span{
     background-color: #1CB698;
-    padding: 3px;
+    padding: 5px;
     font-weight: bold;
     border-radius: 5px;
 }
@@ -187,7 +188,6 @@ html{
     width: 30px;
     height: 30px;
     margin-bottom: 10px;
-    
 }
 .aboutme button{
     cursor: pointer;
@@ -509,6 +509,7 @@ html{
 .portfolio .galeria .proyecto img{
     width: 100%;
     display: block;
+    margin: auto
 }
 .portfolio .contenedor-seccion .galeria .proyecto .overlay{
     position: absolute;
@@ -684,12 +685,29 @@ footer .arriba{
     }
 }
 @media screen and (max-width:700px){
-    .aboutme.fila{
+    .contenedor-header header .logo a{
+        font-size: 26px;
+    }
+    .aboutme .fila{
         display: block;
     }
     .aboutme .fila .col{
-        width: fit-content;
+        width: 100%;
     }
+    .aboutme .fila .col h3{
+        margin-top: 30px ;
+    }
+    .aboutme .fila .col ul li strong{
+        display: block;
+    }
+    .aboutme .fila .col .contenedor-intereses .interes{
+        width: 20%;
+    }
+    .aboutme .fila .col .contenedor-intereses .interes i{
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    
     .skills .fila{
         display: block;
     }
@@ -713,7 +731,7 @@ footer .arriba{
         width: 100%;
     }
     .portfolio .galeria .proyecto{
-        max-width: 100%;
+        max-width: 90%;
     }
     .portfolio .galeria .proyecto{
         width: 100%;
