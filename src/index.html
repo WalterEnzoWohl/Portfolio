@@ -1,3 +1,19 @@
+<!--
+COSAS A MEJORAR:
+- El link de linkedin o github te saca de la pagina del portfolio en ves de abrir nueva pestaña
+- Hay que hacer un logo para el Header ya que es redundante que mi nombre este tan seguido
+- La descarga de CV se puede SPAMEAR
+- Las barras de SKILLS estan aburridas, hay que ponerle logos de las tecnologias
+- El menu hamburguesa esta horrible, diseño a mejorar
+- el background  se pixelea en celulares.
+
+COSAS A MEJORAR MUY A FUTURO:
+- HACERLO TODO CON REACT Y TYPESCRIPT
+- HACER BASE DE SQL
+- AÑADIR FUNCIONALIADES EN BASE A LAS HABILIDADES APRENDIDAS
+-->
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,9 +32,8 @@
     </script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
     <!-- MENU ENCABEZADO -->
-     <div class="contenedor-header">
+    <div class="contenedor-header">
         <header>
             <div class="logo">
                 <a href="#">Walter Enzo Wohl</a>
@@ -38,17 +53,20 @@
             </div>
         </header>
      </div>
+<body>
      <!-- SECCION DE INICIO -->
       <section class="home" id="home">
         <div class="contenedor-banner">
             <div class="contenedor-img">
                 <img src="img/FotodePerfilAzul.png" alt="">
             </div>
-            <h1>Walter Enzo Wohl</h1>
-            <h2>Analista de Datos Junior - Desarrollador web Fullstack</h2>
-            <div class="redes">
-                <a href="https://www.linkedin.com/in/walterenzowohl"><i class="fa-brands fa-linkedin"></i></a>
-                <a href="https://github.com/WalterEnzoWohl"><i class="fa-brands fa-github"></i></a>
+            <div class="contenedor-info">
+             <h1>Walter Enzo Wohl</h1>
+             <h2>Analista de Datos Junior - Desarrollador web Fullstack</h2>
+             <div class="redes">
+                 <a href="https://www.linkedin.com/in/walterenzowohl"><i class="fa-brands fa-linkedin"></i></a>
+                 <a href="https://github.com/WalterEnzoWohl"><i class="fa-brands fa-github"></i></a>
+             </div>
             </div>
         </div>
       </section>
@@ -57,16 +75,13 @@
         <div class="contenedor-seccion">
             <h2>About Me</h2>
             <p><span>Hola, Soy Walter Enzo Wohl.</span> 
-                Soy un estudiante de programación con una base sólida en tecnología y
-                análisis de datos. Actualmente estoy en formación sobre arquitectura
-                cloud y automatización de pipelines con Azure DevOps, en camino hacia
-                un rol de Data Engineer. Mi experiencia incluye moderación y validación
-                de contenido automatizado en plataformas de alto tráfico, con
-                capacidad de autogestión mientras trabajo con herramientas de
-                reportes y métricas. Me caracterizo por mi pensamiento analítico, mi
-                curiosidad por la tecnología, mi compromiso con la mejora continua y la
-                proactividad. Sin embargo, mi especialidad es la buena comunicación
-                con equipos multidisciplinarios.</p>
+                Alguna ves pensaste en la mejor forma para tomar tus desiciones?
+                La mejor forma de decidir es basándote en datos!
+                Soy estudiante de programación con una base sólida en tecnología y 
+                <span> tengo experiencia utilizando Análisis de datos.</span>
+                Aprovecha mi experiencia en análisis y visualización de datos: 
+                explora mi perfil y descubre mis habilidades, así como las formas en las que puedo ayudarte 
+                a identificar la información clave <span>para tomar las mejores decisiones.</span></p>
 
                 <div class="fila">
                     <!-- Datos personales -->
@@ -270,10 +285,10 @@
                             <span class="casa">Universidad Tecnologica Nacional</span>
                             <span class="fecha">20 de Marzo 2023 - 13 de Diciembre 2023</span>
                             <p>
-                                Diplomatura en Desarrollo Web Full Stack (UTN – Fundación Empujar)
-Curso integral orientado al desarrollo de aplicaciones web tanto del lado del cliente (frontend) como del servidor (backend). 
-Adquirí conocimientos en HTML, CSS, JavaScript, Git, GitHub, Node.js y bases de datos, trabajando en proyectos prácticos con metodologías ágiles como Scrum.
-El enfoque estuvo puesto en la lógica de programación, la colaboración en equipo y el uso de herramientas de control de versiones y despliegue web.
+                                En la cual me bacaron mediante la Fundación Empujar
+                                Curso integral orientado al desarrollo de aplicaciones web tanto del lado del cliente (frontend) como del servidor (backend). 
+                                Adquirí conocimientos en HTML, CSS, JavaScript, Git, GitHub, Node.js y bases de datos, trabajando en proyectos prácticos con metodologías ágiles como Scrum.
+                                El enfoque estuvo puesto en la lógica de programación, la colaboración en equipo y el uso de herramientas de control de versiones y despliegue web.
                             </p>
                             <div class="conectori">
                                 <div class="circuloi"></div>
@@ -297,9 +312,10 @@ El enfoque estuvo puesto en la lógica de programación, la colaboración en equ
                             <span class="casa">Escuela de Educación Secundaria Técnica N°3</span>
                             <span class="fecha">2012 - 2019</span>
                             <p>
-                                Formación técnica con enfoque en sistemas eléctricos, mecánicos y automatización industrial. 
-                                Durante la carrera adquirí una sólida base en resolución de problemas, interpretación de planos, programación de PLC y fundamentos de electrónica, lo cual fortaleció mi pensamiento lógico y analítico. 
-                                Estas habilidades resultaron claves para mi posterior transición al mundo de la programación y el desarrollo web.
+                                Formación técnica en sistemas eléctricos, mecánicos y automatización industrial, 
+                                con conocimientos en programación de PLC, electrónica y resolución de problemas. 
+                                Esta base fortaleció mi pensamiento lógico y analítico, 
+                                facilitando mi transición a la programación y desarrollo web.
                             </p>
                             <div class="conectori">
                                 <div class="circuloi"></div>
@@ -312,23 +328,11 @@ El enfoque estuvo puesto en la lógica de programación, la colaboración en equ
                             <h4>ANALISTA DE DATOS JUNIOR</h4>
                             <span class="casa">ARBUSTA S.A.</span>
                             <span class="fecha">AGOSTO DE 2024 - ACTUALIDAD</span>
-                            <p>Analisis de datos para Arbusta en colaboración con el proyecto MTC
-                                para control y moderacion de productos en Mercado Libre.
-                                Participación activa en proyectos internos utilizando Excel - SQL 
-                               Power BI para el análisis y visualizacion de grandes volúmenes de
-                                datos y seguimiento de KPIs. 
-                               Desarrollo de reportes automatizados en Google Sheets y
-                                dashboards interactivos en Power BI para visualizar métricas
-                                operativas clave.
-                                Lidero una iniciativa propia (Reviews) dando onboarding, donde
-                                capacito a nuevos compañeros en procedimientos, buenas prácticas
-                                y uso eficiente de herramientas de trabajo.
-                                Realizo tareas de control de calidad (QA) sobre el trabajo del equipo
-                                en la iniciativa, asegurando la precisión y consistencia.
-                                Trabajo en equipo bajo metodologías ágiles, adaptándome a
-                                cambios dinámicos en los flujos de trabajo y prioridades del cliente.
-                                Participación en procesos de extracción, transformación y carga
-                                (ETL) de datos para alimentar dashboards de métricas en Power BI.
+                            <p>Análisis de datos en Arbusta (proyecto MTC - Mercado Libre), 
+                                utilizando Excel, SQL y Power BI para control de calidad, 
+                                seguimiento de KPIs y visualización de métricas. Desarrollo de reportes automatizados 
+                                y dashboards interactivos. Lidero una iniciativa interna con onboarding y QA de equipo, 
+                                aplicando metodologías ágiles y procesos ETL.
                             </p>
                             <div class="conectord">
                                 <div class="circulod"></div>
@@ -339,13 +343,9 @@ El enfoque estuvo puesto en la lógica de programación, la colaboración en equ
                             <span class="casa">GRUPO MSA S.A</span>
                             <span class="fecha"> FEBRERO - MARZO 2024</span>
                             <p>
-                                Desarrollo de una aplicación IoT para validación de identidad
-                                mediante DNI y huella.
-                                Implementación en entorno Ubuntu; trabajo colaborativo con
-                                metodologías ágiles.
-                                Desarrollo de soluciones creativas para control de acceso
-                                Utilización de Html - Css - Javascript - Python (lenguaje de
-                                programacion).
+                                Desarrollo de aplicación IoT para validación de identidad mediante DNI y huella, 
+                                implementada en Ubuntu con HTML, CSS, JavaScript y Python. Trabajo colaborativo con metodologías ágiles 
+                                y soluciones creativas para control de acceso.
                             </p>
                             <div class="conectord">
                                 <div class="circulod"></div>
@@ -381,40 +381,40 @@ El enfoque estuvo puesto en la lógica de programación, la colaboración en equ
                         </div>
                     </div>
                     <div class="proyecto">
-                        <img src="img/D2.jpg" alt="">
+                        <img src="img/D2.png" alt="">
                         <div class="overlay">
                             <h3>Seguimiento de reportes por recurso</h3>
                             <p>PowerBI + SQL + Python</p>
                         </div>
                     </div>
-                    <div class="proyecto">
-                        <img src="img/D3.jpg" alt="">
+                    <!-- <div class="proyecto">
+                        <img src="img/D3.png" alt="">
                         <div class="overlay">
                             <h3>Rendimiento de Equipos de Futbol</h3>
                             <p>PowerBI + Excel</p>
                         </div>
                     </div>
                     <div class="proyecto">
-                        <img src="img/D4.jpg" alt="">
+                        <img src="img/D4.png" alt="">
                         <div class="overlay">
                             <h3>Canciones mas escuchadas en Spotify</h3>
                             <p>PowerBI + SQL</p>
                         </div>
                     </div>
                     <div class="proyecto">
-                        <img src="img/D5.jpg" alt="">
+                        <img src="img/D5.png" alt="">
                         <div class="overlay">
                             <h3>Informe de Ventas</h3>
                             <p>PowerBI + Excel</p>
                         </div>
                     </div>
                     <div class="proyecto">
-                        <img src="img/D6.jpg" alt="">
+                        <img src="img/D6.png" alt="">
                         <div class="overlay">
                             <h3>Informe de Ventas por segmento</h3>
                             <p>PowerBI + SQL + Python</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
           </section>
@@ -426,11 +426,11 @@ El enfoque estuvo puesto en la lógica de programación, la colaboración en equ
                     <!-- Formulario -->
                     <div class="col">
                         <form id="form">
-                            <input type="text" name="name" id="name" placeholder="Tu nombre">
-                            <input type="number" name="phonenumber" id="phonenumber" placeholder="Número de Telefono">
-                            <input type="text" name="email" id="email" placeholder="Direccion de correo">
-                            <input type="text" name="title" id="title" placeholder="Asunto">
-                            <textarea name="message" id="message" cols="30" rows="10" placeholder="Mensaje"></textarea>
+                            <input type="text" name="name" id="name" placeholder="Tu nombre" required>
+                            <input type="text" name="phonenumber" id="phonenumber" placeholder="Número de Telefono" pattern="[0-9]*" inputmode="numeric">
+                            <input type="email" name="email" id="email" placeholder="Direccion de correo" required>
+                            <input type="text" name="title" id="title" placeholder="Asunto" required>
+                            <textarea name="message" id="message" cols="30" rows="10" placeholder="Mensaje" required></textarea>
                             <button type="submit" id="button" value="Send Email">
                                 Enviar mensaje<i class="fa-solid fa-paper-plane"></i>
                                 <span class="overlay"></span>
