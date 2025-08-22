@@ -58,7 +58,7 @@ html{
 
 /* SECCION DE HOME */
 .home{
-    background: linear-gradient(to top, rgba(30,35,38,.6), rgba(30,35,38,1)),
+    background: linear-gradient(to top, rgba(30,35,38,.4), rgba(30,35,38,1)),
     url(img/FondoBanner.jpg);
     background-size: cover;
     height: 110vh;
@@ -502,23 +502,45 @@ html{
     font-family: 'Righteous';
     text-align: center;
     padding: 20px 0;
+    margin-bottom: 50px;
 }
 .portfolio .galeria{
-    display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
 .portfolio .galeria .proyecto{
     position: relative;
-    max-width: 340px;
+    max-width: 800px;
     height: fit-content;
-    margin: 20px;
+    margin: 20px auto;
     cursor: pointer;
 }
 .portfolio .galeria .proyecto img{
-    width: 100%;
+    width: 300px;
     display: block;
     margin: auto
+}
+.portfolio .galeria .proyecto iframe{
+    width: 100%;
+    max-width: 800px;
+    max-height: 500px;
+    display: block;
+    margin: auto;
+    border: solid 10px #1CB698;
+    border-radius: 10px;
+}
+.portfolio .galeria .proyecto h3{
+    font-size: 28px;
+    font-family: 'Righteous';
+    margin-bottom: 15px;
+    text-align: center;
+    color: #1CB698;
+}
+.portfolio .galeria .proyecto p{
+    font-size: 18px;
+    font-family: 'Righteous';
+    margin-bottom: 25px;
+    text-align: center;
 }
 .portfolio .contenedor-seccion .galeria .proyecto .overlay{
     position: absolute;
@@ -553,7 +575,7 @@ html{
     padding: 50px 0;
 }
 .contacto .contenedor-seccion{
-    max-width: 1100px;
+    max-width: 1200px;
     margin: auto;
 }
 .contacto h2{
@@ -579,6 +601,7 @@ html{
     background-color: #252A2E;
     color: #fff;
     font-size: 18px;
+    resize: none;
 }
 .contacto button{
     cursor: pointer;
@@ -627,6 +650,9 @@ html{
     color: #1CB698;
     display: inline-block;
     margin-right: 20px;
+}
+.contacto .col .info ul li span{
+    color: #1CB698;
 }
 footer{
     background-color: #252A2E;
@@ -711,8 +737,6 @@ footer .arriba{
     nav.responsive ul li a:hover {
         color: #1CB698;
     }
-
-
 @keyframes slideDown {
     from {
         opacity: 0;
