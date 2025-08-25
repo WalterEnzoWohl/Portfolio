@@ -1,7 +1,3 @@
-<!--
-Cosas NECESARIAS para el Deploy:
-- Colocar un proyecto extenso y terminado en SECCION PORTFOLIO
--->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -262,100 +258,19 @@ Cosas NECESARIAS para el Deploy:
             </div>
         </section>
         <!-- SECCION CURRICULUM -->
-         <section id="curriculum" class="curriculum">
-            <div class="contenedor-seccion">
-                <h2>Curriculum</h2>
-                <div class="fila">
-                    <div class="col izquierda">
-                        <h3>Formacion Academica</h3>
-                        <div class="item izq">
-                            <h4>Diplomatura en Desarrollo Web Full Stack</h4>
-                            <span class="casa">Universidad Tecnologica Nacional</span>
-                            <span class="fecha">20 de Marzo 2023 - 13 de Diciembre 2023</span>
-                            <p>
-                                En la cual me bacaron mediante la Fundación Empujar
-                                Curso integral orientado al desarrollo de aplicaciones web tanto del lado del cliente (frontend) como del servidor (backend). 
-                                Adquirí conocimientos en HTML, CSS, JavaScript, Git, GitHub, Node.js y bases de datos, trabajando en proyectos prácticos con metodologías ágiles como Scrum.
-                                El enfoque estuvo puesto en la lógica de programación, la colaboración en equipo y el uso de herramientas de control de versiones y despliegue web.
-                            </p>
-                            <div class="conectori">
-                                <div class="circuloi"></div>
-                            </div>
-                        </div>
-                        <div class="item izq">
-                            <h4>Curso de Análisis de Datos</h4>
-                            <span class="casa">CREHANA</span>
-                            <span class="fecha">2024 - 2025</span>
-                            <p>
-                                Curso enfocado en el análisis y visualización de datos mediante herramientas clave del sector. 
-                                Aprendí a manipular y analizar grandes volúmenes de información utilizando Excel, SQL, Power BI y Python, desarrollando habilidades prácticas para la toma de decisiones basadas en datos. 
-                                Este curso fortaleció mi perfil como analista de datos y potenció mi capacidad para trabajar en proyectos orientados a resultados concretos.
-                            </p>
-                            <div class="conectori">
-                                <div class="circuloi"></div>
-                            </div>
-                        </div> 
-                        <div class="item izq">
-                            <h4>Técnico Electromecánico</h4>
-                            <span class="casa">Escuela de Educación Secundaria Técnica N°3</span>
-                            <span class="fecha">2012 - 2019</span>
-                            <p>
-                                Formación técnica en sistemas eléctricos, mecánicos y automatización industrial, 
-                                con conocimientos en programación de PLC, electrónica y resolución de problemas. 
-                                Esta base fortaleció mi pensamiento lógico y analítico, 
-                                facilitando mi transición a la programación y desarrollo web.
-                            </p>
-                            <div class="conectori">
-                                <div class="circuloi"></div>
-                            </div>
-                        </div>                                               
-                    </div>
-                    <div class="col derecha">
-                        <h3>Experiencia</h3>
-                        <div class="item der">
-                            <h4>ANALISTA DE DATOS JUNIOR</h4>
-                            <span class="casa">ARBUSTA S.A.</span>
-                            <span class="fecha">AGOSTO DE 2024 - ACTUALIDAD</span>
-                            <p>Análisis de datos en Arbusta (proyecto MTC - Mercado Libre), 
-                                utilizando Excel, SQL y Power BI para control de calidad, 
-                                seguimiento de KPIs y visualización de métricas. Desarrollo de reportes automatizados 
-                                y dashboards interactivos. Lidero una iniciativa interna con onboarding y QA de equipo, 
-                                aplicando metodologías ágiles y procesos ETL.
-                            </p>
-                            <div class="conectord">
-                                <div class="circulod"></div>
-                            </div>
-                        </div>
-                        <div class="item der">
-                            <h4>DESARROLLADOR IoT EN PASANTIA</h4>
-                            <span class="casa">GRUPO MSA S.A</span>
-                            <span class="fecha"> FEBRERO - MARZO 2024</span>
-                            <p>
-                                Desarrollo de aplicación IoT para validación de identidad mediante DNI y huella, 
-                                implementada en Ubuntu con HTML, CSS, JavaScript y Python. Trabajo colaborativo con metodologías ágiles 
-                                y soluciones creativas para control de acceso.
-                            </p>
-                            <div class="conectord">
-                                <div class="circulod"></div>
-                            </div>
-                        </div>
-                        <div class="item der">
-                            <h4>ENCARGADO DE BARRA EN EVENTOS</h4>
-                            <span class="casa">RIKI WOHL.</span>
-                            <span class="fecha">20 de Marzo 2023 - 13 de Diciembre 2023</span>
-                            <p> Coordinación de equipos en eventos con más de 300 asistentes.
-                                Gran habilidad de priorización de tareas
-                                Resolución de imprevistos operativos bajo presión.
-                                Planificación y organización de trabajo y de personal a cargo
-                                Interacción constante con clientes en idioma inglés.
-                            <div class="conectord">
-                                <div class="circulod"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <section class="curriculum">
+          <div class="contenedor-seccion">
+            <h2>Curriculum</h2>
+            <div class="fila">
+              <div class="col izquierda" id="formacion">
+                <h3>Formación</h3>
+              </div>
+              <div class="col derecha" id="experiencia">
+               <h3>Experiencia</h3>
+              </div>
             </div>
-         </section>
+          </div>
+        </section>
          <!-- SECCION PORTAFOLIO -->
           <section id="portfolio" class="portfolio">
             <div class="contenedor-seccion">
@@ -455,15 +370,16 @@ Cosas NECESARIAS para el Deploy:
             </div>
            </section>
            <!-- FOOTER -->
-            <footer>
-                <a href="#home" class="arriba">
-                    <i class="fa-solid fa-angles-up"></i>
-                </a>
-                <div class="redes">
-                    <a target="_blank" href="https://www.linkedin.com/in/walterenzowohl"><i class="fa-brands fa-linkedin"></i></a>
-                    <a target="_blank" href="https://github.com/WalterEnzoWohl"><i class="fa-brands fa-github"></i></a>
-                </div>
-            </footer>
+        <footer>
+            <a href="#home" class="arriba">
+                <i class="fa-solid fa-angles-up"></i>
+            </a>
+            <div class="redes">
+                <a target="_blank" href="https://www.linkedin.com/in/walterenzowohl"><i class="fa-brands fa-linkedin"></i></a>
+                <a target="_blank" href="https://github.com/WalterEnzoWohl"><i class="fa-brands fa-github"></i></a>
+            </div>
+            <p class="copyright">&copy; 2025 Walter Enzo Wohl. Todos los derechos reservados.</p>
+        </footer>
             </section>
             <script src="script.js"></script>
 </body>

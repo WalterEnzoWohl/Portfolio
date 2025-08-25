@@ -410,6 +410,7 @@ html{
     font-size: 28px;
     font-family: 'Righteous';
     margin-bottom: 25px;
+    text-align: center;
 }
 .curriculum .fila .izquierda{
     border-right: 2px solid #252A2E;
@@ -486,6 +487,45 @@ html{
     float: left;
     position: relative;
     bottom: 4px;
+}
+/* === NUEVO: acordeón en Curriculum === */
+.toggle-btn {
+  margin-top: 8px;
+  background: #1CB698;
+  color: #0e1214;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: filter .2s ease;
+}
+
+.toggle-btn:hover {
+  filter: brightness(0.95);
+}
+
+.toggle-btn .chevron {
+  transition: transform .25s ease;
+}
+
+.toggle-btn .chevron.rotated {
+  transform: rotate(180deg);
+}
+
+.descripcion-wrapper {
+  overflow: hidden;
+  max-height: 0;               /* colapsado */
+  transition: max-height .35s ease;
+}
+
+.descripcion {
+  margin-top: 12px;
+  line-height: 1.6;            /* mantiene tu estética */
 }
 /* SECCION PORTFOLIO */
 .portfolio{
@@ -691,6 +731,10 @@ footer .arriba{
     border-radius: 50%;
     line-height: 50px;
     font-size: 18px;
+}
+footer .copyright {
+    font-size: 14px;
+    color: #aaa;
 }
 /* SECCION RESPONSIVE */
 @media screen and (max-width:980px) {

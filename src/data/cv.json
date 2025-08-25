@@ -1,0 +1,42 @@
+{
+  "formacion": [
+    {
+      "titulo": "Diplomatura en Desarrollo Web Full Stack",
+      "institucion": "Universidad Tecnologica Nacional",
+      "fecha": "20 de Marzo 2023 - 13 de Diciembre 2023",
+      "descripcion": "Curso integral orientado al desarrollo de aplicaciones web tanto del lado del cliente (frontend) como del servidor (backend). Adquirí conocimientos en HTML, CSS, JavaScript, Git, GitHub, Node.js y bases de datos, trabajando en proyectos prácticos con metodologías ágiles como Scrum. El enfoque estuvo puesto en la lógica de programación, la colaboración en equipo y el uso de herramientas de control de versiones y despliegue web."
+    },
+    {
+      "titulo": "Curso de Análisis de Datos",
+      "institucion": "CREHANA",
+      "fecha": "2024 - 2025",
+      "descripcion": "Análisis y visualización de datos usando Excel, SQL, Power BI y Python. Manipulación de grandes volúmenes de información y toma de decisiones basadas en datos."
+    },
+    {
+      "titulo": "Técnico Electromecánico",
+      "institucion": "E.E.S Técnica N°3",
+      "fecha": "2012 - 2019",
+      "descripcion": "Sistemas eléctricos, mecánicos y automatización industrial. Programación de PLC, electrónica y resolución de problemas. Base sólida de pensamiento lógico."
+    }
+  ],
+  "experiencia": [
+    {
+      "titulo": "ANALISTA DE DATOS JUNIOR",
+      "empresa": "ARBUSTA S.A.",
+      "fecha": "AGOSTO DE 2024 - ACTUALIDAD",
+      "descripcion": "Responsable de análisis de datos en el proyecto MTC para Mercado Libre, realizando control de publicaciones. Participación activa en proyectos internos utilizando Excel, SQL y Power BI para el análisis, la visualización de grandes volúmenes de datos y el seguimiento de KPIs. Desarrollo de reportes automatizados en Google Sheets para visualizar métricas operativas clave. Lidero una iniciativa propia llamada Reviews, en la cual doy onboarding a nuevos compañeros, capacito en procedimientos y buenas prácticas, y realizo control de calidad (QA) del trabajo del equipo. Trabajo en equipo bajo metodologías ágiles, adaptándome a cambios dinámicos y prioridades del cliente. También participo en procesos de ETL para alimentar dashboards estratégicos."
+    },
+    {
+      "titulo": "DESARROLLADOR IoT EN PASANTIA",
+      "empresa": "GRUPO MSA S.A",
+      "fecha": "FEBRERO - MARZO 2024",
+      "descripcion": "Desarrollo de aplicación IoT para validación de identidad con DNI y huella. Trabajo colaborativo en entorno Ubuntu utilizando HTML, CSS, JavaScript y React para el desarrollo fronEnd de app IoT"
+    },
+    {
+      "titulo": "ENCARGADO DE BARRA EN EVENTOS",
+      "empresa": "RIKI WOHL.",
+      "fecha": "2018 - 2024",
+      "descripcion": "Coordinación de equipos en eventos con más de 300 asistentes. Experiencia en gestión, resolución de imprevistos y trato con clientes en idioma inglés."
+    }
+  ]
+}
