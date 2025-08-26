@@ -7,7 +7,6 @@
     integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" 
     crossorigin="anonymous" 
     referrerpolicy="no-referrer" />
-
     <title>Portfolio</title>
     <script type="text/javascript"
   src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -62,10 +61,10 @@
                 Alguna ves pensaste en la mejor forma para tomar tus desiciones?
                 La mejor forma de decidir es basándote en datos!
                 Soy estudiante de programación con una base sólida en tecnología y 
-                <span> tengo experiencia utilizando Análisis de datos.</span>
+                <strong> tengo experiencia utilizando Análisis de datos.</strong>
                 Aprovecha mi experiencia en análisis y visualización de datos: 
                 explora mi perfil y descubre mis habilidades, así como las formas en las que puedo ayudarte 
-                a identificar la información clave <span>para tomar las mejores decisiones.</span></p>
+                a identificar la información clave <strong>para tomar las mejores decisiones.</strong></p>
 
                 <div class="fila">
                     <!-- Datos personales -->
@@ -258,7 +257,7 @@
             </div>
         </section>
         <!-- SECCION CURRICULUM -->
-        <section class="curriculum">
+        <section id="curriculum" class="curriculum">
           <div class="contenedor-seccion">
             <h2>Curriculum</h2>
             <div class="fila">
@@ -277,13 +276,6 @@
                 <h2>PORTAFOLIO</h2>
                 <div class="galeria">
                     <div class="proyecto">
-                        <!-- <img src="img/D1.png" alt="">
-                        <div class="overlay">
-                            <h3>Informe de Gestion</h3>
-                            <p >PowerBI + Excel</p>
-                        </div> -->
-                    </div>
-                    <div class="proyecto">
                         <div>
                             <h3>Informe de Ventas para empresa "Appol"</h3>
                             <p >PowerBI + Excel</p>
@@ -297,34 +289,6 @@
                             <p>PowerBI + SQL + Python</p>
                         </div>
                     </div>
-                    <!-- <div class="proyecto">
-                        <img src="img/D3.png" alt="">
-                        <div class="overlay">
-                            <h3>Rendimiento de Equipos de Futbol</h3>
-                            <p>PowerBI + Excel</p>
-                        </div>
-                    </div>
-                    <div class="proyecto">
-                        <img src="img/D4.png" alt="">
-                        <div class="overlay">
-                            <h3>Canciones mas escuchadas en Spotify</h3>
-                            <p>PowerBI + SQL</p>
-                        </div>
-                    </div>
-                    <div class="proyecto">
-                        <img src="img/D5.png" alt="">
-                        <div class="overlay">
-                            <h3>Informe de Ventas</h3>
-                            <p>PowerBI + Excel</p>
-                        </div>
-                    </div>
-                    <div class="proyecto">
-                        <img src="img/D6.png" alt="">
-                        <div class="overlay">
-                            <h3>Informe de Ventas por segmento</h3>
-                            <p>PowerBI + SQL + Python</p>
-                        </div>
-                    </div> -->
                 </div>
             </div>
           </section>
@@ -337,7 +301,7 @@
                     <div class="col">
                         <form id="form">
                             <input type="text" name="name" id="name" placeholder="Tu nombre" required>
-                            <input type="text" name="phonenumber" id="phonenumber" placeholder="Número de Telefono" pattern="[0-9]*" inputmode="numeric">
+                            <input type="text" name="phonenumber" id="phonenumber" placeholder="Número de Telefono" pattern="[0-9]*" inputmode="numeric" required>
                             <input type="email" name="email" id="email" placeholder="Direccion de correo" required>
                             <input type="text" name="title" id="title" placeholder="Asunto" required>
                             <textarea name="message" id="message" cols="30" rows="10" placeholder="Mensaje" required></textarea>

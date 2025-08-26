@@ -136,6 +136,10 @@ html{
     color: #1CB698;
     font-weight: bold;
 }
+.aboutme .contenedor-seccion p strong{
+    color: #1CB698;
+    font-weight: bold;    
+}
 .aboutme .fila{
     display: flex;
 }
