@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 /* Header */
 *
 {
     box-sizing: border-box;
-    font-family: 'Work Sans';
+    font-family: 'Plus Jakarta Sans', sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -27,7 +27,7 @@ html{
     padding: 15px 20px;
 }
 .contenedor-header header .logo a{
-    font-family: 'Righteous';
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 36px;
     color: #1CB698;
     text-decoration: none;
@@ -50,6 +50,7 @@ html{
 .nav-responsive{
     background-color: #1CB698;
     color: #fff;
+    border: none;
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
@@ -59,7 +60,7 @@ html{
 /* SECCION DE HOME */
 .home{
     background: linear-gradient(to top, rgba(30,35,38,.4), rgba(30,35,38,1)),
-    url(img/FondoBanner.jpg);
+    url(/img/fondo-banner.webp);
     background-size: cover;
     height: 110vh;
     color: #fff;
@@ -89,7 +90,7 @@ html{
 .home .contenedor-banner h1 {
     margin-top: 40px;
     font-size: 52px;
-    font-family: 'Righteous';
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 .home .contenedor-banner h2 {
     font-size: 20px;
@@ -123,7 +124,7 @@ html{
 }
 .aboutme h2{
     font-size: 48px;
-    font-family: 'Righteous';
+    font-family: 'Plus Jakarta Sans', sans-serif;
     text-align: center;
     padding: 20px 0;
 }
@@ -148,57 +149,82 @@ html{
 }
 .aboutme .fila .col h3{
     font-size: 28px;
-    font-family: 'Righteous';
+    font-family: 'Plus Jakarta Sans', sans-serif;
     margin-bottom: 25px;
+}
+.aboutme .fila .col ul {
+    display: grid;
+    gap: 14px;
 }
 .aboutme .fila .col ul{
     list-style: none;
 }
 .aboutme .fila .col ul li{
-    margin: 12px 0;
+    margin: 0;
     position: relative;
+    line-height: 1.25;
 }
 .aboutme .fila .col ul li strong{
     display: inline-block;
     color: #1CB698;
     width: 100%;
+    font-size: 31px;
+    margin-bottom: 2px;
+}
+.aboutme .fila .col ul li a{
+    color: #fff;
+    word-break: break-word;
 }
 .aboutme .fila .col ul span{
-    background-color: #1CB698;
-    padding: 5px;
+    background-color: rgba(31, 200, 171, 0.18);
+    border: 1px solid rgba(31, 200, 171, 0.45);
+    color: #bafcef;
+    padding: 6px 10px;
     font-weight: bold;
-    border-radius: 5px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 25px;
 }
 .aboutme .fila .col .contenedor-intereses {
     display: flex;
     flex-wrap: wrap;
+    gap: 12px;
 }
 
 .aboutme .fila .col .contenedor-intereses .interes{
-    width: 100px;
-    height: 100px;
+    width: calc(25% - 9px);
+    min-width: 112px;
+    aspect-ratio: 1 / 1;
     background-color: #252A2E;
     border-radius: 10px;
-    margin: 0 15px 15px 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     transition: .3s;
+    border: 1px solid var(--stroke);
+    padding: 10px;
 }
 .aboutme .fila .col .contenedor-intereses .interes:hover{
-    background-color: #1CB698;
+    background-color: rgba(31, 200, 171, 0.15);
+    border-color: rgba(31, 200, 171, 0.65);
 }
 .aboutme .fila .col .contenedor-intereses .interes i{
-    font-size: 30px;
+    font-size: 28px;
     margin-bottom: 10px;
+}
+.aboutme .fila .col .contenedor-intereses .interes span{
+    font-size: 19px;
+    text-align: center;
 }
 .contenedor-intereses .interes img.icono-interes {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     margin-bottom: 10px;
 }
-.aboutme button{
+.aboutme .btn-descarga{
     text-decoration: none;
     cursor: pointer;
     background-color: transparent;
@@ -215,7 +241,7 @@ html{
 .aboutme .contenedor-seccion a{
     text-decoration: none;
 }
-.aboutme button .overlay{
+.aboutme .btn-descarga .overlay{
     position: absolute;
     top: 0;
     left: 0;
@@ -225,7 +251,7 @@ html{
     z-index: -1;
     transition: 1s;
 }
-.aboutme button:hover .overlay{
+.aboutme .btn-descarga:hover .overlay{
     width: 100%;
 }
 /* Seccion de Skills */
@@ -240,7 +266,7 @@ html{
 }
 .skills h2{
     font-size: 48px;
-    font-family: 'Righteous';
+    font-family: 'Plus Jakarta Sans', sans-serif;
     text-align: center;
     padding: 20px 0;
 }
@@ -253,7 +279,7 @@ html{
 }
 .skills .fila .col h3{
     font-size: 28px;
-    font-family: 'Righteous';
+    font-family: 'Plus Jakarta Sans', sans-serif;
     margin-bottom: 25px;   
 }
 .skills .skill  > span{
@@ -398,7 +424,7 @@ html{
 }
 .curriculum h2{
     font-size: 48px;
-    font-family: 'Righteous';
+    font-family: 'Plus Jakarta Sans', sans-serif;
     text-align: center;
     padding: 20px 0;
 }
@@ -412,7 +438,7 @@ html{
 }
 .curriculum .fila .col h3{
     font-size: 28px;
-    font-family: 'Righteous';
+    font-family: 'Plus Jakarta Sans', sans-serif;
     margin-bottom: 25px;
     text-align: center;
 }
@@ -543,7 +569,7 @@ html{
 }
 .portfolio h2{
     font-size: 48px;
-    font-family: 'Righteous';
+    font-family: 'Plus Jakarta Sans', sans-serif;
     text-align: center;
     padding: 20px 0;
     margin-bottom: 50px;
@@ -575,14 +601,14 @@ html{
 }
 .portfolio .galeria .proyecto h3{
     font-size: 28px;
-    font-family: 'Righteous';
+    font-family: 'Plus Jakarta Sans', sans-serif;
     margin-bottom: 15px;
     text-align: center;
     color: #1CB698;
 }
 .portfolio .galeria .proyecto p{
     font-size: 18px;
-    font-family: 'Righteous';
+    font-family: 'Plus Jakarta Sans', sans-serif;
     margin-bottom: 25px;
     text-align: center;
 }
@@ -613,7 +639,7 @@ html{
 }
 /* SECCION DE CONTACTO */
 .contacto{
-    background-image: url(img/Contact_bg.png);
+    background-image: url(/img/contact_bg.png);
     background-color: #1e2326;
     color: #fff;
     padding: 50px 0;
@@ -624,7 +650,7 @@ html{
 }
 .contacto h2{
     font-size: 48px;
-    font-family: 'Righteous';
+    font-family: 'Plus Jakarta Sans', sans-serif;
     text-align: center;
     padding: 20px 0;    
 }
@@ -647,6 +673,12 @@ html{
     font-size: 18px;
     resize: none;
 }
+.contacto .col .form-label{
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #d8d8d8;
+}
 .contacto button{
     cursor: pointer;
     background-color: transparent;
@@ -659,6 +691,10 @@ html{
     color: #fff;
     position: relative;
     z-index: 10;
+}
+.contacto button:disabled{
+    opacity: 0.8;
+    cursor: not-allowed;
 }
 .contacto button .overlay{
     position: absolute;
@@ -697,6 +733,29 @@ html{
 }
 .contacto .col .info ul li span{
     color: #1CB698;
+}
+.contacto .error-message{
+    display: block;
+    margin-top: -10px;
+    margin-bottom: 14px;
+    color: #ff8f8f;
+    font-size: 14px;
+}
+.contacto .status-message{
+    margin-top: 12px;
+    font-size: 15px;
+    font-weight: 600;
+}
+.contacto .status-message.success{
+    color: #82f8da;
+}
+.contacto .status-message.error{
+    color: #ff9fa4;
+}
+.curriculum-error{
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ff9fa4;
 }
 footer{
     background-color: #252A2E;
@@ -797,7 +856,7 @@ footer .copyright {
 }
     .home{
     background: linear-gradient(to top, rgba(30,35,38,.6), rgba(30,35,38,1)),
-    url(img/FondoBanner.jpg);
+    url(/img/fondo-banner.webp);
     background-size: cover;
     height: 110vh;
     color: #fff;
@@ -824,7 +883,7 @@ footer .copyright {
 .home .contenedor-banner h1 {
     margin-top: 40px;
     font-size: 42px;
-    font-family: 'Righteous';
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 .home .contenedor-banner h2 {
     font-size: 15px;
@@ -863,12 +922,22 @@ footer .copyright {
     .aboutme .fila .col ul li strong{
         display: block;
     }
+    .aboutme .fila .col ul li strong{
+        font-size: 29px;
+    }
+    .aboutme .fila .col .contenedor-intereses{
+        gap: 10px;
+    }
     .aboutme .fila .col .contenedor-intereses .interes{
-        width: 20%;
+        width: calc(50% - 5px);
+        min-width: 0;
     }
     .aboutme .fila .col .contenedor-intereses .interes i{
-        font-size: 20px;
-        margin-bottom: 10px;
+        font-size: 24px;
+        margin-bottom: 8px;
+    }
+    .aboutme .fila .col .contenedor-intereses .interes span{
+        font-size: 18px;
     }
     
     .skills .fila{
@@ -906,3 +975,1738 @@ footer .copyright {
         width: 100%;
     }
 }
+
+/* ===== Modern Sections (Skills, Certifications, Portfolio, Contact) ===== */
+.skills-modern,
+.certifications-modern,
+.portfolio-modern,
+.contact-modern {
+    color: #fff;
+    padding: 70px 20px;
+}
+
+.skills-modern {
+    background-color: #0b0f14;
+}
+
+.skills-modern .contenedor-seccion,
+.certifications-modern .contenedor-seccion,
+.portfolio-modern .contenedor-seccion,
+.contact-modern .contenedor-seccion {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.skills-modern h2,
+.certifications-modern h2,
+.portfolio-modern h2,
+.contact-modern h2 {
+    font-size: 48px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.skills-modern-subtitle,
+.certifications-modern-subtitle,
+.portfolio-modern-subtitle {
+    color: #9ca3af;
+    text-align: center;
+    margin-bottom: 34px;
+}
+
+.skills-modern-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.skills-modern-card {
+    background: #121826;
+    border: 1px solid #2c3447;
+    border-radius: 18px;
+    padding: 24px;
+    transition: .3s;
+}
+
+.skills-modern-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(79, 255, 176, .5);
+    box-shadow: 0 14px 30px rgba(79, 255, 176, .08);
+}
+
+.skills-modern-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.skills-modern-icon {
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(79, 255, 176, .12);
+    color: #4FFFB0;
+}
+
+.skills-modern-header h3 {
+    font-size: 22px;
+    margin: 0;
+}
+
+.skills-modern-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skills-modern-tags span {
+    border: 1px solid rgba(79, 255, 176, .35);
+    background: rgba(79, 255, 176, .08);
+    border-radius: 10px;
+    padding: 6px 10px;
+    font-size: 14px;
+    color: #d1d5db;
+}
+
+.certifications-modern {
+    background: linear-gradient(180deg, #0b0f14 0%, #101522 100%);
+}
+
+.certifications-modern-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.certifications-modern-item {
+    background: #121826;
+    border: 1px solid #2c3447;
+    border-radius: 16px;
+    padding: 18px;
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    align-items: center;
+    gap: 14px;
+}
+
+.certifications-modern-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: rgba(79, 255, 176, .15);
+    color: #4FFFB0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.certifications-modern-content h3 {
+    margin: 0 0 4px;
+    font-size: 20px;
+}
+
+.certifications-modern-content p {
+    margin: 0;
+    color: #9ca3af;
+}
+
+.certifications-modern-item a {
+    color: #d1d5db;
+    border: 1px solid #2c3447;
+    background: #0f1420;
+    padding: 8px 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.certifications-modern-item a:hover {
+    border-color: #4FFFB0;
+    color: #4FFFB0;
+}
+
+.portfolio-modern {
+    background-color: #0b0f14;
+}
+
+.portfolio-modern-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.portfolio-modern-filters button {
+    border: 1px solid #2c3447;
+    background: #121826;
+    color: #d1d5db;
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.portfolio-modern-filters button.is-active {
+    background: #4FFFB0;
+    color: #0b0f14;
+    border-color: #4FFFB0;
+}
+
+.portfolio-modern-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.portfolio-modern-card {
+    background: #121826;
+    border: 1px solid #2c3447;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: .3s;
+}
+
+.portfolio-modern-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(79, 255, 176, .45);
+}
+
+.portfolio-modern-media {
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+    background: #0f1420;
+}
+
+.portfolio-modern-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .35s;
+}
+
+.portfolio-modern-card:hover .portfolio-modern-media img {
+    transform: scale(1.06);
+}
+
+.portfolio-modern-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    border: 1px solid rgba(79, 255, 176, .4);
+    color: #4FFFB0;
+    background: rgba(11, 15, 20, .85);
+    padding: 6px 10px;
+    border-radius: 9px;
+    font-size: 12px;
+}
+
+.portfolio-modern-content {
+    padding: 18px;
+}
+
+.portfolio-modern-content h3 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.portfolio-modern-content p {
+    color: #9ca3af;
+    margin-bottom: 10px;
+}
+
+.portfolio-modern-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.portfolio-modern-tools span {
+    font-size: 12px;
+    border-radius: 8px;
+    padding: 4px 8px;
+    border: 1px solid rgba(79, 255, 176, .3);
+    color: #4FFFB0;
+    background: rgba(79, 255, 176, .09);
+}
+
+.portfolio-modern-content ul {
+    margin: 0 0 12px;
+    padding-left: 18px;
+    color: #d1d5db;
+}
+
+.portfolio-modern-content li {
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+.portfolio-modern-content a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #d1d5db;
+    border: 1px solid #2c3447;
+    background: #0f1420;
+    padding: 10px 14px;
+    border-radius: 12px;
+    transition: .3s;
+}
+
+.portfolio-modern-content a:hover {
+    color: #0b0f14;
+    border-color: #4FFFB0;
+    background: #4FFFB0;
+}
+
+.contact-modern {
+    background-image: url(/img/contact_bg.png);
+    background-color: #0b0f14;
+}
+
+.contact-modern .fila {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.contact-modern .col {
+    width: 100%;
+    padding: 0;
+}
+
+.contact-modern-side {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.contact-modern-mail {
+    text-decoration: none;
+    color: #e5e7eb;
+    border-radius: 14px;
+    border: 1px solid #2c3447;
+    background: #121826;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.contact-modern-mail span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contact-modern-socials {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.contact-modern-socials a {
+    text-decoration: none;
+    color: #d1d5db;
+    border-radius: 14px;
+    border: 1px solid #2c3447;
+    background: #121826;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px 14px;
+    transition: .3s;
+}
+
+.contact-modern-socials a i {
+    font-size: 28px;
+    color: #4FFFB0;
+}
+
+.contact-modern-socials a:hover {
+    transform: translateY(-3px);
+    border-color: #4FFFB0;
+}
+
+.contact-modern .info {
+    position: static;
+    transform: none;
+    top: auto;
+    left: auto;
+    width: 100%;
+    box-shadow: none;
+    border-radius: 14px;
+    background: #121826;
+    border: 1px solid #2c3447;
+}
+
+@media screen and (max-width: 900px) {
+    .skills-modern-grid,
+    .portfolio-modern-grid,
+    .contact-modern .fila {
+        grid-template-columns: 1fr;
+    }
+
+    .skills-modern h2,
+    .certifications-modern h2,
+    .portfolio-modern h2,
+    .contact-modern h2 {
+        font-size: 40px;
+    }
+
+    .certifications-modern-item {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .certifications-modern-icon {
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .contact-modern-socials {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-modern-media {
+        height: 180px;
+    }
+
+    .skills-modern h2,
+    .certifications-modern h2,
+    .portfolio-modern h2,
+    .contact-modern h2 {
+        font-size: 34px;
+    }
+}
+
+/* ===== Unified Theme Override ===== */
+:root {
+    --bg-base: #0b0f14;
+    --bg-alt: #0f1623;
+    --surface: #121b2b;
+    --surface-soft: #0f1726;
+    --stroke: #25304a;
+    --text-main: #e8ecf2;
+    --text-dim: #9eabc0;
+    --accent: #1fc8ab;
+}
+
+body {
+    background: var(--bg-base);
+    color: var(--text-main);
+}
+
+.contenedor-header {
+    background: rgba(11, 15, 20, 0.9);
+    border-bottom: 1px solid var(--stroke);
+    backdrop-filter: blur(8px);
+}
+
+.contenedor-header header .logo a {
+    color: var(--accent);
+}
+
+.contenedor-header nav ul li a:hover {
+    color: var(--accent);
+}
+
+.home {
+    min-height: 100vh;
+    height: auto;
+    padding: 120px 20px 70px;
+    background:
+        radial-gradient(circle at 15% 18%, rgba(31, 200, 171, 0.16), transparent 40%),
+        radial-gradient(circle at 83% 78%, rgba(31, 200, 171, 0.1), transparent 44%),
+        linear-gradient(180deg, #0c1424 0%, #0b0f14 100%);
+}
+
+.home .contenedor-banner {
+    margin-top: 0;
+    background: rgba(18, 27, 43, 0.9);
+    border: 1px solid var(--stroke);
+    border-radius: 26px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+}
+
+.home .contenedor-banner img {
+    border-color: var(--accent);
+}
+
+.home .contenedor-banner .redes a {
+    border-color: var(--stroke);
+    background: var(--surface-soft);
+}
+
+.home .contenedor-banner .redes a:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #081018;
+}
+
+.aboutme,
+.skills-modern,
+.certifications-modern,
+.portfolio-modern,
+.contact-modern,
+footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.aboutme {
+    padding: 70px 20px;
+    background: linear-gradient(180deg, #0e1727 0%, #0b0f14 100%);
+}
+
+.aboutme .contenedor-seccion p {
+    color: var(--text-dim);
+    line-height: 1.65;
+}
+
+.aboutme .contenedor-seccion p span,
+.aboutme .contenedor-seccion p strong,
+.aboutme .fila .col ul li strong {
+    color: var(--accent);
+}
+
+.aboutme .fila {
+    gap: 20px;
+}
+
+.aboutme .fila .col {
+    background: var(--surface);
+    border: 1px solid var(--stroke);
+    border-radius: 18px;
+    padding: 18px;
+}
+
+.aboutme .fila .col h3 {
+    font-size: 27px;
+    margin-bottom: 14px;
+}
+
+.aboutme .fila .col ul {
+    gap: 9px;
+}
+
+.aboutme .fila .col ul li strong {
+    font-size: 26px;
+    margin-bottom: 0;
+    line-height: 1.15;
+}
+
+.aboutme .fila .col ul li {
+    margin: 0;
+}
+
+.aboutme .fila .col ul span {
+    font-size: 21px;
+    padding: 4px 8px;
+}
+
+.aboutme .fila .col .contenedor-intereses {
+    gap: 8px;
+}
+
+.aboutme .fila .col .contenedor-intereses .interes {
+    background: var(--surface-soft);
+    border: 1px solid var(--stroke);
+    width: calc(25% - 6px);
+    min-width: 90px;
+    padding: 8px;
+}
+
+.aboutme .fila .col .contenedor-intereses .interes i {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.aboutme .fila .col .contenedor-intereses .interes span {
+    font-size: 18px;
+}
+
+.aboutme .fila .col .contenedor-intereses .interes:hover {
+    background: rgba(31, 200, 171, 0.15);
+    border-color: rgba(31, 200, 171, 0.65);
+}
+
+.aboutme .btn-descarga {
+    border-color: var(--stroke);
+    background: var(--surface);
+    border-radius: 12px;
+    font-size: 26px;
+    padding: 8px 18px;
+    margin-top: 16px;
+}
+
+.aboutme .btn-descarga .overlay {
+    background: var(--accent);
+}
+
+@media screen and (max-width: 900px) {
+    .aboutme .fila .col .contenedor-intereses .interes {
+        width: calc(25% - 6px);
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .aboutme .fila .col {
+        padding: 16px;
+    }
+
+    .aboutme .fila .col h3 {
+        font-size: 30px;
+    }
+
+    .aboutme .fila .col ul li strong {
+        font-size: 25px;
+    }
+
+    .aboutme .fila .col .contenedor-intereses .interes {
+        width: calc(50% - 4px);
+        min-width: 0;
+    }
+
+    .aboutme .fila .col .contenedor-intereses .interes span {
+        font-size: 17px;
+    }
+}
+
+.skills-modern,
+.portfolio-modern {
+    background: linear-gradient(180deg, #0b0f14 0%, #0c121d 100%);
+}
+
+.certifications-modern {
+    background: linear-gradient(180deg, #0c121d 0%, #0d1522 100%);
+}
+
+.contact-modern {
+    background:
+        linear-gradient(180deg, rgba(11, 15, 20, 0.97), rgba(11, 15, 20, 0.97)),
+        url(/img/contact_bg.png);
+}
+
+.skills-modern-card,
+.portfolio-modern-card,
+.certifications-modern-item,
+.contact-modern-mail,
+.contact-modern-socials a,
+.contact-modern .info,
+.contacto .col input,
+.contacto .col textarea {
+    background: var(--surface);
+    border-color: var(--stroke);
+}
+
+.skills-modern-card:hover,
+.portfolio-modern-card:hover,
+.contact-modern-socials a:hover {
+    border-color: rgba(31, 200, 171, 0.55);
+}
+
+.skills-modern-icon,
+.certifications-modern-icon {
+    background: rgba(31, 200, 171, 0.14);
+    color: var(--accent);
+}
+
+.skills-modern-tags span,
+.portfolio-modern-tools span {
+    border-color: rgba(31, 200, 171, 0.35);
+    color: #7ff8df;
+    background: rgba(31, 200, 171, 0.1);
+}
+
+.portfolio-modern-filters button {
+    background: var(--surface);
+    border-color: var(--stroke);
+}
+
+.portfolio-modern-filters button.is-active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #081018;
+}
+
+.portfolio-modern-badge {
+    color: #7ff8df;
+    border-color: rgba(31, 200, 171, 0.55);
+}
+
+.portfolio-modern-content a {
+    border-color: var(--stroke);
+    background: var(--surface-soft);
+}
+
+.portfolio-modern-content a:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.contacto button {
+    border-color: var(--stroke);
+    background: var(--surface);
+    border-radius: 12px;
+}
+
+.contacto button .overlay {
+    background: var(--accent);
+}
+
+.contacto .col .form-label,
+.portfolio-modern-content p,
+.skills-modern-subtitle,
+.certifications-modern-subtitle,
+.portfolio-modern-subtitle,
+.certifications-modern-content p,
+.contacto .status-message {
+    color: var(--text-dim);
+}
+
+footer {
+    background: #0c131f;
+}
+
+/* ===== Curriculum Modern ===== */
+.curriculum-modern {
+    padding: 70px 20px;
+    background: linear-gradient(180deg, #0d1522 0%, #0b0f14 100%);
+    color: var(--text-main);
+}
+
+.curriculum-modern .contenedor-seccion {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.curriculum-modern h2 {
+    font-size: 48px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.curriculum-modern-subtitle {
+    text-align: center;
+    color: var(--text-dim);
+    margin-bottom: 28px;
+}
+
+.curriculum-modern-error {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ff9fa4;
+}
+
+.curriculum-modern-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.curriculum-modern-col {
+    background: var(--surface);
+    border: 1px solid var(--stroke);
+    border-radius: 18px;
+    padding: 20px;
+}
+
+.curriculum-modern-col > h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 28px;
+    margin-bottom: 14px;
+}
+
+.curriculum-modern-item {
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    background: var(--surface-soft);
+    padding: 14px;
+    margin-bottom: 12px;
+}
+
+.curriculum-modern-item h4 {
+    font-size: 20px;
+    margin-bottom: 6px;
+}
+
+.curriculum-modern-item .casa,
+.curriculum-modern-item .fecha {
+    display: block;
+    color: var(--text-dim);
+    font-size: 15px;
+}
+
+.curriculum-modern-item .casa {
+    color: #7ff8df;
+    margin-bottom: 3px;
+}
+
+.curriculum-modern .toggle-btn {
+    margin-top: 10px;
+    border: 1px solid var(--stroke);
+    background: #0f1626;
+    color: #dbe5f4;
+    padding: 7px 11px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.curriculum-modern .toggle-btn:hover {
+    border-color: rgba(31, 200, 171, 0.55);
+    background: rgba(31, 200, 171, 0.1);
+}
+
+.curriculum-modern .descripcion-wrapper {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .3s ease;
+}
+
+.curriculum-modern .descripcion-wrapper.is-open {
+    max-height: 520px;
+}
+
+.curriculum-modern .descripcion {
+    margin-top: 10px;
+    color: var(--text-dim);
+    line-height: 1.6;
+}
+
+/* ===== Contact Unified ===== */
+.contact-modern {
+    padding: 70px 20px;
+    background:
+        linear-gradient(180deg, rgba(11, 15, 20, 0.97), rgba(11, 15, 20, 0.97)),
+        url(/img/contact_bg.png);
+    color: var(--text-main);
+}
+
+.contact-modern .contenedor-seccion {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.contact-modern h2 {
+    font-size: 48px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contact-modern-layout {
+    display: grid;
+    grid-template-columns: 1fr 0.98fr;
+    gap: 18px;
+    align-items: start;
+}
+
+.contact-modern-form-wrap {
+    background: var(--surface);
+    border: 1px solid var(--stroke);
+    border-radius: 18px;
+    padding: 18px;
+}
+
+.contact-modern form {
+    margin: 0;
+}
+
+.contact-modern .form-label {
+    display: block;
+    margin: 6px 0 6px;
+    color: #b3c0d7;
+    font-weight: 600;
+}
+
+.contact-modern input,
+.contact-modern textarea {
+    width: 100%;
+    border: 1px solid var(--stroke);
+    background: var(--surface-soft);
+    color: var(--text-main);
+    border-radius: 10px;
+    padding: 13px 14px;
+    margin-bottom: 10px;
+}
+
+.contact-modern textarea {
+    min-height: 180px;
+    resize: vertical;
+}
+
+.contact-modern #button {
+    margin: 10px 0 0;
+    border-radius: 10px;
+    border: 1px solid var(--stroke);
+    background: var(--surface-soft);
+    padding: 10px 16px;
+}
+
+.contact-modern #button:hover {
+    border-color: rgba(31, 200, 171, 0.6);
+}
+
+.contact-modern #button .overlay {
+    display: none;
+}
+
+.contact-modern .error-message {
+    margin-top: -3px;
+    margin-bottom: 8px;
+    color: #ff9fa4;
+    font-size: 13px;
+}
+
+.contact-modern .status-message {
+    margin-top: 10px;
+}
+
+.contact-modern-side {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact-modern-mail,
+.contact-modern-socials a,
+.contact-modern-info {
+    background: var(--surface);
+    border: 1px solid var(--stroke);
+    border-radius: 14px;
+}
+
+.contact-modern-mail {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 14px;
+    text-decoration: none;
+    color: #dbe5f4;
+}
+
+.contact-modern-socials {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.contact-modern-socials a {
+    padding: 16px 12px;
+    text-decoration: none;
+    color: #dbe5f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: .25s;
+}
+
+.contact-modern-socials a i {
+    font-size: 28px;
+    color: var(--accent);
+}
+
+.contact-modern-socials a:hover,
+.contact-modern-mail:hover {
+    border-color: rgba(31, 200, 171, 0.6);
+}
+
+.contact-modern-info {
+    padding: 14px;
+}
+
+.contact-modern-info ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.contact-modern-info li {
+    margin-bottom: 8px;
+    color: #dbe5f4;
+}
+
+.contact-modern-info li:last-child {
+    margin-bottom: 0;
+}
+
+.contact-modern-info i {
+    color: var(--accent);
+    margin-right: 8px;
+}
+
+@media screen and (max-width: 980px) {
+    .curriculum-modern-grid,
+    .contact-modern-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .curriculum-modern h2,
+    .contact-modern h2 {
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .curriculum-modern-col,
+    .contact-modern-form-wrap {
+        padding: 14px;
+    }
+
+    .curriculum-modern h2,
+    .contact-modern h2 {
+        font-size: 34px;
+    }
+
+    .curriculum-modern-col > h3 {
+        font-size: 24px;
+    }
+
+    .contact-modern-socials {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Contact Rework ===== */
+.contact-modern-subtitle {
+    text-align: center;
+    color: var(--text-dim);
+    max-width: 760px;
+    margin: 0 auto 28px;
+}
+
+.contact-atelier {
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 18px;
+    align-items: stretch;
+}
+
+.contact-spotlight,
+.contact-modern-form-wrap {
+    border: 1px solid var(--stroke);
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(18, 27, 43, .95), rgba(15, 23, 38, .96));
+    box-shadow: 0 18px 40px rgba(0, 0, 0, .25);
+}
+
+.contact-spotlight {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.contact-pill {
+    display: inline-flex;
+    width: fit-content;
+    border: 1px solid rgba(31, 200, 171, .45);
+    background: rgba(31, 200, 171, .12);
+    color: #93ffec;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.contact-spotlight h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 35px;
+    line-height: 1.2;
+}
+
+.contact-spotlight p {
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin-bottom: 2px;
+}
+
+.contact-cards {
+    display: grid;
+    gap: 10px;
+}
+
+.contact-card-link {
+    text-decoration: none;
+    color: #dbe5f4;
+    border: 1px solid rgba(255, 255, 255, .08);
+    background: rgba(11, 15, 20, .45);
+    border-radius: 12px;
+    padding: 12px;
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    align-items: center;
+    gap: 10px;
+    transition: .25s;
+}
+
+.contact-card-link i {
+    color: var(--accent);
+}
+
+.contact-card-link small {
+    display: block;
+    color: #9fb2cd;
+    font-size: 13px;
+    margin-bottom: 2px;
+}
+
+.contact-card-link strong {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.contact-card-link:hover {
+    border-color: rgba(31, 200, 171, .6);
+    transform: translateY(-1px);
+}
+
+.contact-modern-socials {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.contact-modern-socials a {
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, .08);
+    background: rgba(11, 15, 20, .45);
+    text-decoration: none;
+    color: #dbe5f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: .25s;
+}
+
+.contact-modern-socials a i {
+    color: var(--accent);
+    font-size: 18px;
+}
+
+.contact-modern-socials a:hover {
+    border-color: rgba(31, 200, 171, .6);
+}
+
+.contact-modern-info {
+    border: 1px solid rgba(255, 255, 255, .08);
+    background: rgba(11, 15, 20, .45);
+    border-radius: 12px;
+    padding: 12px;
+}
+
+.contact-modern-info ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.contact-modern-info li {
+    color: #dbe5f4;
+    margin-bottom: 8px;
+}
+
+.contact-modern-info li:last-child {
+    margin-bottom: 0;
+}
+
+.contact-modern-info i {
+    color: var(--accent);
+    margin-right: 8px;
+}
+
+.contact-modern-form-wrap {
+    padding: 18px;
+}
+
+.contact-modern .form-label {
+    color: #b8c7dc;
+    margin-bottom: 5px;
+}
+
+.contact-modern input,
+.contact-modern textarea {
+    border: 1px solid rgba(255, 255, 255, .1);
+    background: rgba(11, 15, 20, .45);
+    border-radius: 11px;
+    margin-bottom: 10px;
+}
+
+.contact-modern input:focus,
+.contact-modern textarea:focus {
+    outline: none;
+    border-color: rgba(31, 200, 171, .65);
+    box-shadow: 0 0 0 3px rgba(31, 200, 171, .12);
+}
+
+.contact-modern #button {
+    width: 100%;
+    margin-top: 8px;
+    border: 1px solid rgba(31, 200, 171, .55);
+    background: linear-gradient(90deg, rgba(31, 200, 171, .28), rgba(31, 200, 171, .08));
+    color: #dcfff6;
+    justify-content: center;
+    gap: 8px;
+}
+
+.contact-modern #button:hover {
+    background: linear-gradient(90deg, rgba(31, 200, 171, .4), rgba(31, 200, 171, .14));
+}
+
+@media screen and (max-width: 980px) {
+    .contact-atelier {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-spotlight h3 {
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .contact-modern-socials {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-spotlight,
+    .contact-modern-form-wrap {
+        padding: 14px;
+    }
+}
+
+/* ===== About Me Rebuild ===== */
+.aboutme {
+    padding: 78px 20px;
+    background: linear-gradient(180deg, #0e1727 0%, #0b0f14 100%);
+}
+
+.aboutme .contenedor-seccion {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    gap: 18px;
+}
+
+.aboutme-header {
+    text-align: center;
+}
+
+.aboutme-eyebrow {
+    display: inline-flex;
+    border: 1px solid rgba(31, 200, 171, 0.45);
+    background: rgba(31, 200, 171, 0.12);
+    color: #93ffec;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.aboutme h2 {
+    font-size: 48px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    margin: 12px 0 0;
+    line-height: 1.1;
+}
+
+.aboutme-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 18px;
+    align-items: stretch;
+}
+
+.aboutme-story,
+.aboutme-value,
+.aboutme-pillar {
+    border: 1px solid var(--stroke);
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(18, 27, 43, 0.95), rgba(15, 23, 38, 0.96));
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+}
+
+.aboutme-story,
+.aboutme-value {
+    padding: 24px;
+}
+
+.aboutme-story p {
+    color: var(--text-dim);
+    font-size: 21px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.aboutme-story p span,
+.aboutme-story p strong {
+    color: var(--accent);
+}
+
+.aboutme-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.aboutme .btn-descarga {
+    margin: 0;
+    padding: 11px 18px;
+    font-size: 20px;
+    border-radius: 12px;
+    border-color: var(--stroke);
+    background: var(--surface);
+    text-transform: none;
+}
+
+.aboutme-contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #dbe5f4;
+    border: 1px solid var(--stroke);
+    border-radius: 12px;
+    background: var(--surface);
+    padding: 11px 16px;
+    font-size: 20px;
+    transition: 0.25s;
+}
+
+.aboutme-contact-link:hover {
+    border-color: rgba(31, 200, 171, 0.6);
+    background: rgba(31, 200, 171, 0.1);
+}
+
+.aboutme-value h3 {
+    font-size: 32px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    margin-bottom: 16px;
+}
+
+.aboutme-value-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.aboutme-value-list li {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    background: rgba(11, 15, 20, 0.45);
+    padding: 12px;
+}
+
+.aboutme-value-list h4 {
+    margin: 0 0 6px;
+    font-size: 20px;
+    color: #dcfff6;
+}
+
+.aboutme-value-list p {
+    margin: 0;
+    color: var(--text-dim);
+    line-height: 1.55;
+    font-size: 17px;
+}
+
+.aboutme-pillars {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.aboutme-pillar {
+    padding: 16px;
+}
+
+.aboutme-pillar i {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: rgba(31, 200, 171, 0.16);
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+.aboutme-pillar h4 {
+    margin: 0 0 6px;
+    font-size: 21px;
+}
+
+.aboutme-pillar p {
+    margin: 0;
+    color: var(--text-dim);
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+@media screen and (max-width: 980px) {
+    .aboutme-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .aboutme-pillars {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .aboutme {
+        padding: 66px 16px;
+    }
+
+    .aboutme h2 {
+        font-size: 38px;
+    }
+
+    .aboutme-story,
+    .aboutme-value,
+    .aboutme-pillar {
+        padding: 14px;
+    }
+
+    .aboutme-story p {
+        font-size: 19px;
+        line-height: 1.65;
+    }
+
+    .aboutme-actions {
+        gap: 10px;
+    }
+
+    .aboutme .btn-descarga,
+    .aboutme-contact-link {
+        width: 100%;
+        justify-content: center;
+        font-size: 19px;
+    }
+
+    .aboutme-value h3 {
+        font-size: 29px;
+    }
+
+    .aboutme-value-list h4 {
+        font-size: 18px;
+    }
+
+    .aboutme-pillars {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Responsive Hardening ===== */
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+main {
+    overflow-x: clip;
+}
+
+img,
+iframe,
+video,
+svg,
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+.contenedor-header header {
+    width: min(1200px, 100%);
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.contenedor-header nav ul {
+    flex-wrap: wrap;
+}
+
+.contenedor-header nav ul li a {
+    margin: 0 10px;
+    font-size: 16px;
+}
+
+.home {
+    min-height: 100svh;
+}
+
+.home .contenedor-banner {
+    width: min(1000px, 100%);
+    margin-inline: auto;
+    margin-top: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 28px;
+    border-radius: 26px;
+    padding: 32px;
+}
+
+.home .contenedor-banner .contenedor-img,
+.home .contenedor-banner .contenedor-info {
+    flex: 1 1 280px;
+}
+
+.home .contenedor-banner h1 {
+    margin-top: 0;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    line-height: 1.1;
+}
+
+.home .contenedor-banner h2 {
+    font-size: clamp(1rem, 2.3vw, 1.25rem);
+}
+
+.home .contenedor-banner img {
+    width: clamp(180px, 30vw, 320px);
+}
+
+.certifications-modern-item,
+.portfolio-modern-card,
+.curriculum-modern-col,
+.aboutme-story,
+.aboutme-value,
+.contact-spotlight,
+.contact-modern-form-wrap {
+    min-width: 0;
+}
+
+@media screen and (max-width: 980px) {
+    .contenedor-header header {
+        padding: 12px 16px;
+    }
+
+    .contenedor-header header .logo a {
+        font-size: clamp(1.5rem, 5vw, 2.2rem);
+    }
+
+    #nav {
+        display: none;
+    }
+
+    .nav-responsive {
+        display: block;
+    }
+
+    #nav.responsive {
+        display: block;
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 12px;
+        width: min(320px, calc(100vw - 24px));
+        background: rgba(15, 23, 38, 0.97);
+        border: 1px solid var(--stroke);
+        border-radius: 14px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 18px 38px rgba(0, 0, 0, 0.32);
+        padding: 8px;
+        animation: slideDown 0.3s ease;
+    }
+
+    #nav.responsive ul {
+        display: block !important;
+        padding: 0;
+    }
+
+    #nav.responsive ul li {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        text-align: left;
+        padding: 0;
+    }
+
+    #nav.responsive ul li:last-child {
+        border-bottom: none;
+    }
+
+    #nav.responsive ul li a {
+        display: block;
+        padding: 12px 14px;
+        margin: 0;
+        font-size: 16px;
+    }
+
+    .home {
+        padding: 110px 16px 62px;
+    }
+
+    .home .contenedor-banner {
+        gap: 20px;
+        padding: 24px;
+        border-radius: 20px;
+    }
+
+    .home .contenedor-banner .contenedor-img,
+    .home .contenedor-banner .contenedor-info {
+        flex: 1 1 100%;
+    }
+
+    .home .contenedor-banner img {
+        width: clamp(180px, 44vw, 270px);
+    }
+
+    .aboutme,
+    .curriculum-modern,
+    .skills-modern,
+    .certifications-modern,
+    .portfolio-modern,
+    .contact-modern {
+        padding: 64px 16px;
+    }
+
+    .aboutme-layout,
+    .aboutme-pillars,
+    .curriculum-modern-grid,
+    .skills-modern-grid,
+    .portfolio-modern-grid,
+    .contact-atelier {
+        grid-template-columns: 1fr;
+    }
+
+    .skills-modern h2,
+    .certifications-modern h2,
+    .portfolio-modern h2,
+    .contact-modern h2,
+    .curriculum-modern h2,
+    .aboutme h2 {
+        font-size: clamp(2.05rem, 6vw, 2.55rem);
+    }
+
+    .certifications-modern-item {
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+
+    .certifications-modern-icon {
+        margin: 0;
+    }
+
+    .contact-modern-socials {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .contenedor-header header {
+        padding: 10px 12px;
+    }
+
+    .home {
+        padding-top: 96px;
+    }
+
+    .home .contenedor-banner {
+        padding: 16px;
+        border-radius: 16px;
+    }
+
+    .home .contenedor-banner h1 {
+        font-size: clamp(1.85rem, 8vw, 2.35rem);
+    }
+
+    .home .contenedor-banner h2 {
+        font-size: clamp(0.95rem, 4.2vw, 1.1rem);
+    }
+
+    .home .contenedor-banner .redes a {
+        width: 52px;
+        height: 52px;
+        line-height: 52px;
+        font-size: 24px;
+        border-width: 2px;
+    }
+
+    .portfolio-modern-filters {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+    }
+
+    .portfolio-modern-filters button {
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
+
+    .portfolio-modern-media {
+        height: 180px;
+    }
+
+    .contact-modern-socials {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-card-link strong,
+    .contact-modern-mail span {
+        word-break: break-word;
+    }
+
+    .aboutme-story p {
+        font-size: 18px;
+    }
+
+    .aboutme .btn-descarga,
+    .aboutme-contact-link {
+        font-size: 17px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .contenedor-header header .logo a {
+        font-size: 1.45rem;
+    }
+
+    .aboutme,
+    .curriculum-modern,
+    .skills-modern,
+    .certifications-modern,
+    .portfolio-modern,
+    .contact-modern {
+        padding: 56px 12px;
+    }
+
+    .skills-modern h2,
+    .certifications-modern h2,
+    .portfolio-modern h2,
+    .contact-modern h2,
+    .curriculum-modern h2,
+    .aboutme h2 {
+        font-size: 2rem;
+    }
+
+    .contact-pill {
+        font-size: 12px;
+    }
+}
+

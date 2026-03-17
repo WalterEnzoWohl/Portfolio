@@ -1,8 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de Walter Enzo Wohl, Analista de Datos IT con foco en BI, reporting y visualización.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" 
     integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" 
     crossorigin="anonymous" 
@@ -15,6 +18,7 @@
     </script>
     <link rel="stylesheet" href="style.css">
 </head>
+<body>
     <!-- MENU ENCABEZADO -->
     <div class="contenedor-header">
         <header>
@@ -31,24 +35,24 @@
                     <li><a href="#contacto" onclick="seleccionar()">Contact</a></li>
                 </ul>
             </nav>
-            <div class="nav-responsive"  onclick="mostrarOcultarMenu()">
+            <button class="nav-responsive" type="button" aria-label="Abrir menú de navegación" aria-controls="nav" aria-expanded="false" onclick="mostrarOcultarMenu()">
                 <i class="fa-solid fa-bars"></i>
-            </div>
+            </button>
         </header>
      </div>
-<body>
+     <main>
      <!-- SECCION DE INICIO -->
       <section class="home" id="home">
         <div class="contenedor-banner">
             <div class="contenedor-img">
-                <img src="img/FotodePerfilAzul.png" alt="">
+                <img src="img/foto-perfil.webp" alt="Foto de perfil de Walter Enzo Wohl" width="320" height="320" fetchpriority="high">
             </div>
             <div class="contenedor-info">
              <h1>Walter Enzo Wohl</h1>
-             <h2>Analista de Datos Junior - Desarrollador web Fullstack</h2>
+             <h2>Analista de Datos IT | BI, Reporting y Visualización</h2>
              <div class="redes">
-                 <a target="_blank" href="https://www.linkedin.com/in/walterenzowohl"><i class="fa-brands fa-linkedin"></i></a>
-                 <a target="_blank" href="https://github.com/WalterEnzoWohl"><i class="fa-brands fa-github"></i></a>
+                 <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/walterenzowohl" aria-label="LinkedIn de Walter Enzo Wohl"><i class="fa-brands fa-linkedin"></i></a>
+                 <a target="_blank" rel="noopener noreferrer" href="https://github.com/WalterEnzoWohl" aria-label="GitHub de Walter Enzo Wohl"><i class="fa-brands fa-github"></i></a>
              </div>
             </div>
         </div>
@@ -58,7 +62,7 @@
         <div class="contenedor-seccion">
             <h2>About Me</h2>
             <p><span>Hola, Soy Walter Enzo Wohl.</span> 
-                Alguna ves pensaste en la mejor forma para tomar tus desiciones?
+                Alguna vez pensaste en la mejor forma para tomar tus decisiones?
                 La mejor forma de decidir es basándote en datos!
                 Soy estudiante de programación con una base sólida en tecnología y 
                 <strong> tengo experiencia utilizando Análisis de datos.</strong>
@@ -76,7 +80,7 @@
                                 15-05-2001
                             </li>
                             <li>
-                                <strong>Telefono</strong>
+                                <strong>Teléfono</strong>
                                 1141419407
                             </li>
                             <li>
@@ -85,16 +89,16 @@
                             </li>
                             <li>
                                 <strong>Website</strong>
-                                portfoliowohlf.vercel.app/
+                                <a href="https://portfoliowohl.vercel.app/" target="_blank" rel="noopener noreferrer">portfoliowohl.vercel.app</a>
                             </li>
                             <li>
-                                <strong>Direccion</strong>
+                                <strong>Dirección</strong>
                                 GBA, Buenos Aires, Argentina
                             </li>
                             <li>
                                 <strong>Cargo actual</strong>
+                                <span>Analista de Datos IT</span>
                             </li>
-                            <span>Analista de Datos Junior</span>
                         </ul>
                     </div>
                     <!-- Intereses -->
@@ -136,11 +140,9 @@
                         </div>
                      </div>
                 </div>
-                <a href="img/Walter Enzo Wohl CV.pdf" download="WalterEnzoWohl.pdf">
-                    <button>
+                <a class="btn-descarga" href="img/Walter Enzo Wohl CV.pdf" download="WalterEnzoWohl.pdf">
                         DESCARGAR CV <i class="fa-solid fa-download"></i>
                         <span class="overlay"></span>
-                    </button>
                 </a>
         </div>
        </section>
@@ -221,7 +223,7 @@
                             </div>
                         </div>
                         <div class="skill">
-                            <span>Organizacion & Prioizacion de tareas</span>
+                            <span>Organización & Priorización de tareas</span>
                             <div class="barra-skill">
                                 <div class="progreso">
                                     <span>87%</span>
@@ -237,7 +239,7 @@
                             </div>
                         </div>
                         <div class="skill">
-                            <span>Tolerancia a la frustracion</span>
+                            <span>Tolerancia a la frustración</span>
                             <div class="barra-skill">
                                 <div class="progreso">
                                     <span>80%</span>
@@ -245,7 +247,7 @@
                             </div>
                         </div>
                         <div class="skill">
-                            <span>Aplicacion de Metodologias Agiles</span>
+                            <span>Aplicación de Metodologías Ágiles</span>
                             <div class="barra-skill">
                                 <div class="progreso">
                                     <span>83%</span>
@@ -259,7 +261,7 @@
         <!-- SECCION CURRICULUM -->
         <section id="curriculum" class="curriculum">
           <div class="contenedor-seccion">
-            <h2>Curriculum</h2>
+            <h2>Currículum</h2>
             <div class="fila">
               <div class="col izquierda" id="formacion">
                 <h3>Formación</h3>
@@ -280,17 +282,17 @@
                             <h3>Análisis de Gastos RRHH</h3>
                             <p >PowerBI + Excel</p>
                         </div>
-                        <iframe title="Panel Análisis de Gastos RRHH" width="1024" height="612" src="https://app.powerbi.com/view?r=eyJrIjoiNzkzN2M5NDctNGFiMC00NmU3LTg1NzQtYjdiZmRlMDU0MzQ4IiwidCI6ImUwODdhZTVmLTQ2YjQtNDBiOS04ZGZkLTE1MTA4MTQwMTc3MyIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>
+                        <iframe title="Panel Análisis de Gastos RRHH" width="1024" height="612" src="https://app.powerbi.com/view?r=eyJrIjoiNzkzN2M5NDctNGFiMC00NmU3LTg1NzQtYjdiZmRlMDU0MzQ4IiwidCI6ImUwODdhZTVmLTQ2YjQtNDBiOS04ZGZkLTE1MTA4MTQwMTc3MyIsImMiOjR9" frameborder="0" loading="lazy" allowfullscreen></iframe>
                     </div>
                     <div class="proyecto">
                         <div>
                             <h3>Informe de Ventas para empresa "Appol"</h3>
                             <p >PowerBI + Excel</p>
                         </div>
-                        <iframe title="PrimerDashboard" width="1024" height="612" src="https://app.powerbi.com/view?r=eyJrIjoiYmZkOTYwMDYtNWU1NS00MjZkLTg2MWYtZDAxZmRkYzVhZGUwIiwidCI6ImUwODdhZTVmLTQ2YjQtNDBiOS04ZGZkLTE1MTA4MTQwMTc3MyIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>
+                        <iframe title="Dashboard de ventas Appol" width="1024" height="612" src="https://app.powerbi.com/view?r=eyJrIjoiYmZkOTYwMDYtNWU1NS00MjZkLTg2MWYtZDAxZmRkYzVhZGUwIiwidCI6ImUwODdhZTVmLTQ2YjQtNDBiOS04ZGZkLTE1MTA4MTQwMTc3MyIsImMiOjR9" frameborder="0" loading="lazy" allowfullscreen></iframe>
                     </div>
                     <div class="proyecto">
-                        <img src="img/D2.png" alt="">
+                        <img src="img/d2.webp" alt="Dashboard de seguimiento de reportes por recurso" loading="lazy" decoding="async" width="300" height="169">
                         <div class="overlay">
                             <h3>Seguimiento de reportes por recurso</h3>
                             <p>PowerBI + SQL + Python</p>
@@ -307,10 +309,15 @@
                     <!-- Formulario -->
                     <div class="col">
                         <form id="form">
+                            <label class="form-label" for="name">Nombre</label>
                             <input type="text" name="name" id="name" placeholder="Tu nombre" required>
-                            <input type="text" name="phonenumber" id="phonenumber" placeholder="Número de Telefono" pattern="[0-9]*" inputmode="numeric" required>
-                            <input type="email" name="email" id="email" placeholder="Direccion de correo" required>
+                            <label class="form-label" for="phonenumber">Teléfono</label>
+                            <input type="text" name="phonenumber" id="phonenumber" placeholder="Número de teléfono" pattern="[0-9]*" inputmode="numeric" required>
+                            <label class="form-label" for="email">Email</label>
+                            <input type="email" name="email" id="email" placeholder="Dirección de correo" required>
+                            <label class="form-label" for="title">Asunto</label>
                             <input type="text" name="title" id="title" placeholder="Asunto" required>
+                            <label class="form-label" for="message">Mensaje</label>
                             <textarea name="message" id="message" cols="30" rows="10" placeholder="Mensaje" required></textarea>
                             <button type="submit" id="button" value="Send Email">
                                 Enviar mensaje<i class="fa-solid fa-paper-plane"></i>
@@ -328,11 +335,11 @@
                                 </li>
                                 <li>
                                     <i class="fa-solid fa-phone"></i>
-                                    Llamame: 11 4141 9407
+                                    Llámame: 11 4141 9407
                                 </li>
                                 <li>
                                     <i class="fa-solid fa-envelope"></i>
-                                    Manda un mail al: <span>walterenzowohl@gmail.com</span>
+                                    Mandá un mail al: <span>walterenzowohl@gmail.com</span>
                                 </li>
                             </ul>
                         </div>
@@ -341,17 +348,18 @@
             </div>
            </section>
            <!-- FOOTER -->
+        </main>
         <footer>
             <a href="#home" class="arriba">
                 <i class="fa-solid fa-angles-up"></i>
             </a>
             <div class="redes">
-                <a target="_blank" href="https://www.linkedin.com/in/walterenzowohl"><i class="fa-brands fa-linkedin"></i></a>
-                <a target="_blank" href="https://github.com/WalterEnzoWohl"><i class="fa-brands fa-github"></i></a>
+                <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/walterenzowohl" aria-label="LinkedIn de Walter Enzo Wohl"><i class="fa-brands fa-linkedin"></i></a>
+                <a target="_blank" rel="noopener noreferrer" href="https://github.com/WalterEnzoWohl" aria-label="GitHub de Walter Enzo Wohl"><i class="fa-brands fa-github"></i></a>
             </div>
             <p class="copyright">&copy; 2025 Walter Enzo Wohl. Todos los derechos reservados.</p>
         </footer>
-            </section>
             <script src="script.js"></script>
 </body>
 </html>
+
