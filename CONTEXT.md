@@ -31,10 +31,6 @@ La app principal es una SPA de una sola página con secciones:
 - Componente principal: `src/App.tsx`
 - Estilos globales: `src/style.css`
 
-## Nota sobre archivo legado
-Existe `src/index.html` (legacy) abierto en tu IDE.  
-Ese archivo **no es** el entrypoint de Vite y hoy no gobierna la app React.
-
 ## Estructura de carpetas relevante
 - `index.html`: shell HTML de Vite + CDN de Font Awesome
 - `src/main.tsx`: monta `<App />` en `#root`
@@ -112,3 +108,8 @@ Variables:
 - Embeds de dashboards Power BI y proyecto web
 - Formulario de contacto con envío vía EmailJS
 - Descarga de CV PDF desde `public/img/Walter Enzo Wohl CV.pdf`
+
+## Orden actual del proyecto
+- El portfolio mantiene una sola implementación activa: **React + Vite**
+- Se eliminaron archivos legacy HTML/JS que ya no participaban del build
+- `public/img` conserva sólo los assets utilizados por la app actual
