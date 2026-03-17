@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState, type SyntheticEvent } from "react";
 import emailjs from "@emailjs/browser";
 import { useForm } from "react-hook-form";
 import "./style.css";
@@ -215,6 +215,13 @@ function App() {
 
   const filteredProjects =
     activeCategory === "all" ? projects : projects.filter((project) => project.category === activeCategory);
+
+  const handleProjectImageError = (event: SyntheticEvent<HTMLImageElement>) => {
+    const image = event.currentTarget;
+
+    image.onerror = null;
+    image.src = "/img/WIP.png";
+  };
 
   return (
     <>
@@ -526,7 +533,13 @@ function App() {
               {filteredProjects.map((project) => (
                 <article className="portfolio-modern-card" key={project.title}>
                   <div className="portfolio-modern-media">
-                    <img src={project.image} alt={project.title} loading="lazy" decoding="async" />
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      loading="lazy"
+                      decoding="async"
+                      onError={handleProjectImageError}
+                    />
                     <span className="portfolio-modern-badge">
                       {project.category === "powerbi" ? "Power BI" : "Web Development"}
                     </span>
@@ -723,3 +736,4 @@ function App() {
 }
 
 export default App;
+
