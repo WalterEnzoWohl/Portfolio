@@ -1,7 +1,15 @@
-import { useEffect, useState, type SyntheticEvent } from "react";
+﻿import { useEffect, useState, type SyntheticEvent } from "react";
 import emailjs from "@emailjs/browser";
 import { useForm } from "react-hook-form";
 import "./style.css";
+
+type Language = "es" | "en";
+type Theme = "dark" | "light";
+
+type LocalizedText = {
+  es: string;
+  en: string;
+};
 
 type ContactFormValues = {
   name: string;
@@ -19,139 +27,497 @@ type SubmitState = {
 type ProjectCategory = "all" | "powerbi" | "web";
 
 type SkillCategory = {
-  title: string;
+  title: LocalizedText;
   icon: string;
-  skills: string[];
+  skills: LocalizedText[];
 };
 
 type Certification = {
-  title: string;
-  provider: string;
-  year: string;
+  title: LocalizedText;
+  provider: LocalizedText;
+  year: LocalizedText;
   link: string;
 };
 
 type Project = {
-  title: string;
+  title: LocalizedText;
   category: Exclude<ProjectCategory, "all">;
-  description: string;
+  description: LocalizedText;
   tools: string[];
-  highlights: string[];
+  highlights: {
+    es: string[];
+    en: string[];
+  };
   image: string;
   link: string;
 };
 
 type CurriculumItem = {
-  titulo: string;
-  institucion?: string;
-  empresa?: string;
-  fecha: string;
-  descripcion: string;
+  title: LocalizedText;
+  place: LocalizedText;
+  date: LocalizedText;
+  description: LocalizedText;
 };
 
-type CurriculumData = {
-  formacion: CurriculumItem[];
-  experiencia: CurriculumItem[];
-};
+const uiCopy = {
+  es: {
+    nav: {
+      home: "Inicio",
+      about: "Sobre mí",
+      curriculum: "Currículum",
+      skills: "Skills",
+      certifications: "Certificaciones",
+      portfolio: "Portfolio",
+      contact: "Contacto"
+    },
+    languageSwitcherAria: "Cambiar idioma",
+    heroRole: "Analista de Datos IT | BI, Reporting y Visualización",
+    about: {
+      eyebrow: "Perfil profesional",
+      title: "Sobre mí",
+      body:
+        "Hola, soy Walter Enzo Wohl. Soy Analista de Datos IT con experiencia en análisis, reporting y visualización para acompañar decisiones de negocio y operación. Trabajo con Excel, SQL, Power BI, Tableau y Python para convertir información dispersa en indicadores claros, dashboards accionables y procesos más ordenados. También cuento con base en desarrollo web y herramientas de colaboración como Git, GitHub y Azure DevOps, lo que me permite moverme con comodidad entre datos, producto y ejecución.",
+      download: "Descargar CV",
+      contact: "Contactarme",
+      valueTitle: "Lo que puedo aportar",
+      values: [
+        {
+          title: "Reporting y seguimiento de KPIs",
+          description: "Diseño reportes y tableros para ordenar información y mejorar el control operativo."
+        },
+        {
+          title: "Visualización para toma de decisiones",
+          description: "Presento hallazgos de forma clara para que equipos y referentes puedan actuar más rápido."
+        },
+        {
+          title: "Ejecución transversal",
+          description: "Combino analítica, automatización y criterio técnico para resolver necesidades de punta a punta."
+        }
+      ],
+      pillars: [
+        {
+          title: "Toma de decisiones",
+          description: "Datos claros para priorizar mejor y decidir con más contexto."
+        },
+        {
+          title: "Storytelling de datos",
+          description: "Contexto, visualización y síntesis para comunicar mejor cada hallazgo."
+        },
+        {
+          title: "Ejecución",
+          description: "Implementación práctica con foco en impacto, orden y continuidad operativa."
+        }
+      ]
+    },
+    curriculum: {
+      title: "Currículum",
+      subtitle: "Formación y experiencia profesional con foco en analítica, mejora operativa y desarrollo.",
+      education: "Formación",
+      experience: "Experiencia",
+      showMore: "Ver más",
+      showLess: "Ver menos"
+    },
+    skills: {
+      title: "Skills & Expertise",
+      subtitle: "Tecnologías y herramientas con las que trabajo para resolver problemas de datos y producto."
+    },
+    certifications: {
+      title: "Certificaciones",
+      subtitle: "Formación validada y aprendizaje continuo.",
+      view: "Ver"
+    },
+    portfolio: {
+      title: "Portfolio",
+      subtitle: "Proyectos orientados a análisis de datos y desarrollo web con foco en impacto real.",
+      filters: {
+        all: "Todos los proyectos",
+        powerbi: "Power BI",
+        web: "Desarrollo Web"
+      },
+      badges: {
+        powerbi: "Power BI",
+        web: "Desarrollo Web"
+      },
+      viewProject: "Ver proyecto"
+    },
+    contact: {
+      title: "Contacto",
+      subtitle:
+        "Contame tu objetivo y te respondo con una propuesta clara para ayudarte con análisis, BI, reporting o automatización.",
+      pill: "Disponible para proyectos y propuestas laborales",
+      heading: "Construyamos algo que tenga impacto real",
+      body:
+        "Si necesitás ordenar información, crear dashboards o mejorar el seguimiento de indicadores, conversemos. Trabajo con foco en resultados, claridad y ejecución prolija.",
+      emailLabel: "Email",
+      phoneLabel: "Teléfono",
+      github: "GitHub",
+      linkedin: "LinkedIn",
+      location: "GBA | Buenos Aires | Argentina",
+      response: "Respuesta habitual: dentro de 24 horas",
+      form: {
+        name: "Nombre",
+        namePlaceholder: "Tu nombre",
+        phone: "Teléfono",
+        phonePlaceholder: "Número de teléfono",
+        email: "Email",
+        emailPlaceholder: "Dirección de correo",
+        title: "Asunto",
+        titlePlaceholder: "Asunto",
+        message: "Mensaje",
+        messagePlaceholder: "Mensaje"
+      },
+      sending: "Enviando...",
+      send: "Enviar mensaje",
+      success: "Mensaje enviado con éxito.",
+      error: "No se pudo enviar el mensaje. Probá nuevamente en unos minutos.",
+      validation: {
+        nameRequired: "El nombre es obligatorio.",
+        phoneRequired: "El teléfono es obligatorio.",
+        phoneInvalid: "Ingresá un teléfono válido.",
+        emailRequired: "El email es obligatorio.",
+        emailInvalid: "Ingresá un email válido.",
+        titleRequired: "El asunto es obligatorio.",
+        messageRequired: "El mensaje es obligatorio."
+      }
+    },
+    footer: "Todos los derechos reservados."
+  },
+  en: {
+    nav: {
+      home: "Home",
+      about: "About Me",
+      curriculum: "Resume",
+      skills: "Skills",
+      certifications: "Certifications",
+      portfolio: "Portfolio",
+      contact: "Contact"
+    },
+    languageSwitcherAria: "Change language",
+    heroRole: "IT Data Analyst | BI, Reporting & Visualization",
+    about: {
+      eyebrow: "Professional profile",
+      title: "About Me",
+      body:
+        "Hi, I'm Walter Enzo Wohl. I'm an IT Data Analyst with experience in analytics, reporting and visualization to support business and operational decisions. I work with Excel, SQL, Power BI, Tableau and Python to turn scattered information into clear indicators, actionable dashboards and more organized processes. I also have a web development foundation and collaboration tools such as Git, GitHub and Azure DevOps, which allows me to move comfortably between data, product and execution.",
+      download: "Download CV",
+      contact: "Contact me",
+      valueTitle: "What I bring",
+      values: [
+        {
+          title: "Reporting and KPI tracking",
+          description: "I design reports and dashboards that organize information and improve operational control."
+        },
+        {
+          title: "Decision-oriented visualization",
+          description: "I present findings clearly so teams and stakeholders can act faster."
+        },
+        {
+          title: "Cross-functional execution",
+          description: "I combine analytics, automation and technical judgment to solve needs end to end."
+        }
+      ],
+      pillars: [
+        {
+          title: "Decision making",
+          description: "Clear data to prioritize better and make decisions with stronger context."
+        },
+        {
+          title: "Data storytelling",
+          description: "Context, visualization and synthesis to communicate each finding more effectively."
+        },
+        {
+          title: "Execution",
+          description: "Practical implementation focused on impact, clarity and operational continuity."
+        }
+      ]
+    },
+    curriculum: {
+      title: "Resume",
+      subtitle: "Education and professional experience focused on analytics, operational improvement and development.",
+      education: "Education",
+      experience: "Experience",
+      showMore: "Show more",
+      showLess: "Show less"
+    },
+    skills: {
+      title: "Skills & Expertise",
+      subtitle: "Technologies and tools I use to solve data and product challenges."
+    },
+    certifications: {
+      title: "Certifications",
+      subtitle: "Validated learning and continuous development.",
+      view: "View"
+    },
+    portfolio: {
+      title: "Portfolio",
+      subtitle: "Projects focused on data analysis and web development with an emphasis on real impact.",
+      filters: {
+        all: "All projects",
+        powerbi: "Power BI",
+        web: "Web Development"
+      },
+      badges: {
+        powerbi: "Power BI",
+        web: "Web Development"
+      },
+      viewProject: "View project"
+    },
+    contact: {
+      title: "Contact",
+      subtitle:
+        "Tell me about your goal and I'll reply with a clear proposal to help you with analytics, BI, reporting or automation.",
+      pill: "Available for projects and job opportunities",
+      heading: "Let's build something with real impact",
+      body:
+        "If you need to organize information, build dashboards or improve KPI tracking, let's talk. I work with a focus on results, clarity and clean execution.",
+      emailLabel: "Email",
+      phoneLabel: "Phone",
+      github: "GitHub",
+      linkedin: "LinkedIn",
+      location: "Greater Buenos Aires | Argentina",
+      response: "Typical response time: within 24 hours",
+      form: {
+        name: "Name",
+        namePlaceholder: "Your name",
+        phone: "Phone",
+        phonePlaceholder: "Phone number",
+        email: "Email",
+        emailPlaceholder: "Email address",
+        title: "Subject",
+        titlePlaceholder: "Subject",
+        message: "Message",
+        messagePlaceholder: "Message"
+      },
+      sending: "Sending...",
+      send: "Send message",
+      success: "Message sent successfully.",
+      error: "The message could not be sent. Please try again in a few minutes.",
+      validation: {
+        nameRequired: "Name is required.",
+        phoneRequired: "Phone number is required.",
+        phoneInvalid: "Enter a valid phone number.",
+        emailRequired: "Email is required.",
+        emailInvalid: "Enter a valid email address.",
+        titleRequired: "Subject is required.",
+        messageRequired: "Message is required."
+      }
+    },
+    footer: "All rights reserved."
+  }
+} as const;
 
 const skillCategories: SkillCategory[] = [
   {
-    title: "Data Analysis",
+    title: { es: "Análisis de datos", en: "Data Analysis" },
     icon: "fa-solid fa-database",
-    skills: ["Excel avanzado", "Macros/VBA", "SQL", "Power BI", "Tableau"]
+    skills: [
+      { es: "Excel avanzado", en: "Advanced Excel" },
+      { es: "Macros / VBA", en: "Macros / VBA" },
+      { es: "SQL", en: "SQL" },
+      { es: "Power BI", en: "Power BI" },
+      { es: "Tableau", en: "Tableau" }
+    ]
   },
   {
-    title: "Python & Automation",
+    title: { es: "Python y automatización", en: "Python & Automation" },
     icon: "fa-solid fa-chart-column",
-    skills: ["Python", "Pandas", "NumPy", "ETL"]
+    skills: [
+      { es: "Python", en: "Python" },
+      { es: "Pandas", en: "Pandas" },
+      { es: "NumPy", en: "NumPy" },
+      { es: "ETL", en: "ETL" }
+    ]
   },
   {
-    title: "Development",
+    title: { es: "Desarrollo", en: "Development" },
     icon: "fa-solid fa-code",
-    skills: ["HTML", "CSS", "JavaScript", "React", "Node.js"]
+    skills: [
+      { es: "HTML", en: "HTML" },
+      { es: "CSS", en: "CSS" },
+      { es: "JavaScript", en: "JavaScript" },
+      { es: "React", en: "React" },
+      { es: "Node.js", en: "Node.js" }
+    ]
   },
   {
-    title: "Tools & Delivery",
+    title: { es: "Herramientas y delivery", en: "Tools & Delivery" },
     icon: "fa-solid fa-screwdriver-wrench",
-    skills: ["Git", "GitHub", "Azure DevOps", "MySQL", "PostgreSQL"]
+    skills: [
+      { es: "Git", en: "Git" },
+      { es: "GitHub", en: "GitHub" },
+      { es: "Azure DevOps", en: "Azure DevOps" },
+      { es: "MySQL", en: "MySQL" },
+      { es: "PostgreSQL", en: "PostgreSQL" }
+    ]
   }
 ];
 
 const certifications: Certification[] = [
   {
-    title: "Google Data Analytics",
-    provider: "Google | Coursera",
-    year: "Actualidad",
+    title: { es: "Google Data Analytics", en: "Google Data Analytics" },
+    provider: { es: "Google | Coursera", en: "Google | Coursera" },
+    year: { es: "Actualidad", en: "Present" },
     link: "/img/Walter Enzo Wohl CV.pdf"
   },
   {
-    title: "Diplomatura en Desarrollo Web Full Stack",
-    provider: "Universidad Tecnológica Nacional",
-    year: "2023",
+    title: { es: "Diplomatura en Desarrollo Web Full Stack", en: "Full Stack Web Development Diploma" },
+    provider: { es: "Universidad Tecnológica Nacional", en: "National Technological University" },
+    year: { es: "2023", en: "2023" },
     link: "/img/Walter Enzo Wohl CV.pdf"
   },
   {
-    title: "Curso de Análisis de Datos",
-    provider: "CREHANA",
-    year: "2025",
+    title: { es: "Curso de Análisis de Datos", en: "Data Analysis Course" },
+    provider: { es: "CREHANA", en: "CREHANA" },
+    year: { es: "2025", en: "2025" },
     link: "/img/Walter Enzo Wohl CV.pdf"
   }
 ];
-
-const projectCategories: { id: ProjectCategory; label: string; icon: string }[] = [
-  { id: "all", label: "Todos los proyectos", icon: "fa-solid fa-layer-group" },
-  { id: "powerbi", label: "Power BI", icon: "fa-solid fa-chart-simple" },
-  { id: "web", label: "Desarrollo Web", icon: "fa-solid fa-code" }
-];
-
 const projects: Project[] = [
   {
-    title: "Análisis de Gastos RRHH",
+    title: { es: "Análisis de Gastos RRHH", en: "HR Expense Analysis" },
     category: "powerbi",
-    description: "Dashboard para controlar gastos operativos y oportunidades de optimización en recursos humanos.",
+    description: {
+      es: "Dashboard para controlar gastos operativos y oportunidades de optimización en recursos humanos.",
+      en: "Dashboard to track operating expenses and optimization opportunities across human resources."
+    },
     tools: ["Power BI", "Excel"],
-    highlights: ["KPIs de costos por área", "Comparativa mensual de desvío"],
+    highlights: {
+      es: ["KPIs de costos por área", "Comparativa mensual de desvío"],
+      en: ["Cost KPIs by area", "Monthly variance comparison"]
+    },
     image: "/img/d2.webp",
     link: "https://app.powerbi.com/view?r=eyJrIjoiNzkzN2M5NDctNGFiMC00NmU3LTg1NzQtYjdiZmRlMDU0MzQ4IiwidCI6ImUwODdhZTVmLTQ2YjQtNDBiOS04ZGZkLTE1MTA4MTQwMTc3MyIsImMiOjR9"
   },
   {
-    title: "Informe de Ventas Appol",
+    title: { es: "Informe de Ventas Appol", en: "Appol Sales Report" },
     category: "powerbi",
-    description: "Informe ejecutivo para análisis comercial con seguimiento de ventas, mix de productos y tendencias.",
+    description: {
+      es: "Informe ejecutivo para análisis comercial con seguimiento de ventas, mix de productos y tendencias.",
+      en: "Executive report for commercial analysis with sales tracking, product mix and trend monitoring."
+    },
     tools: ["Power BI", "Excel", "DAX"],
-    highlights: ["Análisis por canal", "Seguimiento de crecimiento YoY"],
+    highlights: {
+      es: ["Análisis por canal", "Seguimiento de crecimiento YoY"],
+      en: ["Channel analysis", "YoY growth tracking"]
+    },
     image: "/img/D3.png",
     link: "https://app.powerbi.com/view?r=eyJrIjoiYmZkOTYwMDYtNWU1NS00MjZkLTg2MWYtZDAxZmRkYzVhZGUwIiwidCI6ImUwODdhZTVmLTQ2YjQtNDBiOS04ZGZkLTE1MTA4MTQwMTc3MyIsImMiOjR9"
   },
   {
-    title: "Seguimiento de Reportes por Recurso",
+    title: { es: "Seguimiento de Reportes por Recurso", en: "Report Tracking by Resource" },
     category: "powerbi",
-    description: "Control de productividad y calidad por recurso con enfoque en cumplimiento y mejora continua.",
+    description: {
+      es: "Control de productividad y calidad por recurso con enfoque en cumplimiento y mejora continua.",
+      en: "Productivity and quality tracking by resource with a focus on compliance and continuous improvement."
+    },
     tools: ["Power BI", "SQL", "Python"],
-    highlights: ["Trazabilidad por recurso", "Detección de cuellos de botella"],
+    highlights: {
+      es: ["Trazabilidad por recurso", "Detección de cuellos de botella"],
+      en: ["Resource-level traceability", "Bottleneck detection"]
+    },
     image: "/img/D4.png",
     link: "https://github.com/WalterEnzoWohl"
   },
   {
-    title: "Portfolio Fullstack",
+    title: { es: "Portfolio Fullstack", en: "Fullstack Portfolio" },
     category: "web",
-    description: "Sitio portfolio desarrollado con enfoque responsive, performance y experiencia de usuario.",
+    description: {
+      es: "Sitio portfolio desarrollado con enfoque responsive, performance y experiencia de usuario.",
+      en: "Portfolio site built with a focus on responsive behavior, performance and user experience."
+    },
     tools: ["React", "TypeScript", "Vite"],
-    highlights: ["Arquitectura modular", "Formulario de contacto integrado"],
+    highlights: {
+      es: ["Arquitectura modular", "Formulario de contacto integrado"],
+      en: ["Modular architecture", "Integrated contact form"]
+    },
     image: "/img/banner.png",
     link: "https://portfoliowohl.vercel.app/"
   }
 ];
 
+const curriculumData: { education: CurriculumItem[]; experience: CurriculumItem[] } = {
+  education: [
+    {
+      title: { es: "Google Data Analytics", en: "Google Data Analytics" },
+      place: { es: "Google | Coursera", en: "Google | Coursera" },
+      date: { es: "Actualidad", en: "Present" },
+      description: {
+        es: "Certificación orientada a análisis de datos, limpieza y preparación de información, uso de spreadsheets, SQL, visualización y toma de decisiones basada en datos.",
+        en: "Certification focused on data analysis, data cleaning and preparation, spreadsheets, SQL, visualization and data-driven decision making."
+      }
+    },
+    {
+      title: { es: "Diplomatura en Desarrollo Web Full Stack", en: "Full Stack Web Development Diploma" },
+      place: { es: "Universidad Tecnológica Nacional", en: "National Technological University" },
+      date: { es: "20 de marzo 2023 - 13 de diciembre 2023", en: "March 20, 2023 - December 13, 2023" },
+      description: {
+        es: "Formación integral orientada al desarrollo de aplicaciones web frontend y backend. Incorporé HTML, CSS, JavaScript, Git, GitHub, Node.js y bases de datos, trabajando con proyectos prácticos y metodologías ágiles.",
+        en: "Comprehensive training focused on front-end and back-end web application development. I worked with HTML, CSS, JavaScript, Git, GitHub, Node.js and databases through hands-on projects and agile methodologies."
+      }
+    },
+    {
+      title: { es: "Curso de Análisis de Datos", en: "Data Analysis Course" },
+      place: { es: "CREHANA", en: "CREHANA" },
+      date: { es: "2024 - 2025", en: "2024 - 2025" },
+      description: {
+        es: "Análisis y visualización de datos usando Excel, SQL, Power BI y Python. Manipulación de grandes volúmenes de información y toma de decisiones basadas en datos.",
+        en: "Data analysis and visualization using Excel, SQL, Power BI and Python. Handling large data volumes and supporting data-driven decisions."
+      }
+    }
+  ],
+  experience: [
+    {
+      title: { es: "Analista de Datos", en: "Data Analyst" },
+      place: { es: "Gobierno de la Ciudad de Buenos Aires (GCBA)", en: "City Government of Buenos Aires (GCBA)" },
+      date: { es: "Septiembre de 2025 - Actualidad", en: "September 2025 - Present" },
+      description: {
+        es: "Análisis de datos y generación de reportes para entornos de gestión pública, con foco en seguimiento de información, visualización de indicadores y soporte a la toma de decisiones.",
+        en: "Data analysis and reporting for public management environments, focused on information tracking, KPI visualization and decision support."
+      }
+    },
+    {
+      title: { es: "Analista de Datos Junior", en: "Junior Data Analyst" },
+      place: { es: "ARBUSTA S.A.", en: "ARBUSTA S.A." },
+      date: { es: "Agosto de 2024 - Septiembre de 2025", en: "August 2024 - September 2025" },
+      description: {
+        es: "Responsable de análisis de datos en el proyecto MTC para Mercado Libre, control de publicaciones y seguimiento de KPIs. Desarrollo de reportes automatizados en Google Sheets, trabajo con Excel, SQL, Power BI y participación en procesos ETL.",
+        en: "Responsible for data analysis in the MTC project for Mercado Libre, publication control and KPI monitoring. Built automated reports in Google Sheets, worked with Excel, SQL, Power BI and supported ETL processes."
+      }
+    },
+    {
+      title: { es: "Desarrollador IoT en Pasantía", en: "IoT Development Intern" },
+      place: { es: "Grupo MSA S.A", en: "Grupo MSA S.A" },
+      date: { es: "Febrero - Marzo 2024", en: "February - March 2024" },
+      description: {
+        es: "Desarrollo de una aplicación IoT para validación de identidad con DNI y huella. Trabajo colaborativo en entorno Ubuntu usando HTML, CSS, JavaScript y React para el frontend.",
+        en: "Developed an IoT application for identity validation using ID card and fingerprint. Collaborative work in an Ubuntu environment using HTML, CSS, JavaScript and React for the frontend."
+      }
+    }
+  ]
+};
 function App() {
+  const [language, setLanguage] = useState<Language>("es");
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") {
+      return "dark";
+    }
+
+    const savedTheme = window.localStorage.getItem("portfolio-theme");
+
+    if (savedTheme === "light" || savedTheme === "dark") {
+      return savedTheme;
+    }
+
+    return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  });
   const [menuVisible, setMenuVisible] = useState(false);
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>("all");
   const [isSending, setIsSending] = useState(false);
   const [submitState, setSubmitState] = useState<SubmitState>(null);
-  const [curriculum, setCurriculum] = useState<CurriculumData>({ formacion: [], experiencia: [] });
-  const [curriculumError, setCurriculumError] = useState<string | null>(null);
-  const [openFormacion, setOpenFormacion] = useState<number | null>(null);
-  const [openExperiencia, setOpenExperiencia] = useState<number | null>(null);
+  const [openEducation, setOpenEducation] = useState<number | null>(null);
+  const [openExperience, setOpenExperience] = useState<number | null>(null);
+
+  const copy = uiCopy[language];
 
   const {
     register,
@@ -161,31 +527,14 @@ function App() {
   } = useForm<ContactFormValues>();
 
   useEffect(() => {
-    let isMounted = true;
+    document.documentElement.lang = language;
+  }, [language]);
 
-    fetch("/data/cv.json")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("No se pudo cargar el CV.");
-        }
-        return response.json() as Promise<CurriculumData>;
-      })
-      .then((data) => {
-        if (isMounted) {
-          setCurriculum(data);
-          setCurriculumError(null);
-        }
-      })
-      .catch(() => {
-        if (isMounted) {
-          setCurriculumError("No se pudo cargar la sección de currículum.");
-        }
-      });
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    window.localStorage.setItem("portfolio-theme", theme);
+  }, [theme]);
 
   const onSubmit = async (data: ContactFormValues) => {
     setIsSending(true);
@@ -197,13 +546,10 @@ function App() {
 
     try {
       await emailjs.send(serviceId, templateId, data, { publicKey });
-      setSubmitState({ type: "success", message: "Mensaje enviado con éxito." });
+      setSubmitState({ type: "success", message: copy.contact.success });
       reset();
     } catch {
-      setSubmitState({
-        type: "error",
-        message: "No se pudo enviar el mensaje. Probá nuevamente en unos minutos."
-      });
+      setSubmitState({ type: "error", message: copy.contact.error });
     } finally {
       setIsSending(false);
     }
@@ -216,12 +562,27 @@ function App() {
   const filteredProjects =
     activeCategory === "all" ? projects : projects.filter((project) => project.category === activeCategory);
 
+  const projectCategories = [
+    { id: "all" as const, label: copy.portfolio.filters.all, icon: "fa-solid fa-layer-group" },
+    { id: "powerbi" as const, label: copy.portfolio.filters.powerbi, icon: "fa-solid fa-chart-simple" },
+    { id: "web" as const, label: copy.portfolio.filters.web, icon: "fa-solid fa-code" }
+  ];
+
   const handleProjectImageError = (event: SyntheticEvent<HTMLImageElement>) => {
     const image = event.currentTarget;
 
     image.onerror = null;
     image.src = "/img/WIP.png";
   };
+
+  const themeToggleLabel =
+    language === "es"
+      ? theme === "dark"
+        ? "Activar modo claro"
+        : "Activar modo oscuro"
+      : theme === "dark"
+        ? "Enable light mode"
+        : "Enable dark mode";
 
   return (
     <>
@@ -233,54 +594,45 @@ function App() {
 
           <nav id="nav" className={menuVisible ? "responsive" : ""}>
             <ul>
-              <li>
-                <a href="#home" onClick={selectMenu}>
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="#aboutme" onClick={selectMenu}>
-                  About Me
-                </a>
-              </li>
-              <li>
-                <a href="#curriculum" onClick={selectMenu}>
-                  Currículum
-                </a>
-              </li>
-              <li>
-                <a href="#skills" onClick={selectMenu}>
-                  Skills
-                </a>
-              </li>
-              <li>
-                <a href="#certifications" onClick={selectMenu}>
-                  Certificaciones
-                </a>
-              </li>
-              <li>
-                <a href="#portfolio" onClick={selectMenu}>
-                  Portfolio
-                </a>
-              </li>
-              <li>
-                <a href="#contacto" onClick={selectMenu}>
-                  Contact
-                </a>
-              </li>
+              <li><a href="#home" onClick={selectMenu}>{copy.nav.home}</a></li>
+              <li><a href="#aboutme" onClick={selectMenu}>{copy.nav.about}</a></li>
+              <li><a href="#curriculum" onClick={selectMenu}>{copy.nav.curriculum}</a></li>
+              <li><a href="#skills" onClick={selectMenu}>{copy.nav.skills}</a></li>
+              <li><a href="#certifications" onClick={selectMenu}>{copy.nav.certifications}</a></li>
+              <li><a href="#portfolio" onClick={selectMenu}>{copy.nav.portfolio}</a></li>
+              <li><a href="#contacto" onClick={selectMenu}>{copy.nav.contact}</a></li>
             </ul>
           </nav>
 
-          <button
-            className="nav-responsive"
-            type="button"
-            aria-label="Abrir menú de navegación"
-            aria-controls="nav"
-            aria-expanded={menuVisible}
-            onClick={() => setMenuVisible((prev) => !prev)}
-          >
-            <i className="fa-solid fa-bars" />
-          </button>
+          <div className="header-actions">
+            <button
+              type="button"
+              className={`theme-toggle ${theme === "light" ? "is-light" : "is-dark"}`}
+              aria-label={themeToggleLabel}
+              title={themeToggleLabel}
+              onClick={() => setTheme((prev) => (prev === "dark" ? "light" : "dark"))}
+            >
+              <span className="theme-toggle-thumb" aria-hidden="true">
+                <i className={`fa-solid ${theme === "light" ? "fa-sun" : "fa-moon"}`} />
+              </span>
+            </button>
+
+            <div className="language-switch" role="group" aria-label={copy.languageSwitcherAria}>
+              <button type="button" className={language === "en" ? "is-active" : ""} onClick={() => setLanguage("en")}>EN</button>
+              <button type="button" className={language === "es" ? "is-active" : ""} onClick={() => setLanguage("es")}>ES</button>
+            </div>
+
+            <button
+              className="nav-responsive"
+              type="button"
+              aria-label={language === "es" ? "Abrir menú de navegación" : "Open navigation menu"}
+              aria-controls="nav"
+              aria-expanded={menuVisible}
+              onClick={() => setMenuVisible((prev) => !prev)}
+            >
+              <i className="fa-solid fa-bars" />
+            </button>
+          </div>
         </header>
       </div>
 
@@ -288,34 +640,14 @@ function App() {
         <section className="home" id="home">
           <div className="contenedor-banner">
             <div className="contenedor-img">
-              <img
-                src="/img/foto-perfil.webp"
-                alt="Foto de perfil de Walter Enzo Wohl"
-                width={320}
-                height={320}
-                fetchPriority="high"
-              />
+              <img src="/img/foto-perfil.webp" alt="Foto de perfil de Walter Enzo Wohl" width={320} height={320} fetchPriority="high" />
             </div>
             <div className="contenedor-info">
               <h1>Walter Enzo Wohl</h1>
-              <h2>Analista de Datos IT | BI, Reporting y Visualización</h2>
+              <h2>{copy.heroRole}</h2>
               <div className="redes">
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://www.linkedin.com/in/walterenzowohl"
-                  aria-label="LinkedIn de Walter Enzo Wohl"
-                >
-                  <i className="fa-brands fa-linkedin" />
-                </a>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://github.com/WalterEnzoWohl"
-                  aria-label="GitHub de Walter Enzo Wohl"
-                >
-                  <i className="fa-brands fa-github" />
-                </a>
+                <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/walterenzowohl" aria-label="LinkedIn de Walter Enzo Wohl"><i className="fa-brands fa-linkedin" /></a>
+                <a target="_blank" rel="noopener noreferrer" href="https://github.com/WalterEnzoWohl" aria-label="GitHub de Walter Enzo Wohl"><i className="fa-brands fa-github" /></a>
               </div>
             </div>
           </div>
@@ -324,99 +656,69 @@ function App() {
         <section id="aboutme" className="aboutme">
           <div className="contenedor-seccion">
             <div className="aboutme-header">
-              <span className="aboutme-eyebrow">Perfil Profesional</span>
-              <h2>About Me</h2>
+              <span className="aboutme-eyebrow">{copy.about.eyebrow}</span>
+              <h2>{copy.about.title}</h2>
             </div>
 
             <div className="aboutme-layout">
               <article className="aboutme-story">
-                <p>
-                  <span>Hola, soy Walter Enzo Wohl.</span> Soy <strong>Analista de Datos IT</strong> con experiencia en
-                  análisis, reporting y visualización para acompañar decisiones de negocio y operación. Trabajo con
-                  Excel, SQL, Power BI, Tableau y Python para convertir información dispersa en indicadores claros,
-                  dashboards accionables y procesos más ordenados. También cuento con base en desarrollo web y
-                  herramientas de colaboración como Git, GitHub y Azure DevOps, lo que me permite moverme con comodidad
-                  entre datos, producto y ejecución.
-                </p>
+                <p>{copy.about.body}</p>
 
                 <div className="aboutme-actions">
                   <a className="btn-descarga" href="/img/Walter Enzo Wohl CV.pdf" download="WalterEnzoWohl.pdf">
-                    Descargar CV <i className="fa-solid fa-download" />
+                    {copy.about.download} <i className="fa-solid fa-download" />
                     <span className="overlay" />
                   </a>
                   <a className="aboutme-contact-link" href="#contacto">
-                    Contactarme <i className="fa-solid fa-arrow-up-right-from-square" />
+                    {copy.about.contact} <i className="fa-solid fa-arrow-up-right-from-square" />
                   </a>
                 </div>
               </article>
 
               <aside className="aboutme-value">
-                <h3>Lo que puedo aportar</h3>
+                <h3>{copy.about.valueTitle}</h3>
                 <ul className="aboutme-value-list">
-                  <li>
-                    <h4>Reporting y seguimiento de KPIs</h4>
-                    <p>Diseño reportes y tableros para ordenar información y mejorar el control operativo.</p>
-                  </li>
-                  <li>
-                    <h4>Visualización para toma de decisiones</h4>
-                    <p>Presento hallazgos de forma clara para que equipos y referentes puedan actuar más rápido.</p>
-                  </li>
-                  <li>
-                    <h4>Ejecución transversal</h4>
-                    <p>Combino analítica, automatización y criterio técnico para resolver necesidades de punta a punta.</p>
-                  </li>
+                  {copy.about.values.map((item) => (
+                    <li key={item.title}>
+                      <h4>{item.title}</h4>
+                      <p>{item.description}</p>
+                    </li>
+                  ))}
                 </ul>
               </aside>
             </div>
 
             <div className="aboutme-pillars">
-              <article className="aboutme-pillar">
-                <i className="fa-solid fa-chart-line" />
-                <h4>Decision Making</h4>
-                <p>Datos claros para priorizar mejor y decidir con más contexto.</p>
-              </article>
-              <article className="aboutme-pillar">
-                <i className="fa-solid fa-layer-group" />
-                <h4>Data Storytelling</h4>
-                <p>Contexto, visualización y síntesis para comunicar mejor cada hallazgo.</p>
-              </article>
-              <article className="aboutme-pillar">
-                <i className="fa-solid fa-rocket" />
-                <h4>Execution</h4>
-                <p>Implementación práctica con foco en impacto, orden y continuidad operativa.</p>
-              </article>
+              {copy.about.pillars.map((pillar, index) => (
+                <article className="aboutme-pillar" key={pillar.title}>
+                  <i className={index === 0 ? "fa-solid fa-chart-line" : index === 1 ? "fa-solid fa-layer-group" : "fa-solid fa-rocket"} />
+                  <h4>{pillar.title}</h4>
+                  <p>{pillar.description}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
-
         <section id="curriculum" className="curriculum-modern">
           <div className="contenedor-seccion">
-            <h2>Currículum</h2>
-            <p className="curriculum-modern-subtitle">
-              Formación y experiencia profesional con foco en analítica, mejora operativa y desarrollo.
-            </p>
-            {curriculumError ? <p className="curriculum-modern-error">{curriculumError}</p> : null}
+            <h2>{copy.curriculum.title}</h2>
+            <p className="curriculum-modern-subtitle">{copy.curriculum.subtitle}</p>
             <div className="curriculum-modern-grid">
               <div className="curriculum-modern-col">
-                <h3>Formación</h3>
-                {curriculum.formacion.map((item, index) => {
-                  const isOpen = openFormacion === index;
+                <h3>{copy.curriculum.education}</h3>
+                {curriculumData.education.map((item, index) => {
+                  const isOpen = openEducation === index;
                   return (
-                    <article className="curriculum-modern-item" key={`${item.titulo}-${item.fecha}-${index}`}>
-                      <h4>{item.titulo}</h4>
-                      <span className="casa">{item.institucion ?? "-"}</span>
-                      <span className="fecha">{item.fecha}</span>
-                      <button
-                        className="toggle-btn"
-                        type="button"
-                        aria-expanded={isOpen}
-                        onClick={() => setOpenFormacion((prev) => (prev === index ? null : index))}
-                      >
-                        {isOpen ? "Ver menos " : "Ver más "}
+                    <article className="curriculum-modern-item" key={`${item.title.en}-${item.date.en}-${index}`}>
+                      <h4>{item.title[language]}</h4>
+                      <span className="casa">{item.place[language]}</span>
+                      <span className="fecha">{item.date[language]}</span>
+                      <button className="toggle-btn" type="button" aria-expanded={isOpen} onClick={() => setOpenEducation((prev) => (prev === index ? null : index))}>
+                        {isOpen ? copy.curriculum.showLess : copy.curriculum.showMore}
                         <i className={`fa-solid fa-chevron-down chevron ${isOpen ? "rotated" : ""}`} aria-hidden />
                       </button>
                       <div className={`descripcion-wrapper ${isOpen ? "is-open" : ""}`} aria-hidden={!isOpen}>
-                        <p className="descripcion">{item.descripcion}</p>
+                        <p className="descripcion">{item.description[language]}</p>
                       </div>
                     </article>
                   );
@@ -424,25 +726,20 @@ function App() {
               </div>
 
               <div className="curriculum-modern-col">
-                <h3>Experiencia</h3>
-                {curriculum.experiencia.map((item, index) => {
-                  const isOpen = openExperiencia === index;
+                <h3>{copy.curriculum.experience}</h3>
+                {curriculumData.experience.map((item, index) => {
+                  const isOpen = openExperience === index;
                   return (
-                    <article className="curriculum-modern-item" key={`${item.titulo}-${item.fecha}-${index}`}>
-                      <h4>{item.titulo}</h4>
-                      <span className="casa">{item.empresa ?? "-"}</span>
-                      <span className="fecha">{item.fecha}</span>
-                      <button
-                        className="toggle-btn"
-                        type="button"
-                        aria-expanded={isOpen}
-                        onClick={() => setOpenExperiencia((prev) => (prev === index ? null : index))}
-                      >
-                        {isOpen ? "Ver menos " : "Ver más "}
+                    <article className="curriculum-modern-item" key={`${item.title.en}-${item.date.en}-${index}`}>
+                      <h4>{item.title[language]}</h4>
+                      <span className="casa">{item.place[language]}</span>
+                      <span className="fecha">{item.date[language]}</span>
+                      <button className="toggle-btn" type="button" aria-expanded={isOpen} onClick={() => setOpenExperience((prev) => (prev === index ? null : index))}>
+                        {isOpen ? copy.curriculum.showLess : copy.curriculum.showMore}
                         <i className={`fa-solid fa-chevron-down chevron ${isOpen ? "rotated" : ""}`} aria-hidden />
                       </button>
                       <div className={`descripcion-wrapper ${isOpen ? "is-open" : ""}`} aria-hidden={!isOpen}>
-                        <p className="descripcion">{item.descripcion}</p>
+                        <p className="descripcion">{item.description[language]}</p>
                       </div>
                     </article>
                   );
@@ -454,22 +751,18 @@ function App() {
 
         <section id="skills" className="skills-modern">
           <div className="contenedor-seccion">
-            <h2>Skills & Expertise</h2>
-            <p className="skills-modern-subtitle">
-              Tecnologías y herramientas con las que trabajo para resolver problemas de datos y producto.
-            </p>
+            <h2>{copy.skills.title}</h2>
+            <p className="skills-modern-subtitle">{copy.skills.subtitle}</p>
             <div className="skills-modern-grid">
               {skillCategories.map((category) => (
-                <article className="skills-modern-card" key={category.title}>
+                <article className="skills-modern-card" key={category.title.en}>
                   <header className="skills-modern-header">
-                    <span className="skills-modern-icon">
-                      <i className={category.icon} />
-                    </span>
-                    <h3>{category.title}</h3>
+                    <span className="skills-modern-icon"><i className={category.icon} /></span>
+                    <h3>{category.title[language]}</h3>
                   </header>
                   <div className="skills-modern-tags">
                     {category.skills.map((skill) => (
-                      <span key={`${category.title}-${skill}`}>{skill}</span>
+                      <span key={`${category.title.en}-${skill.en}`}>{skill[language]}</span>
                     ))}
                   </div>
                 </article>
@@ -480,27 +773,18 @@ function App() {
 
         <section id="certifications" className="certifications-modern">
           <div className="contenedor-seccion">
-            <h2>Certificaciones</h2>
-            <p className="certifications-modern-subtitle">Formación validada y aprendizaje continuo.</p>
+            <h2>{copy.certifications.title}</h2>
+            <p className="certifications-modern-subtitle">{copy.certifications.subtitle}</p>
             <div className="certifications-modern-list">
               {certifications.map((certification) => (
-                <article className="certifications-modern-item" key={certification.title}>
-                  <div className="certifications-modern-icon">
-                    <i className="fa-solid fa-award" />
-                  </div>
+                <article className="certifications-modern-item" key={certification.title.en}>
+                  <div className="certifications-modern-icon"><i className="fa-solid fa-award" /></div>
                   <div className="certifications-modern-content">
-                    <h3>{certification.title}</h3>
-                    <p>
-                      {certification.provider} • {certification.year}
-                    </p>
+                    <h3>{certification.title[language]}</h3>
+                    <p>{certification.provider[language]} • {certification.year[language]}</p>
                   </div>
-                  <a
-                    href={certification.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Ver ${certification.title}`}
-                  >
-                    Ver
+                  <a href={certification.link} target="_blank" rel="noopener noreferrer" aria-label={`${copy.certifications.view} ${certification.title[language]}`}>
+                    {copy.certifications.view}
                   </a>
                 </article>
               ))}
@@ -510,19 +794,12 @@ function App() {
 
         <section id="portfolio" className="portfolio-modern">
           <div className="contenedor-seccion">
-            <h2>Portfolio</h2>
-            <p className="portfolio-modern-subtitle">
-              Proyectos orientados a análisis de datos y desarrollo web con foco en impacto real.
-            </p>
+            <h2>{copy.portfolio.title}</h2>
+            <p className="portfolio-modern-subtitle">{copy.portfolio.subtitle}</p>
 
             <div className="portfolio-modern-filters">
               {projectCategories.map((category) => (
-                <button
-                  key={category.id}
-                  type="button"
-                  onClick={() => setActiveCategory(category.id)}
-                  className={activeCategory === category.id ? "is-active" : ""}
-                >
+                <button key={category.id} type="button" onClick={() => setActiveCategory(category.id)} className={activeCategory === category.id ? "is-active" : ""}>
                   <i className={category.icon} />
                   {category.label}
                 </button>
@@ -531,170 +808,118 @@ function App() {
 
             <div className="portfolio-modern-grid">
               {filteredProjects.map((project) => (
-                <article className="portfolio-modern-card" key={project.title}>
+                <article className="portfolio-modern-card" key={project.title.en}>
                   <div className="portfolio-modern-media">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      loading="lazy"
-                      decoding="async"
-                      onError={handleProjectImageError}
-                    />
-                    <span className="portfolio-modern-badge">
-                      {project.category === "powerbi" ? "Power BI" : "Web Development"}
-                    </span>
+                    <img src={project.image} alt={project.title[language]} loading="lazy" decoding="async" onError={handleProjectImageError} />
+                    <span className="portfolio-modern-badge">{project.category === "powerbi" ? copy.portfolio.badges.powerbi : copy.portfolio.badges.web}</span>
                   </div>
                   <div className="portfolio-modern-content">
-                    <h3>{project.title}</h3>
-                    <p>{project.description}</p>
+                    <h3>{project.title[language]}</h3>
+                    <p>{project.description[language]}</p>
                     <div className="portfolio-modern-tools">
                       {project.tools.map((tool) => (
-                        <span key={`${project.title}-${tool}`}>{tool}</span>
+                        <span key={`${project.title.en}-${tool}`}>{tool}</span>
                       ))}
                     </div>
                     <ul>
-                      {project.highlights.map((highlight) => (
-                        <li key={`${project.title}-${highlight}`}>{highlight}</li>
+                      {project.highlights[language].map((highlight) => (
+                        <li key={`${project.title.en}-${highlight}`}>{highlight}</li>
                       ))}
                     </ul>
-                    <a href={project.link} target="_blank" rel="noopener noreferrer">
-                      Ver proyecto <i className="fa-solid fa-arrow-up-right-from-square" />
-                    </a>
+                    <a href={project.link} target="_blank" rel="noopener noreferrer">{copy.portfolio.viewProject} <i className="fa-solid fa-arrow-up-right-from-square" /></a>
                   </div>
                 </article>
               ))}
             </div>
           </div>
         </section>
-
         <section id="contacto" className="contact-modern">
           <div className="contenedor-seccion">
-            <h2>CONTACTO</h2>
-            <p className="contact-modern-subtitle">
-              Contame tu objetivo y te respondo con una propuesta clara para ayudarte con análisis, BI, reporting o automatización.
-            </p>
+            <h2>{copy.contact.title}</h2>
+            <p className="contact-modern-subtitle">{copy.contact.subtitle}</p>
             <div className="contact-atelier">
               <div className="contact-spotlight">
-                <span className="contact-pill">Disponible para proyectos y propuestas laborales</span>
-                <h3>Construyamos algo que tenga impacto real</h3>
-                <p>
-                  Si necesitás ordenar información, crear dashboards o mejorar el seguimiento de indicadores,
-                  conversemos. Trabajo con foco en resultados, claridad y ejecución prolija.
-                </p>
+                <span className="contact-pill">{copy.contact.pill}</span>
+                <h3>{copy.contact.heading}</h3>
+                <p>{copy.contact.body}</p>
 
                 <div className="contact-cards">
                   <a href="mailto:walterenzowohl@gmail.com" className="contact-card-link">
                     <i className="fa-solid fa-envelope" />
                     <div>
-                      <small>Email</small>
+                      <small>{copy.contact.emailLabel}</small>
                       <strong>walterenzowohl@gmail.com</strong>
                     </div>
                   </a>
                   <a href="tel:+541141419407" className="contact-card-link">
                     <i className="fa-solid fa-phone" />
                     <div>
-                      <small>Teléfono</small>
+                      <small>{copy.contact.phoneLabel}</small>
                       <strong>+54 11 4141 9407</strong>
                     </div>
                   </a>
                 </div>
 
                 <div className="contact-modern-socials">
-                  <a
-                    href="https://github.com/WalterEnzoWohl"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="GitHub de Walter Enzo Wohl"
-                  >
+                  <a href="https://github.com/WalterEnzoWohl" target="_blank" rel="noopener noreferrer" aria-label="GitHub de Walter Enzo Wohl">
                     <i className="fa-brands fa-github" />
-                    <span>GitHub</span>
+                    <span>{copy.contact.github}</span>
                   </a>
-                  <a
-                    href="https://www.linkedin.com/in/walterenzowohl"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="LinkedIn de Walter Enzo Wohl"
-                  >
+                  <a href="https://www.linkedin.com/in/walterenzowohl" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Walter Enzo Wohl">
                     <i className="fa-brands fa-linkedin" />
-                    <span>LinkedIn</span>
+                    <span>{copy.contact.linkedin}</span>
                   </a>
                 </div>
 
                 <div className="contact-modern-info">
                   <ul>
-                    <li>
-                      <i className="fa-solid fa-location-dot" /> GBA | Buenos Aires | Argentina
-                    </li>
-                    <li>
-                      <i className="fa-solid fa-clock" /> Respuesta habitual: dentro de 24 horas
-                    </li>
+                    <li><i className="fa-solid fa-location-dot" /> {copy.contact.location}</li>
+                    <li><i className="fa-solid fa-clock" /> {copy.contact.response}</li>
                   </ul>
                 </div>
               </div>
 
               <div className="contact-modern-form-wrap">
                 <form id="form" onSubmit={handleSubmit(onSubmit)} noValidate>
-                  <label className="form-label" htmlFor="name">Nombre</label>
-                  <input
-                    type="text"
-                    id="name"
-                    placeholder="Tu nombre"
-                    {...register("name", { required: "El nombre es obligatorio." })}
-                  />
+                  <label className="form-label" htmlFor="name">{copy.contact.form.name}</label>
+                  <input type="text" id="name" placeholder={copy.contact.form.namePlaceholder} {...register("name", { required: copy.contact.validation.nameRequired })} />
                   {errors.name ? <small className="error-message">{errors.name.message}</small> : null}
 
-                  <label className="form-label" htmlFor="phonenumber">Teléfono</label>
+                  <label className="form-label" htmlFor="phonenumber">{copy.contact.form.phone}</label>
                   <input
                     type="text"
                     id="phonenumber"
-                    placeholder="Número de teléfono"
+                    placeholder={copy.contact.form.phonePlaceholder}
                     inputMode="numeric"
                     {...register("phonenumber", {
-                      required: "El teléfono es obligatorio.",
-                      pattern: {
-                        value: /^[0-9+\s()-]+$/,
-                        message: "Ingresá un teléfono válido."
-                      }
+                      required: copy.contact.validation.phoneRequired,
+                      pattern: { value: /^[0-9+\s()-]+$/, message: copy.contact.validation.phoneInvalid }
                     })}
                   />
                   {errors.phonenumber ? <small className="error-message">{errors.phonenumber.message}</small> : null}
 
-                  <label className="form-label" htmlFor="email">Email</label>
+                  <label className="form-label" htmlFor="email">{copy.contact.form.email}</label>
                   <input
                     type="email"
                     id="email"
-                    placeholder="Dirección de correo"
+                    placeholder={copy.contact.form.emailPlaceholder}
                     {...register("email", {
-                      required: "El email es obligatorio.",
-                      pattern: {
-                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                        message: "Ingresá un email válido."
-                      }
+                      required: copy.contact.validation.emailRequired,
+                      pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: copy.contact.validation.emailInvalid }
                     })}
                   />
                   {errors.email ? <small className="error-message">{errors.email.message}</small> : null}
 
-                  <label className="form-label" htmlFor="title">Asunto</label>
-                  <input
-                    type="text"
-                    id="title"
-                    placeholder="Asunto"
-                    {...register("title", { required: "El asunto es obligatorio." })}
-                  />
+                  <label className="form-label" htmlFor="title">{copy.contact.form.title}</label>
+                  <input type="text" id="title" placeholder={copy.contact.form.titlePlaceholder} {...register("title", { required: copy.contact.validation.titleRequired })} />
                   {errors.title ? <small className="error-message">{errors.title.message}</small> : null}
 
-                  <label className="form-label" htmlFor="message">Mensaje</label>
-                  <textarea
-                    id="message"
-                    cols={30}
-                    rows={8}
-                    placeholder="Mensaje"
-                    {...register("message", { required: "El mensaje es obligatorio." })}
-                  />
+                  <label className="form-label" htmlFor="message">{copy.contact.form.message}</label>
+                  <textarea id="message" cols={30} rows={8} placeholder={copy.contact.form.messagePlaceholder} {...register("message", { required: copy.contact.validation.messageRequired })} />
                   {errors.message ? <small className="error-message">{errors.message.message}</small> : null}
 
                   <button type="submit" id="button" disabled={isSending}>
-                    {isSending ? "Enviando..." : "Enviar mensaje"}
+                    {isSending ? copy.contact.sending : copy.contact.send}
                     <i className="fa-solid fa-paper-plane" />
                     <span className="overlay" />
                   </button>
@@ -708,32 +933,15 @@ function App() {
       </main>
 
       <footer>
-        <a href="#home" className="arriba">
-          <i className="fa-solid fa-angles-up" />
-        </a>
+        <a href="#home" className="arriba"><i className="fa-solid fa-angles-up" /></a>
         <div className="redes">
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.linkedin.com/in/walterenzowohl"
-            aria-label="LinkedIn de Walter Enzo Wohl"
-          >
-            <i className="fa-brands fa-linkedin" />
-          </a>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://github.com/WalterEnzoWohl"
-            aria-label="GitHub de Walter Enzo Wohl"
-          >
-            <i className="fa-brands fa-github" />
-          </a>
+          <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/walterenzowohl" aria-label="LinkedIn de Walter Enzo Wohl"><i className="fa-brands fa-linkedin" /></a>
+          <a target="_blank" rel="noopener noreferrer" href="https://github.com/WalterEnzoWohl" aria-label="GitHub de Walter Enzo Wohl"><i className="fa-brands fa-github" /></a>
         </div>
-        <p className="copyright">&copy; {new Date().getFullYear()} Walter Enzo Wohl. Todos los derechos reservados.</p>
+        <p className="copyright">&copy; {new Date().getFullYear()} Walter Enzo Wohl. {copy.footer}</p>
       </footer>
     </>
   );
 }
 
 export default App;
-
