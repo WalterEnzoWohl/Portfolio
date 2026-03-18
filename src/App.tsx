@@ -302,7 +302,7 @@ const certifications: Certification[] = [
   {
     title: { es: "Google Data Analytics", en: "Google Data Analytics" },
     provider: { es: "Google | Coursera", en: "Google | Coursera" },
-    year: { es: "Actualidad", en: "Present" },
+    year: { es: "2025 - Actualidad", en: "2025 - Present" },
     link: "/img/Walter Enzo Wohl CV.pdf",
     icon: "fa-solid fa-chart-line",
     skills: ["Python", "Pandas", "NumPy", "Looker", "Google Sheets", "AppScript", "PostgreSQL"]
@@ -310,7 +310,7 @@ const certifications: Certification[] = [
   {
     title: { es: "Diplomatura en Desarrollo Web Full Stack", en: "Full Stack Web Development Diploma" },
     provider: { es: "Universidad Tecnológica Nacional", en: "National Technological University" },
-    year: { es: "2023", en: "2023" },
+    year: { es: "Marzo 2023 - Diciembre 2023", en: "March 2023 - December 2023" },
     link: "/img/Walter Enzo Wohl CV.pdf",
     icon: "fa-solid fa-code",
     skills: ["HTML", "CSS", "JavaScript", "React", "Node.js", "Git", "GitHub", "MySQL"]
@@ -371,19 +371,34 @@ const projects: Project[] = [
     link: "https://lookerstudio.google.com/reporting/ad58b1c2-d02e-4557-8634-537b8314354a"
   },
   {
-    title: { es: "Portfolio Fullstack", en: "Fullstack Portfolio" },
+    title: { es: "Gestión de Nómina RRHH", en: "HR Payroll Management" },
+    category: "powerbi",
+    description: {
+      es: "Dashboard de recursos humanos para analizar dotación, distribución por área, rango etario y antigüedad del personal.",
+      en: "Human resources dashboard to analyze headcount, area distribution, age ranges and employee tenure."
+    },
+    tools: ["Looker Studio", "Google Sheets"],
+    highlights: {
+      es: ["Distribución por género y dirección general", "Mapa de empleados y análisis de antigüedad"],
+      en: ["Gender and management distribution", "Employee map and tenure analysis"]
+    },
+    image: "/img/dashboard-nomina.png",
+    link: "https://lookerstudio.google.com/reporting/26b9eca6-822c-41f9-836f-f16b76ab2acd"
+  },
+  {
+    title: { es: "WebApp de Gestión de Empleados", en: "Employee Management WebApp" },
     category: "web",
     description: {
-      es: "Sitio portfolio desarrollado con enfoque responsive, performance y experiencia de usuario.",
-      en: "Portfolio site built with a focus on responsive behavior, performance and user experience."
+      es: "Aplicación web interna para que empleados gestionen solicitudes de vacaciones, licencias médicas y otras ausencias de forma ordenada.",
+      en: "Internal web application for employees to manage vacation requests, medical leave and other absences in an organized way."
     },
-    tools: ["React", "TypeScript", "Vite"],
+    tools: ["AppScript", "JavaScript", "Git", "Clasp"],
     highlights: {
-      es: ["Arquitectura modular", "Formulario de contacto integrado"],
-      en: ["Modular architecture", "Integrated contact form"]
+      es: ["Autogestión de vacaciones y licencias", "Seguimiento centralizado de ausencias"],
+      en: ["Self-service vacation and leave requests", "Centralized absence tracking"]
     },
-    image: "/img/banner.png",
-    link: "https://portfoliowohl.vercel.app/"
+    image: "/img/WIP.png",
+    link: "https://github.com/WalterEnzoWohl"
   }
 ];
 
@@ -392,7 +407,7 @@ const curriculumData: { education: CurriculumItem[]; experience: CurriculumItem[
     {
       title: { es: "Google Data Analytics", en: "Google Data Analytics" },
       place: { es: "Google | Coursera", en: "Google | Coursera" },
-      date: { es: "Actualidad", en: "Present" },
+      date: { es: "2025 - Actualidad", en: "2025 - Present" },
       description: {
         es: "Certificación orientada a análisis de datos, limpieza y preparación de información, uso de spreadsheets, SQL, visualización y toma de decisiones basada en datos.",
         en: "Certification focused on data analysis, data cleaning and preparation, spreadsheets, SQL, visualization and data-driven decision making."
@@ -401,7 +416,7 @@ const curriculumData: { education: CurriculumItem[]; experience: CurriculumItem[
     {
       title: { es: "Diplomatura en Desarrollo Web Full Stack", en: "Full Stack Web Development Diploma" },
       place: { es: "Universidad Tecnológica Nacional", en: "National Technological University" },
-      date: { es: "20 de marzo 2023 - 13 de diciembre 2023", en: "March 20, 2023 - December 13, 2023" },
+      date: { es: "Marzo 2023 - Diciembre 2023", en: "March 2023 - December 2023" },
       description: {
         es: "Formación integral orientada al desarrollo de aplicaciones web frontend y backend. Incorporé HTML, CSS, JavaScript, Git, GitHub, Node.js y bases de datos, trabajando con proyectos prácticos y metodologías ágiles.",
         en: "Comprehensive training focused on front-end and back-end web application development. I worked with HTML, CSS, JavaScript, Git, GitHub, Node.js and databases through hands-on projects and agile methodologies."
@@ -421,7 +436,7 @@ const curriculumData: { education: CurriculumItem[]; experience: CurriculumItem[
     {
       title: { es: "Analista de Datos", en: "Data Analyst" },
       place: { es: "Gobierno de la Ciudad de Buenos Aires (GCBA)", en: "City Government of Buenos Aires (GCBA)" },
-      date: { es: "Septiembre de 2025 - Actualidad", en: "September 2025 - Present" },
+      date: { es: "Septiembre 2025 - Actualidad", en: "September 2025 - Present" },
       description: {
         es: "Análisis de datos y generación de reportes para entornos de gestión pública, con foco en seguimiento de información, visualización de indicadores y soporte a la toma de decisiones.",
         en: "Data analysis and reporting for public management environments, focused on information tracking, KPI visualization and decision support."
@@ -430,7 +445,7 @@ const curriculumData: { education: CurriculumItem[]; experience: CurriculumItem[
     {
       title: { es: "Analista de Datos Junior", en: "Junior Data Analyst" },
       place: { es: "ARBUSTA S.A.", en: "ARBUSTA S.A." },
-      date: { es: "Agosto de 2024 - Septiembre de 2025", en: "August 2024 - September 2025" },
+      date: { es: "Agosto 2024 - Septiembre 2025", en: "August 2024 - September 2025" },
       description: {
         es: "Responsable de análisis de datos en el proyecto MTC para Mercado Libre, control de publicaciones y seguimiento de KPIs. Desarrollo de reportes automatizados en Google Sheets, trabajo con Excel, SQL, Power BI y participación en procesos ETL.",
         en: "Responsible for data analysis in the MTC project for Mercado Libre, publication control and KPI monitoring. Built automated reports in Google Sheets, worked with Excel, SQL, Power BI and supported ETL processes."
@@ -439,7 +454,7 @@ const curriculumData: { education: CurriculumItem[]; experience: CurriculumItem[
     {
       title: { es: "Desarrollador IoT en Pasantía", en: "IoT Development Intern" },
       place: { es: "Grupo MSA S.A", en: "Grupo MSA S.A" },
-      date: { es: "Febrero - Marzo 2024", en: "February - March 2024" },
+      date: { es: "Febrero 2024 - Marzo 2024", en: "February 2024 - March 2024" },
       description: {
         es: "Desarrollo de una aplicación IoT para validación de identidad con DNI y huella. Trabajo colaborativo en entorno Ubuntu usando HTML, CSS, JavaScript y React para el frontend.",
         en: "Developed an IoT application for identity validation using ID card and fingerprint. Collaborative work in an Ubuntu environment using HTML, CSS, JavaScript and React for the frontend."
