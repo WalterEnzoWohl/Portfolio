@@ -856,6 +856,23 @@ footer {
     font-size: 1.12rem;
 }
 
+.certifications-modern-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.certifications-modern-skills span {
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: rgba(31, 200, 171, 0.1);
+    border: 1px solid rgba(31, 200, 171, 0.2);
+    color: #a2fff0;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
 .portfolio-modern {
     background: linear-gradient(180deg, #0f1824 0%, #0b1016 100%);
 }
@@ -981,7 +998,9 @@ footer {
 }
 
 .contact-cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 260px));
+    justify-content: start;
+    max-width: 540px;
 }
 
 .contact-card-link,
@@ -996,16 +1015,28 @@ footer {
 
 .contact-card-link {
     display: grid;
-    grid-template-columns: 24px 1fr;
-    align-items: start;
-    gap: 10px;
+    grid-template-columns: 24px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 92px;
+    text-align: left;
     color: var(--text);
     text-decoration: none;
+    appearance: none;
 }
 
 .contact-card-link i,
 .contact-modern-info i {
     color: var(--accent);
+}
+
+.contact-card-link > i {
+    font-size: 1.08rem;
+}
+
+.contact-card-link > div {
+    min-width: 0;
 }
 
 .contact-card-link small {
@@ -1017,9 +1048,33 @@ footer {
 
 .contact-card-link strong {
     display: block;
-    font-size: 0.95rem;
-    line-height: 1.45;
-    word-break: break-word;
+    max-width: 100%;
+    overflow: hidden;
+    font-size: 1rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.contact-copy-badge {
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: rgba(31, 200, 171, 0.1);
+    color: var(--accent);
+    flex: 0 0 auto;
+}
+
+.contact-copy-card.is-copied {
+    border-color: rgba(31, 200, 171, 0.46);
+    background: rgba(31, 200, 171, 0.11);
+}
+
+.contact-copy-card.is-copied .contact-copy-badge {
+    background: rgba(31, 200, 171, 0.18);
 }
 
 .contact-modern-socials {
@@ -1030,10 +1085,20 @@ footer {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
+    min-height: 68px;
     color: var(--text);
     text-decoration: none;
     font-weight: 700;
+}
+
+.contact-modern-socials a i {
+    font-size: 1.7rem;
+    line-height: 1;
+}
+
+.contact-modern-socials a span {
+    font-size: 1rem;
 }
 
 .contact-modern-socials a:hover,
@@ -1333,8 +1398,14 @@ html[data-theme="light"] .contact-card-link:hover {
     border-color: rgba(22, 186, 166, 0.32);
 }
 
+html[data-theme="light"] .contact-copy-badge {
+    background: rgba(22, 186, 166, 0.1);
+    color: var(--accent-strong);
+}
+
 html[data-theme="light"] .skills-modern-tags span,
-html[data-theme="light"] .portfolio-modern-tools span {
+html[data-theme="light"] .portfolio-modern-tools span,
+html[data-theme="light"] .certifications-modern-skills span {
     background: rgba(22, 186, 166, 0.08);
     border-color: rgba(22, 186, 166, 0.16);
     color: var(--accent-strong);
@@ -1469,6 +1540,10 @@ html[data-theme="light"] #nav.responsive {
     .contact-modern-socials,
     .aboutme-pillars {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .contact-cards {
+        max-width: none;
     }
 }
 

@@ -19,6 +19,8 @@ type ContactFormValues = {
   message: string;
 };
 
+type ContactCopyField = "email" | "phone" | null;
+
 type SubmitState = {
   type: "success" | "error";
   message: string;
@@ -26,17 +28,13 @@ type SubmitState = {
 
 type ProjectCategory = "all" | "powerbi" | "web";
 
-type SkillCategory = {
-  title: LocalizedText;
-  icon: string;
-  skills: LocalizedText[];
-};
-
 type Certification = {
   title: LocalizedText;
   provider: LocalizedText;
   year: LocalizedText;
   link: string;
+  icon: string;
+  skills: string[];
 };
 
 type Project = {
@@ -63,9 +61,8 @@ const uiCopy = {
   es: {
     nav: {
       home: "Inicio",
-      about: "Sobre mí",
+      about: "SobreMi",
       curriculum: "Currículum",
-      skills: "Skills",
       certifications: "Certificaciones",
       portfolio: "Portfolio",
       contact: "Contacto"
@@ -76,7 +73,7 @@ const uiCopy = {
       eyebrow: "Perfil profesional",
       title: "Sobre mí",
       body:
-        "Hola, soy Walter Enzo Wohl. Soy Analista de Datos IT con experiencia en análisis, reporting y visualización para acompañar decisiones de negocio y operación. Trabajo con Excel, SQL, Power BI, Tableau y Python para convertir información dispersa en indicadores claros, dashboards accionables y procesos más ordenados. También cuento con base en desarrollo web y herramientas de colaboración como Git, GitHub y Azure DevOps, lo que me permite moverme con comodidad entre datos, producto y ejecución.",
+        "Hola, soy Walter Enzo Wohl. Soy Analista de Datos IT con experiencia en análisis, reporting y visualización para acompañar decisiones de negocio y operación. Trabajo con Excel, SQL, Power BI, Looker y Python para convertir información dispersa en indicadores claros, dashboards accionables y procesos más ordenados. También cuento con base en desarrollo web y herramientas de colaboración como Git, GitHub y MySQL, lo que me permite moverme con comodidad entre datos, producto y ejecución.",
       download: "Descargar CV",
       contact: "Contactarme",
       valueTitle: "Lo que puedo aportar",
@@ -117,13 +114,9 @@ const uiCopy = {
       showMore: "Ver más",
       showLess: "Ver menos"
     },
-    skills: {
-      title: "Skills & Expertise",
-      subtitle: "Tecnologías y herramientas con las que trabajo para resolver problemas de datos y producto."
-    },
     certifications: {
       title: "Certificaciones",
-      subtitle: "Formación validada y aprendizaje continuo.",
+      subtitle: "Formación validada con las herramientas y habilidades que incorporé en cada etapa.",
       view: "Ver"
     },
     portfolio: {
@@ -150,6 +143,8 @@ const uiCopy = {
         "Si necesitás ordenar información, crear dashboards o mejorar el seguimiento de indicadores, conversemos. Trabajo con foco en resultados, claridad y ejecución prolija.",
       emailLabel: "Email",
       phoneLabel: "Teléfono",
+      copyEmail: "Copiar email",
+      copyPhone: "Copiar teléfono",
       github: "GitHub",
       linkedin: "LinkedIn",
       location: "GBA | Buenos Aires | Argentina",
@@ -185,9 +180,8 @@ const uiCopy = {
   en: {
     nav: {
       home: "Home",
-      about: "About Me",
+      about: "AboutMe",
       curriculum: "Resume",
-      skills: "Skills",
       certifications: "Certifications",
       portfolio: "Portfolio",
       contact: "Contact"
@@ -198,7 +192,7 @@ const uiCopy = {
       eyebrow: "Professional profile",
       title: "About Me",
       body:
-        "Hi, I'm Walter Enzo Wohl. I'm an IT Data Analyst with experience in analytics, reporting and visualization to support business and operational decisions. I work with Excel, SQL, Power BI, Tableau and Python to turn scattered information into clear indicators, actionable dashboards and more organized processes. I also have a web development foundation and collaboration tools such as Git, GitHub and Azure DevOps, which allows me to move comfortably between data, product and execution.",
+        "Hi, I'm Walter Enzo Wohl. I'm an IT Data Analyst with experience in analytics, reporting and visualization to support business and operational decisions. I work with Excel, SQL, Power BI, Looker and Python to turn scattered information into clear indicators, actionable dashboards and more organized processes. I also have a web development foundation and collaboration tools such as Git, GitHub and MySQL, which allows me to move comfortably between data, product and execution.",
       download: "Download CV",
       contact: "Contact me",
       valueTitle: "What I bring",
@@ -239,13 +233,9 @@ const uiCopy = {
       showMore: "Show more",
       showLess: "Show less"
     },
-    skills: {
-      title: "Skills & Expertise",
-      subtitle: "Technologies and tools I use to solve data and product challenges."
-    },
     certifications: {
       title: "Certifications",
-      subtitle: "Validated learning and continuous development.",
+      subtitle: "Validated learning with the tools and skills I developed in each stage.",
       view: "View"
     },
     portfolio: {
@@ -272,6 +262,8 @@ const uiCopy = {
         "If you need to organize information, build dashboards or improve KPI tracking, let's talk. I work with a focus on results, clarity and clean execution.",
       emailLabel: "Email",
       phoneLabel: "Phone",
+      copyEmail: "Copy email",
+      copyPhone: "Copy phone",
       github: "GitHub",
       linkedin: "LinkedIn",
       location: "Greater Buenos Aires | Argentina",
@@ -306,70 +298,30 @@ const uiCopy = {
   }
 } as const;
 
-const skillCategories: SkillCategory[] = [
-  {
-    title: { es: "Análisis de datos", en: "Data Analysis" },
-    icon: "fa-solid fa-database",
-    skills: [
-      { es: "Excel avanzado", en: "Advanced Excel" },
-      { es: "Macros / VBA", en: "Macros / VBA" },
-      { es: "SQL", en: "SQL" },
-      { es: "Power BI", en: "Power BI" },
-      { es: "Tableau", en: "Tableau" }
-    ]
-  },
-  {
-    title: { es: "Python y automatización", en: "Python & Automation" },
-    icon: "fa-solid fa-chart-column",
-    skills: [
-      { es: "Python", en: "Python" },
-      { es: "Pandas", en: "Pandas" },
-      { es: "NumPy", en: "NumPy" },
-      { es: "ETL", en: "ETL" }
-    ]
-  },
-  {
-    title: { es: "Desarrollo", en: "Development" },
-    icon: "fa-solid fa-code",
-    skills: [
-      { es: "HTML", en: "HTML" },
-      { es: "CSS", en: "CSS" },
-      { es: "JavaScript", en: "JavaScript" },
-      { es: "React", en: "React" },
-      { es: "Node.js", en: "Node.js" }
-    ]
-  },
-  {
-    title: { es: "Herramientas y delivery", en: "Tools & Delivery" },
-    icon: "fa-solid fa-screwdriver-wrench",
-    skills: [
-      { es: "Git", en: "Git" },
-      { es: "GitHub", en: "GitHub" },
-      { es: "Azure DevOps", en: "Azure DevOps" },
-      { es: "MySQL", en: "MySQL" },
-      { es: "PostgreSQL", en: "PostgreSQL" }
-    ]
-  }
-];
-
 const certifications: Certification[] = [
   {
     title: { es: "Google Data Analytics", en: "Google Data Analytics" },
     provider: { es: "Google | Coursera", en: "Google | Coursera" },
     year: { es: "Actualidad", en: "Present" },
-    link: "/img/Walter Enzo Wohl CV.pdf"
+    link: "/img/Walter Enzo Wohl CV.pdf",
+    icon: "fa-solid fa-chart-line",
+    skills: ["Python", "Pandas", "NumPy", "Looker", "Google Sheets", "AppScript", "PostgreSQL"]
   },
   {
     title: { es: "Diplomatura en Desarrollo Web Full Stack", en: "Full Stack Web Development Diploma" },
     provider: { es: "Universidad Tecnológica Nacional", en: "National Technological University" },
     year: { es: "2023", en: "2023" },
-    link: "/img/Walter Enzo Wohl CV.pdf"
+    link: "/img/Walter Enzo Wohl CV.pdf",
+    icon: "fa-solid fa-code",
+    skills: ["HTML", "CSS", "JavaScript", "React", "Node.js", "Git", "GitHub", "MySQL"]
   },
   {
     title: { es: "Curso de Análisis de Datos", en: "Data Analysis Course" },
     provider: { es: "CREHANA", en: "CREHANA" },
     year: { es: "2025", en: "2025" },
-    link: "/img/Walter Enzo Wohl CV.pdf"
+    link: "/img/Walter Enzo Wohl CV.pdf",
+    icon: "fa-solid fa-database",
+    skills: ["Excel avanzado", "Macros", "Power BI", "SQL"]
   }
 ];
 const projects: Project[] = [
@@ -496,6 +448,9 @@ const curriculumData: { education: CurriculumItem[]; experience: CurriculumItem[
   ]
 };
 function App() {
+  const contactEmail = "walterenzowohl@gmail.com";
+  const contactPhone = "+54 11 4141 9407";
+  const contactPhoneHref = "+541141419407";
   const [language, setLanguage] = useState<Language>("es");
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window === "undefined") {
@@ -516,6 +471,7 @@ function App() {
   const [submitState, setSubmitState] = useState<SubmitState>(null);
   const [openEducation, setOpenEducation] = useState<number | null>(null);
   const [openExperience, setOpenExperience] = useState<number | null>(null);
+  const [copiedContact, setCopiedContact] = useState<ContactCopyField>(null);
 
   const copy = uiCopy[language];
 
@@ -575,6 +531,31 @@ function App() {
     image.src = "/img/WIP.png";
   };
 
+  const copyToClipboard = async (field: Exclude<ContactCopyField, null>, value: string) => {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(value);
+      } else {
+        const tempInput = document.createElement("textarea");
+        tempInput.value = value;
+        tempInput.setAttribute("readonly", "");
+        tempInput.style.position = "absolute";
+        tempInput.style.left = "-9999px";
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+      }
+
+      setCopiedContact(field);
+      window.setTimeout(() => {
+        setCopiedContact((current) => (current === field ? null : current));
+      }, 1800);
+    } catch {
+      setCopiedContact(null);
+    }
+  };
+
   const themeToggleLabel =
     language === "es"
       ? theme === "dark"
@@ -597,7 +578,6 @@ function App() {
               <li><a href="#home" onClick={selectMenu}>{copy.nav.home}</a></li>
               <li><a href="#aboutme" onClick={selectMenu}>{copy.nav.about}</a></li>
               <li><a href="#curriculum" onClick={selectMenu}>{copy.nav.curriculum}</a></li>
-              <li><a href="#skills" onClick={selectMenu}>{copy.nav.skills}</a></li>
               <li><a href="#certifications" onClick={selectMenu}>{copy.nav.certifications}</a></li>
               <li><a href="#portfolio" onClick={selectMenu}>{copy.nav.portfolio}</a></li>
               <li><a href="#contacto" onClick={selectMenu}>{copy.nav.contact}</a></li>
@@ -749,28 +729,6 @@ function App() {
           </div>
         </section>
 
-        <section id="skills" className="skills-modern">
-          <div className="contenedor-seccion">
-            <h2>{copy.skills.title}</h2>
-            <p className="skills-modern-subtitle">{copy.skills.subtitle}</p>
-            <div className="skills-modern-grid">
-              {skillCategories.map((category) => (
-                <article className="skills-modern-card" key={category.title.en}>
-                  <header className="skills-modern-header">
-                    <span className="skills-modern-icon"><i className={category.icon} /></span>
-                    <h3>{category.title[language]}</h3>
-                  </header>
-                  <div className="skills-modern-tags">
-                    {category.skills.map((skill) => (
-                      <span key={`${category.title.en}-${skill.en}`}>{skill[language]}</span>
-                    ))}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
         <section id="certifications" className="certifications-modern">
           <div className="contenedor-seccion">
             <h2>{copy.certifications.title}</h2>
@@ -778,10 +736,15 @@ function App() {
             <div className="certifications-modern-list">
               {certifications.map((certification) => (
                 <article className="certifications-modern-item" key={certification.title.en}>
-                  <div className="certifications-modern-icon"><i className="fa-solid fa-award" /></div>
+                  <div className="certifications-modern-icon"><i className={certification.icon} /></div>
                   <div className="certifications-modern-content">
                     <h3>{certification.title[language]}</h3>
                     <p>{certification.provider[language]} • {certification.year[language]}</p>
+                    <div className="certifications-modern-skills">
+                      {certification.skills.map((skill) => (
+                        <span key={`${certification.title.en}-${skill}`}>{skill}</span>
+                      ))}
+                    </div>
                   </div>
                   <a href={certification.link} target="_blank" rel="noopener noreferrer" aria-label={`${copy.certifications.view} ${certification.title[language]}`}>
                     {copy.certifications.view}
@@ -844,20 +807,38 @@ function App() {
                 <p>{copy.contact.body}</p>
 
                 <div className="contact-cards">
-                  <a href="mailto:walterenzowohl@gmail.com" className="contact-card-link">
+                  <button
+                    type="button"
+                    className={`contact-card-link contact-copy-card ${copiedContact === "email" ? "is-copied" : ""}`}
+                    onClick={() => void copyToClipboard("email", contactEmail)}
+                    aria-label={copy.contact.copyEmail}
+                    title={contactEmail}
+                  >
                     <i className="fa-solid fa-envelope" />
                     <div>
                       <small>{copy.contact.emailLabel}</small>
-                      <strong>walterenzowohl@gmail.com</strong>
+                      <strong>{contactEmail}</strong>
                     </div>
-                  </a>
-                  <a href="tel:+541141419407" className="contact-card-link">
+                    <span className="contact-copy-badge" aria-hidden="true">
+                      <i className={`fa-solid ${copiedContact === "email" ? "fa-check" : "fa-copy"}`} />
+                    </span>
+                  </button>
+                  <button
+                    type="button"
+                    className={`contact-card-link contact-copy-card ${copiedContact === "phone" ? "is-copied" : ""}`}
+                    onClick={() => void copyToClipboard("phone", contactPhoneHref)}
+                    aria-label={copy.contact.copyPhone}
+                    title={contactPhone}
+                  >
                     <i className="fa-solid fa-phone" />
                     <div>
                       <small>{copy.contact.phoneLabel}</small>
-                      <strong>+54 11 4141 9407</strong>
+                      <strong>{contactPhone}</strong>
                     </div>
-                  </a>
+                    <span className="contact-copy-badge" aria-hidden="true">
+                      <i className={`fa-solid ${copiedContact === "phone" ? "fa-check" : "fa-copy"}`} />
+                    </span>
+                  </button>
                 </div>
 
                 <div className="contact-modern-socials">
