@@ -131,11 +131,11 @@ const uiCopy = {
       subtitle: "Proyectos orientados a análisis de datos y desarrollo web con foco en impacto real.",
       filters: {
         all: "Todos los proyectos",
-        powerbi: "Power BI",
+        powerbi: "BI y Dashboards",
         web: "Desarrollo Web"
       },
       badges: {
-        powerbi: "Power BI",
+        powerbi: "BI y Dashboards",
         web: "Desarrollo Web"
       },
       viewProject: "Ver proyecto"
@@ -253,11 +253,11 @@ const uiCopy = {
       subtitle: "Projects focused on data analysis and web development with an emphasis on real impact.",
       filters: {
         all: "All projects",
-        powerbi: "Power BI",
+        powerbi: "BI & Dashboards",
         web: "Web Development"
       },
       badges: {
-        powerbi: "Power BI",
+        powerbi: "BI & Dashboards",
         web: "Web Development"
       },
       viewProject: "View project"
@@ -385,7 +385,7 @@ const projects: Project[] = [
       es: ["KPIs de costos por área", "Comparativa mensual de desvío"],
       en: ["Cost KPIs by area", "Monthly variance comparison"]
     },
-    image: "/img/d2.webp",
+    image: "/img/dashboard-rrhh.png",
     link: "https://app.powerbi.com/view?r=eyJrIjoiNzkzN2M5NDctNGFiMC00NmU3LTg1NzQtYjdiZmRlMDU0MzQ4IiwidCI6ImUwODdhZTVmLTQ2YjQtNDBiOS04ZGZkLTE1MTA4MTQwMTc3MyIsImMiOjR9"
   },
   {
@@ -400,23 +400,23 @@ const projects: Project[] = [
       es: ["Análisis por canal", "Seguimiento de crecimiento YoY"],
       en: ["Channel analysis", "YoY growth tracking"]
     },
-    image: "/img/D3.png",
+    image: "/img/dashboard-appol.png",
     link: "https://app.powerbi.com/view?r=eyJrIjoiYmZkOTYwMDYtNWU1NS00MjZkLTg2MWYtZDAxZmRkYzVhZGUwIiwidCI6ImUwODdhZTVmLTQ2YjQtNDBiOS04ZGZkLTE1MTA4MTQwMTc3MyIsImMiOjR9"
   },
   {
-    title: { es: "Seguimiento de Reportes por Recurso", en: "Report Tracking by Resource" },
+    title: { es: "Métricas de Mailing GCBA", en: "GCBA Mailing Metrics" },
     category: "powerbi",
     description: {
-      es: "Control de productividad y calidad por recurso con enfoque en cumplimiento y mejora continua.",
-      en: "Productivity and quality tracking by resource with a focus on compliance and continuous improvement."
+      es: "Reporte de métricas de mailing para campañas de llamados de la Ciudad de Buenos Aires, con seguimiento de envíos, aperturas, clics y rebotes.",
+      en: "Mailing metrics report for Buenos Aires City outreach campaigns, tracking sends, opens, clicks and bounce rates."
     },
-    tools: ["Power BI", "SQL", "Python"],
+    tools: ["Looker Studio", "Google Sheets"],
     highlights: {
-      es: ["Trazabilidad por recurso", "Detección de cuellos de botella"],
-      en: ["Resource-level traceability", "Bottleneck detection"]
+      es: ["Filtros por campaña y período", "KPIs de aperturas, clics y rebotes"],
+      en: ["Campaign and period filters", "Open, click and bounce KPIs"]
     },
-    image: "/img/D4.png",
-    link: "https://github.com/WalterEnzoWohl"
+    image: "/img/dashboard-mailing.png",
+    link: "https://lookerstudio.google.com/reporting/ad58b1c2-d02e-4557-8634-537b8314354a"
   },
   {
     title: { es: "Portfolio Fullstack", en: "Fullstack Portfolio" },
