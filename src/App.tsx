@@ -62,13 +62,15 @@ const uiCopy = {
     nav: {
       home: "Inicio",
       about: "SobreMi",
+      portfolio: "Portfolio",
       curriculum: "Currículum",
       certifications: "Certificaciones",
-      portfolio: "Portfolio",
       contact: "Contacto"
     },
     languageSwitcherAria: "Cambiar idioma",
-    heroRole: "Analista de Datos IT | BI, Reporting y Visualización",
+    heroRole: "Analista de Datos enfocado en resolución de problemas, automatización de reportes y dashboards para operación y gestión.",
+    heroSummary:
+      "Desarrollo herramientas internas y soluciones de datos que ordenan procesos, reducen tareas manuales y vuelven más clara la toma de decisiones.",
     about: {
       eyebrow: "Perfil profesional",
       title: "Sobre mí",
@@ -181,13 +183,15 @@ const uiCopy = {
     nav: {
       home: "Home",
       about: "AboutMe",
+      portfolio: "Portfolio",
       curriculum: "Resume",
       certifications: "Certifications",
-      portfolio: "Portfolio",
       contact: "Contact"
     },
     languageSwitcherAria: "Change language",
-    heroRole: "IT Data Analyst | BI, Reporting & Visualization",
+    heroRole: "Data Analyst focused on problem solving, report automation and visual dashboards for operations and management.",
+    heroSummary:
+      "I build internal tools and data solutions that organize processes, reduce manual work and make decision-making clearer.",
     about: {
       eyebrow: "Professional profile",
       title: "About Me",
@@ -329,13 +333,13 @@ const projects: Project[] = [
     title: { es: "Análisis de Gastos RRHH", en: "HR Expense Analysis" },
     category: "powerbi",
     description: {
-      es: "Dashboard para controlar gastos operativos y oportunidades de optimización en recursos humanos.",
-      en: "Dashboard to track operating expenses and optimization opportunities across human resources."
+      es: "Dashboard de control presupuestario para RRHH que permite monitorear gasto real, detectar desvíos mensuales y encontrar oportunidades de optimización por categoría.",
+      en: "Budget control dashboard for HR that monitors actual spending, detects monthly variances and identifies optimization opportunities by category."
     },
     tools: ["Power BI", "Excel"],
     highlights: {
-      es: ["KPIs de costos por área", "Comparativa mensual de desvío"],
-      en: ["Cost KPIs by area", "Monthly variance comparison"]
+      es: ["Seguimiento de presupuesto vs. gasto real", "Desvíos por categoría y período"],
+      en: ["Budget vs. actual spend tracking", "Variance by category and period"]
     },
     image: "/img/dashboard-rrhh.png",
     link: "https://app.powerbi.com/view?r=eyJrIjoiNzkzN2M5NDctNGFiMC00NmU3LTg1NzQtYjdiZmRlMDU0MzQ4IiwidCI6ImUwODdhZTVmLTQ2YjQtNDBiOS04ZGZkLTE1MTA4MTQwMTc3MyIsImMiOjR9"
@@ -344,13 +348,13 @@ const projects: Project[] = [
     title: { es: "Informe de Ventas Appol", en: "Appol Sales Report" },
     category: "powerbi",
     description: {
-      es: "Informe ejecutivo para análisis comercial con seguimiento de ventas, mix de productos y tendencias.",
-      en: "Executive report for commercial analysis with sales tracking, product mix and trend monitoring."
+      es: "Dashboard comercial para analizar utilidad, márgenes y desempeño por producto, país y continente, facilitando decisiones sobre mix y performance.",
+      en: "Commercial dashboard to analyze profit, margins and performance by product, country and continent, supporting decisions on mix and performance."
     },
     tools: ["Power BI", "Excel", "DAX"],
     highlights: {
-      es: ["Análisis por canal", "Seguimiento de crecimiento YoY"],
-      en: ["Channel analysis", "YoY growth tracking"]
+      es: ["Utilidad y margen por mercado", "Seguimiento por producto y período"],
+      en: ["Profit and margin by market", "Tracking by product and period"]
     },
     image: "/img/dashboard-appol.png",
     link: "https://app.powerbi.com/view?r=eyJrIjoiYmZkOTYwMDYtNWU1NS00MjZkLTg2MWYtZDAxZmRkYzVhZGUwIiwidCI6ImUwODdhZTVmLTQ2YjQtNDBiOS04ZGZkLTE1MTA4MTQwMTc3MyIsImMiOjR9"
@@ -359,13 +363,13 @@ const projects: Project[] = [
     title: { es: "Métricas de Mailing GCBA", en: "GCBA Mailing Metrics" },
     category: "powerbi",
     description: {
-      es: "Reporte de métricas de mailing para campañas de llamados de la Ciudad de Buenos Aires, con seguimiento de envíos, aperturas, clics y rebotes.",
-      en: "Mailing metrics report for Buenos Aires City outreach campaigns, tracking sends, opens, clicks and bounce rates."
+      es: "Dashboard para monitorear campañas de mailing del GCBA con foco en entregabilidad, aperturas, clics y rendimiento por envío.",
+      en: "Dashboard to monitor GCBA mailing campaigns with a focus on deliverability, opens, clicks and send-level performance."
     },
     tools: ["Looker Studio", "Google Sheets"],
     highlights: {
-      es: ["Filtros por campaña y período", "KPIs de aperturas, clics y rebotes"],
-      en: ["Campaign and period filters", "Open, click and bounce KPIs"]
+      es: ["Comparación por campaña, fecha y volumen enviado", "KPIs de aperturas, clics, rebotes y no abiertos"],
+      en: ["Comparison by campaign, date and send volume", "Open, click, bounce and unopened KPIs"]
     },
     image: "/img/dashboard-mailing.png",
     link: "https://lookerstudio.google.com/reporting/ad58b1c2-d02e-4557-8634-537b8314354a"
@@ -374,13 +378,13 @@ const projects: Project[] = [
     title: { es: "Gestión de Nómina RRHH", en: "HR Payroll Management" },
     category: "powerbi",
     description: {
-      es: "Dashboard de recursos humanos para analizar dotación, distribución por área, rango etario y antigüedad del personal.",
-      en: "Human resources dashboard to analyze headcount, area distribution, age ranges and employee tenure."
+      es: "Dashboard de RRHH para entender la composición de la nómina, la distribución por área y la antigüedad del personal con una mirada operativa.",
+      en: "HR dashboard to understand payroll composition, area distribution and employee tenure from an operational perspective."
     },
     tools: ["Looker Studio", "Google Sheets"],
     highlights: {
-      es: ["Distribución por género y dirección general", "Mapa de empleados y análisis de antigüedad"],
-      en: ["Gender and management distribution", "Employee map and tenure analysis"]
+      es: ["Distribución de dotación por género y dirección", "Mapa de empleados y evolución de antigüedad"],
+      en: ["Headcount distribution by gender and management", "Employee map and tenure evolution"]
     },
     image: "/img/dashboard-nomina.png",
     link: "https://lookerstudio.google.com/reporting/26b9eca6-822c-41f9-836f-f16b76ab2acd"
@@ -389,13 +393,13 @@ const projects: Project[] = [
     title: { es: "WebApp de Gestión de Empleados", en: "Employee Management WebApp" },
     category: "web",
     description: {
-      es: "Aplicación web interna para que empleados gestionen solicitudes de vacaciones, licencias médicas y otras ausencias de forma ordenada.",
-      en: "Internal web application for employees to manage vacation requests, medical leave and other absences in an organized way."
+      es: "Aplicación interna para centralizar solicitudes de vacaciones, licencias médicas y otras ausencias, reduciendo seguimiento manual y ordenando aprobaciones.",
+      en: "Internal application to centralize vacation requests, medical leave and other absences, reducing manual follow-up and organizing approvals."
     },
     tools: ["AppScript", "JavaScript", "Git", "Clasp"],
     highlights: {
-      es: ["Autogestión de vacaciones y licencias", "Seguimiento centralizado de ausencias"],
-      en: ["Self-service vacation and leave requests", "Centralized absence tracking"]
+      es: ["Autogestión de ausencias en un único flujo", "Gestión interna apoyada en Google Workspace"],
+      en: ["Self-service absence management in a single flow", "Internal management powered by Google Workspace"]
     },
     image: "/img/WIP.png",
     link: "https://github.com/WalterEnzoWohl"
@@ -592,9 +596,9 @@ function App() {
             <ul>
               <li><a href="#home" onClick={selectMenu}>{copy.nav.home}</a></li>
               <li><a href="#aboutme" onClick={selectMenu}>{copy.nav.about}</a></li>
+              <li><a href="#portfolio" onClick={selectMenu}>{copy.nav.portfolio}</a></li>
               <li><a href="#curriculum" onClick={selectMenu}>{copy.nav.curriculum}</a></li>
               <li><a href="#certifications" onClick={selectMenu}>{copy.nav.certifications}</a></li>
-              <li><a href="#portfolio" onClick={selectMenu}>{copy.nav.portfolio}</a></li>
               <li><a href="#contacto" onClick={selectMenu}>{copy.nav.contact}</a></li>
             </ul>
           </nav>
@@ -640,6 +644,7 @@ function App() {
             <div className="contenedor-info">
               <h1>Walter Enzo Wohl</h1>
               <h2>{copy.heroRole}</h2>
+              <p className="hero-summary">{copy.heroSummary}</p>
               <div className="redes">
                 <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/walterenzowohl" aria-label="LinkedIn de Walter Enzo Wohl"><i className="fa-brands fa-linkedin" /></a>
                 <a target="_blank" rel="noopener noreferrer" href="https://github.com/WalterEnzoWohl" aria-label="GitHub de Walter Enzo Wohl"><i className="fa-brands fa-github" /></a>

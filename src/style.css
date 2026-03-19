@@ -67,8 +67,13 @@ html[data-theme="light"] body {
         linear-gradient(180deg, #fbfdff 0%, #eef4fa 100%);
 }
 
-body,
+body {
+    overflow-x: hidden;
+}
+
 main {
+    display: flex;
+    flex-direction: column;
     overflow-x: hidden;
 }
 
@@ -90,6 +95,30 @@ img {
 
 section {
     scroll-margin-top: 92px;
+}
+
+.home {
+    order: 1;
+}
+
+.aboutme {
+    order: 2;
+}
+
+.portfolio-modern {
+    order: 3;
+}
+
+.curriculum-modern {
+    order: 4;
+}
+
+.certifications-modern {
+    order: 5;
+}
+
+.contact-modern {
+    order: 6;
 }
 
 .contenedor-seccion {
@@ -119,9 +148,11 @@ section {
 
 .logo {
     flex: 0 0 auto;
+    min-width: 0;
 }
 
 .logo a {
+    display: block;
     color: var(--accent);
     white-space: nowrap;
     font-size: clamp(1.45rem, 2.25vw, 2.1rem);
@@ -156,6 +187,7 @@ section {
     text-decoration: none;
     font-size: 0.94rem;
     font-weight: 700;
+    white-space: nowrap;
     transition: color 0.2s ease, background 0.2s ease;
 }
 
@@ -422,6 +454,14 @@ section {
     line-height: 1.5;
 }
 
+.hero-summary {
+    margin: -2px 0 0;
+    max-width: 60ch;
+    color: var(--text-dim);
+    font-size: 1.02rem;
+    line-height: 1.75;
+}
+
 .redes {
     display: flex;
     flex-wrap: wrap;
@@ -454,8 +494,7 @@ section {
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 10px 24px rgba(0, 0, 0, 0.18);
 }
 
-.redes a:hover,
-.arriba:hover {
+.redes a:hover {
     transform: translateY(-2px);
     color: #041317;
     background: var(--accent);
@@ -1237,6 +1276,13 @@ footer .redes a {
     text-decoration: none;
 }
 
+.arriba:hover {
+    transform: translateX(-50%) translateY(-2px);
+    color: #041317;
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
 .copyright {
     margin: 0;
     color: var(--text-muted);
@@ -1468,7 +1514,11 @@ html[data-theme="light"] #nav.responsive {
 
 @media screen and (max-width: 980px) {
     .contenedor-header header {
-        min-height: 74px;
+        min-height: 82px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 12px;
     }
 
     #nav {
@@ -1477,7 +1527,11 @@ html[data-theme="light"] #nav.responsive {
     }
 
     .header-actions {
-        right: 0;
+        position: static;
+        top: auto;
+        right: auto;
+        transform: none;
+        justify-self: end;
     }
 
     .nav-responsive {
@@ -1586,6 +1640,11 @@ html[data-theme="light"] #nav.responsive {
         max-width: none;
     }
 
+    .hero-summary {
+        font-size: 0.98rem;
+        line-height: 1.68;
+    }
+
     .aboutme-actions,
     .contact-cards,
     .contact-modern-socials,
@@ -1634,19 +1693,24 @@ html[data-theme="light"] #nav.responsive {
         padding: 98px 0 56px;
     }
 
+    .contenedor-header header {
+        min-height: 88px;
+        gap: 10px;
+    }
+
     .header-actions {
-        gap: 8px;
+        gap: 6px;
     }
 
     .language-switch {
-        min-height: 46px;
-        padding: 4px;
+        min-height: 40px;
+        padding: 3px;
     }
 
     .theme-toggle {
-        --toggle-track-width: 72px;
-        --toggle-padding: 4px;
-        --toggle-thumb-size: 32px;
+        --toggle-track-width: 66px;
+        --toggle-padding: 5px;
+        --toggle-thumb-size: 30px;
         width: var(--toggle-track-width);
         height: 40px;
         padding: var(--toggle-padding);
@@ -1655,14 +1719,19 @@ html[data-theme="light"] #nav.responsive {
     .theme-toggle-thumb {
         width: var(--toggle-thumb-size);
         height: var(--toggle-thumb-size);
-        font-size: 0.92rem;
+        font-size: 0.88rem;
     }
 
     .language-switch button {
-        min-width: 44px;
-        min-height: 38px;
-        padding: 0 12px;
-        font-size: 0.84rem;
+        min-width: 34px;
+        min-height: 34px;
+        padding: 0 8px;
+        font-size: 0.76rem;
+    }
+
+    .nav-responsive {
+        width: 40px;
+        height: 40px;
     }
 
     .home .contenedor-banner {
@@ -1670,7 +1739,10 @@ html[data-theme="light"] #nav.responsive {
     }
 
     .logo a {
-        font-size: 1.2rem;
+        max-width: 152px;
+        white-space: normal;
+        font-size: 1rem;
+        line-height: 0.95;
     }
 
     .contenedor-info h1 {
@@ -1679,6 +1751,11 @@ html[data-theme="light"] #nav.responsive {
 
     .contenedor-info h2 {
         font-size: 1.05rem;
+    }
+
+    .hero-summary {
+        font-size: 0.94rem;
+        line-height: 1.62;
     }
 
     .home .contenedor-img {
