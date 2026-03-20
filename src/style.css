@@ -67,13 +67,8 @@ html[data-theme="light"] body {
         linear-gradient(180deg, #fbfdff 0%, #eef4fa 100%);
 }
 
-body {
-    overflow-x: hidden;
-}
-
+body,
 main {
-    display: flex;
-    flex-direction: column;
     overflow-x: hidden;
 }
 
@@ -95,30 +90,6 @@ img {
 
 section {
     scroll-margin-top: 92px;
-}
-
-.home {
-    order: 1;
-}
-
-.aboutme {
-    order: 2;
-}
-
-.portfolio-modern {
-    order: 3;
-}
-
-.curriculum-modern {
-    order: 4;
-}
-
-.certifications-modern {
-    order: 5;
-}
-
-.contact-modern {
-    order: 6;
 }
 
 .contenedor-seccion {
@@ -240,6 +211,7 @@ section {
 .aboutme-contact-link,
 .portfolio-modern-content a,
 .certifications-modern-item a,
+.certification-toggle,
 .toggle-btn,
 #button {
     transition:
@@ -258,6 +230,7 @@ section {
 .aboutme-contact-link:focus-visible,
 .portfolio-modern-content a:focus-visible,
 .certifications-modern-item a:focus-visible,
+.certification-toggle:focus-visible,
 .toggle-btn:focus-visible,
 #button:focus-visible,
 .contact-card-link:focus-visible,
@@ -616,7 +589,8 @@ footer {
 .btn-descarga,
 .aboutme-contact-link,
 .portfolio-modern-content a,
-.certifications-modern-item a {
+.certifications-modern-item a,
+.certification-toggle {
     position: relative;
     overflow: hidden;
     display: inline-flex;
@@ -637,7 +611,8 @@ footer {
 .btn-descarga:hover,
 .aboutme-contact-link:hover,
 .portfolio-modern-content a:hover,
-.certifications-modern-item a:hover {
+.certifications-modern-item a:hover,
+.certification-toggle:hover {
     transform: translateY(-1px);
     border-color: rgba(31, 200, 171, 0.62);
     background: rgba(31, 200, 171, 0.16);
@@ -728,6 +703,26 @@ footer {
 
 .curriculum-modern {
     background: linear-gradient(180deg, #0d1520 0%, #0b1016 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.curriculum-modern::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 16% 20%, rgba(31, 200, 171, 0.1), transparent 28%),
+        radial-gradient(circle at 84% 16%, rgba(99, 102, 241, 0.12), transparent 24%);
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+.curriculum-modern .contenedor-seccion {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 24px;
 }
 
 .curriculum-modern-subtitle,
@@ -739,6 +734,83 @@ footer {
     margin: 12px auto 0;
     text-align: center;
     font-size: 1.02rem;
+}
+
+.curriculum-modern-head {
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+}
+
+.curriculum-modern-copy {
+    display: grid;
+    gap: 10px;
+    justify-items: center;
+}
+
+.curriculum-modern-copy h2,
+.curriculum-modern-copy .curriculum-modern-subtitle {
+    text-align: center;
+    margin-inline: auto;
+}
+
+.curriculum-download {
+    flex-shrink: 0;
+}
+
+.curriculum-footer-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.curriculum-modern-snapshot {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.curriculum-spotlight-card {
+    padding: 18px 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(180deg, rgba(17, 28, 43, 0.82), rgba(11, 18, 31, 0.96));
+    box-shadow: 0 18px 40px rgba(3, 10, 18, 0.24);
+}
+
+.curriculum-spotlight-card small {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--text-muted);
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.curriculum-spotlight-card strong {
+    display: block;
+    color: var(--text);
+    font-size: 1.03rem;
+    line-height: 1.45;
+    text-wrap: balance;
+}
+
+.curriculum-timeline {
+    position: relative;
+    display: grid;
+    gap: 18px;
+    margin-top: 6px;
+}
+
+.curriculum-timeline::before {
+    content: "";
+    position: absolute;
+    left: 22px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, rgba(31, 200, 171, 0.55), rgba(31, 200, 171, 0));
 }
 
 .curriculum-modern-error {
@@ -761,37 +833,140 @@ footer {
     grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.curriculum-modern-grid--single {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 780px;
+    margin-inline: auto;
+}
+
 .curriculum-modern-item {
-    padding: 16px;
-    border-radius: var(--radius-sm);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 18px;
+    padding: 18px 22px;
+    border-radius: 22px;
+    background: linear-gradient(180deg, rgba(17, 28, 43, 0.9), rgba(10, 16, 27, 0.98));
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow: 0 18px 42px rgba(2, 8, 18, 0.22);
 }
 
 .curriculum-modern-item + .curriculum-modern-item {
-    margin-top: 12px;
+    margin-top: 0;
 }
 
-.curriculum-modern-item h4 {
+.curriculum-modern-item.is-current {
+    border-color: rgba(31, 200, 171, 0.22);
+    box-shadow: 0 22px 52px rgba(3, 10, 18, 0.3), inset 0 1px 0 rgba(31, 200, 171, 0.06);
+}
+
+.curriculum-item-rail {
+    position: relative;
+    z-index: 1;
+}
+
+.curriculum-item-marker {
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    border: 1px solid rgba(31, 200, 171, 0.26);
+    background: linear-gradient(180deg, rgba(31, 200, 171, 0.18), rgba(31, 200, 171, 0.08));
+    color: #9bfbea;
+    font-size: 0.86rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+}
+
+.curriculum-item-body {
+    display: grid;
+    gap: 14px;
+    min-width: 0;
+    align-content: start;
+}
+
+.curriculum-item-heading {
+    min-width: 0;
+}
+
+.curriculum-item-heading h3 {
     margin: 0 0 6px;
-    font-size: 1.08rem;
+    font-size: clamp(1.16rem, 2.2vw, 1.56rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+}
+
+.curriculum-item-details {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    color: var(--text-soft);
+    line-height: 1.5;
+}
+
+.curriculum-item-separator {
+    color: var(--text-muted);
+}
+
+.curriculum-current-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(31, 200, 171, 0.24);
+    background: rgba(31, 200, 171, 0.12);
+    color: #9bfbea;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
 }
 
 .casa {
-    display: block;
-    margin-bottom: 2px;
+    display: inline;
+    margin-bottom: 0;
     color: #8cf8e5;
     font-weight: 700;
 }
 
 .fecha {
-    display: block;
+    display: inline;
     color: var(--text-muted);
     font-size: 0.95rem;
 }
 
+.curriculum-item-summary {
+    margin: 0;
+    color: var(--text-soft);
+    font-size: 1.01rem;
+    line-height: 1.72;
+}
+
+.curriculum-item-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.curriculum-item-stack span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(31, 200, 171, 0.18);
+    background: rgba(31, 200, 171, 0.08);
+    color: #a9fff0;
+    font-size: 0.84rem;
+    font-weight: 700;
+}
+
 .toggle-btn {
-    margin-top: 12px;
+    margin-top: 0;
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -801,6 +976,13 @@ footer {
     background: rgba(31, 200, 171, 0.08);
     color: var(--text);
     font-weight: 600;
+}
+
+.curriculum-toggle {
+    grid-column: 3;
+    justify-self: end;
+    align-self: center;
+    margin-top: 0;
 }
 
 .toggle-btn:hover {
@@ -828,6 +1010,18 @@ footer {
 
 .descripcion {
     margin-top: 12px;
+}
+
+.curriculum-item-highlights {
+    margin: 14px 0 0;
+    padding-left: 18px;
+    display: grid;
+    gap: 8px;
+    color: var(--text-soft);
+}
+
+.curriculum-item-highlights li::marker {
+    color: var(--accent);
 }
 
 .skills-modern {
@@ -885,7 +1079,7 @@ footer {
 .certifications-modern-item {
     display: grid;
     grid-template-columns: auto 1fr auto;
-    align-items: center;
+    align-items: start;
     gap: 18px;
     padding: 18px 20px;
 }
@@ -910,6 +1104,27 @@ footer {
     color: #a2fff0;
     font-size: 0.88rem;
     font-weight: 600;
+}
+
+.certification-description-wrapper {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.28s ease;
+}
+
+.certification-description-wrapper.is-open {
+    max-height: 240px;
+}
+
+.certification-description {
+    margin: 16px 0 0;
+    color: var(--text-soft);
+    line-height: 1.75;
+}
+
+.certification-toggle {
+    appearance: none;
+    align-self: center;
 }
 
 .portfolio-modern {
@@ -1004,6 +1219,372 @@ footer {
     padding-left: 18px;
     color: var(--text-soft);
     line-height: 1.75;
+}
+
+.portfolio-story-card {
+    animation: fadeUpSoft 0.72s ease both;
+    animation-delay: var(--delay, 0s);
+}
+
+.portfolio-modern-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.portfolio-modern-actions a {
+    flex: 1 1 190px;
+}
+
+.portfolio-modern-secondary-link {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.case-study-page {
+    padding: 126px 0 82px;
+    min-height: calc(100svh - 120px);
+    background:
+        radial-gradient(circle at 8% 12%, rgba(31, 200, 171, 0.12), transparent 18%),
+        radial-gradient(circle at 92% 8%, rgba(80, 101, 255, 0.16), transparent 20%),
+        linear-gradient(180deg, rgba(10, 16, 27, 0.98) 0%, rgba(11, 16, 22, 1) 100%);
+}
+
+.case-study-shell {
+    width: min(1160px, calc(100% - 40px));
+    margin: 0 auto;
+    display: grid;
+    gap: 26px;
+}
+
+.case-study-breadcrumb a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-soft);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.case-study-breadcrumb a:hover {
+    color: var(--accent);
+}
+
+.case-study-hero,
+.case-study-panel,
+.case-study-card,
+.case-study-showcase {
+    min-width: 0;
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(180deg, rgba(17, 28, 43, 0.95), rgba(10, 16, 27, 0.98));
+    box-shadow: var(--shadow);
+}
+
+.case-study-hero {
+    padding: 34px;
+}
+
+.case-study-hero-grid,
+.case-study-overview,
+.case-study-showcase {
+    display: grid;
+    gap: 20px;
+}
+
+.case-study-hero-grid {
+    grid-template-columns: minmax(0, 1.06fr) minmax(320px, 0.94fr);
+    align-items: start;
+}
+
+.case-study-copy,
+.case-study-media {
+    min-width: 0;
+}
+
+.case-study-kicker,
+.case-study-showcase-copy span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(31, 200, 171, 0.28);
+    background: rgba(31, 200, 171, 0.08);
+    color: #9ffdf0;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.case-study-copy h1,
+.case-study-story-header h2,
+.case-study-showcase-copy h2 {
+    margin: 16px 0 0;
+    font-size: clamp(2.2rem, 4vw, 3.8rem);
+    line-height: 0.94;
+    letter-spacing: -0.05em;
+    text-wrap: balance;
+}
+
+.case-study-summary {
+    margin: 18px 0 0;
+    color: var(--text);
+    font-size: 1.18rem;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.case-study-narrative,
+.case-study-card p,
+.case-study-showcase-copy p {
+    margin: 14px 0 0;
+    color: var(--text-soft);
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.case-study-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.case-study-stack span {
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(31, 200, 171, 0.1);
+    border: 1px solid rgba(31, 200, 171, 0.2);
+    color: #a2fff0;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.case-study-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.case-study-actions a,
+.case-study-secondary-link {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 12px 18px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(31, 200, 171, 0.32);
+    color: var(--text);
+    background: rgba(31, 200, 171, 0.08);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.case-study-secondary-link {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.case-study-actions a:hover,
+.case-study-secondary-link:hover {
+    transform: translateY(-1px);
+    border-color: rgba(31, 200, 171, 0.62);
+    background: rgba(31, 200, 171, 0.16);
+}
+
+.case-study-media {
+    display: grid;
+    gap: 14px;
+}
+
+.case-study-media-frame,
+.case-study-showcase-media {
+    overflow: hidden;
+    border-radius: calc(var(--radius-lg) - 6px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #0c131d;
+}
+
+.case-study-media-frame img,
+.case-study-showcase-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.case-study-media-frame img {
+    min-height: 100%;
+}
+
+.case-study-quote {
+    display: grid;
+    gap: 8px;
+    padding: 18px 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(31, 200, 171, 0.18);
+    background: rgba(31, 200, 171, 0.07);
+}
+
+.case-study-quote i {
+    color: var(--accent);
+}
+
+.case-study-quote p {
+    margin: 0;
+    color: var(--text);
+    line-height: 1.72;
+    font-weight: 600;
+}
+
+.case-study-overview {
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+}
+
+.case-study-panel {
+    padding: 24px;
+}
+
+.case-study-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.case-study-panel-header span {
+    color: var(--text);
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.case-study-outcomes {
+    display: grid;
+    gap: 12px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.case-study-outcomes li {
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+    color: var(--text-soft);
+    line-height: 1.72;
+}
+
+.case-study-outcomes i,
+.case-study-card-icon {
+    color: var(--accent);
+}
+
+.case-study-facts-grid {
+    display: grid;
+    gap: 12px;
+}
+
+.case-study-fact {
+    padding: 14px;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.case-study-fact small {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.case-study-fact strong {
+    display: block;
+    color: var(--text);
+    line-height: 1.5;
+}
+
+.case-study-story {
+    display: grid;
+    gap: 24px;
+}
+
+.case-study-story-header {
+    text-align: center;
+}
+
+.case-study-story-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.case-study-card {
+    padding: 24px;
+    animation: fadeUpSoft 0.72s ease both;
+    animation-delay: var(--delay, 0s);
+}
+
+.case-study-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.case-study-card-icon {
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: rgba(31, 200, 171, 0.1);
+}
+
+.case-study-card h3 {
+    margin: 0;
+    font-size: 1.18rem;
+    letter-spacing: -0.02em;
+}
+
+.case-study-card ul {
+    margin: 14px 0 0;
+    padding-left: 18px;
+    color: var(--text-soft);
+    line-height: 1.72;
+}
+
+.case-study-showcase {
+    grid-template-columns: minmax(260px, 0.42fr) minmax(0, 1fr);
+    align-items: center;
+    padding: 26px;
+}
+
+.case-study-showcase-copy h2 {
+    margin-top: 14px;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+}
+
+.case-study-showcase-media {
+    min-height: 300px;
+}
+
+.case-animate {
+    animation: fadeUpSoft 0.72s ease both;
+    animation-delay: var(--delay, 0s);
 }
 
 .contact-modern {
@@ -1362,6 +1943,12 @@ html[data-theme="light"] .curriculum-modern {
     background: linear-gradient(180deg, #eef4fa 0%, #f7fbfe 100%);
 }
 
+html[data-theme="light"] .curriculum-modern::before {
+    background:
+        radial-gradient(circle at 16% 20%, rgba(22, 186, 166, 0.12), transparent 28%),
+        radial-gradient(circle at 84% 16%, rgba(74, 120, 255, 0.12), transparent 24%);
+}
+
 html[data-theme="light"] .skills-modern {
     background: linear-gradient(180deg, #f8fbfe 0%, #eef4fa 100%);
 }
@@ -1408,7 +1995,8 @@ html[data-theme="light"] .contact-modern-socials a,
 html[data-theme="light"] .contact-modern-info,
 html[data-theme="light"] .contact-modern input,
 html[data-theme="light"] .contact-modern textarea,
-html[data-theme="light"] .portfolio-modern-filters button {
+html[data-theme="light"] .portfolio-modern-filters button,
+html[data-theme="light"] .curriculum-spotlight-card {
     background: rgba(255, 255, 255, 0.76);
     border-color: rgba(77, 99, 128, 0.14);
 }
@@ -1424,10 +2012,23 @@ html[data-theme="light"] .casa {
     color: var(--accent-strong);
 }
 
+html[data-theme="light"] .curriculum-item-marker,
+html[data-theme="light"] .curriculum-current-badge,
+html[data-theme="light"] .curriculum-item-stack span {
+    color: var(--accent-strong);
+    border-color: rgba(22, 186, 166, 0.22);
+    background: rgba(22, 186, 166, 0.08);
+}
+
+html[data-theme="light"] .curriculum-timeline::before {
+    background: linear-gradient(180deg, rgba(22, 186, 166, 0.34), rgba(22, 186, 166, 0));
+}
+
 html[data-theme="light"] .btn-descarga,
 html[data-theme="light"] .aboutme-contact-link,
 html[data-theme="light"] .portfolio-modern-content a,
 html[data-theme="light"] .certifications-modern-item a,
+html[data-theme="light"] .certification-toggle,
 html[data-theme="light"] .toggle-btn {
     background: rgba(22, 186, 166, 0.06);
     border-color: rgba(22, 186, 166, 0.2);
@@ -1437,6 +2038,7 @@ html[data-theme="light"] .btn-descarga:hover,
 html[data-theme="light"] .aboutme-contact-link:hover,
 html[data-theme="light"] .portfolio-modern-content a:hover,
 html[data-theme="light"] .certifications-modern-item a:hover,
+html[data-theme="light"] .certification-toggle:hover,
 html[data-theme="light"] .toggle-btn:hover,
 html[data-theme="light"] .contact-modern-socials a:hover,
 html[data-theme="light"] .contact-card-link:hover {
@@ -1496,6 +2098,45 @@ html[data-theme="light"] .arriba {
     background: rgba(22, 186, 166, 0.12);
 }
 
+html[data-theme="light"] .case-study-page {
+    background:
+        radial-gradient(circle at 8% 12%, rgba(22, 186, 166, 0.11), transparent 18%),
+        radial-gradient(circle at 92% 8%, rgba(74, 120, 255, 0.1), transparent 20%),
+        linear-gradient(180deg, #f8fbfe 0%, #eef4fa 100%);
+}
+
+html[data-theme="light"] .case-study-hero,
+html[data-theme="light"] .case-study-panel,
+html[data-theme="light"] .case-study-card,
+html[data-theme="light"] .case-study-showcase {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(246, 249, 252, 0.98));
+}
+
+html[data-theme="light"] .case-study-kicker,
+html[data-theme="light"] .case-study-showcase-copy span {
+    border-color: rgba(22, 186, 166, 0.22);
+    background: rgba(22, 186, 166, 0.08);
+    color: var(--accent-strong);
+}
+
+html[data-theme="light"] .case-study-stack span {
+    background: rgba(22, 186, 166, 0.08);
+    border-color: rgba(22, 186, 166, 0.16);
+    color: var(--accent-strong);
+}
+
+html[data-theme="light"] .case-study-secondary-link,
+html[data-theme="light"] .portfolio-modern-secondary-link {
+    background: rgba(255, 255, 255, 0.76) !important;
+    border-color: rgba(77, 99, 128, 0.14) !important;
+}
+
+html[data-theme="light"] .case-study-quote,
+html[data-theme="light"] .case-study-fact {
+    background: rgba(255, 255, 255, 0.78);
+    border-color: rgba(77, 99, 128, 0.12);
+}
+
 html[data-theme="light"] #nav.responsive {
     background: rgba(255, 255, 255, 0.97);
 }
@@ -1504,6 +2145,18 @@ html[data-theme="light"] #nav.responsive {
     from {
         opacity: 0;
         transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeUpSoft {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
     }
 
     to {
@@ -1574,10 +2227,12 @@ html[data-theme="light"] #nav.responsive {
 
     .home .contenedor-banner,
     .aboutme-layout,
-    .curriculum-modern-grid,
     .skills-modern-grid,
     .portfolio-modern-grid,
-    .contact-atelier {
+    .contact-atelier,
+    .case-study-hero-grid,
+    .case-study-overview,
+    .case-study-showcase {
         grid-template-columns: 1fr;
     }
 
@@ -1596,8 +2251,26 @@ html[data-theme="light"] #nav.responsive {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .case-study-shell {
+        width: min(1160px, calc(100% - 32px));
+    }
+
+    .case-study-showcase-media {
+        min-height: 240px;
+    }
+
     .contact-cards {
         max-width: none;
+    }
+
+    .curriculum-modern-head,
+    .curriculum-item-top {
+        grid-template-columns: 1fr;
+        display: grid;
+    }
+
+    .curriculum-modern-snapshot {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -1619,12 +2292,15 @@ html[data-theme="light"] #nav.responsive {
     .home .contenedor-banner,
     .aboutme-story,
     .aboutme-value,
-    .curriculum-modern-col,
     .skills-modern-card,
     .portfolio-modern-content,
     .contact-spotlight,
     .contact-modern-form-wrap,
-    .certifications-modern-item {
+    .certifications-modern-item,
+    .case-study-hero,
+    .case-study-panel,
+    .case-study-card,
+    .case-study-showcase {
         padding: 18px;
     }
 
@@ -1645,10 +2321,48 @@ html[data-theme="light"] #nav.responsive {
         line-height: 1.68;
     }
 
+    .curriculum-modern-head {
+        align-items: stretch;
+    }
+
+    .curriculum-download {
+        width: 100%;
+    }
+
+    .curriculum-modern-item {
+        grid-template-columns: 1fr;
+        padding: 18px;
+    }
+
+    .curriculum-item-rail {
+        margin-bottom: -4px;
+    }
+
+    .curriculum-timeline::before {
+        left: 21px;
+    }
+
+    .curriculum-item-meta {
+        justify-items: start;
+    }
+
+    .curriculum-item-stack {
+        gap: 8px;
+    }
+
+    .curriculum-toggle {
+        grid-column: auto;
+        justify-self: start;
+    }
+
     .aboutme-actions,
     .contact-cards,
     .contact-modern-socials,
     .aboutme-pillars {
+        grid-template-columns: 1fr;
+    }
+
+    .case-study-story-grid {
         grid-template-columns: 1fr;
     }
 
@@ -1681,6 +2395,10 @@ html[data-theme="light"] #nav.responsive {
 
     .portfolio-modern-media {
         height: 210px;
+    }
+
+    .case-study-page {
+        padding: 108px 0 68px;
     }
 }
 
@@ -1738,6 +2456,10 @@ html[data-theme="light"] #nav.responsive {
         padding: 16px;
     }
 
+    .case-study-page {
+        padding: 96px 0 58px;
+    }
+
     .logo a {
         max-width: 152px;
         white-space: normal;
@@ -1780,6 +2502,20 @@ html[data-theme="light"] #nav.responsive {
 
     .portfolio-modern-media {
         height: 180px;
+    }
+
+    .case-study-summary {
+        font-size: 1.06rem;
+    }
+
+    .case-study-actions a,
+    .case-study-secondary-link,
+    .portfolio-modern-actions a {
+        width: 100%;
+    }
+
+    .case-study-showcase-media {
+        min-height: 190px;
     }
 }
 
