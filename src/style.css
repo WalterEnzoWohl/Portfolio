@@ -19,6 +19,9 @@
     --radius-md: 18px;
     --radius-sm: 12px;
     --container: 1180px;
+    --theme-transition-x: 50%;
+    --theme-transition-y: 50%;
+    --theme-transition-speed: 0.85s;
 }
 
 html[data-theme="light"] {
@@ -47,6 +50,50 @@ html[data-theme="light"] {
 
 html {
     scroll-behavior: smooth;
+}
+
+::view-transition-group(root),
+::view-transition-image-pair(root) {
+    animation: none;
+    isolation: isolate;
+    overflow: hidden;
+}
+
+[data-theme-transition]::view-transition-old(root) {
+    animation: none;
+    z-index: 1;
+    mix-blend-mode: normal;
+}
+
+[data-theme-transition]::view-transition-new(root) {
+    animation: theme-circle-expand var(--theme-transition-speed) cubic-bezier(0.72, 0, 0.18, 1);
+    z-index: 2;
+    mix-blend-mode: normal;
+    will-change: clip-path;
+}
+
+[data-theme-transition] *,
+[data-theme-transition] *::before,
+[data-theme-transition] *::after {
+    transition: none !important;
+}
+
+@keyframes theme-circle-expand {
+    from {
+        clip-path: circle(0% at var(--theme-transition-x) var(--theme-transition-y));
+    }
+
+    to {
+        clip-path: circle(150% at var(--theme-transition-x) var(--theme-transition-y));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+        animation: none !important;
+    }
 }
 
 body {

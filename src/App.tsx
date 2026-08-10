@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useState, type CSSProperties, type Dispatch, type SetStateAction, type SyntheticEvent } from "react";
+﻿import { useEffect, useMemo, useRef, useState, type CSSProperties, type Dispatch, type SetStateAction, type SyntheticEvent } from "react";
 import { Link, Navigate, Route, Routes, useLocation, useParams } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import { useForm } from "react-hook-form";
@@ -6,6 +6,12 @@ import "./style.css";
 
 type Language = "es" | "en";
 type Theme = "dark" | "light";
+
+type ViewTransitionDocument = Document & {
+  startViewTransition?: (callback: () => void) => {
+    finished: Promise<void>;
+  };
+};
 
 type LocalizedText = {
   es: string;
@@ -1969,6 +1975,7 @@ function App() {
   const contactEmail = "walterenzowohl@gmail.com";
   const contactPhone = "+54 11 4141 9407";
   const contactPhoneHref = "+541141419407";
+  const themeToggleRef = useRef<HTMLButtonElement | null>(null);
   const [language, setLanguage] = useState<Language>("es");
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window === "undefined") {
@@ -2079,6 +2086,43 @@ function App() {
     }
   };
 
+  const switchThemeWithTransition = async () => {
+    const nextTheme: Theme = theme === "dark" ? "light" : "dark";
+    const root = document.documentElement;
+    const trigger = themeToggleRef.current;
+    const rect = trigger?.getBoundingClientRect();
+    const x = rect ? rect.left + rect.width / 2 : window.innerWidth / 2;
+    const y = rect ? rect.top + rect.height / 2 : window.innerHeight / 2;
+
+    root.style.setProperty("--theme-transition-x", `${(x / window.innerWidth) * 100}%`);
+    root.style.setProperty("--theme-transition-y", `${(y / window.innerHeight) * 100}%`);
+    root.setAttribute("data-theme-transition", nextTheme === "dark" ? "to-dark" : "to-light");
+
+    const clearTransitionState = () => {
+      root.removeAttribute("data-theme-transition");
+      root.style.removeProperty("--theme-transition-x");
+      root.style.removeProperty("--theme-transition-y");
+    };
+
+    const transitionDocument = document as ViewTransitionDocument;
+
+    if (!transitionDocument.startViewTransition || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setTheme(nextTheme);
+      window.setTimeout(clearTransitionState, 350);
+      return;
+    }
+
+    try {
+      const transition = transitionDocument.startViewTransition(() => {
+        setTheme(nextTheme);
+      });
+
+      await transition.finished;
+    } finally {
+      clearTransitionState();
+    }
+  };
+
   const themeToggleLabel =
     language === "es"
       ? theme === "dark"
@@ -2121,11 +2165,12 @@ function App() {
 
           <div className="header-actions">
             <button
+              ref={themeToggleRef}
               type="button"
               className={`theme-toggle ${theme === "light" ? "is-light" : "is-dark"}`}
               aria-label={themeToggleLabel}
               title={themeToggleLabel}
-              onClick={() => setTheme((prev) => (prev === "dark" ? "light" : "dark"))}
+              onClick={switchThemeWithTransition}
             >
               <span className="theme-toggle-thumb" aria-hidden="true">
                 <i className={`fa-solid ${theme === "light" ? "fa-sun" : "fa-moon"}`} />
