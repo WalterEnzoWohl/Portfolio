@@ -3,6 +3,7 @@ dist
 .env
 .env.local
 .DS_Store
+desktop.ini
 *.tsbuildinfo
 .vite-preview.log
 .vite-preview.err

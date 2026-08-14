@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useRef, useState, type Dispatch, type SetStateAction, type SyntheticEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type SyntheticEvent } from "react";
 import { Navigate, Route, Routes, useLocation, useParams } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import { useForm } from "react-hook-form";
@@ -6,6 +6,8 @@ import DashboardLayout from "./components/DashboardLayout";
 import OverviewDashboard from "./components/OverviewDashboard";
 import ProjectsGallery from "./components/ProjectsGallery";
 import ProjectCaseStudy from "./components/ProjectCaseStudy";
+import ExperienceSection from "./components/ExperienceSection";
+import CertificationsSection from "./components/CertificationsSection";
 import { getDataCaseStudy } from "./data/projectCaseStudies";
 import { projects, recentOverviewProjectSlugs } from "./data/projects";
 import "./style.css";
@@ -13,6 +15,9 @@ import "./dashboard.css";
 import "./overview.css";
 import "./projects.css";
 import "./project-case-study.css";
+import "./experience.css";
+import "./certifications.css";
+import "./density.css";
 
 type Language = "es" | "en";
 type Theme = "dark" | "light";
@@ -21,16 +26,6 @@ type ViewTransitionDocument = Document & {
   startViewTransition?: (callback: () => void) => {
     finished: Promise<void>;
   };
-};
-
-type LocalizedText = {
-  es: string;
-  en: string;
-};
-
-type LocalizedList = {
-  es: string[];
-  en: string[];
 };
 
 type ContactFormValues = {
@@ -47,28 +42,6 @@ type SubmitState = {
   type: "success" | "error";
   message: string;
 } | null;
-
-type Certification = {
-  title: LocalizedText;
-  provider: LocalizedText;
-  year: LocalizedText;
-  link: string;
-  icon: string;
-  skills: string[];
-  description: LocalizedText;
-};
-
-
-type CurriculumItem = {
-  title: LocalizedText;
-  place: LocalizedText;
-  date: LocalizedText;
-  summary: LocalizedText;
-  description: LocalizedText;
-  highlights: LocalizedList;
-  stack: string[];
-  current?: boolean;
-};
 
 const uiCopy = {
   es: {
@@ -349,129 +322,6 @@ const uiCopy = {
   }
 } as const;
 
-const certifications: Certification[] = [
-  {
-    title: { es: "Google Data Analytics", en: "Google Data Analytics" },
-    provider: { es: "Google | Coursera", en: "Google | Coursera" },
-    year: { es: "2025 - Actualidad", en: "2025 - Present" },
-    link: "/img/Walter Enzo Wohl CV.pdf",
-    icon: "fa-solid fa-chart-line",
-    skills: ["Python", "Pandas", "NumPy", "Looker", "Google Sheets", "AppScript", "PostgreSQL"],
-    description: {
-      es: "Certificación orientada a análisis de datos, limpieza y preparación de información, uso de spreadsheets, SQL, visualización y toma de decisiones basada en datos.",
-      en: "Certification focused on data analysis, data cleaning and preparation, spreadsheets, SQL, visualization and data-driven decision making."
-    }
-  },
-  {
-    title: { es: "Diplomatura en Desarrollo Web Full Stack", en: "Full Stack Web Development Diploma" },
-    provider: { es: "Universidad Tecnológica Nacional", en: "National Technological University" },
-    year: { es: "Marzo 2023 - Diciembre 2023", en: "March 2023 - December 2023" },
-    link: "/img/Walter Enzo Wohl CV.pdf",
-    icon: "fa-solid fa-code",
-    skills: ["HTML", "CSS", "JavaScript", "React", "Node.js", "Git", "GitHub", "MySQL"],
-    description: {
-      es: "Formación integral orientada al desarrollo de aplicaciones web frontend y backend. Incorporé HTML, CSS, JavaScript, Git, GitHub, Node.js y bases de datos, trabajando con proyectos prácticos y metodologías ágiles.",
-      en: "Comprehensive training focused on front-end and back-end web application development. I worked with HTML, CSS, JavaScript, Git, GitHub, Node.js and databases through hands-on projects and agile methodologies."
-    }
-  },
-  {
-    title: { es: "Curso de Análisis de Datos", en: "Data Analysis Course" },
-    provider: { es: "CREHANA", en: "CREHANA" },
-    year: { es: "2025", en: "2025" },
-    link: "/img/Walter Enzo Wohl CV.pdf",
-    icon: "fa-solid fa-database",
-    skills: ["Excel avanzado", "Macros", "Power BI", "SQL"],
-    description: {
-      es: "Análisis y visualización de datos usando Excel, SQL, Power BI y Python. Manipulación de grandes volúmenes de información y toma de decisiones basadas en datos.",
-      en: "Data analysis and visualization using Excel, SQL, Power BI and Python. Handling large data volumes and supporting data-driven decisions."
-    }
-  }
-];
-
-const curriculumData: { experience: CurriculumItem[] } = {
-  experience: [
-    {
-      title: { es: "Analista de Datos", en: "Data Analyst" },
-      place: { es: "Gobierno de la Ciudad de Buenos Aires (GCBA)", en: "City Government of Buenos Aires (GCBA)" },
-      date: { es: "Septiembre 2025 -", en: "September 2025 - Present" },
-      summary: {
-        es: "Generación de reportes, indicadores y herramientas para ordenar información y sostener decisiones en entornos de gestión pública.",
-        en: "Reporting, KPI tracking and internal tools to organize information and support decisions in public management environments."
-      },
-      description: {
-        es: "Análisis de datos y generación de reportes para entornos de gestión pública, con foco en seguimiento de información, visualización de indicadores y soporte a la toma de decisiones.",
-        en: "Data analysis and reporting for public management environments, focused on information tracking, KPI visualization and decision support."
-      },
-      highlights: {
-        es: [
-          "Construcción de dashboards y reportes para seguimiento operativo.",
-          "Visualización de indicadores para conversaciones de gestión más claras.",
-          "Soporte analítico para áreas que necesitan ordenar información dispersa."
-        ],
-        en: [
-          "Built dashboards and reports for operational follow-up.",
-          "Visualized indicators to support clearer management conversations.",
-          "Provided analytical support for teams that need to organize scattered information."
-        ]
-      },
-      stack: ["Python", "Pandas", "SQL", "Looker", "Google Sheets", "AppScript", "Power BI"],
-      current: true
-    },
-    {
-      title: { es: "Analista de Datos Junior", en: "Junior Data Analyst" },
-      place: { es: "ARBUSTA S.A.", en: "ARBUSTA S.A." },
-      date: { es: "Agosto 2024 - Septiembre 2025", en: "August 2024 - September 2025" },
-      summary: {
-        es: "Análisis para el proyecto MTC de Mercado Libre, con foco en control de publicaciones, KPIs y automatización de reportes.",
-        en: "Analytics for Mercado Libre's MTC project, focused on publication control, KPIs and report automation."
-      },
-      description: {
-        es: "Responsable de análisis de datos en el proyecto MTC para Mercado Libre, control de publicaciones y seguimiento de KPIs. Desarrollo de reportes automatizados en Google Sheets, trabajo con Excel, SQL, Power BI y participación en procesos ETL.",
-        en: "Responsible for data analysis in the MTC project for Mercado Libre, publication control and KPI monitoring. Built automated reports in Google Sheets, worked with Excel, SQL, Power BI and supported ETL processes."
-      },
-      highlights: {
-        es: [
-          "Automatización de reportes para reducir trabajo manual.",
-          "Seguimiento de publicaciones y métricas clave para operación.",
-          "Trabajo con Excel, SQL, Power BI y apoyo en procesos ETL."
-        ],
-        en: [
-          "Automated reports to reduce manual work.",
-          "Tracked publications and key operational metrics.",
-          "Worked with Excel, SQL, Power BI and supported ETL processes."
-        ]
-      },
-      stack: ["Google Sheets", "Excel", "SQL", "Power BI", "ETL"]
-    },
-    {
-      title: { es: "Desarrollador IoT en Pasantía", en: "IoT Development Intern" },
-      place: { es: "Grupo MSA S.A", en: "Grupo MSA S.A" },
-      date: { es: "Febrero 2024 - Marzo 2024", en: "February 2024 - March 2024" },
-      summary: {
-        es: "Desarrollo front-end para una solución IoT de validación de identidad con trabajo colaborativo en entorno técnico.",
-        en: "Front-end development for an IoT identity validation solution in a collaborative technical environment."
-      },
-      description: {
-        es: "Desarrollo de una aplicación IoT para validación de identidad con DNI y huella. Trabajo colaborativo en entorno Ubuntu usando HTML, CSS, JavaScript y React para el frontend.",
-        en: "Developed an IoT application for identity validation using ID card and fingerprint. Collaborative work in an Ubuntu environment using HTML, CSS, JavaScript and React for the frontend."
-      },
-      highlights: {
-        es: [
-          "Participación en una solución de validación de identidad.",
-          "Trabajo colaborativo con tecnologías front-end modernas.",
-          "Experiencia práctica en un entorno técnico con Ubuntu."
-        ],
-        en: [
-          "Contributed to an identity validation solution.",
-          "Worked collaboratively with modern front-end technologies.",
-          "Gained hands-on experience in a technical Ubuntu environment."
-        ]
-      },
-      stack: ["React", "JavaScript", "HTML", "CSS", "Ubuntu"]
-    }
-  ]
-};
-
 function ScrollManager() {
   const location = useLocation();
 
@@ -500,8 +350,6 @@ function ScrollManager() {
 type LandingPageProps = {
   language: Language;
   copy: (typeof uiCopy)[Language];
-  openExperience: number | null;
-  setOpenExperience: Dispatch<SetStateAction<number | null>>;
   handleProjectImageError: (event: SyntheticEvent<HTMLImageElement>) => void;
   copiedContact: ContactCopyField;
   copyToClipboard: (field: Exclude<ContactCopyField, null>, value: string) => Promise<void>;
@@ -518,8 +366,6 @@ type LandingPageProps = {
 function LandingPage({
   language,
   copy,
-  openExperience,
-  setOpenExperience,
   handleProjectImageError,
   copiedContact,
   copyToClipboard,
@@ -533,28 +379,11 @@ function LandingPage({
   isSending,
   submitState
 }: LandingPageProps) {
-  const [openCertification, setOpenCertification] = useState<number | null>(null);
-  const latestExperience = curriculumData.experience[0];
   const featuredProject = projects.find((project) => project.caseStudySlug === "mailing-gcba") ?? projects[0];
   const recentProjects = recentOverviewProjectSlugs.flatMap((slug) => {
     const project = projects.find((item) => item.caseStudySlug === slug);
     return project ? [project] : [];
   });
-  const curriculumSpotlights = [
-    {
-      label: copy.curriculum.spotlightCurrent,
-      value: `${latestExperience.title[language]} · ${latestExperience.place[language]}`
-    },
-    {
-      label: copy.curriculum.spotlightExperience,
-      value: copy.curriculum.spotlightExperienceUnit
-    },
-    {
-      label: copy.curriculum.spotlightFocus,
-      value: copy.curriculum.spotlightFocusValue
-    }
-  ];
-
   return (
     <main className="dashboard-main">
       <OverviewDashboard
@@ -567,116 +396,8 @@ function LandingPage({
 
       <ProjectsGallery language={language} projects={projects} copy={copy.portfolio} onImageError={handleProjectImageError} />
 
-      <section id="curriculum" className="curriculum-modern experience-section">
-        <div className="contenedor-seccion">
-          <div className="curriculum-modern-head">
-            <div className="curriculum-modern-copy">
-              <h2>{copy.curriculum.title}</h2>
-              <p className="curriculum-modern-subtitle">{copy.curriculum.subtitle}</p>
-            </div>
-          </div>
-
-          <div className="curriculum-modern-snapshot">
-            {curriculumSpotlights.map((spotlight) => (
-              <article className="curriculum-spotlight-card" key={`${spotlight.label}-${spotlight.value}`}>
-                <small>{spotlight.label}</small>
-                <strong>{spotlight.value}</strong>
-              </article>
-            ))}
-          </div>
-
-          <div className="curriculum-timeline">
-            {curriculumData.experience.map((item, index) => {
-              const isOpen = openExperience === index;
-              const itemNumber = String(index + 1).padStart(2, "0");
-
-              return (
-                <article className={`curriculum-modern-item ${item.current ? "is-current" : ""}`} key={`${item.title.en}-${item.date.en}-${index}`}>
-                  <div className="curriculum-item-rail">
-                    <span className="curriculum-item-marker">{itemNumber}</span>
-                  </div>
-                  <div className="curriculum-item-body">
-                    <div className="curriculum-item-heading">
-                      <h3>{item.title[language]}</h3>
-                      <p className="curriculum-item-details">
-                        <span className="casa">{item.place[language]}</span>
-                        <span className="curriculum-item-separator" aria-hidden>•</span>
-                        <span className="fecha">{item.date[language]}</span>
-                        {item.current ? <span className="curriculum-current-badge">{copy.curriculum.currentBadge}</span> : null}
-                      </p>
-                    </div>
-
-                    <p className="curriculum-item-summary">{item.summary[language]}</p>
-
-                    <div className="curriculum-item-stack">
-                      {item.stack.map((skill) => (
-                        <span key={`${item.title.en}-${skill}`}>{skill}</span>
-                      ))}
-                    </div>
-
-                    <div className={`descripcion-wrapper ${isOpen ? "is-open" : ""}`} aria-hidden={!isOpen}>
-                      <p className="descripcion">{item.description[language]}</p>
-                      <ul className="curriculum-item-highlights">
-                        {item.highlights[language].map((highlight) => (
-                          <li key={`${item.title.en}-${highlight}`}>{highlight}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                  <button className="toggle-btn curriculum-toggle" type="button" aria-expanded={isOpen} onClick={() => setOpenExperience((prev) => (prev === index ? null : index))}>
-                    {isOpen ? copy.curriculum.showLess : copy.curriculum.showMore}
-                    <i className={`fa-solid fa-chevron-down chevron ${isOpen ? "rotated" : ""}`} aria-hidden />
-                  </button>
-                </article>
-              );
-            })}
-          </div>
-
-          <div className="curriculum-footer-actions">
-            <a className="btn-descarga curriculum-download" href="/img/Walter Enzo Wohl CV.pdf" download="WalterEnzoWohl.pdf">
-              {copy.curriculum.downloadCv}
-              <i className="fa-solid fa-download" />
-            </a>
-          </div>
-        </div>
-      </section>
-      <section id="certifications" className="certifications-modern">
-        <div className="contenedor-seccion">
-          <h2>{copy.certifications.title}</h2>
-          <p className="certifications-modern-subtitle">{copy.certifications.subtitle}</p>
-          <div className="certifications-modern-list">
-            {certifications.map((certification, index) => {
-              const isOpen = openCertification === index;
-              return (
-              <article className="certifications-modern-item" key={certification.title.en}>
-                <div className="certifications-modern-icon"><i className={certification.icon} /></div>
-                <div className="certifications-modern-content">
-                  <h3>{certification.title[language]}</h3>
-                  <p>{certification.provider[language]} • {certification.year[language]}</p>
-                  <div className="certifications-modern-skills">
-                    {certification.skills.map((skill) => (
-                      <span key={`${certification.title.en}-${skill}`}>{skill}</span>
-                    ))}
-                  </div>
-                  <div className={`certification-description-wrapper ${isOpen ? "is-open" : ""}`} aria-hidden={!isOpen}>
-                    <p className="certification-description">{certification.description[language]}</p>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  className="certification-toggle"
-                  aria-expanded={isOpen}
-                  onClick={() => setOpenCertification((prev) => (prev === index ? null : index))}
-                >
-                  {isOpen ? copy.certifications.showLess : copy.certifications.showMore}
-                  <i className={`fa-solid fa-chevron-down chevron ${isOpen ? "rotated" : ""}`} aria-hidden />
-                </button>
-              </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <ExperienceSection language={language} />
+      <CertificationsSection language={language} />
 
       <section id="contacto" className="contact-modern">
         <div className="contenedor-seccion">
@@ -849,7 +570,6 @@ function App() {
   });
   const [isSending, setIsSending] = useState(false);
   const [submitState, setSubmitState] = useState<SubmitState>(null);
-  const [openExperience, setOpenExperience] = useState<number | null>(null);
   const [copiedContact, setCopiedContact] = useState<ContactCopyField>(null);
 
   const copy = uiCopy[language];
@@ -1000,8 +720,6 @@ function App() {
               <LandingPage
                 language={language}
                 copy={copy}
-                openExperience={openExperience}
-                setOpenExperience={setOpenExperience}
                 handleProjectImageError={handleProjectImageError}
                 copiedContact={copiedContact}
                 copyToClipboard={copyToClipboard}

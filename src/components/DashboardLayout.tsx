@@ -88,18 +88,30 @@ function DashboardLayout({
       .map((item) => document.getElementById(item.id))
       .filter((section): section is HTMLElement => Boolean(section));
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible && isNavigationSection(visible.target.id)) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-12% 0px -70% 0px", threshold: [0, 0.1, 0.25] }
-    );
+    let frame = 0;
+    const updateActiveSection = () => {
+      const activationLine = Math.max(84, window.innerHeight * 0.22);
+      const current = sections.reduce<HTMLElement | null>((selected, section) => {
+        const rect = section.getBoundingClientRect();
+        return rect.top <= activationLine && rect.bottom > activationLine ? section : selected;
+      }, null);
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+      if (current && isNavigationSection(current.id)) setActiveSection(current.id);
+    };
+    const scheduleUpdate = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updateActiveSection);
+    };
+
+    scheduleUpdate();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+    };
   }, [activeSectionOverride]);
 
   const displayedSection = activeSectionOverride ?? activeSection;

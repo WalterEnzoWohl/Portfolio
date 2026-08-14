@@ -1,0 +1,1005 @@
+/* Shared desktop-density system. Mobile keeps the existing touch-first layout. */
+.dashboard-app {
+    --density-page-inline: clamp(16px, 1.6vw, 24px);
+    --density-page-block: 12px;
+    --density-section-gap: 10px;
+    --density-card-gap: 10px;
+    --density-card-padding: 14px;
+    --density-control-height: 40px;
+    --density-icon-size: 20px;
+    --density-text: 0.9375rem;
+    --density-copy: 0.875rem;
+    --density-meta: 0.8125rem;
+    --density-tech: 0.8rem;
+    --density-card-title: 1.0625rem;
+    --density-page-title: clamp(2.125rem, 2.55vw, 2.5rem);
+}
+
+.dashboard-main :where(.overview-dashboard-content, .overview-hero-grid, .overview-project-grid,
+    .overview-area-grid, .projects-gallery-shell, .projects-toolbar, .projects-gallery-grid,
+    .data-case-shell, .data-case-hero, .data-case-facts, .data-case-journey > div,
+    .data-case-insights, .experience-dashboard-shell, .experience-card-content,
+    .experience-card-header, .experience-contribution-grid, .experience-history-grid,
+    .certifications-modern-item, .contact-atelier, .contact-cards) > * {
+    min-width: 0;
+}
+
+@media (min-width: 1025px) {
+    .dashboard-app {
+        --dash-sidebar-width: 220px;
+        --dash-topbar-height: 52px;
+    }
+
+    .dashboard-sidebar {
+        padding: 20px 14px 16px;
+    }
+
+    .dashboard-brand-mark {
+        width: 58px;
+        height: 68px;
+        margin-bottom: 7px;
+    }
+
+    .dashboard-brand-name {
+        font-size: 1.25rem;
+    }
+
+    .dashboard-brand-role {
+        max-width: 188px;
+        margin-top: 4px;
+        font-size: 0.8125rem;
+        line-height: 1.45;
+    }
+
+    .dashboard-nav {
+        margin-top: 26px;
+    }
+
+    .dashboard-nav ul {
+        gap: 4px;
+    }
+
+    .dashboard-nav a {
+        min-height: 42px;
+        grid-template-columns: 22px minmax(0, 1fr);
+        gap: 9px;
+        padding: 7px 11px;
+        border-radius: 10px;
+        font-size: 0.9375rem;
+    }
+
+    .dashboard-nav a i {
+        font-size: 1rem;
+    }
+
+    .dashboard-sidebar-footer {
+        gap: 14px;
+        padding-top: 16px;
+    }
+
+    .dashboard-cv-link {
+        min-height: 42px;
+        font-size: 0.875rem;
+    }
+
+    .dashboard-availability {
+        gap: 8px;
+        font-size: 0.8125rem;
+    }
+
+    .dashboard-topbar {
+        min-height: var(--dash-topbar-height);
+        gap: 16px;
+        padding-inline: var(--density-page-inline);
+    }
+
+    .dashboard-breadcrumb {
+        gap: 8px;
+        font-size: 0.8125rem;
+    }
+
+    .dashboard-breadcrumb ol,
+    .dashboard-breadcrumb li {
+        gap: 8px;
+    }
+
+    .dashboard-topbar-actions {
+        gap: 10px;
+    }
+
+    .dashboard-theme-toggle {
+        width: 40px;
+        height: 40px;
+    }
+
+    .dashboard-language-switch {
+        gap: 4px;
+        padding-left: 10px;
+    }
+
+    .dashboard-language-switch button {
+        min-width: 40px;
+        height: 40px;
+        padding-inline: 9px;
+        font-size: 0.8125rem;
+    }
+
+    .dashboard-app .contenedor-seccion {
+        width: min(1480px, calc(100% - (2 * var(--density-page-inline))));
+    }
+}
+
+@media (min-width: 1280px) {
+    .dashboard-app {
+        --dash-topbar-height: 50px;
+    }
+
+    /* Overview */
+    .overview-dashboard {
+        padding: var(--density-page-block) var(--density-page-inline) 16px;
+    }
+
+    .overview-dashboard-content,
+    .overview-hero-grid,
+    .overview-project-grid {
+        gap: var(--density-section-gap);
+    }
+
+    .overview-hero-grid {
+        grid-template-columns: minmax(0, 2.35fr) minmax(260px, 0.8fr);
+    }
+
+    .overview-hero,
+    .overview-profile {
+        height: auto;
+        min-height: 204px;
+    }
+
+    .overview-hero {
+        padding: 20px clamp(24px, 2.35vw, 36px);
+    }
+
+    .overview-hero h1 {
+        max-width: 620px;
+        font-size: clamp(1.95rem, 2.3vw, 2.25rem);
+        line-height: 1.1;
+    }
+
+    .overview-actions {
+        gap: 8px;
+        margin-top: 15px;
+    }
+
+    .overview-primary-action,
+    .overview-secondary-action {
+        min-height: 40px;
+        padding-inline: 16px;
+        font-size: 0.875rem;
+    }
+
+    .overview-profile {
+        padding: 10px 14px;
+    }
+
+    .overview-profile-image {
+        width: 128px;
+        height: 128px;
+        flex-basis: 128px;
+    }
+
+    .overview-profile h2 {
+        margin: 5px 0 2px;
+        font-size: 1.0625rem;
+    }
+
+    .overview-profile-links {
+        gap: 7px;
+        margin-top: 5px;
+    }
+
+    .overview-profile-links a {
+        min-height: 40px;
+        font-size: 0.8125rem;
+    }
+
+    .overview-panel {
+        padding: 10px;
+    }
+
+    .overview-panel-heading {
+        gap: 8px;
+        margin-bottom: 7px;
+    }
+
+    .overview-heading-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 0.875rem;
+    }
+
+    .overview-panel-heading h2 {
+        font-size: 1.0625rem;
+    }
+
+    .overview-area-grid {
+        gap: 8px;
+    }
+
+    .overview-area-card {
+        min-height: 132px;
+        gap: 8px;
+        padding: 10px;
+    }
+
+    .overview-area-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 9px;
+        font-size: 1rem;
+    }
+
+    .work-area-card-heading {
+        gap: 8px;
+    }
+
+    .work-area-card-heading strong {
+        font-size: 0.875rem;
+        line-height: 1.3;
+    }
+
+    .work-area-technology {
+        min-height: 52px;
+        gap: 5px;
+        padding: 2px 4px 0;
+    }
+
+    .work-area-technology-icon {
+        min-height: 23px;
+        font-size: 22px;
+    }
+
+    .work-area-technology-icon svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .work-area-combined-icon svg {
+        width: 15px;
+        height: 21px;
+    }
+
+    .work-area-technology-name {
+        max-width: 78px;
+        font-size: var(--density-tech);
+        line-height: 1.2;
+    }
+
+    .work-area-arrow {
+        right: 8px;
+        bottom: 6px;
+        font-size: 0.75rem;
+    }
+
+    .overview-project-grid {
+        grid-template-columns: minmax(0, 1.5fr) minmax(320px, 0.95fr);
+    }
+
+    .overview-featured,
+    .overview-recent {
+        min-height: 246px;
+    }
+
+    .overview-featured-content {
+        grid-template-columns: minmax(280px, 1.2fr) minmax(230px, 0.86fr);
+        gap: 14px;
+    }
+
+    .overview-featured-media {
+        height: 190px;
+    }
+
+    .overview-featured-copy h3,
+    .overview-recent-card strong {
+        font-size: var(--density-card-title);
+    }
+
+    .overview-featured-copy > p {
+        font-size: var(--density-copy);
+        line-height: 1.45;
+    }
+
+    .overview-featured-tools span,
+    .overview-recent-card small {
+        font-size: var(--density-tech);
+    }
+
+    .overview-case-link,
+    .overview-project-arrow {
+        min-height: 40px;
+        font-size: 0.875rem;
+    }
+
+    .overview-recent-list {
+        gap: 7px;
+    }
+
+    .overview-recent-card {
+        min-height: 62px;
+        height: auto;
+        grid-template-columns: 76px minmax(0, 1fr) 40px;
+        gap: 9px;
+        padding: 5px;
+    }
+
+    .overview-recent-card img {
+        width: 76px;
+        height: 54px;
+    }
+
+    /* Projects gallery */
+    .projects-gallery-section {
+        padding: var(--density-page-block) var(--density-page-inline) 18px;
+    }
+
+    .projects-page-header {
+        min-height: 88px;
+        gap: 16px;
+        padding: 10px 2px;
+    }
+
+    .projects-page-header h2 {
+        font-size: var(--density-page-title);
+        line-height: 1.12;
+    }
+
+    .projects-page-header p {
+        margin-top: 6px;
+        font-size: var(--density-copy);
+    }
+
+    .projects-count {
+        min-width: 184px;
+        min-height: 60px;
+        gap: 10px;
+        padding: 9px 13px;
+    }
+
+    .projects-count > i {
+        font-size: 1.3rem;
+    }
+
+    .projects-count small {
+        font-size: var(--density-meta);
+    }
+
+    .projects-count strong {
+        font-size: 1.125rem;
+    }
+
+    .projects-toolbar {
+        min-height: 50px;
+        grid-template-columns: minmax(200px, 250px) minmax(0, 1fr) minmax(150px, 178px);
+        gap: 8px;
+        padding: 5px;
+    }
+
+    .projects-search input,
+    .projects-sort select {
+        height: 40px;
+        font-size: 0.875rem;
+    }
+
+    .projects-search button {
+        width: 40px;
+        height: 40px;
+        right: 0;
+    }
+
+    .projects-filter-list {
+        gap: 5px;
+    }
+
+    .projects-filter-list button {
+        min-height: 40px;
+        gap: 6px;
+        padding-inline: 11px;
+        font-size: 0.8125rem;
+    }
+
+    .projects-gallery-grid {
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .project-gallery-card {
+        min-height: 276px;
+    }
+
+    .project-gallery-content {
+        padding: 9px 11px 0;
+    }
+
+    .project-gallery-category,
+    .project-gallery-tools > span {
+        font-size: var(--density-tech);
+    }
+
+    .project-gallery-title {
+        font-size: var(--density-card-title);
+        line-height: 1.3;
+    }
+
+    .project-gallery-description {
+        min-height: 2.8em;
+        margin-top: 3px;
+        font-size: var(--density-copy);
+        line-height: 1.4;
+    }
+
+    .project-gallery-tools {
+        gap: 5px;
+        margin-top: 6px;
+    }
+
+    .project-gallery-tools > span {
+        padding: 3px 7px;
+    }
+
+    .project-gallery-action {
+        min-height: 40px;
+        font-size: 0.875rem;
+    }
+
+    /* Case studies */
+    .data-case-page {
+        padding: var(--density-page-block) var(--density-page-inline) 18px;
+    }
+
+    .data-case-shell,
+    .data-case-facts,
+    .data-case-insights {
+        gap: var(--density-section-gap);
+    }
+
+    .data-case-hero {
+        min-height: 284px;
+        grid-template-columns: minmax(300px, 0.74fr) minmax(430px, 1.46fr);
+        gap: 14px;
+        padding: 14px;
+    }
+
+    .data-case-intro {
+        padding: 2px 8px;
+    }
+
+    .data-case-category,
+    .data-case-tools span {
+        font-size: var(--density-tech);
+    }
+
+    .data-case-intro h1 {
+        margin: 8px 0 5px;
+        font-size: var(--density-page-title);
+        line-height: 1.05;
+    }
+
+    .data-case-lead {
+        font-size: var(--density-text);
+        line-height: 1.45;
+    }
+
+    .data-case-description {
+        margin-top: 5px;
+        font-size: var(--density-copy);
+        line-height: 1.45;
+    }
+
+    .data-case-tools {
+        gap: 5px;
+        margin-top: 9px;
+    }
+
+    .data-case-tools span {
+        padding: 4px 8px;
+    }
+
+    .data-case-actions {
+        gap: 8px 12px;
+        margin-top: 10px;
+    }
+
+    .data-case-actions a {
+        min-height: 40px;
+        padding: 7px 14px;
+        font-size: 0.875rem;
+    }
+
+    .data-case-main-visual {
+        gap: 6px;
+        padding: 9px;
+    }
+
+    .data-case-main-visual > span {
+        font-size: var(--density-meta);
+    }
+
+    .data-case-main-visual > button {
+        width: 40px;
+        height: 40px;
+    }
+
+    .data-case-main-visual > img {
+        min-height: 220px;
+    }
+
+    .data-case-facts article {
+        min-height: 74px;
+        grid-template-columns: 34px minmax(0, 1fr);
+        gap: 9px;
+        padding: 9px 12px;
+    }
+
+    .data-case-facts article > i {
+        font-size: 1.45rem;
+    }
+
+    .data-case-facts small {
+        font-size: var(--density-meta);
+    }
+
+    .data-case-facts p {
+        font-size: var(--density-copy);
+    }
+
+    .data-case-journey,
+    .data-case-analysis,
+    .data-case-detection,
+    .data-case-related {
+        padding: 10px 12px 12px;
+    }
+
+    .data-case-journey h2,
+    .data-case-analysis h2,
+    .data-case-detection h2,
+    .data-case-related h2 {
+        margin-bottom: 7px;
+        font-size: 1.125rem;
+    }
+
+    .data-case-journey > div {
+        gap: 38px;
+    }
+
+    .data-case-journey article {
+        min-height: 88px;
+        grid-template-columns: 42px minmax(0, 1fr);
+        gap: 9px;
+        padding: 9px 12px;
+    }
+
+    .data-case-journey article > i:first-child {
+        font-size: 2rem;
+    }
+
+    .data-case-journey small {
+        font-size: var(--density-meta);
+    }
+
+    .data-case-journey p,
+    .data-case-analysis p,
+    .data-case-detection li {
+        font-size: var(--density-copy);
+    }
+
+    .data-case-analysis > div {
+        gap: 7px;
+    }
+
+    .data-case-analysis article {
+        padding: 7px;
+    }
+
+    .data-case-analysis h3 {
+        font-size: 0.875rem;
+    }
+
+    .data-case-crop {
+        height: 78px;
+    }
+
+    .data-case-detection ul {
+        gap: 8px;
+        margin-top: 8px;
+    }
+
+    /* Experience */
+    .experience-dashboard {
+        padding: var(--density-page-block) var(--density-page-inline) 20px;
+    }
+
+    .experience-dashboard-header {
+        min-height: 76px;
+        gap: 18px;
+        padding-bottom: 8px;
+    }
+
+    .experience-dashboard-header h2 {
+        font-size: var(--density-page-title);
+    }
+
+    .experience-dashboard-header p {
+        margin-top: 5px;
+        font-size: var(--density-text);
+        line-height: 1.45;
+    }
+
+    .experience-download {
+        min-width: 164px;
+        min-height: 42px;
+        padding: 8px 15px;
+        font-size: 0.875rem;
+    }
+
+    .experience-card {
+        grid-template-columns: 50px minmax(0, 1fr);
+        gap: 13px;
+    }
+
+    .experience-card--featured {
+        min-height: 320px;
+        padding: 16px 18px 14px 15px;
+    }
+
+    .experience-marker-number {
+        margin-bottom: 13px;
+        font-size: 1rem;
+    }
+
+    .experience-card-header {
+        gap: 16px;
+    }
+
+    .experience-company-logo {
+        width: 62px;
+        height: 62px;
+        flex-basis: 62px;
+        padding: 6px;
+    }
+
+    .experience-company-logo--wide {
+        width: 94px;
+        flex-basis: 94px;
+    }
+
+    .experience-card-heading h3 {
+        font-size: clamp(1.125rem, 1.45vw, 1.35rem);
+    }
+
+    .experience-card-heading > strong,
+    .experience-period {
+        font-size: var(--density-copy);
+    }
+
+    .experience-current-badge {
+        min-height: 26px;
+        padding: 4px 9px;
+        font-size: var(--density-meta);
+    }
+
+    .experience-description {
+        margin: 11px 0 10px;
+        font-size: var(--density-text);
+        line-height: 1.48;
+    }
+
+    .experience-contribution-grid {
+        gap: 9px;
+    }
+
+    .experience-contribution-grid .experience-contribution {
+        min-height: 92px;
+        grid-template-columns: 40px minmax(0, 1fr);
+        gap: 11px;
+        padding: 10px 12px;
+    }
+
+    .experience-contribution-grid .experience-contribution > svg {
+        width: 34px;
+        height: 34px;
+    }
+
+    .experience-contribution h4 {
+        font-size: 1rem;
+    }
+
+    .experience-contribution p {
+        font-size: var(--density-copy);
+    }
+
+    .experience-technologies {
+        gap: 9px 20px;
+        margin-top: 10px;
+    }
+
+    .experience-technologies li {
+        gap: 6px;
+        font-size: var(--density-tech);
+    }
+
+    .experience-technologies svg {
+        width: 21px;
+        height: 21px;
+    }
+
+    .experience-related-link {
+        min-height: 40px;
+        margin-top: 6px;
+        font-size: 0.875rem;
+    }
+
+    .experience-history-grid {
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .experience-card--historical {
+        min-height: 248px;
+        grid-template-columns: 42px minmax(0, 1fr);
+        gap: 10px;
+        padding: 14px 16px 13px 13px;
+    }
+
+    .experience-card--historical .experience-description,
+    .experience-card--historical .experience-contribution p {
+        font-size: var(--density-copy);
+        line-height: 1.45;
+    }
+
+    /* Certifications and contact */
+    .dashboard-app .certifications-modern,
+    .dashboard-app .contact-modern {
+        padding: 28px 0;
+        scroll-margin-top: var(--dash-topbar-height);
+    }
+
+    .dashboard-app .certifications-modern h2,
+    .dashboard-app .contact-modern h2 {
+        margin-top: 0;
+        font-size: var(--density-page-title);
+        line-height: 1.12;
+    }
+
+    .dashboard-app .certifications-modern-subtitle,
+    .dashboard-app .contact-modern-subtitle {
+        font-size: var(--density-text);
+        line-height: 1.45;
+    }
+
+    .dashboard-app .certifications-modern-list {
+        gap: 10px;
+        margin-top: 18px;
+    }
+
+    .dashboard-app .certifications-modern-item {
+        gap: 13px;
+        padding: 13px 15px;
+    }
+
+    .dashboard-app .certifications-modern-icon {
+        width: 38px;
+        height: 38px;
+    }
+
+    .dashboard-app .certifications-modern-content h3 {
+        margin-bottom: 4px;
+        font-size: var(--density-card-title);
+    }
+
+    .dashboard-app .certifications-modern-content p {
+        font-size: var(--density-copy);
+        line-height: 1.45;
+    }
+
+    .dashboard-app .certifications-modern-skills {
+        gap: 6px;
+        margin-top: 9px;
+    }
+
+    .dashboard-app .certifications-modern-skills span {
+        padding: 4px 8px;
+        font-size: var(--density-tech);
+    }
+
+    .dashboard-app .certification-toggle {
+        min-height: 40px;
+        padding: 8px 13px;
+        font-size: 0.875rem;
+    }
+
+    .dashboard-app .certification-description {
+        margin-top: 10px;
+    }
+
+    .dashboard-app .contact-atelier {
+        gap: 12px;
+        margin-top: 18px;
+    }
+
+    .dashboard-app .contact-spotlight,
+    .dashboard-app .contact-modern-form-wrap {
+        padding: 18px;
+    }
+
+    .dashboard-app .contact-spotlight {
+        gap: 11px;
+    }
+
+    .dashboard-app .contact-pill {
+        padding: 5px 10px;
+        font-size: var(--density-meta);
+    }
+
+    .dashboard-app .contact-spotlight h3 {
+        font-size: clamp(1.75rem, 2.2vw, 2.15rem);
+        line-height: 1.08;
+    }
+
+    .dashboard-app .contact-spotlight p,
+    .dashboard-app .contact-modern-info li,
+    .dashboard-app .form-label,
+    .dashboard-app .contact-modern input,
+    .dashboard-app .contact-modern textarea {
+        font-size: var(--density-text);
+    }
+
+    .dashboard-app .contact-cards,
+    .dashboard-app .contact-modern-socials {
+        gap: 8px;
+    }
+
+    .dashboard-app .contact-card-link {
+        min-height: 72px;
+        gap: 9px;
+        padding: 10px;
+    }
+
+    .dashboard-app .contact-card-link small {
+        font-size: var(--density-meta);
+    }
+
+    .dashboard-app .contact-card-link strong {
+        font-size: 0.9375rem;
+    }
+
+    .dashboard-app .contact-copy-badge {
+        width: 40px;
+        height: 40px;
+    }
+
+    .dashboard-app .contact-modern-socials a {
+        min-height: 52px;
+        gap: 9px;
+        padding: 9px;
+    }
+
+    .dashboard-app .contact-modern-socials a i {
+        font-size: 1.3rem;
+    }
+
+    .dashboard-app .contact-modern-socials a span {
+        font-size: 0.9375rem;
+    }
+
+    .dashboard-app .contact-modern-info {
+        padding: 10px 12px;
+    }
+
+    .dashboard-app .contact-modern-info ul {
+        gap: 6px;
+    }
+
+    .dashboard-app .contact-modern-form-wrap form {
+        gap: 5px;
+    }
+
+    .dashboard-app .contact-modern input,
+    .dashboard-app .contact-modern textarea {
+        padding: 10px 12px;
+    }
+
+    .dashboard-app .contact-modern textarea {
+        min-height: 120px;
+    }
+
+    .dashboard-app #button {
+        min-height: 42px;
+        margin-top: 6px;
+        padding: 9px 14px;
+        font-size: 0.875rem;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1279px) {
+    .overview-dashboard,
+    .projects-gallery-section,
+    .data-case-page,
+    .experience-dashboard {
+        padding-inline: 18px;
+    }
+
+    .overview-hero,
+    .overview-profile {
+        height: auto;
+        min-height: 218px;
+    }
+
+    .overview-profile-image {
+        width: 132px;
+        height: 132px;
+        flex-basis: 132px;
+    }
+
+    .projects-page-header {
+        min-height: 102px;
+    }
+
+    .project-gallery-title,
+    .overview-featured-copy h3,
+    .experience-card-heading h3 {
+        font-size: var(--density-card-title);
+    }
+
+    .project-gallery-description,
+    .data-case-description,
+    .experience-description,
+    .experience-contribution p {
+        font-size: var(--density-copy);
+    }
+
+    .project-gallery-tools > span,
+    .work-area-technology-name,
+    .experience-technologies li {
+        font-size: var(--density-tech);
+    }
+
+    .dashboard-app .certifications-modern,
+    .dashboard-app .contact-modern {
+        padding-block: 42px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .dashboard-app {
+        --density-page-inline: 18px;
+        --density-section-gap: 12px;
+    }
+
+    .overview-dashboard,
+    .projects-gallery-section,
+    .data-case-page,
+    .experience-dashboard {
+        padding-inline: var(--density-page-inline);
+    }
+
+    .overview-area-card,
+    .project-gallery-card,
+    .data-case-facts article,
+    .experience-card,
+    .certifications-modern-item {
+        min-width: 0;
+    }
+
+    .project-gallery-description,
+    .data-case-description,
+    .experience-description,
+    .experience-contribution p {
+        font-size: var(--density-copy);
+    }
+
+    .project-gallery-tools > span,
+    .work-area-technology-name,
+    .experience-technologies li,
+    .certifications-modern-skills span {
+        font-size: var(--density-tech);
+    }
+}
