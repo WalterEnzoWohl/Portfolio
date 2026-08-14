@@ -1,8 +1,10 @@
-import { useMemo, useState, type SyntheticEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type SyntheticEvent } from "react";
+import { createPortal } from "react-dom";
 import { Link } from "react-router-dom";
 import { AnimatePresence, MotionConfig, motion } from "motion/react";
 import { interactiveMotion, staggerContainer, staggerItem } from "../animations/motion";
 import type { Language } from "../config/navigation";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 
 export type ProjectGalleryCategory = "data" | "web" | "automation";
 export type ProjectSortOrder = "recent" | "alphabetical-asc" | "alphabetical-desc";
@@ -126,6 +128,7 @@ function EmptyProjectsState({ copy, onReset }: { copy: ProjectsGalleryCopy; onRe
 }
 
 function ProjectsToolbar({
+  language,
   copy,
   query,
   filter,
@@ -135,6 +138,7 @@ function ProjectsToolbar({
   onFilterChange,
   onSortChange
 }: {
+  language: Language;
   copy: ProjectsGalleryCopy;
   query: string;
   filter: ActiveFilter;
@@ -144,6 +148,59 @@ function ProjectsToolbar({
   onFilterChange: (value: ActiveFilter) => void;
   onSortChange: (value: ProjectSortOrder) => void;
 }) {
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const filterTriggerRef = useRef<HTMLButtonElement>(null);
+  const filterSheetRef = useRef<HTMLElement>(null);
+  const isMobile = useMediaQuery("(max-width: 767px)");
+
+  useEffect(() => {
+    if (!isMobile) setFiltersOpen(false);
+  }, [isMobile]);
+
+  useEffect(() => {
+    if (!filtersOpen) return;
+
+    const backgroundRegions = [
+      document.querySelector<HTMLElement>(".dashboard-workspace"),
+      document.querySelector<HTMLElement>(".mobile-bottom-navigation")
+    ].filter((element): element is HTMLElement => Boolean(element));
+    const previousInert = backgroundRegions.map((element) => element.inert);
+    backgroundRegions.forEach((element) => { element.inert = true; });
+    document.body.classList.add("mobile-project-filters-open");
+
+    const frame = window.requestAnimationFrame(() => {
+      filterSheetRef.current?.querySelector<HTMLButtonElement>(".is-active")?.focus();
+    });
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setFiltersOpen(false);
+        return;
+      }
+      if (event.key !== "Tab" || !filterSheetRef.current) return;
+      const focusable = Array.from(filterSheetRef.current.querySelectorAll<HTMLButtonElement>('button:not([disabled])'));
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (!first || !last) return;
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.classList.remove("mobile-project-filters-open");
+      backgroundRegions.forEach((element, index) => { element.inert = previousInert[index]; });
+      filterTriggerRef.current?.focus();
+    };
+  }, [filtersOpen]);
+
   return (
     <div className="projects-toolbar">
       <div className="projects-search">
@@ -161,6 +218,19 @@ function ProjectsToolbar({
         ))}
       </div>
 
+      <button
+        ref={filterTriggerRef}
+        type="button"
+        className={`projects-mobile-filter-trigger${filter !== "all" ? " has-active-filter" : ""}`}
+        aria-haspopup="dialog"
+        aria-expanded={filtersOpen}
+        onClick={() => setFiltersOpen(true)}
+      >
+        <i className="fa-solid fa-filter" aria-hidden="true" />
+        <span>{language === "es" ? "Filtrar" : "Filter"}</span>
+        {filter !== "all" ? <i className="projects-filter-indicator" aria-hidden="true" /> : null}
+      </button>
+
       <div className="projects-sort">
         <label htmlFor="projects-sort-select">{copy.sortLabel}</label>
         <select id="projects-sort-select" value={sortOrder} onChange={(event) => onSortChange(event.target.value as ProjectSortOrder)}>
@@ -170,6 +240,63 @@ function ProjectsToolbar({
         </select>
         <i className="fa-solid fa-chevron-down" aria-hidden="true" />
       </div>
+
+      {createPortal(
+        <AnimatePresence>
+          {filtersOpen ? (
+            <div className="projects-mobile-filter-layer">
+              <motion.button
+                type="button"
+                className="projects-mobile-filter-backdrop"
+                aria-label={language === "es" ? "Cerrar filtros" : "Close filters"}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.18 }}
+                onClick={() => setFiltersOpen(false)}
+              />
+              <motion.aside
+                ref={filterSheetRef}
+                className="projects-mobile-filter-sheet"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="projects-mobile-filter-title"
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "100%" }}
+                transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <span className="projects-mobile-filter-handle" aria-hidden="true" />
+                <header>
+                  <h2 id="projects-mobile-filter-title">{copy.filtersLabel}</h2>
+                  <button type="button" onClick={() => setFiltersOpen(false)} aria-label={language === "es" ? "Cerrar filtros" : "Close filters"}>
+                    <i className="fa-solid fa-xmark" aria-hidden="true" />
+                  </button>
+                </header>
+                <div className="projects-mobile-filter-options" role="group" aria-label={copy.filtersLabel}>
+                  {availableFilters.map((item) => (
+                    <button
+                      key={item}
+                      type="button"
+                      className={filter === item ? "is-active" : ""}
+                      aria-pressed={filter === item}
+                      onClick={() => {
+                        onFilterChange(item);
+                        setFiltersOpen(false);
+                      }}
+                    >
+                      <i className={filterIcons[item]} aria-hidden="true" />
+                      <span>{copy.filters[item]}</span>
+                      {filter === item ? <i className="fa-solid fa-check" aria-hidden="true" /> : null}
+                    </button>
+                  ))}
+                </div>
+              </motion.aside>
+            </div>
+          ) : null}
+        </AnimatePresence>,
+        document.body
+      )}
     </div>
   );
 }
@@ -213,7 +340,7 @@ function ProjectsGallery({ language, projects, copy, onImageError }: { language:
             <aside className="projects-count" aria-label={`${copy.published}: ${projects.length}`}><i className="fa-regular fa-folder" aria-hidden="true" /><span><small>{copy.published}</small><strong>{projects.length}</strong></span></aside>
           </header>
 
-          <ProjectsToolbar copy={copy} query={query} filter={filter} sortOrder={sortOrder} availableFilters={availableFilters} onQueryChange={setQuery} onFilterChange={setFilter} onSortChange={setSortOrder} />
+          <ProjectsToolbar language={language} copy={copy} query={query} filter={filter} sortOrder={sortOrder} availableFilters={availableFilters} onQueryChange={setQuery} onFilterChange={setFilter} onSortChange={setSortOrder} />
 
           <motion.div className="projects-gallery-grid" variants={staggerContainer} initial="hidden" animate="visible" aria-live="polite">
             <AnimatePresence mode="popLayout">

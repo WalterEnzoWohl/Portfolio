@@ -2,8 +2,10 @@ import { useEffect, useState, type ReactNode, type RefObject } from "react";
 import { Link } from "react-router-dom";
 import wohlLogo from "../../wohl_logo_black.svg";
 import Breadcrumb from "./Breadcrumb";
+import MobileNavigation from "./MobileNavigation";
 import {
   defaultNavigationSection,
+  getNavigationItem,
   isNavigationSection,
   navigationItems,
   type Language,
@@ -115,9 +117,9 @@ function DashboardLayout({
   }, [activeSectionOverride]);
 
   const displayedSection = activeSectionOverride ?? activeSection;
+  const displayedNavigationItem = getNavigationItem(displayedSection);
 
   const closeSidebar = () => setIsSidebarOpen(false);
-
   const selectSection = (section: NavigationSectionId) => {
     setActiveSection(section);
     closeSidebar();
@@ -181,6 +183,13 @@ function DashboardLayout({
 
       <div className="dashboard-workspace">
         <header className="dashboard-topbar">
+          <div className="dashboard-mobile-heading">
+            <Link to={{ pathname: "/", hash: "#home" }} onClick={() => selectSection("home")} aria-label={navigationItems[0].label[language]}>
+              <img src={wohlLogo} alt="" width="38" height="44" />
+            </Link>
+            <strong>{displayedNavigationItem.label[language]}</strong>
+          </div>
+
           <Breadcrumb activeSection={displayedSection} language={language} details={breadcrumbDetails} />
 
           <div className="dashboard-topbar-actions">
@@ -206,6 +215,15 @@ function DashboardLayout({
               <i className={`fa-solid ${theme === "light" ? "fa-sun" : "fa-moon"}`} aria-hidden="true" />
             </button>
 
+            <button
+              type="button"
+              className="dashboard-mobile-language-toggle"
+              aria-label={language === "es" ? "Cambiar idioma a inglés" : "Switch language to Spanish"}
+              onClick={() => onLanguageChange(language === "es" ? "en" : "es")}
+            >
+              <span key={language}>{language.toUpperCase()}</span>
+            </button>
+
             <div className="dashboard-language-switch" role="group" aria-label={language === "es" ? "Cambiar idioma" : "Change language"}>
               <button type="button" className={language === "es" ? "is-active" : ""} onClick={() => onLanguageChange("es")}>ES</button>
               <span aria-hidden="true">·</span>
@@ -216,6 +234,11 @@ function DashboardLayout({
 
         {children}
       </div>
+
+      <MobileNavigation
+        activeSection={displayedSection}
+        language={language}
+      />
     </div>
   );
 }

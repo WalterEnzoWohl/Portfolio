@@ -64,18 +64,18 @@ const cardReveal: Variants = {
   visible: (delay: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.3, delay, ease: easeOut }
+    transition: { duration: 0.4, delay, ease: easeOut }
   })
 };
 
 const topicContainer: Variants = {
   hidden: {},
-  visible: { transition: { delayChildren: 0.13, staggerChildren: 0.075 } }
+  visible: { transition: { delayChildren: 0.1, staggerChildren: 0.09 } }
 };
 
 const topicReveal: Variants = {
-  hidden: { opacity: 0, y: 8 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.24, ease: easeOut } }
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.38, ease: easeOut } }
 };
 
 async function writeToClipboard(value: string) {
@@ -142,7 +142,36 @@ function ContactMethod({ label, value, href, copyLabel, copied, icon: Icon, onCo
   );
 }
 
-function ContactInfoCard({ language }: { language: Language }) {
+function ContactIntroductionCard({ language }: { language: Language }) {
+  const copy = contactSectionCopy[language];
+
+  return (
+    <motion.article className="contact-info-card contact-info-card--intro" variants={cardReveal} custom={0.04}>
+      <motion.span
+        className="contact-info-line contact-info-line--intro"
+        initial={{ scaleY: 0 }}
+        whileInView={{ scaleY: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.52, ease: easeOut, delay: 0.08 }}
+        aria-hidden="true"
+      />
+
+      <div className="contact-info-content">
+        <h3>{copy.infoTitle}</h3>
+        <p className="contact-info-intro">{copy.infoDescription}</p>
+
+        <section className="contact-info-group" aria-labelledby="contact-topics-title">
+          <h4 id="contact-topics-title">{copy.topicsTitle}</h4>
+          <motion.ul className="contact-conversation-list" variants={topicContainer} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.35 }}>
+            {conversationTopics.map((topic) => <ConversationTopicItem key={topic.id} topic={topic} language={language} />)}
+          </motion.ul>
+        </section>
+      </div>
+    </motion.article>
+  );
+}
+
+function ContactDirectCard({ language }: { language: Language }) {
   const copy = contactSectionCopy[language];
   const [copiedField, setCopiedField] = useState<CopiedField>(null);
   const clearCopiedTimer = useRef<number | null>(null);
@@ -163,28 +192,18 @@ function ContactInfoCard({ language }: { language: Language }) {
   };
 
   return (
-    <motion.article className="contact-info-card" variants={cardReveal} custom={0.04}>
+    <motion.article className="contact-info-card contact-info-card--direct" variants={cardReveal} custom={0.26}>
       <motion.span
-        className="contact-info-line"
+        className="contact-info-line contact-info-line--direct"
         initial={{ scaleY: 0 }}
         whileInView={{ scaleY: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.52, ease: easeOut, delay: 0.08 }}
+        transition={{ duration: 0.44, ease: easeOut, delay: 0.24 }}
         aria-hidden="true"
       />
 
-      <div className="contact-info-content">
-        <h3>{copy.infoTitle}</h3>
-        <p className="contact-info-intro">{copy.infoDescription}</p>
-
-        <section className="contact-info-group" aria-labelledby="contact-topics-title">
-          <h4 id="contact-topics-title">{copy.topicsTitle}</h4>
-          <motion.ul className="contact-conversation-list" variants={topicContainer} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.35 }}>
-            {conversationTopics.map((topic) => <ConversationTopicItem key={topic.id} topic={topic} language={language} />)}
-          </motion.ul>
-        </section>
-
-        <section className="contact-info-group" aria-labelledby="contact-direct-title">
+      <div className="contact-info-content contact-direct-content">
+        <section className="contact-info-group contact-direct-group" aria-labelledby="contact-direct-title">
           <h4 id="contact-direct-title">{copy.directTitle}</h4>
           <div className="contact-methods">
             <ContactMethod
@@ -383,7 +402,7 @@ function ContactForm({ language }: { language: Language }) {
   };
 
   return (
-    <motion.article className="contact-form-card" variants={cardReveal} custom={0.14}>
+    <motion.article className="contact-form-card" variants={cardReveal} custom={0.15}>
       <header>
         <h3>{copy.formTitle}</h3>
         <p>{copy.formIntro}</p>
@@ -491,8 +510,9 @@ function ContactSection({ language }: { language: Language }) {
           </motion.header>
 
           <motion.div className="contact-dashboard-grid" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.08 }}>
-            <ContactInfoCard language={language} />
+            <ContactIntroductionCard language={language} />
             <ContactForm language={language} />
+            <ContactDirectCard language={language} />
           </motion.div>
         </div>
       </motion.section>

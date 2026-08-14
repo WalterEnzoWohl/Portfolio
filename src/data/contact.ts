@@ -37,7 +37,7 @@ export const conversationTopics: ConversationTopic[] = [
   },
   {
     id: "automation",
-    title: { es: "Automatización", en: "Automation" },
+    title: { es: "Automatización y herramientas internas", en: "Automation and internal tools" },
     description: {
       es: "Procesos y herramientas internas",
       en: "Processes and internal tools"

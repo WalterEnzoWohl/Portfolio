@@ -4,6 +4,8 @@ import { AnimatePresence, MotionConfig, motion, useReducedMotion } from "motion/
 import { drawerBackdrop, drawerPanel, drawerSheet, sectionReveal, staggerContainer, staggerItem } from "../animations/motion";
 import { workAreas, type WorkArea } from "../data/workAreas";
 import type { Language } from "../config/navigation";
+import { useMediaQuery } from "../hooks/useMediaQuery";
+import MobileWorkAreasCarousel from "./MobileWorkAreasCarousel";
 import WorkAreaCard from "./WorkAreaCard";
 
 export type OverviewProject = {
@@ -71,19 +73,6 @@ function ProjectLink({ project, label, className }: { project: OverviewProject; 
   );
 }
 
-function useMobileSheet() {
-  const [isMobile, setIsMobile] = useState(() => window.matchMedia("(max-width: 760px)").matches);
-
-  useEffect(() => {
-    const query = window.matchMedia("(max-width: 760px)");
-    const update = () => setIsMobile(query.matches);
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
-  }, []);
-
-  return isMobile;
-}
-
 function AreaPanel({
   area,
   language,
@@ -147,7 +136,7 @@ function OverviewDashboard({ language, featuredProject, recentProjects, projects
   const panelRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const openerRef = useRef<HTMLButtonElement | null>(null);
-  const isMobileSheet = useMobileSheet();
+  const isMobileSheet = useMediaQuery("(max-width: 767px)");
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -240,10 +229,14 @@ function OverviewDashboard({ language, featuredProject, recentProjects, projects
               <div className="overview-profile-image">
                 <img src="/img/foto-perfil.webp" alt="Walter Enzo Wohl" width="220" height="220" fetchPriority="high" />
               </div>
-              <h2>Walter Enzo Wohl</h2>
+              <div className="overview-profile-copy">
+                <h2>Walter Enzo Wohl</h2>
+                <p className="overview-profile-location">Buenos Aires, Argentina</p>
+                <p className="overview-profile-availability"><span aria-hidden="true" />{language === "es" ? "Disponible para propuestas" : "Available for opportunities"}</p>
+              </div>
               <div className="overview-profile-links">
-                <a href="https://www.linkedin.com/in/walterenzowohl" target="_blank" rel="noopener noreferrer"><i className="fa-brands fa-linkedin" aria-hidden="true" /> LinkedIn</a>
-                <a href="https://github.com/WalterEnzoWohl" target="_blank" rel="noopener noreferrer"><i className="fa-brands fa-github" aria-hidden="true" /> GitHub</a>
+                <a href="https://www.linkedin.com/in/walterenzowohl" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i className="fa-brands fa-linkedin" aria-hidden="true" /><span>LinkedIn</span></a>
+                <a href="https://github.com/WalterEnzoWohl" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i className="fa-brands fa-github" aria-hidden="true" /><span>GitHub</span></a>
               </div>
             </motion.aside>
           </motion.div>
@@ -253,16 +246,20 @@ function OverviewDashboard({ language, featuredProject, recentProjects, projects
               <span className="overview-heading-icon"><i className="fa-solid fa-briefcase" aria-hidden="true" /></span>
               <h2 id="work-areas-title">{copy.workAreas}</h2>
             </header>
-            <motion.div className="overview-area-grid" variants={staggerContainer}>
-              {workAreas.map((area) => (
-                <WorkAreaCard
-                  key={area.id}
-                  area={area}
-                  language={language}
-                  onOpen={(trigger) => openArea(area, trigger)}
-                />
-              ))}
-            </motion.div>
+            {isMobileSheet ? (
+              <MobileWorkAreasCarousel language={language} onOpen={openArea} />
+            ) : (
+              <motion.div className="overview-area-grid" variants={staggerContainer}>
+                {workAreas.map((area) => (
+                  <WorkAreaCard
+                    key={area.id}
+                    area={area}
+                    language={language}
+                    onOpen={(trigger) => openArea(area, trigger)}
+                  />
+                ))}
+              </motion.div>
+            )}
           </motion.section>
 
           <motion.div className="overview-project-grid" initial="hidden" animate="visible" variants={staggerContainer}>

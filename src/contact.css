@@ -62,8 +62,10 @@
     min-width: 0;
     display: grid;
     grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
+    grid-template-rows: auto minmax(0, 1fr);
     align-items: stretch;
-    gap: 16px;
+    column-gap: 16px;
+    row-gap: 0;
 }
 
 .contact-info-card,
@@ -78,9 +80,28 @@
 
 .contact-info-card {
     position: relative;
+    overflow: hidden;
+}
+
+.contact-info-card--intro {
+    grid-column: 1;
+    grid-row: 1;
+    border-bottom: 0;
+    border-radius: 15px 15px 0 0;
+    box-shadow: none;
+}
+
+.contact-info-card--direct {
+    grid-column: 1;
+    grid-row: 2;
     display: grid;
     grid-template-rows: minmax(0, 1fr) auto;
-    overflow: hidden;
+    border-radius: 0 0 15px 15px;
+}
+
+.contact-form-card {
+    grid-column: 2;
+    grid-row: 1 / span 2;
 }
 
 .contact-info-line {
@@ -94,6 +115,14 @@
     background: linear-gradient(180deg, #39e3ca, var(--dash-accent));
     box-shadow: 0 0 18px rgba(18, 191, 168, 0.18);
     transform-origin: top;
+}
+
+.contact-info-line--intro {
+    bottom: 0;
+}
+
+.contact-info-line--direct {
+    top: 0;
 }
 
 .contact-info-content {
@@ -120,6 +149,10 @@
 
 .contact-info-group {
     margin-top: 18px;
+}
+
+.contact-direct-group {
+    margin-top: 0;
 }
 
 .contact-info-group h4 {
@@ -703,7 +736,7 @@ html[data-theme="light"] .contact-field-error {
     }
 
     .contact-dashboard-grid {
-        gap: 12px;
+        column-gap: 12px;
     }
 
     .contact-info-content {
@@ -714,6 +747,14 @@ html[data-theme="light"] .contact-field-error {
         top: 15px;
         bottom: 59px;
         left: 12px;
+    }
+
+    .contact-info-line--intro {
+        bottom: 0;
+    }
+
+    .contact-info-line--direct {
+        top: 0;
     }
 
     .contact-info-group {
@@ -756,12 +797,27 @@ html[data-theme="light"] .contact-field-error {
 @media (max-width: 1100px) {
     .contact-dashboard-grid {
         grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto;
+        gap: 16px;
     }
 
     .contact-info-card,
     .contact-form-card {
+        grid-column: 1;
+        grid-row: auto;
         width: min(800px, 100%);
         margin-inline: auto;
+        border: 1px solid var(--dash-border);
+        border-radius: 15px;
+        box-shadow: var(--dash-shadow);
+    }
+
+    .contact-info-line--intro {
+        bottom: 18px;
+    }
+
+    .contact-info-line--direct {
+        top: 18px;
     }
 }
 

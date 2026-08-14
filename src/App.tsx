@@ -18,6 +18,7 @@ import "./experience.css";
 import "./certifications.css";
 import "./contact.css";
 import "./density.css";
+import "./mobile.css";
 
 type Language = "es" | "en";
 type Theme = "dark" | "light";
@@ -315,7 +316,11 @@ function DataProjectCaseStudyPage({ language, theme, themeToggleRef, themeToggle
 function App() {
   const location = useLocation();
   const themeToggleRef = useRef<HTMLButtonElement | null>(null);
-  const [language, setLanguage] = useState<Language>("es");
+  const [language, setLanguage] = useState<Language>(() => {
+    if (typeof window === "undefined") return "es";
+    const savedLanguage = window.localStorage.getItem("portfolio-language");
+    return savedLanguage === "en" ? "en" : "es";
+  });
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window === "undefined") {
       return "dark";
@@ -340,6 +345,7 @@ function App() {
 
   useEffect(() => {
     document.documentElement.lang = language;
+    window.localStorage.setItem("portfolio-language", language);
   }, [language]);
 
   useEffect(() => {
