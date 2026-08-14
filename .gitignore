@@ -7,3 +7,6 @@ desktop.ini
 *.tsbuildinfo
 .vite-preview.log
 .vite-preview.err
+
+.vercel
+.env*.local

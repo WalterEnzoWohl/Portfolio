@@ -1,13 +1,12 @@
 import { useEffect, useMemo, useRef, useState, type SyntheticEvent } from "react";
 import { Navigate, Route, Routes, useLocation, useParams } from "react-router-dom";
-import emailjs from "@emailjs/browser";
-import { useForm } from "react-hook-form";
 import DashboardLayout from "./components/DashboardLayout";
 import OverviewDashboard from "./components/OverviewDashboard";
 import ProjectsGallery from "./components/ProjectsGallery";
 import ProjectCaseStudy from "./components/ProjectCaseStudy";
 import ExperienceSection from "./components/ExperienceSection";
 import CertificationsSection from "./components/CertificationsSection";
+import ContactSection from "./components/ContactSection";
 import { getDataCaseStudy } from "./data/projectCaseStudies";
 import { projects, recentOverviewProjectSlugs } from "./data/projects";
 import "./style.css";
@@ -17,6 +16,7 @@ import "./projects.css";
 import "./project-case-study.css";
 import "./experience.css";
 import "./certifications.css";
+import "./contact.css";
 import "./density.css";
 
 type Language = "es" | "en";
@@ -27,21 +27,6 @@ type ViewTransitionDocument = Document & {
     finished: Promise<void>;
   };
 };
-
-type ContactFormValues = {
-  name: string;
-  phonenumber: string;
-  email: string;
-  title: string;
-  message: string;
-};
-
-type ContactCopyField = "email" | "phone" | null;
-
-type SubmitState = {
-  type: "success" | "error";
-  message: string;
-} | null;
 
 const uiCopy = {
   es: {
@@ -137,48 +122,6 @@ const uiCopy = {
       comingSoon: "Próximamente",
       empty: "No encontramos proyectos con estos filtros.",
       clearFilters: "Limpiar filtros"
-    },
-    contact: {
-      title: "Contacto",
-      subtitle:
-        "Contame tu objetivo y te respondo con una propuesta clara para ayudarte con análisis, BI, reporting o automatización.",
-      pill: "Disponible para proyectos y propuestas laborales",
-      heading: "Construyamos algo que tenga impacto real",
-      body:
-        "Si necesitás ordenar información, crear dashboards o mejorar el seguimiento de indicadores, conversemos. Trabajo con foco en resultados, claridad y ejecución prolija.",
-      emailLabel: "Email",
-      phoneLabel: "Teléfono",
-      copyEmail: "Copiar email",
-      copyPhone: "Copiar teléfono",
-      github: "GitHub",
-      linkedin: "LinkedIn",
-      location: "GBA | Buenos Aires | Argentina",
-      response: "Respuesta habitual: dentro de 24 horas",
-      form: {
-        name: "Nombre",
-        namePlaceholder: "Tu nombre",
-        phone: "Teléfono",
-        phonePlaceholder: "Número de teléfono",
-        email: "Email",
-        emailPlaceholder: "Dirección de correo",
-        title: "Asunto",
-        titlePlaceholder: "Asunto",
-        message: "Mensaje",
-        messagePlaceholder: "Mensaje"
-      },
-      sending: "Enviando...",
-      send: "Enviar mensaje",
-      success: "Mensaje enviado con éxito.",
-      error: "No se pudo enviar el mensaje. Probá nuevamente en unos minutos.",
-      validation: {
-        nameRequired: "El nombre es obligatorio.",
-        phoneRequired: "El teléfono es obligatorio.",
-        phoneInvalid: "Ingresá un teléfono válido.",
-        emailRequired: "El email es obligatorio.",
-        emailInvalid: "Ingresá un email válido.",
-        titleRequired: "El asunto es obligatorio.",
-        messageRequired: "El mensaje es obligatorio."
-      }
     },
     footer: "Todos los derechos reservados."
   },
@@ -276,48 +219,6 @@ const uiCopy = {
       empty: "We couldn't find projects with these filters.",
       clearFilters: "Clear filters"
     },
-    contact: {
-      title: "Contact",
-      subtitle:
-        "Tell me about your goal and I'll reply with a clear proposal to help you with analytics, BI, reporting or automation.",
-      pill: "Available for projects and job opportunities",
-      heading: "Let's build something with real impact",
-      body:
-        "If you need to organize information, build dashboards or improve KPI tracking, let's talk. I work with a focus on results, clarity and clean execution.",
-      emailLabel: "Email",
-      phoneLabel: "Phone",
-      copyEmail: "Copy email",
-      copyPhone: "Copy phone",
-      github: "GitHub",
-      linkedin: "LinkedIn",
-      location: "Greater Buenos Aires | Argentina",
-      response: "Typical response time: within 24 hours",
-      form: {
-        name: "Name",
-        namePlaceholder: "Your name",
-        phone: "Phone",
-        phonePlaceholder: "Phone number",
-        email: "Email",
-        emailPlaceholder: "Email address",
-        title: "Subject",
-        titlePlaceholder: "Subject",
-        message: "Message",
-        messagePlaceholder: "Message"
-      },
-      sending: "Sending...",
-      send: "Send message",
-      success: "Message sent successfully.",
-      error: "The message could not be sent. Please try again in a few minutes.",
-      validation: {
-        nameRequired: "Name is required.",
-        phoneRequired: "Phone number is required.",
-        phoneInvalid: "Enter a valid phone number.",
-        emailRequired: "Email is required.",
-        emailInvalid: "Enter a valid email address.",
-        titleRequired: "Subject is required.",
-        messageRequired: "Message is required."
-      }
-    },
     footer: "All rights reserved."
   }
 } as const;
@@ -351,33 +252,11 @@ type LandingPageProps = {
   language: Language;
   copy: (typeof uiCopy)[Language];
   handleProjectImageError: (event: SyntheticEvent<HTMLImageElement>) => void;
-  copiedContact: ContactCopyField;
-  copyToClipboard: (field: Exclude<ContactCopyField, null>, value: string) => Promise<void>;
-  contactEmail: string;
-  contactPhone: string;
-  contactPhoneHref: string;
-  register: ReturnType<typeof useForm<ContactFormValues>>["register"];
-  handleSubmit: ReturnType<typeof useForm<ContactFormValues>>["handleSubmit"];
-  onSubmit: (values: ContactFormValues) => Promise<void>;
-  errors: ReturnType<typeof useForm<ContactFormValues>>["formState"]["errors"];
-  isSending: boolean;
-  submitState: SubmitState;
 };
 function LandingPage({
   language,
   copy,
-  handleProjectImageError,
-  copiedContact,
-  copyToClipboard,
-  contactEmail,
-  contactPhone,
-  contactPhoneHref,
-  register,
-  handleSubmit,
-  onSubmit,
-  errors,
-  isSending,
-  submitState
+  handleProjectImageError
 }: LandingPageProps) {
   const featuredProject = projects.find((project) => project.caseStudySlug === "mailing-gcba") ?? projects[0];
   const recentProjects = recentOverviewProjectSlugs.flatMap((slug) => {
@@ -398,122 +277,7 @@ function LandingPage({
 
       <ExperienceSection language={language} />
       <CertificationsSection language={language} />
-
-      <section id="contacto" className="contact-modern">
-        <div className="contenedor-seccion">
-          <h2>{copy.contact.title}</h2>
-          <p className="contact-modern-subtitle">{copy.contact.subtitle}</p>
-          <div className="contact-atelier">
-            <div className="contact-spotlight">
-              <span className="contact-pill">{copy.contact.pill}</span>
-              <h3>{copy.contact.heading}</h3>
-              <p>{copy.contact.body}</p>
-
-              <div className="contact-cards">
-                <button
-                  type="button"
-                  className={`contact-card-link contact-copy-card ${copiedContact === "email" ? "is-copied" : ""}`}
-                  onClick={() => void copyToClipboard("email", contactEmail)}
-                  aria-label={copy.contact.copyEmail}
-                  title={contactEmail}
-                >
-                  <i className="fa-solid fa-envelope" />
-                  <div>
-                    <small>{copy.contact.emailLabel}</small>
-                    <strong>{contactEmail}</strong>
-                  </div>
-                  <span className="contact-copy-badge" aria-hidden="true">
-                    <i className={`fa-solid ${copiedContact === "email" ? "fa-check" : "fa-copy"}`} />
-                  </span>
-                </button>
-                <button
-                  type="button"
-                  className={`contact-card-link contact-copy-card ${copiedContact === "phone" ? "is-copied" : ""}`}
-                  onClick={() => void copyToClipboard("phone", contactPhoneHref)}
-                  aria-label={copy.contact.copyPhone}
-                  title={contactPhone}
-                >
-                  <i className="fa-solid fa-phone" />
-                  <div>
-                    <small>{copy.contact.phoneLabel}</small>
-                    <strong>{contactPhone}</strong>
-                  </div>
-                  <span className="contact-copy-badge" aria-hidden="true">
-                    <i className={`fa-solid ${copiedContact === "phone" ? "fa-check" : "fa-copy"}`} />
-                  </span>
-                </button>
-              </div>
-
-              <div className="contact-modern-socials">
-                <a href="https://github.com/WalterEnzoWohl" target="_blank" rel="noopener noreferrer" aria-label="GitHub de Walter Enzo Wohl">
-                  <i className="fa-brands fa-github" />
-                  <span>{copy.contact.github}</span>
-                </a>
-                <a href="https://www.linkedin.com/in/walterenzowohl" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Walter Enzo Wohl">
-                  <i className="fa-brands fa-linkedin" />
-                  <span>{copy.contact.linkedin}</span>
-                </a>
-              </div>
-
-              <div className="contact-modern-info">
-                <ul>
-                  <li><i className="fa-solid fa-location-dot" /> {copy.contact.location}</li>
-                  <li><i className="fa-solid fa-clock" /> {copy.contact.response}</li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="contact-modern-form-wrap">
-              <form id="form" onSubmit={handleSubmit(onSubmit)} noValidate>
-                <label className="form-label" htmlFor="name">{copy.contact.form.name}</label>
-                <input type="text" id="name" placeholder={copy.contact.form.namePlaceholder} {...register("name", { required: copy.contact.validation.nameRequired })} />
-                {errors.name ? <small className="error-message">{errors.name.message}</small> : null}
-
-                <label className="form-label" htmlFor="phonenumber">{copy.contact.form.phone}</label>
-                <input
-                  type="text"
-                  id="phonenumber"
-                  placeholder={copy.contact.form.phonePlaceholder}
-                  inputMode="numeric"
-                  {...register("phonenumber", {
-                    required: copy.contact.validation.phoneRequired,
-                    pattern: { value: /^[0-9+\s()-]+$/, message: copy.contact.validation.phoneInvalid }
-                  })}
-                />
-                {errors.phonenumber ? <small className="error-message">{errors.phonenumber.message}</small> : null}
-
-                <label className="form-label" htmlFor="email">{copy.contact.form.email}</label>
-                <input
-                  type="email"
-                  id="email"
-                  placeholder={copy.contact.form.emailPlaceholder}
-                  {...register("email", {
-                    required: copy.contact.validation.emailRequired,
-                    pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: copy.contact.validation.emailInvalid }
-                  })}
-                />
-                {errors.email ? <small className="error-message">{errors.email.message}</small> : null}
-
-                <label className="form-label" htmlFor="title">{copy.contact.form.title}</label>
-                <input type="text" id="title" placeholder={copy.contact.form.titlePlaceholder} {...register("title", { required: copy.contact.validation.titleRequired })} />
-                {errors.title ? <small className="error-message">{errors.title.message}</small> : null}
-
-                <label className="form-label" htmlFor="message">{copy.contact.form.message}</label>
-                <textarea id="message" cols={30} rows={8} placeholder={copy.contact.form.messagePlaceholder} {...register("message", { required: copy.contact.validation.messageRequired })} />
-                {errors.message ? <small className="error-message">{errors.message.message}</small> : null}
-
-                <button type="submit" id="button" disabled={isSending}>
-                  {isSending ? copy.contact.sending : copy.contact.send}
-                  <i className="fa-solid fa-paper-plane" />
-                  <span className="overlay" />
-                </button>
-
-                {submitState ? <p className={`status-message ${submitState.type}`}>{submitState.message}</p> : null}
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ContactSection language={language} />
     </main>
   );
 }
@@ -550,9 +314,6 @@ function DataProjectCaseStudyPage({ language, theme, themeToggleRef, themeToggle
 
 function App() {
   const location = useLocation();
-  const contactEmail = "walterenzowohl@gmail.com";
-  const contactPhone = "+54 11 4141 9407";
-  const contactPhoneHref = "+541141419407";
   const themeToggleRef = useRef<HTMLButtonElement | null>(null);
   const [language, setLanguage] = useState<Language>("es");
   const [theme, setTheme] = useState<Theme>(() => {
@@ -568,10 +329,6 @@ function App() {
 
     return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
   });
-  const [isSending, setIsSending] = useState(false);
-  const [submitState, setSubmitState] = useState<SubmitState>(null);
-  const [copiedContact, setCopiedContact] = useState<ContactCopyField>(null);
-
   const copy = uiCopy[language];
   const isDataCaseStudyRoute = location.pathname.startsWith("/proyectos/");
   const currentDataCaseStudyProject = useMemo(() => {
@@ -580,13 +337,6 @@ function App() {
     const detail = getDataCaseStudy(slug);
     return detail ? projects.find((item) => item.id === detail.projectId) ?? null : null;
   }, [isDataCaseStudyRoute, location.pathname]);
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors }
-  } = useForm<ContactFormValues>();
 
   useEffect(() => {
     document.documentElement.lang = language;
@@ -604,55 +354,11 @@ function App() {
       : `Portfolio | Walter Enzo Wohl`;
   }, [currentDataCaseStudyProject, language]);
 
-  const onSubmit = async (data: ContactFormValues) => {
-    setIsSending(true);
-    setSubmitState(null);
-
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID ?? "default_service";
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID ?? "template_bixc80n";
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY ?? "lhs0IH3WpDcnuUKOr";
-
-    try {
-      await emailjs.send(serviceId, templateId, data, { publicKey });
-      setSubmitState({ type: "success", message: copy.contact.success });
-      reset();
-    } catch {
-      setSubmitState({ type: "error", message: copy.contact.error });
-    } finally {
-      setIsSending(false);
-    }
-  };
-
   const handleProjectImageError = (event: SyntheticEvent<HTMLImageElement>) => {
     const image = event.currentTarget;
 
     image.onerror = null;
     image.src = "/img/WIP.png";
-  };
-
-  const copyToClipboard = async (field: Exclude<ContactCopyField, null>, value: string) => {
-    try {
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(value);
-      } else {
-        const tempInput = document.createElement("textarea");
-        tempInput.value = value;
-        tempInput.setAttribute("readonly", "");
-        tempInput.style.position = "absolute";
-        tempInput.style.left = "-9999px";
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        document.execCommand("copy");
-        document.body.removeChild(tempInput);
-      }
-
-      setCopiedContact(field);
-      window.setTimeout(() => {
-        setCopiedContact((current) => (current === field ? null : current));
-      }, 1800);
-    } catch {
-      setCopiedContact(null);
-    }
   };
 
   const switchThemeWithTransition = async () => {
@@ -721,17 +427,6 @@ function App() {
                 language={language}
                 copy={copy}
                 handleProjectImageError={handleProjectImageError}
-                copiedContact={copiedContact}
-                copyToClipboard={copyToClipboard}
-                contactEmail={contactEmail}
-                contactPhone={contactPhone}
-                contactPhoneHref={contactPhoneHref}
-                register={register}
-                handleSubmit={handleSubmit}
-                onSubmit={onSubmit}
-                errors={errors}
-                isSending={isSending}
-                submitState={submitState}
               />
             </DashboardLayout>
           }
