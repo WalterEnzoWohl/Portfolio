@@ -1637,7 +1637,7 @@ footer {
 .contact-modern {
     background:
         linear-gradient(180deg, rgba(11, 16, 22, 0.96), rgba(11, 16, 22, 0.96)),
-        url(/img/contact_bg.png) center/cover no-repeat;
+        url("./assets/fondos/contact-bg.png") center/cover no-repeat;
 }
 
 .contact-atelier {

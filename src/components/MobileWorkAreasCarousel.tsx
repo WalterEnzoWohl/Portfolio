@@ -43,13 +43,11 @@ function wrapIndex(index: number) {
 function MobileWorkAreasCarousel({ language, onOpen }: MobileWorkAreasCarouselProps) {
   const copy = carouselCopy[language];
   const reduceMotion = useReducedMotion();
-  const rootRef = useRef<HTMLDivElement>(null);
   const manualResumeTimerRef = useRef<number | null>(null);
   const suppressClickTimerRef = useRef<number | null>(null);
   const suppressCardClickRef = useRef(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(1);
-  const [isVisible, setIsVisible] = useState(false);
   const [isPageVisible, setIsPageVisible] = useState(!document.hidden);
   const [isPointerActive, setIsPointerActive] = useState(false);
   const [isManualPause, setIsManualPause] = useState(false);
@@ -60,23 +58,6 @@ function MobileWorkAreasCarousel({ language, onOpen }: MobileWorkAreasCarouselPr
   useEffect(() => {
     if (reduceMotion) setAutoplayEnabled(false);
   }, [reduceMotion]);
-
-  useEffect(() => {
-    const node = rootRef.current;
-    if (!node) return;
-
-    if (!("IntersectionObserver" in window)) {
-      setIsVisible(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.45 }
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     const handleVisibility = () => setIsPageVisible(!document.hidden);
@@ -116,7 +97,6 @@ function MobileWorkAreasCarousel({ language, onOpen }: MobileWorkAreasCarouselPr
   useEffect(() => {
     const canRotate = autoplayEnabled
       && !reduceMotion
-      && isVisible
       && isPageVisible
       && !isPointerActive
       && !isManualPause
@@ -128,7 +108,7 @@ function MobileWorkAreasCarousel({ language, onOpen }: MobileWorkAreasCarouselPr
       setActiveIndex((current) => wrapIndex(current + 1));
     }, AUTO_ROTATION_MS);
     return () => window.clearInterval(timer);
-  }, [autoplayEnabled, isFocusPaused, isManualPause, isPageVisible, isPointerActive, isVisible, reduceMotion]);
+  }, [autoplayEnabled, isFocusPaused, isManualPause, isPageVisible, isPointerActive, reduceMotion]);
 
   const suppressNextCardClick = () => {
     suppressCardClickRef.current = true;
@@ -170,7 +150,6 @@ function MobileWorkAreasCarousel({ language, onOpen }: MobileWorkAreasCarouselPr
 
   return (
     <div
-      ref={rootRef}
       className="mobile-work-carousel"
       role="region"
       aria-roledescription={language === "es" ? "carrusel" : "carousel"}
@@ -180,6 +159,10 @@ function MobileWorkAreasCarousel({ language, onOpen }: MobileWorkAreasCarouselPr
         if (focusEnteredCarousel && event.target instanceof HTMLElement && event.target.matches(":focus-visible")) {
           setIsFocusPaused(true);
         }
+      }}
+      onBlurCapture={(event) => {
+        const focusLeftCarousel = !event.relatedTarget || !event.currentTarget.contains(event.relatedTarget as Node);
+        if (focusLeftCarousel) setIsFocusPaused(false);
       }}
     >
       <div className="mobile-work-carousel-viewport">
@@ -195,10 +178,14 @@ function MobileWorkAreasCarousel({ language, onOpen }: MobileWorkAreasCarouselPr
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: direction * -animationDistance }}
             transition={{ duration: reduceMotion ? 0.01 : 0.36, ease: [0.22, 1, 0.36, 1] }}
-            drag={reduceMotion ? false : "x"}
+            drag="x"
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={0.16}
-            onPointerDown={() => setIsPointerActive(true)}
+            dragMomentum={false}
+            onPointerDown={() => {
+              setIsPointerActive(true);
+              scheduleManualResume();
+            }}
             onPointerUp={() => setIsPointerActive(false)}
             onPointerCancel={() => setIsPointerActive(false)}
             onDragStart={() => setIsPointerActive(true)}
@@ -207,6 +194,7 @@ function MobileWorkAreasCarousel({ language, onOpen }: MobileWorkAreasCarouselPr
             <WorkAreaCard
               area={activeArea}
               language={language}
+              standalone
               onOpen={(trigger) => {
                 if (!suppressCardClickRef.current) onOpen(activeArea, trigger);
               }}

@@ -1,10 +1,12 @@
 import type { ProjectGalleryCategory } from "../components/ProjectsGallery";
 import type { Language } from "../config/navigation";
+import { getRequiredProjectCapture } from "./projectCaptures";
 
 type LocalizedText = Record<Language, string>;
 
 export type PortfolioProject = {
   id: string;
+  projectNumber: number;
   title: LocalizedText;
   category: "powerbi" | "web";
   description: LocalizedText;
@@ -23,6 +25,7 @@ export type PortfolioProject = {
 export const projects: PortfolioProject[] = [
   {
     id: "gastos-rrhh",
+    projectNumber: 1,
     title: { es: "Análisis de Gastos RRHH", en: "HR Expense Analysis" },
     category: "powerbi",
     description: {
@@ -34,7 +37,7 @@ export const projects: PortfolioProject[] = [
       es: ["Seguimiento de presupuesto vs. gasto real", "Desvíos por categoría y período"],
       en: ["Budget vs. actual spend tracking", "Variance by category and period"]
     },
-    image: "/img/dashboard-rrhh.png",
+    image: getRequiredProjectCapture(1, "A"),
     imageAlt: { es: "Dashboard de gastos de recursos humanos con indicadores de presupuesto y gasto.", en: "Human resources expense dashboard with budget and spend indicators." },
     link: "https://app.powerbi.com/view?r=eyJrIjoiNzkzN2M5NDctNGFiMC00NmU3LTg1NzQtYjdiZmRlMDU0MzQ4IiwidCI6ImUwODdhZTVmLTQ2YjQtNDBiOS04ZGZkLTE1MTA4MTQwMTc3MyIsImMiOjR9",
     linkKind: "dashboard",
@@ -45,6 +48,7 @@ export const projects: PortfolioProject[] = [
   },
   {
     id: "ventas-appol",
+    projectNumber: 2,
     title: { es: "Informe de Ventas Appol", en: "Appol Sales Report" },
     category: "powerbi",
     description: {
@@ -56,7 +60,7 @@ export const projects: PortfolioProject[] = [
       es: ["Utilidad y margen por mercado", "Seguimiento por producto y período"],
       en: ["Profit and margin by market", "Tracking by product and period"]
     },
-    image: "/img/dashboard-appol.png",
+    image: getRequiredProjectCapture(2, "A"),
     imageAlt: { es: "Dashboard comercial Appol con utilidad, margen y análisis geográfico.", en: "Appol commercial dashboard with profit, margin and geographic analysis." },
     link: "https://app.powerbi.com/view?r=eyJrIjoiYmZkOTYwMDYtNWU1NS00MjZkLTg2MWYtZDAxZmRkYzVhZGUwIiwidCI6ImUwODdhZTVmLTQ2YjQtNDBiOS04ZGZkLTE1MTA4MTQwMTc3MyIsImMiOjR9",
     linkKind: "dashboard",
@@ -67,6 +71,7 @@ export const projects: PortfolioProject[] = [
   },
   {
     id: "mailing-gcba",
+    projectNumber: 3,
     title: { es: "Métricas de Mailing GCBA", en: "GCBA Mailing Metrics" },
     category: "powerbi",
     description: {
@@ -78,7 +83,7 @@ export const projects: PortfolioProject[] = [
       es: ["Comparación por campaña, fecha y volumen enviado", "KPIs de aperturas, clics, rebotes y no abiertos"],
       en: ["Comparison by campaign, date and send volume", "Open, click, bounce and unopened KPIs"]
     },
-    image: "/img/dashboard-mailing.png",
+    image: getRequiredProjectCapture(3, "A"),
     imageAlt: { es: "Dashboard de mailing del GCBA con métricas de envíos, aperturas, clics y rebotes.", en: "GCBA mailing dashboard with send, open, click and bounce metrics." },
     link: "https://lookerstudio.google.com/reporting/ad58b1c2-d02e-4557-8634-537b8314354a",
     linkKind: "dashboard",
@@ -89,6 +94,7 @@ export const projects: PortfolioProject[] = [
   },
   {
     id: "nomina-rrhh",
+    projectNumber: 4,
     title: { es: "Gestión de Nómina RRHH", en: "HR Payroll Management" },
     category: "powerbi",
     description: {
@@ -100,7 +106,7 @@ export const projects: PortfolioProject[] = [
       es: ["Distribución de dotación por género y dirección", "Mapa de empleados y evolución de antigüedad"],
       en: ["Headcount distribution by gender and management", "Employee map and tenure evolution"]
     },
-    image: "/img/dashboard-nomina.png",
+    image: getRequiredProjectCapture(4, "A"),
     imageAlt: { es: "Dashboard de nómina de recursos humanos con distribución y antigüedad del personal.", en: "Human resources payroll dashboard with workforce distribution and tenure." },
     link: "https://lookerstudio.google.com/reporting/26b9eca6-822c-41f9-836f-f16b76ab2acd",
     linkKind: "dashboard",

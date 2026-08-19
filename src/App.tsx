@@ -7,6 +7,7 @@ import ProjectCaseStudy from "./components/ProjectCaseStudy";
 import ExperienceSection from "./components/ExperienceSection";
 import CertificationsSection from "./components/CertificationsSection";
 import ContactSection from "./components/ContactSection";
+import wipImage from "./assets/placeholders/wip.png";
 import { getDataCaseStudy } from "./data/projectCaseStudies";
 import { projects, recentOverviewProjectSlugs } from "./data/projects";
 import "./style.css";
@@ -228,6 +229,9 @@ function ScrollManager() {
   const location = useLocation();
 
   useEffect(() => {
+    const state = location.state as { fromScrollSpy?: boolean } | null;
+    if (state?.fromScrollSpy) return;
+
     const frame = window.requestAnimationFrame(() => {
       if (location.hash) {
         const element = document.getElementById(location.hash.slice(1));
@@ -244,7 +248,7 @@ function ScrollManager() {
     return () => {
       window.cancelAnimationFrame(frame);
     };
-  }, [location.pathname, location.hash]);
+  }, [location.hash, location.key, location.pathname, location.state]);
 
   return null;
 }
@@ -305,7 +309,6 @@ function DataProjectCaseStudyPage({ language, theme, themeToggleRef, themeToggle
       themeToggleLabel={themeToggleLabel}
       onThemeToggle={onThemeToggle}
       onLanguageChange={onLanguageChange}
-      activeSectionOverride="portfolio"
       breadcrumbDetails={project ? [{ label: project.title[language] }] : []}
     >
       <ProjectCaseStudy detail={detail} project={project} projects={projects} language={language} onImageError={handleProjectImageError} />
@@ -364,7 +367,7 @@ function App() {
     const image = event.currentTarget;
 
     image.onerror = null;
-    image.src = "/img/WIP.png";
+    image.src = wipImage;
   };
 
   const switchThemeWithTransition = async () => {

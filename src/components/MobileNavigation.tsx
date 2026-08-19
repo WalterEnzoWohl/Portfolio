@@ -9,6 +9,7 @@ type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 type MobileNavigationProps = {
   activeSection: NavigationSectionId;
   language: Language;
+  onSectionActivate: (section: NavigationSectionId) => void;
 };
 
 const copy = {
@@ -36,9 +37,10 @@ type NavigationActionProps = {
   activeSection: NavigationSectionId;
   label: string;
   icon: IconComponent;
+  onClick?: () => void;
 };
 
-function NavigationAction({ href, section, activeSection, label, icon: Icon }: NavigationActionProps) {
+function NavigationAction({ href, section, activeSection, label, icon: Icon, onClick }: NavigationActionProps) {
   const isActive = section === activeSection;
 
   return (
@@ -47,6 +49,7 @@ function NavigationAction({ href, section, activeSection, label, icon: Icon }: N
       to={{ pathname: "/", hash: href }}
       aria-current={isActive ? "page" : undefined}
       aria-label={label}
+      onClick={onClick}
     >
       {isActive ? <motion.span className="mobile-bottom-active" layoutId="mobile-bottom-active" transition={{ duration: 0.2 }} /> : null}
       <Icon aria-hidden="true" />
@@ -55,16 +58,16 @@ function NavigationAction({ href, section, activeSection, label, icon: Icon }: N
   );
 }
 
-function MobileNavigation({ activeSection, language }: MobileNavigationProps) {
+function MobileNavigation({ activeSection, language, onSectionActivate }: MobileNavigationProps) {
   const text = copy[language];
 
   return (
     <nav className="mobile-bottom-navigation" aria-label={text.navigation}>
-      <NavigationAction href="#home" section="home" activeSection={activeSection} label={text.home} icon={TbHome} />
-      <NavigationAction href="#portfolio" section="portfolio" activeSection={activeSection} label={text.projects} icon={TbFolder} />
-      <NavigationAction href="#curriculum" section="curriculum" activeSection={activeSection} label={text.experience} icon={TbCode} />
-      <NavigationAction href="#certifications" section="certifications" activeSection={activeSection} label={text.certifications} icon={TbAward} />
-      <NavigationAction href="#contacto" section="contacto" activeSection={activeSection} label={text.contact} icon={TbMail} />
+      <NavigationAction href="#home" section="home" activeSection={activeSection} label={text.home} icon={TbHome} onClick={() => onSectionActivate("home")} />
+      <NavigationAction href="#portfolio" section="portfolio" activeSection={activeSection} label={text.projects} icon={TbFolder} onClick={() => onSectionActivate("portfolio")} />
+      <NavigationAction href="#curriculum" section="curriculum" activeSection={activeSection} label={text.experience} icon={TbCode} onClick={() => onSectionActivate("curriculum")} />
+      <NavigationAction href="#contacto" section="contacto" activeSection={activeSection} label={text.contact} icon={TbMail} onClick={() => onSectionActivate("contacto")} />
+      <NavigationAction href="#certifications" section="certifications" activeSection={activeSection} label={text.certifications} icon={TbAward} onClick={() => onSectionActivate("certifications")} />
     </nav>
   );
 }

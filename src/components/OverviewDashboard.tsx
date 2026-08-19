@@ -7,6 +7,7 @@ import type { Language } from "../config/navigation";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import MobileWorkAreasCarousel from "./MobileWorkAreasCarousel";
 import WorkAreaCard from "./WorkAreaCard";
+import profileImage from "../assets/branding/foto-perfil.webp";
 
 export type OverviewProject = {
   title: { es: string; en: string };
@@ -227,7 +228,7 @@ function OverviewDashboard({ language, featuredProject, recentProjects, projects
 
             <motion.aside className="overview-profile" variants={sectionReveal}>
               <div className="overview-profile-image">
-                <img src="/img/foto-perfil.webp" alt="Walter Enzo Wohl" width="220" height="220" fetchPriority="high" />
+                <img src={profileImage} alt="Walter Enzo Wohl" width="220" height="220" fetchPriority="high" />
               </div>
               <div className="overview-profile-copy">
                 <h2>Walter Enzo Wohl</h2>

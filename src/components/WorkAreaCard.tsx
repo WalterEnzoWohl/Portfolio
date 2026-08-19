@@ -62,9 +62,10 @@ type WorkAreaCardProps = {
   area: WorkArea;
   language: Language;
   onOpen: (trigger: HTMLButtonElement) => void;
+  standalone?: boolean;
 };
 
-function WorkAreaCard({ area, language, onOpen }: WorkAreaCardProps) {
+function WorkAreaCard({ area, language, onOpen, standalone = false }: WorkAreaCardProps) {
   const accessibleLabel = language === "es" ? `Abrir área ${area.title.es}` : `Open ${area.title.en} area`;
 
   return (
@@ -72,6 +73,8 @@ function WorkAreaCard({ area, language, onOpen }: WorkAreaCardProps) {
       type="button"
       className="overview-area-card"
       variants={staggerItem}
+      initial={standalone ? "visible" : undefined}
+      animate={standalone ? "visible" : undefined}
       whileHover={interactiveMotion.hover}
       whileTap={interactiveMotion.tap}
       transition={interactiveMotion.transition}

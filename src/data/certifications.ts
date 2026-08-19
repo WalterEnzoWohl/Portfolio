@@ -1,4 +1,7 @@
 import type { Language } from "../config/navigation";
+import crehanaLogo from "../assets/certificaciones/crehana.png";
+import googleLogo from "../assets/certificaciones/google.png";
+import utnLogo from "../assets/certificaciones/utn.png";
 
 type LocalizedText = Record<Language, string>;
 
@@ -73,6 +76,10 @@ export const certifications: Certification[] = [
       es: "Formación orientada a preparar, analizar y comunicar datos para apoyar decisiones.",
       en: "Training focused on preparing, analyzing and communicating data to support decisions."
     },
+    logo: {
+      src: googleLogo,
+      alt: { es: "Logo de Google", en: "Google logo" }
+    },
     logoFallback: "Google\nCoursera",
     technologies: ["SQL", "Spreadsheets", "Tableau", "R"],
     competencies: [
@@ -105,6 +112,10 @@ export const certifications: Certification[] = [
       es: "Formación integral en desarrollo de interfaces, lógica de aplicaciones y bases de datos.",
       en: "Comprehensive training in interface development, application logic and databases."
     },
+    logo: {
+      src: utnLogo,
+      alt: { es: "Logo del Centro de e-Learning de UTN.BA", en: "UTN.BA e-Learning Center logo" }
+    },
     logoFallback: "UTN",
     technologies: ["HTML", "CSS", "JavaScript", "React", "Node.js", "MySQL"],
     competencies: [
@@ -124,6 +135,10 @@ export const certifications: Certification[] = [
     description: {
       es: "Análisis con hojas de cálculo, automatización y construcción de tableros.",
       en: "Spreadsheet analysis, automation and dashboard development."
+    },
+    logo: {
+      src: crehanaLogo,
+      alt: { es: "Logo de Crehana", en: "Crehana logo" }
     },
     logoFallback: "C",
     technologies: ["Excel avanzado", "Macros", "Power BI", "SQL"],

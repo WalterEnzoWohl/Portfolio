@@ -81,7 +81,7 @@ body.mobile-project-filters-open {
     }
 
     .dashboard-mobile-heading > a {
-        width: 42px;
+        width: 44px;
         height: 44px;
         display: grid;
         place-items: center;
@@ -152,7 +152,7 @@ body.mobile-project-filters-open {
         z-index: 250;
         min-height: calc(72px + env(safe-area-inset-bottom));
         display: grid;
-        grid-template-columns: 0.86fr 1fr 1fr 1.32fr 0.88fr;
+        grid-template-columns: 0.86fr 1fr 1fr 0.88fr 1.32fr;
         align-items: stretch;
         gap: 2px;
         padding: 5px 4px max(5px, env(safe-area-inset-bottom));
@@ -193,7 +193,7 @@ body.mobile-project-filters-open {
         overflow-wrap: normal;
     }
 
-    .mobile-bottom-action:nth-child(4) {
+    .mobile-bottom-action:last-child {
         font-size: 12px;
         letter-spacing: -0.035em;
     }

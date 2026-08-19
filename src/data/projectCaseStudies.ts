@@ -1,4 +1,5 @@
 import type { Language } from "../config/navigation";
+import type { ProjectCaptureLetter } from "./projectCaptures";
 
 type LocalizedText = Record<Language, string>;
 
@@ -18,9 +19,9 @@ export type DataCaseStudyDetail = {
     description: LocalizedText;
   }>;
   analysisCards: Array<{
+    capture: Exclude<ProjectCaptureLetter, "A">;
     title: LocalizedText;
     description: LocalizedText;
-    objectPosition: string;
   }>;
   detectionItems: Record<Language, string[]>;
 };
@@ -44,9 +45,9 @@ export const dataCaseStudies: DataCaseStudyDetail[] = [
       { id: "solution", icon: "fa-regular fa-circle-check", title: { es: "Solución", en: "Solution" }, description: { es: "Un tablero para comparar presupuesto, gasto y saldo por categoría y período.", en: "A dashboard to compare budget, spend and balance by category and period." } }
     ],
     analysisCards: [
-      { title: { es: "Presupuesto frente a gasto", en: "Budget versus spend" }, description: { es: "Compara el gasto real contra el presupuesto total.", en: "Compares actual spend against the total budget." }, objectPosition: "12% 18%" },
-      { title: { es: "Desvíos por categoría", en: "Variance by category" }, description: { es: "Permite revisar diferencias por categoría de gasto.", en: "Supports reviewing differences by expense category." }, objectPosition: "14% 64%" },
-      { title: { es: "Evolución mensual", en: "Monthly evolution" }, description: { es: "Facilita observar la evolución del gasto a lo largo de los meses.", en: "Makes it easier to observe spending evolution over time." }, objectPosition: "57% 58%" }
+      { capture: "B", title: { es: "Presupuesto frente a gasto", en: "Budget versus spend" }, description: { es: "Compara el gasto real contra el presupuesto total.", en: "Compares actual spend against the total budget." } },
+      { capture: "C", title: { es: "Desvíos por categoría", en: "Variance by category" }, description: { es: "Permite revisar diferencias por categoría de gasto.", en: "Supports reviewing differences by expense category." } },
+      { capture: "D", title: { es: "Evolución mensual", en: "Monthly evolution" }, description: { es: "Facilita observar la evolución del gasto a lo largo de los meses.", en: "Makes it easier to observe spending evolution over time." } }
     ],
     detectionItems: {
       es: ["Categorías con mayor participación en el gasto.", "Períodos con mayores desvíos.", "Diferencias entre presupuesto y ejecución.", "Puntos que requieren una revisión más detallada."],
@@ -71,9 +72,9 @@ export const dataCaseStudies: DataCaseStudyDetail[] = [
       { id: "solution", icon: "fa-regular fa-circle-check", title: { es: "Solución", en: "Solution" }, description: { es: "Un dashboard para comparar utilidad, margen y desempeño entre productos y mercados.", en: "A dashboard to compare profit, margin and performance across products and markets." } }
     ],
     analysisCards: [
-      { title: { es: "Utilidad y margen", en: "Profit and margin" }, description: { es: "Permite revisar los principales indicadores comerciales.", en: "Supports reviewing the main commercial indicators." }, objectPosition: "10% 14%" },
-      { title: { es: "Desempeño por producto", en: "Product performance" }, description: { es: "Facilita comparar productos y categorías.", en: "Makes it easier to compare products and categories." }, objectPosition: "10% 72%" },
-      { title: { es: "Países y continentes", en: "Countries and continents" }, description: { es: "Ayuda a observar la distribución geográfica del desempeño.", en: "Helps observe the geographic distribution of performance." }, objectPosition: "55% 68%" }
+      { capture: "B", title: { es: "Utilidad y margen", en: "Profit and margin" }, description: { es: "Permite revisar los principales indicadores comerciales.", en: "Supports reviewing the main commercial indicators." } },
+      { capture: "C", title: { es: "Desempeño por producto", en: "Product performance" }, description: { es: "Facilita comparar productos y categorías.", en: "Makes it easier to compare products and categories." } },
+      { capture: "D", title: { es: "Países y continentes", en: "Countries and continents" }, description: { es: "Ayuda a observar la distribución geográfica del desempeño.", en: "Helps observe the geographic distribution of performance." } }
     ],
     detectionItems: {
       es: ["Mercados con diferente participación.", "Cambios en el desempeño a través del tiempo.", "Diferencias entre productos o categorías.", "Resultados que requieren una revisión más detallada."],
@@ -98,9 +99,9 @@ export const dataCaseStudies: DataCaseStudyDetail[] = [
       { id: "solution", icon: "fa-regular fa-circle-check", title: { es: "Solución", en: "Solution" }, description: { es: "Un dashboard que centraliza envíos, aperturas, clics y evolución por campaña.", en: "A dashboard that centralizes sends, opens, clicks and campaign evolution." } }
     ],
     analysisCards: [
-      { title: { es: "Volumen de envíos", en: "Send volume" }, description: { es: "Compara la cantidad enviada entre períodos y campañas.", en: "Compares send volume across periods and campaigns." }, objectPosition: "9% 18%" },
-      { title: { es: "Aperturas y clics", en: "Opens and clicks" }, description: { es: "Permite revisar la respuesta obtenida por cada pieza.", en: "Supports reviewing response by campaign piece." }, objectPosition: "11% 54%" },
-      { title: { es: "Evolución mensual", en: "Monthly evolution" }, description: { es: "Ayuda a observar cambios de rendimiento a lo largo del tiempo.", en: "Helps observe performance changes over time." }, objectPosition: "68% 24%" }
+      { capture: "B", title: { es: "Volumen de envíos", en: "Send volume" }, description: { es: "Compara la cantidad enviada entre períodos y campañas.", en: "Compares send volume across periods and campaigns." } },
+      { capture: "C", title: { es: "Aperturas y clics", en: "Opens and clicks" }, description: { es: "Permite revisar la respuesta obtenida por cada pieza.", en: "Supports reviewing response by campaign piece." } },
+      { capture: "D", title: { es: "Evolución mensual", en: "Monthly evolution" }, description: { es: "Ayuda a observar cambios de rendimiento a lo largo del tiempo.", en: "Helps observe performance changes over time." } }
     ],
     detectionItems: {
       es: ["Campañas con mayor nivel de interacción.", "Períodos con cambios en aperturas y clics.", "Piezas con comportamientos diferentes.", "Resultados que requieren una revisión más detallada."],
@@ -125,9 +126,9 @@ export const dataCaseStudies: DataCaseStudyDetail[] = [
       { id: "solution", icon: "fa-regular fa-circle-check", title: { es: "Solución", en: "Solution" }, description: { es: "Un tablero para consultar composición, rangos etarios, antigüedad y distribución organizacional.", en: "A dashboard to review composition, age ranges, tenure and organizational distribution." } }
     ],
     analysisCards: [
-      { title: { es: "Composición por género", en: "Gender composition" }, description: { es: "Permite revisar la distribución agregada por género.", en: "Supports reviewing aggregate gender distribution." }, objectPosition: "12% 18%" },
-      { title: { es: "Distribución etaria", en: "Age distribution" }, description: { es: "Facilita observar la composición por rango etario.", en: "Makes it easier to observe composition by age range." }, objectPosition: "20% 57%" },
-      { title: { es: "Antigüedad y organización", en: "Tenure and organization" }, description: { es: "Ayuda a revisar antigüedad y distribución por área.", en: "Helps review tenure and distribution by area." }, objectPosition: "78% 62%" }
+      { capture: "B", title: { es: "Composición por género", en: "Gender composition" }, description: { es: "Permite revisar la distribución agregada por género.", en: "Supports reviewing aggregate gender distribution." } },
+      { capture: "C", title: { es: "Distribución etaria", en: "Age distribution" }, description: { es: "Facilita observar la composición por rango etario.", en: "Makes it easier to observe composition by age range." } },
+      { capture: "D", title: { es: "Antigüedad y organización", en: "Tenure and organization" }, description: { es: "Ayuda a revisar antigüedad y distribución por área.", en: "Helps review tenure and distribution by area." } }
     ],
     detectionItems: {
       es: ["Grupos con mayor o menor representación agregada.", "Diferencias de composición entre áreas.", "Concentración por rango etario o antigüedad.", "Segmentos que requieren una revisión más detallada."],

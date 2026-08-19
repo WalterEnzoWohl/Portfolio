@@ -1,12 +1,12 @@
-import { useEffect, useState, type ReactNode, type RefObject } from "react";
-import { Link } from "react-router-dom";
-import wohlLogo from "../../wohl_logo_black.svg";
+import { useEffect, useRef, useState, type ReactNode, type RefObject } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { motion, useReducedMotion } from "motion/react";
+import wohlLogo from "../assets/branding/wohl-logo.svg";
 import Breadcrumb from "./Breadcrumb";
 import MobileNavigation from "./MobileNavigation";
 import {
-  defaultNavigationSection,
+  getNavigationSectionFromLocation,
   getNavigationItem,
-  isNavigationSection,
   navigationItems,
   type Language,
   type NavigationSectionId
@@ -22,7 +22,6 @@ type DashboardLayoutProps = {
   themeToggleLabel: string;
   onThemeToggle: () => void;
   onLanguageChange: (language: Language) => void;
-  activeSectionOverride?: NavigationSectionId;
   breadcrumbDetails?: Array<{ label: string; href?: string }>;
 };
 
@@ -45,11 +44,6 @@ const layoutCopy = {
   }
 } as const;
 
-function getInitialSection(): NavigationSectionId {
-  const hash = window.location.hash.replace("#", "");
-  return isNavigationSection(hash) ? hash : defaultNavigationSection;
-}
-
 function DashboardLayout({
   children,
   language,
@@ -58,12 +52,16 @@ function DashboardLayout({
   themeToggleLabel,
   onThemeToggle,
   onLanguageChange,
-  activeSectionOverride,
   breadcrumbDetails = []
 }: DashboardLayoutProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<NavigationSectionId>(getInitialSection);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const reduceMotion = useReducedMotion();
+  const syncedHashRef = useRef(location.hash);
+  const pendingSectionRef = useRef<NavigationSectionId | null>(null);
   const copy = layoutCopy[language];
+  const displayedSection = getNavigationSectionFromLocation(location.pathname, location.hash);
 
   useEffect(() => {
     document.body.classList.toggle("dashboard-menu-open", isSidebarOpen);
@@ -81,10 +79,7 @@ function DashboardLayout({
   }, [isSidebarOpen]);
 
   useEffect(() => {
-    if (activeSectionOverride) {
-      setActiveSection(activeSectionOverride);
-      return;
-    }
+    if (location.pathname !== "/") return;
 
     const sections = navigationItems
       .map((item) => document.getElementById(item.id))
@@ -98,7 +93,21 @@ function DashboardLayout({
         return rect.top <= activationLine && rect.bottom > activationLine ? section : selected;
       }, null);
 
-      if (current && isNavigationSection(current.id)) setActiveSection(current.id);
+      if (!current) return;
+
+      if (pendingSectionRef.current) {
+        if (current.id !== pendingSectionRef.current) return;
+        pendingSectionRef.current = null;
+      }
+
+      const nextHash = `#${current.id}`;
+      if (syncedHashRef.current === nextHash) return;
+
+      syncedHashRef.current = nextHash;
+      void navigate(
+        { pathname: "/", hash: nextHash },
+        { replace: true, state: { fromScrollSpy: true }, preventScrollReset: true }
+      );
     };
     const scheduleUpdate = () => {
       cancelAnimationFrame(frame);
@@ -114,15 +123,23 @@ function DashboardLayout({
       window.removeEventListener("scroll", scheduleUpdate);
       window.removeEventListener("resize", scheduleUpdate);
     };
-  }, [activeSectionOverride]);
+  }, [location.pathname, navigate]);
 
-  const displayedSection = activeSectionOverride ?? activeSection;
+  useEffect(() => {
+    syncedHashRef.current = location.hash;
+  }, [location.hash]);
+
   const displayedNavigationItem = getNavigationItem(displayedSection);
 
   const closeSidebar = () => setIsSidebarOpen(false);
-  const selectSection = (section: NavigationSectionId) => {
-    setActiveSection(section);
+  const handleSectionActivation = (section: NavigationSectionId) => {
+    pendingSectionRef.current = section;
     closeSidebar();
+    if (section === "home" && location.pathname === "/" && (location.hash === "#home" || location.hash === "")) {
+      window.requestAnimationFrame(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: reduceMotion ? "auto" : "smooth" });
+      });
+    }
   };
 
   return (
@@ -140,7 +157,7 @@ function DashboardLayout({
           <i className="fa-solid fa-xmark" aria-hidden="true" />
         </button>
 
-        <Link className="dashboard-brand" to={{ pathname: "/", hash: "#home" }} onClick={() => selectSection("home")}>
+        <Link className="dashboard-brand" to={{ pathname: "/", hash: "#home" }} onClick={() => handleSectionActivation("home")} aria-label="Ir al resumen">
           <span className="dashboard-brand-mark">
             <img src={wohlLogo} alt="Logo de Walter Enzo Wohl" width="74" height="88" />
           </span>
@@ -157,9 +174,16 @@ function DashboardLayout({
                   <Link
                     className={isActive ? "is-active" : ""}
                     to={{ pathname: "/", hash: item.href }}
-                    onClick={() => selectSection(item.id)}
+                    onClick={() => handleSectionActivation(item.id)}
                     aria-current={isActive ? "page" : undefined}
                   >
+                    {isActive ? (
+                      <motion.span
+                        className="dashboard-nav-active-indicator"
+                        layoutId="dashboard-nav-active-indicator"
+                        transition={{ duration: reduceMotion ? 0 : 0.18, ease: [0.22, 1, 0.36, 1] }}
+                      />
+                    ) : null}
                     <i className={item.icon} aria-hidden="true" />
                     <span>{item.label[language]}</span>
                   </Link>
@@ -184,7 +208,7 @@ function DashboardLayout({
       <div className="dashboard-workspace">
         <header className="dashboard-topbar">
           <div className="dashboard-mobile-heading">
-            <Link to={{ pathname: "/", hash: "#home" }} onClick={() => selectSection("home")} aria-label={navigationItems[0].label[language]}>
+            <Link to={{ pathname: "/", hash: "#home" }} onClick={() => handleSectionActivation("home")} aria-label="Ir al resumen">
               <img src={wohlLogo} alt="" width="38" height="44" />
             </Link>
             <strong>{displayedNavigationItem.label[language]}</strong>
@@ -238,6 +262,7 @@ function DashboardLayout({
       <MobileNavigation
         activeSection={displayedSection}
         language={language}
+        onSectionActivate={handleSectionActivation}
       />
     </div>
   );

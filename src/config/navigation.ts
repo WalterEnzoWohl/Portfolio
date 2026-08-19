@@ -26,3 +26,10 @@ export function isNavigationSection(value: string): value is NavigationSectionId
 export function getNavigationItem(id: NavigationSectionId) {
   return navigationItems.find((item) => item.id === id) ?? navigationItems[0];
 }
+
+export function getNavigationSectionFromLocation(pathname: string, hash: string): NavigationSectionId {
+  if (pathname.startsWith("/proyectos")) return "portfolio";
+
+  const section = hash.replace("#", "");
+  return isNavigationSection(section) ? section : defaultNavigationSection;
+}

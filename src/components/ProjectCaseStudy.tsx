@@ -4,11 +4,13 @@ import { AnimatePresence, MotionConfig, motion } from "motion/react";
 import { drawerBackdrop, interactiveMotion, sectionReveal, staggerContainer, staggerItem } from "../animations/motion";
 import type { Language } from "../config/navigation";
 import type { DataCaseStudyDetail } from "../data/projectCaseStudies";
+import ProjectCapture from "./ProjectCapture";
 
 type LocalizedText = Record<Language, string>;
 
 export type CaseStudyProject = {
   id: string;
+  projectNumber: number;
   title: LocalizedText;
   description: LocalizedText;
   image: string;
@@ -35,7 +37,8 @@ const caseCopy = {
     openRelated: "Abrir caso de estudio",
     notFound: "Proyecto no encontrado",
     notFoundBody: "El caso de estudio solicitado no está disponible.",
-    returnToProjects: "Volver a Proyectos"
+    returnToProjects: "Volver a Proyectos",
+    pendingCapture: "Captura pendiente"
   },
   en: {
     category: "Data & visualization",
@@ -52,7 +55,8 @@ const caseCopy = {
     openRelated: "Open case study",
     notFound: "Project not found",
     notFoundBody: "The requested case study is not available.",
-    returnToProjects: "Back to Projects"
+    returnToProjects: "Back to Projects",
+    pendingCapture: "Capture pending"
   }
 } as const;
 
@@ -168,7 +172,23 @@ function ProjectCaseStudy({ detail, project, projects, language, onImageError }:
           <div className="data-case-insights">
             <section className="data-case-analysis" aria-labelledby="data-case-analysis-title">
               <h2 id="data-case-analysis-title">{copy.analysis}</h2>
-              <div>{detail.analysisCards.map((card) => <article key={card.title.en}><h3>{card.title[language]}</h3><div className="data-case-crop"><img src={project.image} alt="" aria-hidden="true" loading="lazy" style={{ objectPosition: card.objectPosition }} onError={onImageError} /></div><p>{card.description[language]}</p></article>)}</div>
+              <div>
+                {detail.analysisCards.map((card) => (
+                  <article key={card.capture}>
+                    <h3>{card.title[language]}</h3>
+                    <div className="data-case-crop">
+                      <ProjectCapture
+                        projectNumber={project.projectNumber}
+                        capture={card.capture}
+                        alt={`${card.title[language]}: ${project.title[language]}`}
+                        fit="contain"
+                        pendingLabel={copy.pendingCapture}
+                      />
+                    </div>
+                    <p>{card.description[language]}</p>
+                  </article>
+                ))}
+              </div>
             </section>
             <section className="data-case-detection" aria-labelledby="data-case-detection-title"><h2 id="data-case-detection-title">{copy.detection}</h2><ul>{detail.detectionItems[language].map((item) => <li key={item}><i className="fa-solid fa-circle-check" aria-hidden="true" /><span>{item}</span></li>)}</ul></section>
           </div>

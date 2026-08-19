@@ -99,6 +99,12 @@ html[data-theme="dark"] .dashboard-app {
     text-decoration: none;
 }
 
+.dashboard-brand:focus-visible,
+.dashboard-mobile-heading a:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--dash-accent) 62%, transparent);
+    outline-offset: 4px;
+}
+
 .dashboard-brand-mark {
     width: 74px;
     height: 88px;
@@ -142,6 +148,7 @@ html[data-theme="dark"] .dashboard-app {
 }
 
 .dashboard-nav a {
+    position: relative;
     min-height: 50px;
     display: grid;
     grid-template-columns: 26px minmax(0, 1fr);
@@ -155,6 +162,20 @@ html[data-theme="dark"] .dashboard-app {
     font-weight: 600;
     text-decoration: none;
     transition: color 180ms ease, background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.dashboard-nav a > i,
+.dashboard-nav a > span:not(.dashboard-nav-active-indicator) {
+    position: relative;
+    z-index: 1;
+}
+
+.dashboard-nav-active-indicator {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(90deg, rgba(18, 191, 168, 0.22), rgba(18, 191, 168, 0.08));
 }
 
 .dashboard-nav a i {
@@ -172,7 +193,7 @@ html[data-theme="dark"] .dashboard-app {
 
 .dashboard-nav a.is-active {
     color: #ffffff;
-    background: linear-gradient(90deg, rgba(18, 191, 168, 0.22), rgba(18, 191, 168, 0.08));
+    background: transparent;
     border-color: rgba(51, 213, 191, 0.13);
 }
 
