@@ -3,7 +3,7 @@ import crehanaLogo from "../assets/certificaciones/crehana.png";
 import crehanaCertificate from "../assets/certificaciones/crehana_certificado.jpg";
 import googleLogo from "../assets/certificaciones/google.png";
 import utnLogo from "../assets/certificaciones/utn.png";
-import utnCertificate from "../assets/certificaciones/utn_certificado.pdf";
+import utnCertificate from "../assets/certificaciones/utn_certificado.png";
 
 type LocalizedText = Record<Language, string>;
 
@@ -119,7 +119,7 @@ export const certifications: Certification[] = [
       alt: { es: "Logo del Centro de e-Learning de UTN.BA", en: "UTN.BA e-Learning Center logo" }
     },
     logoFallback: "UTN",
-    certificateUrl: utnCertificate,
+    certificateImage: utnCertificate,
     technologies: ["HTML", "CSS", "JavaScript", "React", "Node.js", "MySQL"],
     competencies: [
       { icon: "frontend", title: { es: "Desarrollo frontend", en: "Frontend development" } },
