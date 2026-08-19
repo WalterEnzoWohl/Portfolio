@@ -1,7 +1,9 @@
 import type { Language } from "../config/navigation";
 import crehanaLogo from "../assets/certificaciones/crehana.png";
+import crehanaCertificate from "../assets/certificaciones/crehana_certificado.jpg";
 import googleLogo from "../assets/certificaciones/google.png";
 import utnLogo from "../assets/certificaciones/utn.png";
+import utnCertificate from "../assets/certificaciones/utn_certificado.pdf";
 
 type LocalizedText = Record<Language, string>;
 
@@ -117,6 +119,7 @@ export const certifications: Certification[] = [
       alt: { es: "Logo del Centro de e-Learning de UTN.BA", en: "UTN.BA e-Learning Center logo" }
     },
     logoFallback: "UTN",
+    certificateUrl: utnCertificate,
     technologies: ["HTML", "CSS", "JavaScript", "React", "Node.js", "MySQL"],
     competencies: [
       { icon: "frontend", title: { es: "Desarrollo frontend", en: "Frontend development" } },
@@ -141,6 +144,7 @@ export const certifications: Certification[] = [
       alt: { es: "Logo de Crehana", en: "Crehana logo" }
     },
     logoFallback: "C",
+    certificateImage: crehanaCertificate,
     technologies: ["Excel avanzado", "Macros", "Power BI", "SQL"],
     competencies: [
       { icon: "excel", title: { es: "Análisis con Excel", en: "Excel analysis" } },

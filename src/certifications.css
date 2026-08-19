@@ -418,6 +418,33 @@ body.certificate-modal-open {
     padding: 18px 18px 15px;
 }
 
+.certification-card--interactive {
+    cursor: pointer;
+}
+
+.certification-card-action {
+    position: absolute;
+    z-index: 3;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: inherit;
+    background: transparent;
+    cursor: pointer;
+}
+
+.certification-card-action:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--dash-accent) 58%, transparent);
+    outline-offset: 3px;
+}
+
+.certification-card--interactive:hover .certification-cta svg,
+.certification-card--interactive:focus-within .certification-cta svg {
+    transform: translateX(4px);
+}
+
 .certification-card-main {
     align-items: flex-start;
     grid-column: 1;
@@ -494,6 +521,14 @@ body.certificate-modal-open {
     background: #f1f1ed;
 }
 
+.certificate-placeholder--available {
+    border-color: color-mix(in srgb, var(--dash-accent) 38%, var(--dash-border-strong));
+}
+
+.certificate-placeholder--available svg {
+    color: color-mix(in srgb, var(--dash-accent) 72%, #8996a2);
+}
+
 .certificate-placeholder {
     position: relative;
     display: grid;
@@ -559,6 +594,10 @@ body.certificate-modal-open {
 .certification-card-footer .certification-cta {
     min-width: 166px;
     flex: 0 0 auto;
+}
+
+.certification-cta--display {
+    pointer-events: none;
 }
 
 .certificate-modal {

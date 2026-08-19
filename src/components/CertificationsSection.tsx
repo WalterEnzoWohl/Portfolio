@@ -87,6 +87,12 @@ function CertificatePreview({ certification, language }: { certification: Certif
 
   return certification.certificateImage ? (
     <img src={certification.certificateImage} alt={`${copy.certificatePreview}: ${certification.title[language]}`} />
+  ) : certification.certificateUrl ? (
+    <div className="certificate-placeholder certificate-placeholder--available" aria-label={`${copy.certificatePreview}: ${certification.title[language]}`}>
+      <TbFileCertificate aria-hidden="true" />
+      <span aria-hidden="true" />
+      <span aria-hidden="true" />
+    </div>
   ) : (
     <div className="certificate-placeholder" aria-label={copy.certificatePending}>
       <TbFileCertificate aria-hidden="true" />
@@ -220,9 +226,26 @@ function FeaturedCertification({ certification, language }: { certification: Cer
 
 function CertificationCard({ certification, language, onPreview }: { certification: Certification; language: Language; onPreview: (certification: Certification, trigger: HTMLElement) => void }) {
   const copy = certificationSectionCopy[language];
+  const isInteractive = Boolean(certification.certificateImage || certification.certificateUrl);
 
   return (
-    <motion.article className="certification-card" variants={staggerItem} whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
+    <motion.article className={`certification-card${isInteractive ? " certification-card--interactive" : ""}`} variants={staggerItem} whileHover={isInteractive ? { y: -2 } : undefined} transition={{ duration: 0.2 }}>
+      {certification.certificateImage ? (
+        <button
+          className="certification-card-action"
+          type="button"
+          aria-label={`${copy.viewCertificate}: ${certification.title[language]}`}
+          onClick={(event) => onPreview(certification, event.currentTarget)}
+        />
+      ) : certification.certificateUrl ? (
+        <a
+          className="certification-card-action"
+          href={certification.certificateUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${copy.viewCertificate}: ${certification.title[language]}`}
+        />
+      ) : null}
       <div className="certification-card-main">
         <InstitutionLogo certification={certification} language={language} />
         <div className="certification-heading">
@@ -245,14 +268,10 @@ function CertificationCard({ certification, language, onPreview }: { certificati
             {certification.technologies.map((technology) => <TechnologyBadge key={technology} technology={technology} />)}
           </motion.div>
         </div>
-        {certification.certificateImage ? (
-          <button className="certification-cta" type="button" onClick={(event) => onPreview(certification, event.currentTarget)}>
-            {copy.viewCertificate}<TbArrowRight aria-hidden="true" />
-          </button>
-        ) : certification.certificateUrl ? (
-          <a className="certification-cta" href={certification.certificateUrl} target="_blank" rel="noopener noreferrer">
-            {copy.viewCertificate}<TbExternalLink aria-hidden="true" />
-          </a>
+        {isInteractive ? (
+          <span className="certification-cta certification-cta--display" aria-hidden="true">
+            {copy.viewCertificate}{certification.certificateImage ? <TbArrowRight aria-hidden="true" /> : <TbExternalLink aria-hidden="true" />}
+          </span>
         ) : null}
       </div>
     </motion.article>
