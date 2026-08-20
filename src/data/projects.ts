@@ -24,6 +24,32 @@ export type PortfolioProject = {
 
 export const projects: PortfolioProject[] = [
   {
+    id: "jenny-ugc",
+    projectNumber: 5,
+    title: { es: "JennyUGC.com", en: "JennyUGC.com" },
+    category: "web",
+    description: {
+      es: "Portfolio web autoadministrable para una creadora UGC, con sitio público y panel privado para gestionar contenido multimedia sin modificar código.",
+      en: "Self-managed web portfolio for a UGC creator, with a public site and private dashboard for managing multimedia content without editing code."
+    },
+    tools: ["React", "TypeScript", "Supabase", "Vercel"],
+    highlights: {
+      es: ["Sitio público y administración privada", "Gestión de contenido multimedia sin redespliegues"],
+      en: ["Public site and private administration", "Multimedia content management without redeployments"]
+    },
+    image: getRequiredProjectCapture(5, "A"),
+    imageAlt: {
+      es: "Página principal del portfolio web JennyUGC.com.",
+      en: "JennyUGC.com web portfolio home page."
+    },
+    link: "https://www.jennyugc.com/",
+    linkKind: "project",
+    caseStudySlug: "jenny-ugc",
+    caseStudyPath: "/proyectos/jenny-ugc",
+    galleryCategories: ["web"],
+    order: 0
+  },
+  {
     id: "gastos-rrhh",
     projectNumber: 1,
     title: { es: "Análisis de Gastos RRHH", en: "HR Expense Analysis" },

@@ -66,8 +66,8 @@ function MobileNavigation({ activeSection, language, onSectionActivate }: Mobile
       <NavigationAction href="#home" section="home" activeSection={activeSection} label={text.home} icon={TbHome} onClick={() => onSectionActivate("home")} />
       <NavigationAction href="#portfolio" section="portfolio" activeSection={activeSection} label={text.projects} icon={TbFolder} onClick={() => onSectionActivate("portfolio")} />
       <NavigationAction href="#curriculum" section="curriculum" activeSection={activeSection} label={text.experience} icon={TbCode} onClick={() => onSectionActivate("curriculum")} />
-      <NavigationAction href="#contacto" section="contacto" activeSection={activeSection} label={text.contact} icon={TbMail} onClick={() => onSectionActivate("contacto")} />
       <NavigationAction href="#certifications" section="certifications" activeSection={activeSection} label={text.certifications} icon={TbAward} onClick={() => onSectionActivate("certifications")} />
+      <NavigationAction href="#contacto" section="contacto" activeSection={activeSection} label={text.contact} icon={TbMail} onClick={() => onSectionActivate("contacto")} />
     </nav>
   );
 }

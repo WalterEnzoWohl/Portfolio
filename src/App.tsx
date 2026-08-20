@@ -4,17 +4,20 @@ import DashboardLayout from "./components/DashboardLayout";
 import OverviewDashboard from "./components/OverviewDashboard";
 import ProjectsGallery from "./components/ProjectsGallery";
 import ProjectCaseStudy from "./components/ProjectCaseStudy";
+import WebProjectCaseStudy from "./components/WebProjectCaseStudy";
 import ExperienceSection from "./components/ExperienceSection";
 import CertificationsSection from "./components/CertificationsSection";
 import ContactSection from "./components/ContactSection";
 import wipImage from "./assets/placeholders/wip.png";
 import { getDataCaseStudy } from "./data/projectCaseStudies";
 import { projects, recentOverviewProjectSlugs } from "./data/projects";
+import { getWebCaseStudy } from "./data/webCaseStudies";
 import "./style.css";
 import "./dashboard.css";
 import "./overview.css";
 import "./projects.css";
 import "./project-case-study.css";
+import "./web-project-case-study.css";
 import "./experience.css";
 import "./certifications.css";
 import "./contact.css";
@@ -286,7 +289,7 @@ function LandingPage({
     </main>
   );
 }
-type DataProjectCaseStudyPageProps = {
+type ProjectCaseStudyPageProps = {
   language: Language;
   handleProjectImageError: (event: SyntheticEvent<HTMLImageElement>) => void;
   theme: Theme;
@@ -296,10 +299,12 @@ type DataProjectCaseStudyPageProps = {
   onLanguageChange: (language: Language) => void;
 };
 
-function DataProjectCaseStudyPage({ language, theme, themeToggleRef, themeToggleLabel, onThemeToggle, onLanguageChange, handleProjectImageError }: DataProjectCaseStudyPageProps) {
+function ProjectCaseStudyPage({ language, theme, themeToggleRef, themeToggleLabel, onThemeToggle, onLanguageChange, handleProjectImageError }: ProjectCaseStudyPageProps) {
   const { slug } = useParams();
-  const detail = getDataCaseStudy(slug);
-  const project = detail ? projects.find((item) => item.id === detail.projectId) : undefined;
+  const dataDetail = getDataCaseStudy(slug);
+  const webDetail = getWebCaseStudy(slug);
+  const projectId = dataDetail?.projectId ?? webDetail?.projectId;
+  const project = projectId ? projects.find((item) => item.id === projectId) : undefined;
 
   return (
     <DashboardLayout
@@ -311,7 +316,11 @@ function DataProjectCaseStudyPage({ language, theme, themeToggleRef, themeToggle
       onLanguageChange={onLanguageChange}
       breadcrumbDetails={project ? [{ label: project.title[language] }] : []}
     >
-      <ProjectCaseStudy detail={detail} project={project} projects={projects} language={language} onImageError={handleProjectImageError} />
+      {webDetail ? (
+        <WebProjectCaseStudy detail={webDetail} project={project} projects={projects} language={language} onImageError={handleProjectImageError} />
+      ) : (
+        <ProjectCaseStudy detail={dataDetail} project={project} projects={projects} language={language} onImageError={handleProjectImageError} />
+      )}
     </DashboardLayout>
   );
 }
@@ -440,7 +449,7 @@ function App() {
             </DashboardLayout>
           }
         />
-        <Route path="/proyectos/:slug" element={<DataProjectCaseStudyPage language={language} theme={theme} themeToggleRef={themeToggleRef} themeToggleLabel={themeToggleLabel} onThemeToggle={() => void switchThemeWithTransition()} onLanguageChange={setLanguage} handleProjectImageError={handleProjectImageError} />} />
+        <Route path="/proyectos/:slug" element={<ProjectCaseStudyPage language={language} theme={theme} themeToggleRef={themeToggleRef} themeToggleLabel={themeToggleLabel} onThemeToggle={() => void switchThemeWithTransition()} onLanguageChange={setLanguage} handleProjectImageError={handleProjectImageError} />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 

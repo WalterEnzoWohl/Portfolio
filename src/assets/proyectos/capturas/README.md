@@ -20,3 +20,7 @@ Convención: el número identifica al proyecto y la letra identifica el tipo de 
 | 4B | Gestión de Nómina RRHH | Proceso 1 | Cargada |
 | 4C | Gestión de Nómina RRHH | Proceso 2 | Cargada |
 | 4D | Gestión de Nómina RRHH | Proceso 3 | Cargada |
+| 5A | JennyUGC.com | Página principal | Cargada |
+| 5B | JennyUGC.com | Portfolio multimedia | Cargada |
+| 5C | JennyUGC.com | Panel de administración | Cargada |
+| 5D | JennyUGC.com | Carga y edición de videos | Cargada |
