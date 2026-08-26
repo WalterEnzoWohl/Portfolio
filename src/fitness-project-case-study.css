@@ -1,0 +1,888 @@
+.fitness-case-page {
+    min-height: calc(100svh - var(--dash-topbar-height));
+    padding: 8px clamp(14px, 1.25vw, 20px) 20px;
+    color: var(--dash-ink);
+    background:
+        radial-gradient(circle at 62% 16%, color-mix(in srgb, var(--dash-accent) 13%, transparent), transparent 26%),
+        linear-gradient(180deg, var(--dash-canvas-deep), var(--dash-canvas));
+}
+
+.fitness-case-shell {
+    width: min(100%, 1500px);
+    display: grid;
+    gap: 10px;
+    margin: 0 auto;
+}
+
+.fitness-case-hero,
+.fitness-case-insights,
+.fitness-case-features,
+.fitness-case-related {
+    min-width: 0;
+    border: 1px solid var(--dash-border);
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--dash-card) 96%, transparent);
+    box-shadow: var(--dash-shadow);
+}
+
+.fitness-case-hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.28fr) minmax(230px, 0.72fr) minmax(240px, 0.74fr);
+    grid-template-areas:
+        "intro visual rail"
+        "story visual rail";
+    gap: 10px 14px;
+    overflow: hidden;
+    padding: clamp(15px, 1.3vw, 20px);
+}
+
+.fitness-case-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.2;
+    background-image:
+        linear-gradient(color-mix(in srgb, var(--dash-accent) 8%, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in srgb, var(--dash-accent) 8%, transparent) 1px, transparent 1px);
+    background-size: 34px 34px;
+    mask-image: radial-gradient(circle at 63% 38%, black, transparent 47%);
+}
+
+.fitness-case-intro,
+.fitness-case-main-visual,
+.fitness-case-rail,
+.fitness-case-story {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+}
+
+.fitness-case-intro {
+    grid-area: intro;
+    align-self: end;
+}
+
+.fitness-case-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+}
+
+.fitness-case-category,
+.fitness-case-tools span {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid color-mix(in srgb, var(--dash-accent) 48%, var(--dash-border));
+    color: var(--dash-accent-strong);
+    background: color-mix(in srgb, var(--dash-accent-soft) 72%, transparent);
+}
+
+.fitness-case-category {
+    width: max-content;
+    max-width: 100%;
+    gap: 7px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 0.66rem;
+    font-weight: 850;
+    letter-spacing: 0.075em;
+    text-transform: uppercase;
+}
+
+.fitness-case-category svg {
+    width: 15px;
+    height: 15px;
+}
+
+.fitness-case-platforms {
+    color: var(--dash-muted);
+    font-size: 0.68rem;
+    font-weight: 750;
+    letter-spacing: 0.025em;
+}
+
+.fitness-case-intro h1 {
+    max-width: none;
+    margin: 11px 0 7px;
+    color: var(--dash-ink);
+    font-size: clamp(2.15rem, 2.35vw, 2.75rem);
+    line-height: 1.02;
+    letter-spacing: -0.048em;
+    text-wrap: balance;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+}
+
+.fitness-case-lead,
+.fitness-case-description {
+    max-width: 58ch;
+    margin: 0;
+    line-height: 1.46;
+}
+
+.fitness-case-lead {
+    color: var(--dash-ink);
+    font-size: clamp(0.9rem, 0.9vw, 1rem);
+    font-weight: 720;
+    text-wrap: pretty;
+}
+
+.fitness-case-lead::first-line {
+    color: var(--dash-ink);
+}
+
+.fitness-case-description {
+    margin-top: 7px;
+    color: var(--dash-copy);
+    font-size: clamp(0.8rem, 0.76vw, 0.88rem);
+    text-wrap: pretty;
+}
+
+.fitness-case-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 11px;
+}
+
+.fitness-case-tools span {
+    gap: 6px;
+    min-height: 27px;
+    padding: 4px 8px;
+    border-radius: 7px;
+    color: var(--dash-copy);
+    font-size: 0.7rem;
+    font-weight: 680;
+}
+
+.fitness-case-tools svg {
+    width: 14px;
+    height: 14px;
+    color: var(--dash-accent);
+}
+
+.fitness-case-store-link {
+    width: max-content;
+    max-width: 100%;
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 11px;
+    padding: 8px 13px;
+    border: 1px solid var(--dash-accent);
+    border-radius: 9px;
+    color: var(--dash-canvas-deep);
+    background: var(--dash-accent-strong);
+    font-size: 0.76rem;
+    font-weight: 850;
+    text-decoration: none;
+    transition: transform 180ms ease, filter 180ms ease, box-shadow 180ms ease;
+}
+
+.fitness-case-store-link:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.06);
+    box-shadow: 0 10px 24px color-mix(in srgb, var(--dash-accent) 18%, transparent);
+}
+
+.fitness-case-store-link:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--dash-accent) 45%, transparent);
+    outline-offset: 3px;
+}
+
+.fitness-case-store-link svg {
+    width: 16px;
+    height: 16px;
+}
+
+.fitness-case-store-link i {
+    font-size: 0.67rem;
+}
+
+.fitness-case-main-visual {
+    grid-area: visual;
+    min-height: 382px;
+    display: grid;
+    place-items: center;
+    isolation: isolate;
+}
+
+.fitness-case-main-visual::before {
+    content: "";
+    position: absolute;
+    z-index: -2;
+    width: min(34vw, 430px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--dash-accent) 22%, transparent), transparent 68%);
+    filter: blur(3px);
+}
+
+.fitness-case-visual-orbit {
+    position: absolute;
+    z-index: -1;
+    width: min(31vw, 390px);
+    aspect-ratio: 1;
+    border: 1px solid color-mix(in srgb, var(--dash-accent) 18%, transparent);
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 34px color-mix(in srgb, var(--dash-accent) 5%, transparent),
+        0 0 0 70px color-mix(in srgb, var(--dash-accent) 3%, transparent);
+}
+
+.fitness-case-main-visual .project-capture {
+    width: min(100%, 238px);
+    max-height: 400px;
+    aspect-ratio: var(--project-capture-ratio, 9 / 16);
+    border-color: color-mix(in srgb, var(--dash-accent) 54%, var(--dash-border));
+    border-radius: 22px;
+    background: color-mix(in srgb, var(--dash-canvas-deep) 92%, transparent);
+    box-shadow: 0 24px 55px color-mix(in srgb, #000 42%, transparent);
+}
+
+.fitness-case-main-visual .project-capture img {
+    object-fit: contain;
+    object-position: center;
+}
+
+.fitness-case-rail {
+    grid-area: rail;
+    display: grid;
+    align-content: center;
+    gap: 9px;
+}
+
+.fitness-case-rail > section {
+    padding: 11px;
+    border: 1px solid color-mix(in srgb, var(--dash-accent) 48%, var(--dash-border));
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--dash-card-subtle) 90%, transparent);
+}
+
+.fitness-case-rail h2,
+.fitness-case-story > h2 {
+    margin: 0 0 8px;
+    color: var(--dash-accent-strong);
+    font-size: 0.66rem;
+    font-weight: 850;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.fitness-case-rail section > div {
+    display: grid;
+    gap: 6px;
+}
+
+.fitness-case-rail article {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: 29px minmax(0, 1fr);
+    align-items: center;
+    gap: 7px;
+    padding: 8px;
+    border: 1px solid var(--dash-border-strong);
+    border-radius: 10px;
+}
+
+.fitness-case-rail article > svg {
+    width: 21px;
+    height: 21px;
+    color: var(--dash-accent);
+}
+
+.fitness-case-rail article span,
+.fitness-case-rail article strong,
+.fitness-case-rail article small {
+    min-width: 0;
+    display: block;
+}
+
+.fitness-case-rail article strong {
+    color: var(--dash-ink);
+    font-size: clamp(0.76rem, 0.7vw, 0.82rem);
+    line-height: 1.25;
+    text-wrap: balance;
+}
+
+.fitness-case-rail article small {
+    margin-top: 2px;
+    color: var(--dash-copy);
+    font-size: clamp(0.69rem, 0.62vw, 0.75rem);
+    line-height: 1.4;
+    text-wrap: pretty;
+}
+
+.fitness-case-rail ul {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.fitness-case-rail li {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    color: var(--dash-copy);
+    font-size: 0.75rem;
+    line-height: 1.35;
+}
+
+.fitness-case-rail li i {
+    width: 17px;
+    height: 17px;
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    margin-top: 1px;
+    border: 1px solid var(--dash-accent);
+    border-radius: 50%;
+    color: var(--dash-accent);
+    font-size: 0.58rem;
+}
+
+.fitness-case-story {
+    grid-area: story;
+    align-self: start;
+    padding: 10px;
+    border: 1px solid var(--dash-border);
+    border-radius: 13px;
+    background: color-mix(in srgb, var(--dash-card-subtle) 84%, transparent);
+}
+
+.fitness-case-story > div {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+}
+
+.fitness-case-story article {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: 27px minmax(0, 1fr);
+    align-items: start;
+    gap: 6px;
+}
+
+.fitness-case-story article > svg {
+    width: 22px;
+    height: 22px;
+    color: var(--dash-accent);
+}
+
+.fitness-case-story h3 {
+    margin: 0;
+    color: var(--dash-ink);
+    font-size: clamp(0.74rem, 0.67vw, 0.8rem);
+    line-height: 1.28;
+    text-wrap: balance;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+}
+
+.fitness-case-story p {
+    margin: 4px 0 0;
+    color: var(--dash-copy);
+    font-size: clamp(0.68rem, 0.6vw, 0.74rem);
+    line-height: 1.45;
+    text-wrap: pretty;
+}
+
+.fitness-case-insights {
+    display: grid;
+    grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
+    overflow: hidden;
+}
+
+.fitness-case-insights > article {
+    min-width: 0;
+    padding: 14px 16px;
+}
+
+.fitness-case-insights > article + article {
+    border-left: 1px solid var(--dash-border);
+}
+
+.fitness-case-insights header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.fitness-case-insights header > svg {
+    width: 30px;
+    height: 30px;
+    flex: 0 0 auto;
+    padding: 6px;
+    border-radius: 9px;
+    color: var(--dash-accent);
+    background: var(--dash-accent-soft);
+}
+
+.fitness-case-insights header small,
+.fitness-case-insights header h2 {
+    display: block;
+    margin: 0;
+}
+
+.fitness-case-insights header small {
+    color: var(--dash-accent-strong);
+    font-size: 0.63rem;
+    font-weight: 850;
+    letter-spacing: 0.075em;
+    text-transform: uppercase;
+}
+
+.fitness-case-insights header h2 {
+    margin-top: 2px;
+    color: var(--dash-ink);
+    font-size: clamp(1rem, 1.25vw, 1.25rem);
+    line-height: 1.15;
+}
+
+.fitness-case-insights > article > p {
+    margin: 9px 0 11px;
+    color: var(--dash-copy);
+    font-size: clamp(0.72rem, 0.67vw, 0.8rem);
+    line-height: 1.45;
+}
+
+.fitness-case-analytics > div {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+}
+
+.fitness-case-analytics article {
+    min-width: 0;
+    padding: 8px;
+    border: 1px solid var(--dash-border);
+    border-radius: 9px;
+    background: color-mix(in srgb, var(--dash-card-subtle) 86%, transparent);
+}
+
+.fitness-case-analytics strong,
+.fitness-case-analytics span {
+    display: block;
+}
+
+.fitness-case-analytics strong {
+    color: var(--dash-accent-strong);
+    font-size: 0.72rem;
+}
+
+.fitness-case-analytics span {
+    margin-top: 2px;
+    color: var(--dash-copy);
+    font-size: 0.68rem;
+    line-height: 1.35;
+}
+
+.fitness-case-technical ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.fitness-case-technical li {
+    min-width: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    color: var(--dash-copy);
+    font-size: 0.7rem;
+    line-height: 1.4;
+}
+
+.fitness-case-technical li i {
+    width: 16px;
+    height: 16px;
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    margin-top: 1px;
+    border-radius: 50%;
+    color: var(--dash-canvas-deep);
+    background: var(--dash-accent);
+    font-size: 0.56rem;
+}
+
+.fitness-case-features {
+    padding: 11px;
+}
+
+.fitness-case-features > header {
+    margin-bottom: 8px;
+}
+
+.fitness-case-features > header small {
+    color: var(--dash-accent-strong);
+    font-size: 0.68rem;
+    font-weight: 850;
+    letter-spacing: 0.075em;
+    text-transform: uppercase;
+}
+
+.fitness-case-features h2,
+.fitness-case-related h2 {
+    margin: 4px 0 0;
+    color: var(--dash-ink);
+    font-size: clamp(1.2rem, 1.7vw, 1.65rem);
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+}
+
+.fitness-case-features > div {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 7px;
+}
+
+.fitness-case-features article {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 7px;
+    border: 1px solid var(--dash-border-strong);
+    border-radius: 13px;
+    background:
+        linear-gradient(180deg, color-mix(in srgb, var(--dash-accent-soft) 20%, transparent), transparent 36%),
+        var(--dash-card-subtle);
+    transition: border-color 190ms ease, box-shadow 190ms ease;
+}
+
+.fitness-case-features article:hover {
+    border-color: color-mix(in srgb, var(--dash-accent) 60%, var(--dash-border));
+    box-shadow: var(--dash-shadow-hover);
+}
+
+.fitness-case-feature-heading {
+    min-height: 39px;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: 6px;
+}
+
+.fitness-case-feature-heading span {
+    color: var(--dash-accent);
+    font-size: 0.82rem;
+    font-weight: 850;
+}
+
+.fitness-case-feature-heading h3 {
+    margin: 0;
+    color: var(--dash-ink);
+    font-size: clamp(0.7rem, 0.62vw, 0.78rem);
+    line-height: 1.28;
+    text-wrap: balance;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+}
+
+.fitness-case-features .project-capture {
+    width: 100%;
+    aspect-ratio: var(--project-capture-ratio, 9 / 16);
+    border-color: var(--dash-border);
+    border-radius: 10px;
+    background: var(--dash-canvas-deep);
+}
+
+.fitness-case-features .project-capture img {
+    object-fit: contain;
+    object-position: center;
+}
+
+.fitness-case-features article > p {
+    margin: 6px 1px 1px;
+    color: var(--dash-copy);
+    font-size: clamp(0.68rem, 0.59vw, 0.75rem);
+    line-height: 1.45;
+    text-wrap: pretty;
+}
+
+.fitness-case-related {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 18px;
+    padding: 11px 14px;
+}
+
+.fitness-case-related h2 {
+    margin: 0;
+    font-size: 0.88rem;
+}
+
+.fitness-case-related > div {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.fitness-case-related a {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    align-items: center;
+    gap: 11px;
+    padding: 7px;
+    border: 1px solid var(--dash-border);
+    border-radius: 11px;
+    color: inherit;
+    text-decoration: none;
+    transition: transform 190ms ease, border-color 190ms ease;
+}
+
+.fitness-case-related a:hover {
+    border-color: color-mix(in srgb, var(--dash-accent) 58%, var(--dash-border));
+    transform: translateY(-2px);
+}
+
+.fitness-case-related a:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--dash-accent) 42%, transparent);
+    outline-offset: 3px;
+}
+
+.fitness-case-related img {
+    width: 112px;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+    border-radius: 7px;
+    background: var(--dash-canvas-deep);
+}
+
+.fitness-case-related span,
+.fitness-case-related strong,
+.fitness-case-related small {
+    min-width: 0;
+    display: block;
+}
+
+.fitness-case-related strong {
+    color: var(--dash-ink);
+    font-size: 0.8rem;
+}
+
+.fitness-case-related small {
+    margin-top: 5px;
+    color: var(--dash-accent-strong);
+    font-size: 0.71rem;
+    font-weight: 750;
+}
+
+.fitness-case-related small i {
+    margin-left: 7px;
+}
+
+/* Preserve the full desktop composition across standard PC widths. */
+@media (max-width: 1199px) {
+    .fitness-case-hero {
+        grid-template-columns: minmax(320px, 1fr) minmax(280px, 0.8fr);
+        grid-template-areas:
+            "intro visual"
+            "story visual"
+            "rail rail";
+    }
+
+    .fitness-case-rail {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .fitness-case-features > div {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    .fitness-case-page {
+        padding: 10px 14px 24px;
+    }
+
+    .fitness-case-hero {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "intro"
+            "visual"
+            "story"
+            "rail";
+    }
+
+    .fitness-case-intro h1 {
+        max-width: none;
+    }
+
+    .fitness-case-main-visual {
+        min-height: 380px;
+    }
+
+    .fitness-case-main-visual .project-capture {
+        max-width: 270px;
+        max-height: 430px;
+    }
+
+    .fitness-case-story > div,
+    .fitness-case-rail {
+        grid-template-columns: 1fr;
+    }
+
+    .fitness-case-related {
+        grid-template-columns: 1fr;
+    }
+
+    .fitness-case-insights {
+        grid-template-columns: 1fr;
+    }
+
+    .fitness-case-insights > article + article {
+        border-top: 1px solid var(--dash-border);
+        border-left: 0;
+    }
+}
+
+@media (max-width: 640px) {
+    .fitness-case-page {
+        padding: 12px 12px calc(96px + env(safe-area-inset-bottom));
+    }
+
+    .fitness-case-shell {
+        gap: 12px;
+    }
+
+    .fitness-case-hero,
+    .fitness-case-insights,
+    .fitness-case-features,
+    .fitness-case-related {
+        border-radius: 15px;
+    }
+
+    .fitness-case-hero {
+        gap: 18px;
+        padding: 18px 14px;
+    }
+
+    .fitness-case-intro h1 {
+        margin-top: 12px;
+        font-size: clamp(2.05rem, 10vw, 2.7rem);
+        line-height: 1.04;
+    }
+
+    .fitness-case-lead {
+        font-size: 1rem;
+    }
+
+    .fitness-case-description {
+        font-size: 0.88rem;
+    }
+
+    .fitness-case-tools span {
+        min-height: 32px;
+        font-size: 0.78rem;
+    }
+
+    .fitness-case-store-link {
+        min-height: 44px;
+        font-size: 0.82rem;
+    }
+
+    .fitness-case-main-visual {
+        min-height: 360px;
+    }
+
+    .fitness-case-story > div {
+        gap: 14px;
+    }
+
+    .fitness-case-story article {
+        grid-template-columns: 34px minmax(0, 1fr);
+    }
+
+    .fitness-case-story h3,
+    .fitness-case-rail article strong {
+        font-size: 0.9rem;
+    }
+
+    .fitness-case-story p,
+    .fitness-case-rail article small,
+    .fitness-case-rail li,
+    .fitness-case-features article > p {
+        font-size: 0.82rem;
+    }
+
+    .fitness-case-features {
+        padding: 14px 12px;
+    }
+
+    .fitness-case-features > div {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .fitness-case-features article {
+        padding: 12px;
+    }
+
+    .fitness-case-feature-heading {
+        min-height: 42px;
+    }
+
+    .fitness-case-feature-heading h3 {
+        font-size: 0.98rem;
+    }
+
+    .fitness-case-features .project-capture {
+        width: min(100%, 290px);
+        margin-inline: auto;
+    }
+
+    .fitness-case-related > div {
+        grid-template-columns: 1fr;
+    }
+
+    .fitness-case-related a {
+        grid-template-columns: 96px minmax(0, 1fr);
+    }
+
+    .fitness-case-related img {
+        width: 96px;
+    }
+
+    .fitness-case-insights > article {
+        padding: 14px 12px;
+    }
+
+    .fitness-case-analytics > div,
+    .fitness-case-technical ul {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .fitness-case-analytics strong,
+    .fitness-case-technical li {
+        font-size: 0.78rem;
+    }
+
+    .fitness-case-analytics span,
+    .fitness-case-insights > article > p {
+        font-size: 0.76rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fitness-case-features article,
+    .fitness-case-related a,
+    .fitness-case-store-link {
+        transition-duration: 0.01ms !important;
+    }
+}

@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useRef, useState, type SyntheticEvent } from "react";
+import { useMemo, useState, type SyntheticEvent } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, MotionConfig, motion } from "motion/react";
-import { drawerBackdrop, interactiveMotion, sectionReveal, staggerContainer, staggerItem } from "../animations/motion";
+import { interactiveMotion, sectionReveal, staggerContainer, staggerItem } from "../animations/motion";
 import type { Language } from "../config/navigation";
 import type { DataCaseStudyDetail } from "../data/projectCaseStudies";
 import ProjectCapture from "./ProjectCapture";
+import ProjectCaptureCarousel, { type ProjectCaptureSlide } from "./ProjectCaptureCarousel";
 
 type LocalizedText = Record<Language, string>;
 
@@ -60,56 +61,13 @@ const caseCopy = {
   }
 } as const;
 
-function ImageViewer({ project, language, onClose, returnFocusTo }: { project: CaseStudyProject; language: Language; onClose: () => void; returnFocusTo: HTMLButtonElement | null }) {
-  const closeRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    document.body.classList.add("case-viewer-open");
-    const backgroundRegions = [
-      document.querySelector<HTMLElement>(".dashboard-sidebar"),
-      document.querySelector<HTMLElement>(".dashboard-topbar"),
-      document.querySelector<HTMLElement>(".data-case-shell")
-    ].filter((element): element is HTMLElement => Boolean(element));
-    const priorInertValues = backgroundRegions.map((element) => element.inert);
-    backgroundRegions.forEach((element) => { element.inert = true; });
-    const frame = requestAnimationFrame(() => closeRef.current?.focus());
-    const handleKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
-      if (event.key === "Tab") {
-        event.preventDefault();
-        closeRef.current?.focus();
-      }
-    };
-    window.addEventListener("keydown", handleKey);
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("keydown", handleKey);
-      document.body.classList.remove("case-viewer-open");
-      backgroundRegions.forEach((element, index) => { element.inert = priorInertValues[index]; });
-      returnFocusTo?.focus();
-    };
-  }, [onClose, returnFocusTo]);
-
-  return (
-    <motion.div className="data-case-viewer" role="dialog" aria-modal="true" aria-label={caseCopy[language].expandImage}>
-      <motion.button className="data-case-viewer-backdrop" type="button" tabIndex={-1} aria-label={caseCopy[language].closeImage} variants={drawerBackdrop} initial="hidden" animate="visible" exit="exit" onClick={onClose} />
-      <motion.figure initial={{ opacity: 0, scale: 0.985 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.985 }} transition={{ duration: 0.22 }}>
-        <button ref={closeRef} type="button" onClick={onClose} aria-label={caseCopy[language].closeImage}><i className="fa-solid fa-xmark" aria-hidden="true" /></button>
-        <img src={project.image} alt={project.imageAlt[language]} />
-        <figcaption>{project.title[language]}</figcaption>
-      </motion.figure>
-    </motion.div>
-  );
-}
-
 function ProjectNotFound({ language }: { language: Language }) {
   const copy = caseCopy[language];
   return <main className="data-case-not-found"><i className="fa-regular fa-folder-open" aria-hidden="true" /><h1>{copy.notFound}</h1><p>{copy.notFoundBody}</p><Link to="/#portfolio">{copy.returnToProjects}</Link></main>;
 }
 
 function ProjectCaseStudy({ detail, project, projects, language, onImageError }: { detail?: DataCaseStudyDetail; project?: CaseStudyProject; projects: CaseStudyProject[]; language: Language; onImageError: (event: SyntheticEvent<HTMLImageElement>) => void }) {
-  const [viewerOpen, setViewerOpen] = useState(false);
-  const expandButtonRef = useRef<HTMLButtonElement>(null);
+  const [viewerIndex, setViewerIndex] = useState<number | null>(null);
   const copy = caseCopy[language];
   const relatedProjects = useMemo(() => {
     if (!project) return [];
@@ -118,6 +76,23 @@ function ProjectCaseStudy({ detail, project, projects, language, onImageError }:
       .sort((a, b) => b.tools.filter((tool) => project.tools.includes(tool)).length - a.tools.filter((tool) => project.tools.includes(tool)).length)
       .slice(0, 2);
   }, [project, projects]);
+  const captureSlides = useMemo<ProjectCaptureSlide[]>(() => {
+    if (!detail || !project) return [];
+    return [
+      {
+        capture: "A",
+        title: copy.mainView,
+        description: detail.fullDescription[language],
+        alt: project.imageAlt[language]
+      },
+      ...detail.analysisCards.map((card) => ({
+        capture: card.capture,
+        title: card.title[language],
+        description: card.description[language],
+        alt: `${card.title[language]}: ${project.title[language]}`
+      }))
+    ];
+  }, [copy.mainView, detail, language, project]);
 
   if (!detail || !project) return <ProjectNotFound language={language} />;
 
@@ -147,8 +122,16 @@ function ProjectCaseStudy({ detail, project, projects, language, onImageError }:
 
             <aside className="data-case-main-visual">
               <span>{copy.mainView}</span>
-              <button ref={expandButtonRef} type="button" onClick={() => setViewerOpen(true)} aria-label={copy.expandImage}><i className="fa-solid fa-up-right-and-down-left-from-center" aria-hidden="true" /></button>
-              <img src={project.image} alt={project.imageAlt[language]} loading="eager" width="960" height="540" onError={onImageError} />
+              <ProjectCapture
+                projectNumber={project.projectNumber}
+                capture="A"
+                alt={project.imageAlt[language]}
+                fit="contain"
+                loading="eager"
+                pendingLabel={copy.pendingCapture}
+                onOpen={() => setViewerIndex(0)}
+                openLabel={`${copy.expandImage}: ${project.title[language]}`}
+              />
             </aside>
           </section>
 
@@ -173,7 +156,7 @@ function ProjectCaseStudy({ detail, project, projects, language, onImageError }:
             <section className="data-case-analysis" aria-labelledby="data-case-analysis-title">
               <h2 id="data-case-analysis-title">{copy.analysis}</h2>
               <div>
-                {detail.analysisCards.map((card) => (
+                {detail.analysisCards.map((card, index) => (
                   <article key={card.capture}>
                     <h3>{card.title[language]}</h3>
                     <div className="data-case-crop">
@@ -183,6 +166,8 @@ function ProjectCaseStudy({ detail, project, projects, language, onImageError }:
                         alt={`${card.title[language]}: ${project.title[language]}`}
                         fit="contain"
                         pendingLabel={copy.pendingCapture}
+                        onOpen={() => setViewerIndex(index + 1)}
+                        openLabel={`${copy.expandImage}: ${card.title[language]}`}
                       />
                     </div>
                     <p>{card.description[language]}</p>
@@ -196,7 +181,20 @@ function ProjectCaseStudy({ detail, project, projects, language, onImageError }:
           {relatedProjects.length ? <section className="data-case-related" aria-labelledby="related-projects-title"><h2 id="related-projects-title">{copy.related}</h2><div>{relatedProjects.map((related) => <Link key={related.id} to={related.caseStudyPath ?? ""}><img src={related.image} alt={related.imageAlt[language]} loading="lazy" onError={onImageError} /><span><strong>{related.title[language]}</strong><small>{copy.openRelated}<i className="fa-solid fa-arrow-right" aria-hidden="true" /></small></span></Link>)}</div></section> : null}
         </motion.div>
 
-        <AnimatePresence>{viewerOpen ? <ImageViewer project={project} language={language} onClose={() => setViewerOpen(false)} returnFocusTo={expandButtonRef.current} /> : null}</AnimatePresence>
+        <AnimatePresence>
+          {viewerIndex !== null ? (
+            <ProjectCaptureCarousel
+              projectNumber={project.projectNumber}
+              projectTitle={project.title[language]}
+              slides={captureSlides}
+              activeIndex={viewerIndex}
+              language={language}
+              pendingLabel={copy.pendingCapture}
+              onIndexChange={setViewerIndex}
+              onClose={() => setViewerIndex(null)}
+            />
+          ) : null}
+        </AnimatePresence>
       </main>
     </MotionConfig>
   );

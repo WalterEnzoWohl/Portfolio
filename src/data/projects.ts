@@ -1,6 +1,6 @@
 import type { ProjectGalleryCategory } from "../components/ProjectsGallery";
 import type { Language } from "../config/navigation";
-import { getRequiredProjectCapture } from "./projectCaptures";
+import { getProjectCaptureOrPlaceholder, getRequiredProjectCapture } from "./projectCaptures";
 
 type LocalizedText = Record<Language, string>;
 
@@ -8,6 +8,7 @@ export type PortfolioProject = {
   id: string;
   projectNumber: number;
   title: LocalizedText;
+  categoryLabel?: LocalizedText;
   category: "powerbi" | "web";
   description: LocalizedText;
   tools: string[];
@@ -23,6 +24,59 @@ export type PortfolioProject = {
 };
 
 export const projects: PortfolioProject[] = [
+  {
+    id: "wohl-fitness",
+    projectNumber: 7,
+    title: { es: "WOHL — App fitness", en: "WOHL — Fitness app" },
+    category: "web",
+    categoryLabel: { es: "Aplicación móvil", en: "Mobile application" },
+    description: {
+      es: "Aplicación móvil para organizar rutinas, registrar entrenamientos y transformar cada sesión en métricas de progreso.",
+      en: "Mobile application for organizing routines, logging workouts and turning every session into progress metrics."
+    },
+    tools: ["React", "TypeScript", "Capacitor", "Supabase", "IndexedDB", "Recharts"],
+    highlights: {
+      es: ["Registro offline-first de entrenamientos", "Métricas de progreso y carga muscular"],
+      en: ["Offline-first workout logging", "Progress and muscle-load metrics"]
+    },
+    image: getRequiredProjectCapture(7, "H"),
+    imageAlt: {
+      es: "Presentación de WOHL, aplicación móvil para organizar y analizar entrenamientos.",
+      en: "WOHL presentation, a mobile application for organizing and analyzing workouts."
+    },
+    link: "/proyectos/wohl-fitness",
+    linkKind: "project",
+    caseStudySlug: "wohl-fitness",
+    caseStudyPath: "/proyectos/wohl-fitness",
+    galleryCategories: ["web", "automation"],
+    order: 0
+  },
+  {
+    id: "riki-wohl",
+    projectNumber: 6,
+    title: { es: "RikiWohl.com", en: "RikiWohl.com" },
+    category: "web",
+    description: {
+      es: "Landing comercial para un servicio de barra móvil y coctelería, diseñada para presentar la propuesta, organizar los servicios y facilitar consultas.",
+      en: "Commercial landing page for a mobile bar and cocktail service, designed to present the offering, organize services and facilitate enquiries."
+    },
+    tools: ["React", "TypeScript", "Tailwind CSS", "Vite"],
+    highlights: {
+      es: ["Servicios, packs y carta organizados", "Experiencia responsive orientada a consultas"],
+      en: ["Organized services, packages and menu", "Responsive experience focused on enquiries"]
+    },
+    image: getProjectCaptureOrPlaceholder(6, "A"),
+    imageAlt: {
+      es: "Página principal de RikiWohl.com para un servicio de barra móvil y coctelería.",
+      en: "RikiWohl.com home page for a mobile bar and cocktail service."
+    },
+    link: "https://www.rikiwohl.com/",
+    linkKind: "project",
+    caseStudySlug: "riki-wohl",
+    caseStudyPath: "/proyectos/riki-wohl",
+    galleryCategories: ["web"],
+    order: 1
+  },
   {
     id: "jenny-ugc",
     projectNumber: 5,
@@ -47,7 +101,7 @@ export const projects: PortfolioProject[] = [
     caseStudySlug: "jenny-ugc",
     caseStudyPath: "/proyectos/jenny-ugc",
     galleryCategories: ["web"],
-    order: 0
+    order: 2
   },
   {
     id: "gastos-rrhh",
@@ -70,7 +124,7 @@ export const projects: PortfolioProject[] = [
     caseStudySlug: "gastos-rrhh",
     caseStudyPath: "/proyectos/analisis-de-gastos-rrhh",
     galleryCategories: ["data"],
-    order: 1
+    order: 3
   },
   {
     id: "ventas-appol",
@@ -93,7 +147,7 @@ export const projects: PortfolioProject[] = [
     caseStudySlug: "ventas-appol",
     caseStudyPath: "/proyectos/informe-de-ventas-appol",
     galleryCategories: ["data"],
-    order: 2
+    order: 4
   },
   {
     id: "mailing-gcba",
@@ -116,7 +170,7 @@ export const projects: PortfolioProject[] = [
     caseStudySlug: "mailing-gcba",
     caseStudyPath: "/proyectos/metricas-de-mailing-gcba",
     galleryCategories: ["data"],
-    order: 3
+    order: 5
   },
   {
     id: "nomina-rrhh",
@@ -139,9 +193,10 @@ export const projects: PortfolioProject[] = [
     caseStudySlug: "nomina-rrhh",
     caseStudyPath: "/proyectos/gestion-de-nomina-rrhh",
     galleryCategories: ["data"],
-    order: 4
+    order: 6
   },
 
 ];
 
-export const recentOverviewProjectSlugs = ["nomina-rrhh", "gastos-rrhh", "ventas-appol"];
+export const featuredOverviewProjectSlug = "wohl-fitness";
+export const recentOverviewProjectSlugs = ["mailing-gcba", "jenny-ugc", "riki-wohl"];

@@ -223,6 +223,14 @@ body.certificate-modal-open {
     border-left: 1px solid var(--dash-border-strong);
 }
 
+.certification-competency:nth-child(3n + 1) {
+    border-left: 0;
+}
+
+.certification-competency:nth-child(n + 4) {
+    border-top: 1px solid var(--dash-border-strong);
+}
+
 .certification-competency > svg {
     width: 34px;
     height: 34px;
@@ -480,10 +488,10 @@ body.certificate-modal-open {
     border-bottom: 1px solid var(--dash-border);
 }
 
-.certification-competency--compact {
+.certification-competency.certification-competency--compact {
     min-height: 25px;
-    grid-template-columns: 18px minmax(0, 1fr);
-    gap: 8px;
+    grid-template-columns: 24px minmax(0, 1fr);
+    gap: 10px;
     padding: 1px 2px;
 }
 
@@ -491,9 +499,9 @@ body.certificate-modal-open {
     border-left: 0;
 }
 
-.certification-competency--compact > svg {
-    width: 17px;
-    height: 17px;
+.certification-competency.certification-competency--compact > svg {
+    width: 19px;
+    height: 19px;
 }
 
 .certification-competency--compact strong {

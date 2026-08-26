@@ -13,7 +13,7 @@ body.case-viewer-open {
 }
 
 .data-case-shell {
-    width: min(100%, 1480px);
+    width: min(100%, 1380px);
     display: grid;
     gap: 12px;
     margin: 0 auto;
@@ -159,6 +159,7 @@ body.case-viewer-open {
     border: 1px solid var(--dash-border);
     border-radius: 14px;
     background: color-mix(in srgb, var(--dash-card-subtle) 88%, var(--dash-canvas-deep));
+    align-content: center;
 }
 
 .data-case-main-visual > span {
@@ -167,37 +168,19 @@ body.case-viewer-open {
     font-weight: 700;
 }
 
-.data-case-main-visual > button {
-    position: absolute;
-    z-index: 2;
-    top: 8px;
-    right: 8px;
-    width: 42px;
-    height: 42px;
-    display: grid;
-    place-items: center;
-    border: 1px solid var(--dash-border-strong);
-    border-radius: 10px;
-    color: var(--dash-ink);
-    background: color-mix(in srgb, var(--dash-card) 88%, transparent);
-    cursor: pointer;
-    transition: color 180ms ease, border-color 180ms ease, background 180ms ease, transform 180ms ease;
-}
-
-.data-case-main-visual > button:hover {
-    color: var(--dash-accent);
-    border-color: var(--dash-accent);
-    transform: translateY(-2px);
-}
-
-.data-case-main-visual > img {
+.data-case-main-visual > .project-capture {
     width: 100%;
-    height: 100%;
-    min-height: 270px;
-    display: block;
-    object-fit: contain;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: var(--project-capture-ratio, 16 / 9);
+    align-self: center;
+    border: 0;
     border-radius: 10px;
     background: var(--dash-canvas-deep);
+}
+
+.data-case-main-visual > .project-capture img {
+    object-fit: contain;
 }
 
 .data-case-facts {
@@ -350,7 +333,7 @@ body.case-viewer-open {
 .project-capture {
     width: 100%;
     min-width: 0;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: var(--project-capture-ratio, 16 / 9);
     display: grid;
     overflow: hidden;
     border: 1px solid var(--dash-border);
@@ -647,7 +630,7 @@ html[data-theme="dark"] .data-case-related small {
         max-width: 14ch;
     }
 
-    .data-case-main-visual > img {
+    .data-case-main-visual > .project-capture {
         min-height: 0;
         aspect-ratio: 16 / 9;
     }

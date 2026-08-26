@@ -5,19 +5,23 @@ import OverviewDashboard from "./components/OverviewDashboard";
 import ProjectsGallery from "./components/ProjectsGallery";
 import ProjectCaseStudy from "./components/ProjectCaseStudy";
 import WebProjectCaseStudy from "./components/WebProjectCaseStudy";
+import FitnessProjectCaseStudy from "./components/FitnessProjectCaseStudy";
 import ExperienceSection from "./components/ExperienceSection";
 import CertificationsSection from "./components/CertificationsSection";
 import ContactSection from "./components/ContactSection";
 import wipImage from "./assets/placeholders/wip.png";
 import { getDataCaseStudy } from "./data/projectCaseStudies";
-import { projects, recentOverviewProjectSlugs } from "./data/projects";
+import { featuredOverviewProjectSlug, projects, recentOverviewProjectSlugs } from "./data/projects";
 import { getWebCaseStudy } from "./data/webCaseStudies";
+import { getFitnessCaseStudy } from "./data/fitnessCaseStudy";
 import "./style.css";
 import "./dashboard.css";
 import "./overview.css";
 import "./projects.css";
 import "./project-case-study.css";
 import "./web-project-case-study.css";
+import "./fitness-project-case-study.css";
+import "./project-capture-carousel.css";
 import "./experience.css";
 import "./certifications.css";
 import "./contact.css";
@@ -266,7 +270,7 @@ function LandingPage({
   copy,
   handleProjectImageError
 }: LandingPageProps) {
-  const featuredProject = projects.find((project) => project.caseStudySlug === "mailing-gcba") ?? projects[0];
+  const featuredProject = projects.find((project) => project.caseStudySlug === featuredOverviewProjectSlug) ?? projects[0];
   const recentProjects = recentOverviewProjectSlugs.flatMap((slug) => {
     const project = projects.find((item) => item.caseStudySlug === slug);
     return project ? [project] : [];
@@ -303,7 +307,8 @@ function ProjectCaseStudyPage({ language, theme, themeToggleRef, themeToggleLabe
   const { slug } = useParams();
   const dataDetail = getDataCaseStudy(slug);
   const webDetail = getWebCaseStudy(slug);
-  const projectId = dataDetail?.projectId ?? webDetail?.projectId;
+  const fitnessDetail = getFitnessCaseStudy(slug);
+  const projectId = dataDetail?.projectId ?? webDetail?.projectId ?? fitnessDetail?.projectId;
   const project = projectId ? projects.find((item) => item.id === projectId) : undefined;
 
   return (
@@ -316,7 +321,9 @@ function ProjectCaseStudyPage({ language, theme, themeToggleRef, themeToggleLabe
       onLanguageChange={onLanguageChange}
       breadcrumbDetails={project ? [{ label: project.title[language] }] : []}
     >
-      {webDetail ? (
+      {fitnessDetail ? (
+        <FitnessProjectCaseStudy detail={fitnessDetail} project={project} projects={projects} language={language} onImageError={handleProjectImageError} />
+      ) : webDetail ? (
         <WebProjectCaseStudy detail={webDetail} project={project} projects={projects} language={language} onImageError={handleProjectImageError} />
       ) : (
         <ProjectCaseStudy detail={dataDetail} project={project} projects={projects} language={language} onImageError={handleProjectImageError} />
@@ -347,13 +354,13 @@ function App() {
     return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
   });
   const copy = uiCopy[language];
-  const isDataCaseStudyRoute = location.pathname.startsWith("/proyectos/");
-  const currentDataCaseStudyProject = useMemo(() => {
-    if (!isDataCaseStudyRoute) return null;
+  const isCaseStudyRoute = location.pathname.startsWith("/proyectos/");
+  const currentCaseStudyProject = useMemo(() => {
+    if (!isCaseStudyRoute) return null;
     const slug = location.pathname.split("/").filter(Boolean).at(-1);
-    const detail = getDataCaseStudy(slug);
+    const detail = getDataCaseStudy(slug) ?? getWebCaseStudy(slug) ?? getFitnessCaseStudy(slug);
     return detail ? projects.find((item) => item.id === detail.projectId) ?? null : null;
-  }, [isDataCaseStudyRoute, location.pathname]);
+  }, [isCaseStudyRoute, location.pathname]);
 
   useEffect(() => {
     document.documentElement.lang = language;
@@ -367,10 +374,10 @@ function App() {
   }, [theme]);
 
   useEffect(() => {
-    document.title = currentDataCaseStudyProject
-      ? `${currentDataCaseStudyProject.title[language]} | Walter Enzo Wohl`
+    document.title = currentCaseStudyProject
+      ? `${currentCaseStudyProject.title[language]} | Walter Enzo Wohl`
       : `Portfolio | Walter Enzo Wohl`;
-  }, [currentDataCaseStudyProject, language]);
+  }, [currentCaseStudyProject, language]);
 
   const handleProjectImageError = (event: SyntheticEvent<HTMLImageElement>) => {
     const image = event.currentTarget;
@@ -454,14 +461,14 @@ function App() {
       </Routes>
 
       <footer className="dashboard-page-footer">
-        <a href={isDataCaseStudyRoute ? "#case-study-top" : "#home"} className="arriba"><i className="fa-solid fa-angles-up" /></a>
+        <a href={isCaseStudyRoute ? "#case-study-top" : "#home"} className="arriba"><i className="fa-solid fa-angles-up" /></a>
         <div className="redes">
           <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/walterenzowohl" aria-label="LinkedIn de Walter Enzo Wohl"><i className="fa-brands fa-linkedin" /></a>
           <a target="_blank" rel="noopener noreferrer" href="https://github.com/WalterEnzoWohl" aria-label="GitHub de Walter Enzo Wohl"><i className="fa-brands fa-github" /></a>
         </div>
         <p className="copyright">
           &copy; {new Date().getFullYear()} Walter Enzo Wohl. {copy.footer}
-          {currentDataCaseStudyProject ? ` · ${currentDataCaseStudyProject.title[language]}` : ""}
+          {currentCaseStudyProject ? ` · ${currentCaseStudyProject.title[language]}` : ""}
         </p>
       </footer>
     </>

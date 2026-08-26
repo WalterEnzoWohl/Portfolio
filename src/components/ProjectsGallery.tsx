@@ -14,6 +14,7 @@ type LocalizedText = Record<Language, string>;
 export type ProjectGalleryItem = {
   id: string;
   title: LocalizedText;
+  categoryLabel?: LocalizedText;
   description: LocalizedText;
   image: string;
   imageAlt: LocalizedText;
@@ -69,7 +70,7 @@ function ProjectCard({
 }) {
   const visibleTools = project.tools.slice(0, 3);
   const hiddenTools = Math.max(project.tools.length - visibleTools.length, 0);
-  const category = copy.filters[project.galleryCategories[0]];
+  const category = project.categoryLabel?.[language] ?? copy.filters[project.galleryCategories[0]];
 
   return (
     <motion.article

@@ -71,34 +71,52 @@ export const certifications: Certification[] = [
     featured: true,
     status: "in-progress",
     statusLabel: { es: "En curso", en: "In progress" },
-    title: { es: "Google Data Analytics", en: "Google Data Analytics" },
+    title: {
+      es: "Certificado Profesional de Análisis de Datos de Google",
+      en: "Google Data Analytics Professional Certificate"
+    },
     institution: { es: "Google | Coursera", en: "Google | Coursera" },
     period: { es: "2025 — Actualidad", en: "2025 — Present" },
     description: {
-      es: "Formación orientada a preparar, analizar y comunicar datos para apoyar decisiones.",
-      en: "Training focused on preparing, analyzing and communicating data to support decisions."
+      es: "Formación en análisis, limpieza y visualización de datos mediante Python, SQL, Google Sheets y Tableau. Incluye estructuras de datos, pandas, NumPy, validación de datos y creación de tableros para la toma de decisiones.",
+      en: "Training in data analysis, cleaning and visualization using Python, SQL, Google Sheets and Tableau. It covers data structures, pandas, NumPy, data validation and dashboard creation for decision-making."
     },
     logo: {
       src: googleLogo,
       alt: { es: "Logo de Google", en: "Google logo" }
     },
     logoFallback: "Google\nCoursera",
-    technologies: ["SQL", "Spreadsheets", "Tableau", "R"],
+    technologies: ["Python", "SQL", "Tableau", "Google Sheets", "Excel", "pandas", "NumPy"],
     competencies: [
       {
         icon: "prepare",
-        title: { es: "Preparar y limpiar", en: "Prepare and clean" },
-        description: { es: "Calidad y estructura de datos", en: "Data quality and structure" }
+        title: { es: "Estructuras y calidad", en: "Structures and quality" },
+        description: { es: "Limpieza, validación y estructura de datos", en: "Data cleaning, validation and structure" }
+      },
+      {
+        icon: "database",
+        title: { es: "SQL y transformación", en: "SQL and transformation" },
+        description: { es: "Consultas, integración y transformación", en: "Queries, integration and transformation" }
       },
       {
         icon: "analyze",
-        title: { es: "Analizar", en: "Analyze" },
-        description: { es: "Indicadores y hallazgos", en: "Indicators and findings" }
+        title: { es: "Python para análisis", en: "Python for analysis" },
+        description: { es: "pandas, NumPy y manipulación de datos", en: "pandas, NumPy and data manipulation" }
+      },
+      {
+        icon: "excel",
+        title: { es: "Hojas de cálculo", en: "Spreadsheets" },
+        description: { es: "Google Sheets, Excel y tablas dinámicas", en: "Google Sheets, Excel and pivot tables" }
+      },
+      {
+        icon: "visualization",
+        title: { es: "Tableau", en: "Tableau" },
+        description: { es: "Visualización y tableros interactivos", en: "Visualization and interactive dashboards" }
       },
       {
         icon: "communicate",
-        title: { es: "Comunicar", en: "Communicate" },
-        description: { es: "Visualizaciones y conclusiones", en: "Visualizations and conclusions" }
+        title: { es: "Análisis responsable", en: "Responsible analysis" },
+        description: { es: "Estadística, pensamiento analítico y ética", en: "Statistics, analytical thinking and ethics" }
       }
     ]
   },

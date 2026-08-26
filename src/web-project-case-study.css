@@ -8,7 +8,7 @@
 }
 
 .web-case-shell {
-    width: min(100%, 1480px);
+    width: min(100%, 1380px);
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     gap: 8px 12px;
@@ -151,7 +151,7 @@
 .web-case-main-visual {
     min-width: 0;
     display: grid;
-    align-content: start;
+    align-content: center;
     gap: 6px;
     margin: 0;
     padding: 8px;
@@ -167,15 +167,17 @@
 }
 
 .web-case-main-visual .project-capture {
-    height: 245px;
-    aspect-ratio: auto;
+    width: 100%;
+    height: auto;
+    aspect-ratio: var(--project-capture-ratio, 2 / 1);
+    align-self: center;
     border: 0;
     border-radius: 10px;
 }
 
 .web-case-main-visual .project-capture img {
     object-fit: contain;
-    object-position: top center;
+    object-position: center;
 }
 
 .web-case-facts {
@@ -493,8 +495,8 @@
 }
 
 .web-case-feature .project-capture img {
-    object-fit: cover;
-    object-position: top center;
+    object-fit: contain;
+    object-position: center;
 }
 
 .web-case-related > div {
@@ -545,6 +547,50 @@
 
 .web-case-related small i {
     margin-left: 8px;
+}
+
+.web-case-page--commercial-landing .web-case-hero {
+    grid-template-columns: minmax(320px, 0.62fr) minmax(620px, 1.38fr);
+}
+
+.web-case-page--commercial-landing .web-case-intro h1 {
+    font-size: clamp(2.4rem, 2.85vw, 3.1rem);
+}
+
+.web-case-page--commercial-landing .web-case-actions a:last-child {
+    display: none;
+}
+
+.web-case-page--commercial-landing .web-case-feature-layout {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.web-case-page--commercial-landing .web-case-feature {
+    min-height: 176px;
+}
+
+.web-case-page--commercial-landing .web-case-feature--1 {
+    grid-column: span 4;
+}
+
+.web-case-page--commercial-landing .web-case-feature--2 {
+    grid-column: span 5;
+}
+
+.web-case-page--commercial-landing .web-case-feature--3 {
+    grid-column: span 3;
+}
+
+.web-case-page--commercial-landing .web-case-feature--2 .web-case-feature-copy {
+    flex-basis: 36%;
+}
+
+.web-case-page--commercial-landing .web-case-feature--2 .project-capture {
+    flex-basis: 64%;
+}
+
+.web-case-page--commercial-landing .web-case-highlights li {
+    line-height: 1.28;
 }
 
 @media (max-width: 1120px) {
@@ -604,6 +650,12 @@
         grid-column: 1;
         grid-row: auto;
         flex-direction: column;
+    }
+
+    .web-case-page--commercial-landing .web-case-feature--1,
+    .web-case-page--commercial-landing .web-case-feature--2,
+    .web-case-page--commercial-landing .web-case-feature--3 {
+        grid-column: 1;
     }
 
     .web-case-feature .project-capture,

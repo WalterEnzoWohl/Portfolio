@@ -6,6 +6,10 @@ type LocalizedText = Record<Language, string>;
 export type WebCaseStudyDetail = {
   projectId: string;
   slug: string;
+  variant?: "ugc-platform" | "commercial-landing";
+  mainViewLabel?: LocalizedText;
+  featuresEyebrow?: LocalizedText;
+  featuresTitle?: LocalizedText;
   fullDescription: LocalizedText;
   quickFacts: {
     context: LocalizedText;
@@ -117,6 +121,104 @@ export const webCaseStudies: WebCaseStudyDetail[] = [
       }
     ],
     relatedProjectIds: ["wohl-fitness", "riki-wohl"]
+  },
+  {
+    projectId: "riki-wohl",
+    slug: "riki-wohl",
+    variant: "commercial-landing",
+    mainViewLabel: { es: "Vista principal", en: "Main view" },
+    featuresEyebrow: {
+      es: "Propuesta comercial → experiencia visual → consulta",
+      en: "Commercial proposal → visual experience → enquiry"
+    },
+    featuresTitle: { es: "Presentación visual del proyecto", en: "Visual project presentation" },
+    fullDescription: {
+      es: "Centraliza la propuesta comercial, los packs, la carta y las vías de contacto en una experiencia visual orientada a la conversión.",
+      en: "It centralizes the commercial offering, packages, menu and contact channels in a visual experience designed to encourage enquiries."
+    },
+    quickFacts: {
+      context: {
+        es: "Sitio comercial para un servicio de barra móvil y eventos.",
+        en: "Commercial website for a mobile bar and event service."
+      },
+      objective: {
+        es: "Presentar la propuesta, ordenar la oferta y generar consultas de cotización.",
+        en: "Present the offering, organize the services and generate quote enquiries."
+      },
+      participation: {
+        es: "Diseño de estructura, desarrollo frontend, contenido visual e implementación responsive.",
+        en: "Information architecture, frontend development, visual content and responsive implementation."
+      }
+    },
+    journey: [
+      {
+        id: "problem",
+        icon: "fa-solid fa-triangle-exclamation",
+        title: { es: "Problema", en: "Problem" },
+        description: {
+          es: "El servicio necesitaba una presencia digital clara para mostrar su propuesta, diferenciar sus packs y concentrar la información clave antes de la consulta.",
+          en: "The service needed a clear digital presence to showcase its offering, differentiate packages and gather key information before an enquiry."
+        }
+      },
+      {
+        id: "process",
+        icon: "fa-solid fa-gears",
+        title: { es: "Proceso", en: "Process" },
+        description: {
+          es: "Se estructuró el contenido comercial y se desarrolló una landing responsive con navegación, packs, carta, galería, preguntas frecuentes y contacto.",
+          en: "The commercial content was structured into a responsive landing page with navigation, packages, menu, gallery, FAQs and contact."
+        }
+      },
+      {
+        id: "solution",
+        icon: "fa-regular fa-circle-check",
+        title: { es: "Solución", en: "Solution" },
+        description: {
+          es: "Una landing comercial que presenta el servicio de forma visual, organiza la oferta y guía al usuario hacia la cotización.",
+          en: "A commercial landing page that presents the service visually, organizes the offering and guides users toward requesting a quote."
+        }
+      }
+    ],
+    highlights: [
+      { es: "Navegación interna con desplazamiento suave.", en: "Internal navigation with smooth scrolling." },
+      { es: "Presentación estructurada de servicios y packs.", en: "Structured presentation of services and packages." },
+      { es: "Carta interactiva organizada por categorías.", en: "Interactive cocktail menu organized by category." },
+      { es: "Galería visual orientada a reforzar la experiencia del servicio.", en: "Visual gallery designed to reinforce the service experience." },
+      { es: "Preguntas frecuentes desplegables.", en: "Expandable frequently asked questions." },
+      { es: "Formulario de consulta para eventos.", en: "Event enquiry form." },
+      { es: "Adaptación a escritorio, tablet y móvil.", en: "Desktop, tablet and mobile adaptation." },
+      { es: "Animaciones e interacciones de interfaz.", en: "Interface animations and interactions." }
+    ],
+    features: [
+      {
+        id: "services",
+        capture: "B",
+        title: { es: "Propuesta y servicios", en: "Offering and services" },
+        description: {
+          es: "Packs organizados por nivel de propuesta para facilitar la comparación y dirigir al usuario hacia la consulta.",
+          en: "Packages organized by service level to simplify comparison and guide users toward an enquiry."
+        }
+      },
+      {
+        id: "visual-experience",
+        capture: "C",
+        title: { es: "Experiencia visual", en: "Visual experience" },
+        description: {
+          es: "Composición editorial y galería fotográfica para transmitir la experiencia del servicio y reforzar su identidad.",
+          en: "Editorial composition and photo gallery that communicate the service experience and reinforce its identity."
+        }
+      },
+      {
+        id: "event-enquiry",
+        capture: "D",
+        title: { es: "Consulta de evento", en: "Event enquiry" },
+        description: {
+          es: "Formulario estructurado para recopilar los principales datos de un evento antes de iniciar una conversación comercial.",
+          en: "Structured form for gathering key event details before starting a commercial conversation."
+        }
+      }
+    ],
+    relatedProjectIds: ["jenny-ugc", "wohl-fitness"]
   }
 ];
 

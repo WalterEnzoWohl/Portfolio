@@ -1,10 +1,11 @@
-import { useMemo, type SyntheticEvent } from "react";
+import { useMemo, useState, type SyntheticEvent } from "react";
 import { Link } from "react-router-dom";
-import { MotionConfig, motion } from "motion/react";
+import { AnimatePresence, MotionConfig, motion } from "motion/react";
 import { interactiveMotion, sectionReveal, staggerContainer, staggerItem } from "../animations/motion";
 import type { Language } from "../config/navigation";
 import type { WebCaseStudyDetail } from "../data/webCaseStudies";
 import ProjectCapture from "./ProjectCapture";
+import ProjectCaptureCarousel, { type ProjectCaptureSlide } from "./ProjectCaptureCarousel";
 import type { CaseStudyProject } from "./ProjectCaseStudy";
 
 const copy = {
@@ -13,6 +14,7 @@ const copy = {
     openSite: "Abrir sitio",
     back: "Volver a proyectos",
     mainView: "Sitio público",
+    expandImage: "Ampliar captura",
     facts: {
       context: "Contexto",
       objective: "Objetivo",
@@ -34,6 +36,7 @@ const copy = {
     openSite: "Open site",
     back: "Back to projects",
     mainView: "Public site",
+    expandImage: "Expand screenshot",
     facts: {
       context: "Context",
       objective: "Objective",
@@ -80,14 +83,34 @@ function WebProjectCaseStudy({
   language: Language;
   onImageError: (event: SyntheticEvent<HTMLImageElement>) => void;
 }) {
+  const [viewerIndex, setViewerIndex] = useState<number | null>(null);
   const text = copy[language];
   const relatedProjects = useMemo(() => {
     if (!detail) return [];
     const relatedIds = new Set(detail.relatedProjectIds);
     return projects.filter((item) => relatedIds.has(item.id) && item.caseStudyPath);
   }, [detail, projects]);
+  const captureSlides = useMemo<ProjectCaptureSlide[]>(() => {
+    if (!detail || !project) return [];
+    return [
+      {
+        capture: "A",
+        title: detail.mainViewLabel?.[language] ?? text.mainView,
+        description: detail.fullDescription[language],
+        alt: project.imageAlt[language]
+      },
+      ...detail.features.map((feature) => ({
+        capture: feature.capture,
+        title: feature.title[language],
+        description: feature.description[language],
+        alt: `${feature.title[language]}: ${project.title[language]}`
+      }))
+    ];
+  }, [detail, language, project, text.mainView]);
 
   if (!detail || !project) return <WebProjectNotFound language={language} />;
+
+  const variant = detail.variant ?? "ugc-platform";
 
   const facts = [
     { label: text.facts.context, value: detail.quickFacts.context[language] },
@@ -97,7 +120,7 @@ function WebProjectCaseStudy({
 
   return (
     <MotionConfig reducedMotion="user">
-      <main className="web-case-page" id="case-study-top">
+      <main className={`web-case-page web-case-page--${variant}`} id="case-study-top">
         <motion.div className="web-case-shell" initial="hidden" animate="visible" variants={sectionReveal}>
           <section className="web-case-hero" aria-labelledby="web-case-title">
             <article className="web-case-intro">
@@ -117,7 +140,7 @@ function WebProjectCaseStudy({
             </article>
 
             <motion.figure className="web-case-main-visual" variants={staggerItem}>
-              <figcaption>{text.mainView}</figcaption>
+              <figcaption>{detail.mainViewLabel?.[language] ?? text.mainView}</figcaption>
               <ProjectCapture
                 projectNumber={project.projectNumber}
                 capture="A"
@@ -125,6 +148,8 @@ function WebProjectCaseStudy({
                 fit="contain"
                 loading="eager"
                 pendingLabel={text.pendingCapture}
+                onOpen={() => setViewerIndex(0)}
+                openLabel={`${text.expandImage}: ${project.title[language]}`}
               />
             </motion.figure>
           </section>
@@ -158,7 +183,7 @@ function WebProjectCaseStudy({
           <section className="web-case-highlights" aria-labelledby="web-case-highlights-title">
             <div className="web-case-highlights-heading">
               <span><i className="fa-solid fa-wand-magic-sparkles" aria-hidden="true" /></span>
-              <div><small>JennyUGC.com</small><h2 id="web-case-highlights-title">{text.highlights}</h2></div>
+              <div><small>{project.title[language]}</small><h2 id="web-case-highlights-title">{text.highlights}</h2></div>
             </div>
             <motion.ul variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }}>
               {detail.highlights.map((item) => (
@@ -169,8 +194,8 @@ function WebProjectCaseStudy({
 
           <section className="web-case-features" aria-labelledby="web-case-features-title">
             <header>
-              <small>{text.featuresEyebrow}</small>
-              <h2 id="web-case-features-title">{text.features}</h2>
+              <small>{detail.featuresEyebrow?.[language] ?? text.featuresEyebrow}</small>
+              <h2 id="web-case-features-title">{detail.featuresTitle?.[language] ?? text.features}</h2>
             </header>
             <div className="web-case-feature-layout">
               {detail.features.map((feature, index) => (
@@ -193,6 +218,8 @@ function WebProjectCaseStudy({
                     alt={`${feature.title[language]}: ${project.title[language]}`}
                     fit="contain"
                     pendingLabel={text.pendingCapture}
+                    onOpen={() => setViewerIndex(index + 1)}
+                    openLabel={`${text.expandImage}: ${feature.title[language]}`}
                   />
                 </motion.article>
               ))}
@@ -213,6 +240,20 @@ function WebProjectCaseStudy({
             </section>
           ) : null}
         </motion.div>
+        <AnimatePresence>
+          {viewerIndex !== null ? (
+            <ProjectCaptureCarousel
+              projectNumber={project.projectNumber}
+              projectTitle={project.title[language]}
+              slides={captureSlides}
+              activeIndex={viewerIndex}
+              language={language}
+              pendingLabel={text.pendingCapture}
+              onIndexChange={setViewerIndex}
+              onClose={() => setViewerIndex(null)}
+            />
+          ) : null}
+        </AnimatePresence>
       </main>
     </MotionConfig>
   );

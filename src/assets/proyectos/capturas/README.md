@@ -1,6 +1,6 @@
 # Inventario de capturas
 
-Convención: el número identifica al proyecto y la letra identifica el tipo de captura (`A` vista general; `B`, `C` y `D` proceso).
+Convención: el número identifica al proyecto y la letra identifica el tipo de captura (`A` vista general; las letras siguientes corresponden a vistas del producto o del proceso).
 
 | Código | Proyecto | Tipo | Estado |
 |--------|----------|------|--------|
@@ -24,3 +24,15 @@ Convención: el número identifica al proyecto y la letra identifica el tipo de 
 | 5B | JennyUGC.com | Portfolio multimedia | Cargada |
 | 5C | JennyUGC.com | Panel de administración | Cargada |
 | 5D | JennyUGC.com | Carga y edición de videos | Cargada |
+| 6A | RikiWohl.com | Página principal | Cargada |
+| 6B | RikiWohl.com | Propuesta y servicios | Cargada |
+| 6C | RikiWohl.com | Experiencia visual | Cargada |
+| 6D | RikiWohl.com | Consulta de evento | Cargada |
+| 7A | WOHL — App fitness | Portada / imagen principal | Cargada |
+| 7B | WOHL — App fitness | Entrená con enfoque | Cargada |
+| 7C | WOHL — App fitness | Organizá tus rutinas | Cargada |
+| 7D | WOHL — App fitness | Registrá cada serie | Cargada |
+| 7E | WOHL — App fitness | Reviví cada sesión | Cargada |
+| 7F | WOHL — App fitness | Medí tu progreso real | Cargada |
+| 7G | WOHL — App fitness | Visualizá tu carga muscular | Cargada |
+| 7H | WOHL — App fitness | Portada de la tarjeta en Proyectos | Cargada |
