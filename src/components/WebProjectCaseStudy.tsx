@@ -185,7 +185,7 @@ function WebProjectCaseStudy({
               <span><i className="fa-solid fa-wand-magic-sparkles" aria-hidden="true" /></span>
               <div><small>{project.title[language]}</small><h2 id="web-case-highlights-title">{text.highlights}</h2></div>
             </div>
-            <motion.ul variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }}>
+            <motion.ul variants={staggerContainer} initial="hidden" animate="visible">
               {detail.highlights.map((item) => (
                 <motion.li key={item.es} variants={staggerItem}><i className="fa-solid fa-check" aria-hidden="true" /><span>{item[language]}</span></motion.li>
               ))}

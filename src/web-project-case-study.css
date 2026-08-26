@@ -610,6 +610,10 @@
         min-height: 0;
     }
 
+    .web-case-page--commercial-landing .web-case-hero {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
     .web-case-intro h1 {
         max-width: none;
     }
@@ -644,6 +648,10 @@
         grid-template-rows: auto;
     }
 
+    .web-case-page--commercial-landing .web-case-feature-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
     .web-case-feature--1,
     .web-case-feature--2,
     .web-case-feature--3 {
@@ -669,10 +677,15 @@
 
 @media (max-width: 767px) {
     .web-case-page {
+        width: 100%;
+        min-width: 0;
+        overflow-x: clip;
         padding: 12px 12px calc(96px + env(safe-area-inset-bottom));
     }
 
     .web-case-shell {
+        width: 100%;
+        min-width: 0;
         gap: 12px;
     }
 
@@ -689,16 +702,29 @@
     .web-case-highlights,
     .web-case-features,
     .web-case-related {
+        width: 100%;
+        min-width: 0;
         padding: 16px;
     }
 
+    .web-case-hero,
+    .web-case-page--commercial-landing .web-case-hero {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+
     .web-case-intro {
+        width: 100%;
+        min-width: 0;
         padding: 0;
     }
 
     .web-case-intro h1 {
+        max-width: 100%;
         margin-top: 12px;
-        font-size: clamp(2.25rem, 13vw, 3.2rem);
+        font-size: clamp(2.15rem, 10.8vw, 2.8rem);
+        line-height: 1.02;
+        overflow-wrap: anywhere;
     }
 
     .web-case-lead {
@@ -723,7 +749,14 @@
     }
 
     .web-case-main-visual {
+        width: 100%;
+        min-width: 0;
         padding: 8px;
+    }
+
+    .web-case-main-visual .project-capture {
+        width: 100%;
+        max-width: 100%;
     }
 
     .web-case-facts {
@@ -745,7 +778,12 @@
     }
 
     .web-case-highlights ul {
+        width: 100%;
         grid-template-columns: 1fr;
+    }
+
+    .web-case-highlights li {
+        min-width: 0;
     }
 
     .web-case-features header small {
@@ -754,7 +792,40 @@
     }
 
     .web-case-feature-copy {
+        flex: none;
+        width: 100%;
+        min-width: 0;
         padding: 15px;
+    }
+
+    .web-case-feature-layout,
+    .web-case-page--commercial-landing .web-case-feature-layout {
+        width: 100%;
+        min-width: 0;
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .web-case-feature,
+    .web-case-page--commercial-landing .web-case-feature {
+        width: 100%;
+        min-width: 0;
+        min-height: 0;
+        grid-column: 1;
+        grid-row: auto;
+        flex-direction: column;
+    }
+
+    .web-case-page--commercial-landing .web-case-feature--2 .web-case-feature-copy,
+    .web-case-page--commercial-landing .web-case-feature--2 .project-capture {
+        flex-basis: auto;
+    }
+
+    .web-case-feature .project-capture,
+    .web-case-page--commercial-landing .web-case-feature .project-capture {
+        width: 100%;
+        max-width: 100%;
+        flex: none;
+        aspect-ratio: 16 / 9;
     }
 
     .web-case-related > div {
