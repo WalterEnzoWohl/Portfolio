@@ -147,7 +147,7 @@ function WebProjectCaseStudy({
 
   return (
     <MotionConfig reducedMotion="user">
-      <main className={`web-case-page web-case-page--${variant}`} id="case-study-top">
+      <main className={`web-case-page web-case-page--${variant}${detail.splitFooter ? " web-case-page--split-footer" : ""}`} id="case-study-top">
         <motion.div className="web-case-shell" initial="hidden" animate="visible" variants={sectionReveal}>
           <section className="web-case-hero" aria-labelledby="web-case-title">
             <article className="web-case-intro">

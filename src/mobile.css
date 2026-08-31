@@ -1351,8 +1351,9 @@ body.mobile-project-filters-open {
 
     .certificate-modal figure {
         width: 100%;
+        height: 92dvh;
         max-height: 94dvh;
-        overflow: auto;
+        overflow: hidden;
     }
 
     /* Contact */

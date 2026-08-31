@@ -1,9 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion, useReducedMotion } from "motion/react";
 import type { Language } from "../config/navigation";
 import type { ProjectCaptureLetter } from "../data/projectCaptures";
 import ProjectCapture from "./ProjectCapture";
+import ZoomableMedia from "./ZoomableMedia";
 
 export type ProjectCaptureSlide = {
   capture: ProjectCaptureLetter;
@@ -29,14 +30,22 @@ const viewerCopy = {
     close: "Cerrar galería",
     previous: "Captura anterior",
     next: "Captura siguiente",
-    goTo: "Ir a la captura"
+    goTo: "Ir a la captura",
+    zoomRegion: "Imagen ampliable. Usá la rueda, doble clic o los controles para cambiar el zoom.",
+    zoomIn: "Acercar imagen",
+    zoomOut: "Alejar imagen",
+    resetZoom: "Restablecer zoom"
   },
   en: {
     dialog: "Screenshot gallery",
     close: "Close gallery",
     previous: "Previous screenshot",
     next: "Next screenshot",
-    goTo: "Go to screenshot"
+    goTo: "Go to screenshot",
+    zoomRegion: "Zoomable image. Use the wheel, double-click or controls to change zoom.",
+    zoomIn: "Zoom in",
+    zoomOut: "Zoom out",
+    resetZoom: "Reset zoom"
   }
 } as const;
 
@@ -56,6 +65,8 @@ function ProjectCaptureCarousel({
   const activeIndexRef = useRef(activeIndex);
   const onIndexChangeRef = useRef(onIndexChange);
   const onCloseRef = useRef(onClose);
+  const isZoomedRef = useRef(false);
+  const [isZoomed, setIsZoomed] = useState(false);
   const reducedMotion = useReducedMotion();
   const text = viewerCopy[language];
   const slide = slides[activeIndex];
@@ -63,6 +74,11 @@ function ProjectCaptureCarousel({
   activeIndexRef.current = activeIndex;
   onIndexChangeRef.current = onIndexChange;
   onCloseRef.current = onClose;
+  isZoomedRef.current = isZoomed;
+
+  const handleZoomChange = useCallback((zoom: number) => {
+    setIsZoomed(zoom > 1);
+  }, []);
 
   const move = (direction: -1 | 1) => {
     const nextIndex = (activeIndexRef.current + direction + slides.length) % slides.length;
@@ -86,11 +102,13 @@ function ProjectCaptureCarousel({
         return;
       }
       if (event.key === "ArrowLeft") {
+        if (isZoomedRef.current) return;
         event.preventDefault();
         move(-1);
         return;
       }
       if (event.key === "ArrowRight") {
+        if (isZoomedRef.current) return;
         event.preventDefault();
         move(1);
         return;
@@ -168,7 +186,7 @@ function ProjectCaptureCarousel({
           <motion.div
             key={`${projectNumber}-${slide.capture}`}
             className="project-capture-carousel-media"
-            drag={reducedMotion || slides.length < 2 ? false : "x"}
+            drag={reducedMotion || slides.length < 2 || isZoomed ? false : "x"}
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={0.12}
             onDragEnd={(_, info) => {
@@ -179,14 +197,25 @@ function ProjectCaptureCarousel({
             animate={{ opacity: 1 }}
             transition={{ duration: reducedMotion ? 0 : 0.18 }}
           >
-            <ProjectCapture
-              projectNumber={projectNumber}
-              capture={slide.capture}
-              alt={slide.alt}
-              fit="contain"
-              loading="eager"
-              pendingLabel={pendingLabel}
-            />
+            <ZoomableMedia
+              resetKey={`${projectNumber}-${slide.capture}`}
+              labels={{
+                region: text.zoomRegion,
+                zoomIn: text.zoomIn,
+                zoomOut: text.zoomOut,
+                reset: text.resetZoom
+              }}
+              onZoomChange={handleZoomChange}
+            >
+              <ProjectCapture
+                projectNumber={projectNumber}
+                capture={slide.capture}
+                alt={slide.alt}
+                fit="contain"
+                loading="eager"
+                pendingLabel={pendingLabel}
+              />
+            </ZoomableMedia>
           </motion.div>
 
           {slides.length > 1 ? (

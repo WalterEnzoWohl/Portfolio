@@ -48,7 +48,11 @@ export const certificationSectionCopy = {
     viewCertificate: "Ver certificado",
     closeCertificate: "Cerrar certificado",
     certificatePreview: "Vista previa del certificado",
-    certificatePending: "Certificado pendiente de incorporar"
+    certificatePending: "Certificado pendiente de incorporar",
+    zoomRegion: "Certificado ampliable. Usá la rueda, doble clic o los controles para cambiar el zoom.",
+    zoomIn: "Acercar certificado",
+    zoomOut: "Alejar certificado",
+    resetZoom: "Restablecer zoom"
   },
   en: {
     title: "Certifications",
@@ -61,7 +65,11 @@ export const certificationSectionCopy = {
     viewCertificate: "View certificate",
     closeCertificate: "Close certificate",
     certificatePreview: "Certificate preview",
-    certificatePending: "Certificate asset pending"
+    certificatePending: "Certificate asset pending",
+    zoomRegion: "Zoomable certificate. Use the wheel, double-click or controls to change zoom.",
+    zoomIn: "Zoom in on certificate",
+    zoomOut: "Zoom out from certificate",
+    resetZoom: "Reset zoom"
   }
 } as const;
 

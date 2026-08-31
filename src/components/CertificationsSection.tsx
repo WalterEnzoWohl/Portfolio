@@ -20,6 +20,7 @@ import {
   type CertificationCompetency,
   type CertificationIconKey
 } from "../data/certifications";
+import ZoomableMedia from "./ZoomableMedia";
 
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -142,6 +143,7 @@ function CertificationIllustration() {
 
 function CertificateModal({ certification, language, onClose, returnFocusTo }: { certification: Certification; language: Language; onClose: () => void; returnFocusTo: HTMLElement | null }) {
   const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLElement>(null);
   const copy = certificationSectionCopy[language];
 
   useEffect(() => {
@@ -157,8 +159,17 @@ function CertificateModal({ certification, language, onClose, returnFocusTo }: {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
       if (event.key === "Tab") {
-        event.preventDefault();
-        closeRef.current?.focus();
+        const focusable = dialogRef.current?.querySelectorAll<HTMLElement>('button:not([disabled]), [tabindex]:not([tabindex="-1"])');
+        if (!focusable?.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -177,9 +188,15 @@ function CertificateModal({ certification, language, onClose, returnFocusTo }: {
   return (
     <motion.div className="certificate-modal" role="dialog" aria-modal="true" aria-label={`${copy.certificatePreview}: ${certification.title[language]}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <button className="certificate-modal-backdrop" type="button" tabIndex={-1} aria-label={copy.closeCertificate} onClick={onClose} />
-      <motion.figure layoutId={`certificate-${certification.id}`} initial={{ opacity: 0, scale: 0.985 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.985 }} transition={{ duration: 0.22 }}>
+      <motion.figure ref={dialogRef} layoutId={`certificate-${certification.id}`} initial={{ opacity: 0, scale: 0.985 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.985 }} transition={{ duration: 0.22 }}>
         <button ref={closeRef} type="button" onClick={onClose} aria-label={copy.closeCertificate}><TbX aria-hidden="true" /></button>
-        <img src={certification.certificateImage} alt={`${copy.certificatePreview}: ${certification.title[language]}`} />
+        <ZoomableMedia
+          className="certificate-zoom-media"
+          resetKey={certification.id}
+          labels={{ region: copy.zoomRegion, zoomIn: copy.zoomIn, zoomOut: copy.zoomOut, reset: copy.resetZoom }}
+        >
+          <img src={certification.certificateImage} alt={`${copy.certificatePreview}: ${certification.title[language]}`} draggable={false} />
+        </ZoomableMedia>
         <figcaption>{certification.title[language]}</figcaption>
       </motion.figure>
     </motion.div>

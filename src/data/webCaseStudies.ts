@@ -13,6 +13,7 @@ export type WebCaseStudyDetail = {
   mainViewLabel?: LocalizedText;
   journeyTitle?: LocalizedText;
   highlightsPlacement?: "before-features" | "after-features";
+  splitFooter?: boolean;
   featuresEyebrow?: LocalizedText;
   featuresTitle?: LocalizedText;
   leadDescription?: LocalizedText;
@@ -39,6 +40,132 @@ export type WebCaseStudyDetail = {
 };
 
 export const webCaseStudies: WebCaseStudyDetail[] = [
+  {
+    projectId: "sigo",
+    slug: "sigo",
+    variant: "internal-tool",
+    categoryLabel: { es: "Herramienta interna", en: "Internal tool" },
+    ctaLabel: { es: "Abrir sistema", en: "Open system" },
+    heroCapture: "A",
+    mainViewLabel: { es: "Inicio y resumen", en: "Home and overview" },
+    journeyTitle: { es: "Del problema a la solución", en: "From problem to solution" },
+    highlightsPlacement: "after-features",
+    splitFooter: true,
+    featuresEyebrow: {
+      es: "Área → meta → indicador clave → carga → validación → análisis",
+      en: "Area → goal → key indicator → entry → validation → analysis"
+    },
+    featuresTitle: { es: "Qué permite hacer", en: "What it enables" },
+    leadDescription: {
+      es: "Sistema interno de indicadores y objetivos para equipos, áreas, metas e indicadores clave.",
+      en: "Internal indicators and objectives system for teams, areas, goals and key indicators."
+    },
+    fullDescription: {
+      es: "Centraliza la carga de indicadores clave, el seguimiento de avances, la validación de envíos y el análisis de cumplimiento en una única herramienta interna.",
+      en: "It centralizes key indicator entry, progress tracking, submission validation and performance analysis in a single internal tool."
+    },
+    quickFacts: {
+      context: {
+        es: "Seguimiento de KPIs, áreas y objetivos.",
+        en: "Tracking KPIs, areas and objectives."
+      },
+      objective: {
+        es: "Ordenar el seguimiento de metas e indicadores clave por área.",
+        en: "Organize the tracking of goals and key indicators by area."
+      },
+      participation: {
+        es: "Rediseño conceptual, estructura de datos, interfaz, métricas y experiencia de uso.",
+        en: "Concept redesign, data structure, interface, metrics and user experience."
+      }
+    },
+    journey: [
+      {
+        id: "problem",
+        icon: "fa-solid fa-diagram-project",
+        title: { es: "Problema", en: "Problem" },
+        description: {
+          es: "La información y el seguimiento de indicadores podían quedar dispersos y dificultar el control del avance real.",
+          en: "Indicator information and tracking could become scattered, making actual progress difficult to control."
+        }
+      },
+      {
+        id: "process",
+        icon: "fa-solid fa-gears",
+        title: { es: "Proceso", en: "Process" },
+        description: {
+          es: "Se redefinió el sistema alrededor de áreas, metas e indicadores clave, incorporando carga periódica, validación, trazabilidad y análisis.",
+          en: "The system was redefined around areas, goals and key indicators, incorporating periodic entry, validation, traceability and analysis."
+        }
+      },
+      {
+        id: "solution",
+        icon: "fa-regular fa-circle-check",
+        title: { es: "Solución", en: "Solution" },
+        description: {
+          es: "Una aplicación interna para registrar avances, monitorear el cumplimiento y analizar resultados desde una vista centralizada.",
+          en: "An internal application for recording progress, monitoring performance and analyzing results from a centralized view."
+        }
+      }
+    ],
+    highlights: [
+      { es: "Seguimiento de áreas, metas e indicadores clave.", en: "Tracking areas, goals and key indicators." },
+      { es: "Carga periódica de avances.", en: "Periodic progress entry." },
+      { es: "Validación y trazabilidad de envíos.", en: "Submission validation and traceability." },
+      { es: "Analítica de cumplimiento por área.", en: "Performance analytics by area." },
+      { es: "Filtros y vistas ejecutivas.", en: "Filters and executive views." },
+      { es: "Roles de administrador y usuario.", en: "Administrator and user roles." },
+      { es: "Arquitectura sobre Apps Script y Google Sheets.", en: "Architecture built on Apps Script and Google Sheets." },
+      { es: "Datos demo para explorar el sistema.", en: "Demo data for exploring the system." }
+    ],
+    features: [
+      {
+        id: "home-overview",
+        capture: "A",
+        title: { es: "Inicio y resumen", en: "Home and overview" },
+        description: {
+          es: "Panel inicial con áreas activas, metas, indicadores clave, cumplimiento global y accesos rápidos.",
+          en: "Home dashboard with active areas, goals, key indicators, global performance and quick actions."
+        }
+      },
+      {
+        id: "indicator-entry",
+        capture: "B",
+        title: { es: "Carga de indicadores", en: "Indicator entry" },
+        description: {
+          es: "Formulario para registrar avances periódicos, valores alcanzados, responsables y metadatos del indicador.",
+          en: "Form for recording periodic progress, achieved values, owners and indicator metadata."
+        }
+      },
+      {
+        id: "my-submissions",
+        capture: "C",
+        title: { es: "Mis envíos", en: "My submissions" },
+        description: {
+          es: "Listado consultable de cargas realizadas con valores, fechas, estados y acceso al detalle.",
+          en: "Searchable list of submitted entries with values, dates, statuses and detail access."
+        }
+      },
+      {
+        id: "analytics",
+        capture: "D",
+        title: { es: "Analytics", en: "Analytics" },
+        description: {
+          es: "Panel ejecutivo con cumplimiento por área, distribución de estados, evolución temporal y métricas globales.",
+          en: "Executive dashboard with performance by area, status distribution, time evolution and global metrics."
+        }
+      },
+      {
+        id: "management",
+        capture: "E",
+        title: { es: "Gestión", en: "Management" },
+        description: {
+          es: "Administración centralizada de áreas, metas e indicadores clave con filtros, relaciones y estados.",
+          en: "Centralized administration of areas, goals and key indicators with filters, relationships and statuses."
+        }
+      }
+    ],
+    relatedProjectIds: ["tablero-eventos-interno", "wohl-fitness"]
+  },
   {
     projectId: "tablero-eventos-interno",
     slug: "tablero-eventos-interno",

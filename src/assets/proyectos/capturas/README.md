@@ -41,3 +41,8 @@ Convención: el número identifica al proyecto y la letra identifica el tipo de 
 | 8C | Tablero de Eventos Interno | Análisis territorial y composición | Cargada |
 | 8D | Tablero de Eventos Interno | Registro de nuevos eventos | Cargada |
 | 8E | Tablero de Eventos Interno | Gestión y detalle | Cargada |
+| 9A | SIGO | Inicio y dashboard principal | Cargada |
+| 9B | SIGO | Carga de indicadores clave | Cargada |
+| 9C | SIGO | Mis envíos | Cargada |
+| 9D | SIGO | Analytics | Cargada |
+| 9E | SIGO | Gestión de áreas, metas e indicadores clave | Cargada |

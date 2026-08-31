@@ -22,6 +22,7 @@ import "./project-case-study.css";
 import "./web-project-case-study.css";
 import "./fitness-project-case-study.css";
 import "./project-capture-carousel.css";
+import "./image-zoom.css";
 import "./experience.css";
 import "./certifications.css";
 import "./contact.css";

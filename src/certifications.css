@@ -632,8 +632,10 @@ body.certificate-modal-open {
     position: relative;
     z-index: 1;
     width: min(880px, 92vw);
+    height: min(860px, 90svh);
     max-height: 90svh;
     display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
     gap: 8px;
     margin: 0;
     padding: 12px;
@@ -646,6 +648,7 @@ body.certificate-modal-open {
 
 .certificate-modal figure > button {
     position: absolute;
+    z-index: 10;
     top: 20px;
     right: 20px;
     width: 40px;
@@ -664,11 +667,20 @@ body.certificate-modal-open {
     height: 22px;
 }
 
-.certificate-modal figure img {
+.certificate-modal .certificate-zoom-media img {
     width: 100%;
-    max-height: calc(90svh - 58px);
+    height: 100%;
+    max-width: none;
+    max-height: none;
     object-fit: contain;
     border-radius: 9px;
+}
+
+.certificate-zoom-media {
+    min-height: 0;
+    overflow: hidden;
+    border-radius: 9px;
+    background: color-mix(in srgb, var(--dash-canvas-deep) 90%, #000 10%);
 }
 
 .certificate-modal figcaption {
@@ -930,6 +942,7 @@ body.certificate-modal-open {
 
     .certificate-modal figure {
         width: 100%;
+        height: 92dvh;
     }
 }
 

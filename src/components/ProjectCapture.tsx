@@ -49,6 +49,7 @@ function ProjectCapture({
         <img
           src={source}
           alt={alt}
+          draggable={false}
           loading={loading}
           decoding="async"
           onLoad={(event) => {

@@ -25,6 +25,33 @@ export type PortfolioProject = {
 
 export const projects: PortfolioProject[] = [
   {
+    id: "sigo",
+    projectNumber: 9,
+    title: { es: "SIGO", en: "SIGO" },
+    category: "web",
+    categoryLabel: { es: "Herramienta interna", en: "Internal tool" },
+    description: {
+      es: "Sistema interno para gestionar metas e indicadores clave por área, registrar avances y analizar el cumplimiento.",
+      en: "Internal system for managing goals and key indicators by area, recording progress and analyzing performance."
+    },
+    tools: ["Apps Script", "Google Sheets", "JavaScript", "HTML/CSS"],
+    highlights: {
+      es: ["Seguimiento de áreas, metas e indicadores clave", "Carga, validación y analítica de avances"],
+      en: ["Tracking areas, goals and key indicators", "Progress entry, validation and analytics"]
+    },
+    image: getProjectCaptureOrPlaceholder(9, "A"),
+    imageAlt: {
+      es: "Inicio de SIGO con resumen de áreas, metas, indicadores clave y cumplimiento global.",
+      en: "SIGO home screen with a summary of areas, goals, key indicators and global performance."
+    },
+    link: "https://script.google.com/macros/s/AKfycbz9HuvCLFW4pJJZijTmTimlLamt8FpRshj0i4oFW69m4LZxakg_FHD3lSHlAgrEVIoL/exec",
+    linkKind: "project",
+    caseStudySlug: "sigo",
+    caseStudyPath: "/proyectos/sigo",
+    galleryCategories: ["data", "web", "automation"],
+    order: -1
+  },
+  {
     id: "tablero-eventos-interno",
     projectNumber: 8,
     title: { es: "Tablero de Eventos Interno", en: "Internal Events Workspace" },
