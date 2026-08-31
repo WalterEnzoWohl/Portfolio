@@ -317,7 +317,13 @@ function ProjectsGallery({ language, projects, copy, onImageError }: { language:
     const filtered = projects.filter((project) => {
       const matchesFilter = filter === "all" || project.galleryCategories.includes(filter);
       const categoryText = project.galleryCategories.map((category) => copy.filters[category]).join(" ");
-      const searchable = normalizeSearch([project.title[language], project.description[language], categoryText, ...project.tools].join(" "));
+      const searchable = normalizeSearch([
+        project.title[language],
+        project.description[language],
+        project.categoryLabel?.[language] ?? "",
+        categoryText,
+        ...project.tools
+      ].join(" "));
       return matchesFilter && (!normalizedQuery || searchable.includes(normalizedQuery));
     });
     return [...filtered].sort((a, b) => {

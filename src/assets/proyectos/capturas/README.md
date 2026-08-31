@@ -36,3 +36,8 @@ Convención: el número identifica al proyecto y la letra identifica el tipo de 
 | 7F | WOHL — App fitness | Medí tu progreso real | Cargada |
 | 7G | WOHL — App fitness | Visualizá tu carga muscular | Cargada |
 | 7H | WOHL — App fitness | Portada de la tarjeta en Proyectos | Cargada |
+| 8A | Tablero de Eventos Interno | Calendario y seguimiento | Cargada |
+| 8B | Tablero de Eventos Interno | Reporte ejecutivo y métricas | Cargada |
+| 8C | Tablero de Eventos Interno | Análisis territorial y composición | Cargada |
+| 8D | Tablero de Eventos Interno | Registro de nuevos eventos | Cargada |
+| 8E | Tablero de Eventos Interno | Gestión y detalle | Cargada |

@@ -25,6 +25,33 @@ export type PortfolioProject = {
 
 export const projects: PortfolioProject[] = [
   {
+    id: "tablero-eventos-interno",
+    projectNumber: 8,
+    title: { es: "Tablero de Eventos Interno", en: "Internal Events Workspace" },
+    category: "web",
+    categoryLabel: { es: "Herramienta interna", en: "Internal tool" },
+    description: {
+      es: "Herramienta web para registrar, organizar y analizar eventos mediante calendario, gestión operativa, métricas y análisis territorial.",
+      en: "Web tool for recording, organizing and analyzing events through a calendar, operational management, metrics and territorial analysis."
+    },
+    tools: ["Calendario", "Métricas", "Gestión", "Reportes"],
+    highlights: {
+      es: ["Registro y seguimiento operativo", "Métricas, mapas y reportes exportables"],
+      en: ["Operational recording and monitoring", "Metrics, maps and exportable reports"]
+    },
+    image: getProjectCaptureOrPlaceholder(8, "B"),
+    imageAlt: {
+      es: "Resumen ejecutivo del Tablero de Eventos Interno con indicadores y visualizaciones.",
+      en: "Internal Events Workspace executive summary with indicators and visualizations."
+    },
+    link: "https://script.google.com/macros/s/AKfycbyENTtvZNK4rAKzEWzJ_BV-JL05CABV2FYogjzx8FTVqfjuvgM7VUeONmpkDk_HnN8N/exec",
+    linkKind: "project",
+    caseStudySlug: "tablero-eventos-interno",
+    caseStudyPath: "/proyectos/tablero-eventos-interno",
+    galleryCategories: ["data", "web", "automation"],
+    order: 0
+  },
+  {
     id: "wohl-fitness",
     projectNumber: 7,
     title: { es: "WOHL — App fitness", en: "WOHL — Fitness app" },
@@ -49,7 +76,7 @@ export const projects: PortfolioProject[] = [
     caseStudySlug: "wohl-fitness",
     caseStudyPath: "/proyectos/wohl-fitness",
     galleryCategories: ["web", "automation"],
-    order: 0
+    order: 1
   },
   {
     id: "riki-wohl",
@@ -75,7 +102,7 @@ export const projects: PortfolioProject[] = [
     caseStudySlug: "riki-wohl",
     caseStudyPath: "/proyectos/riki-wohl",
     galleryCategories: ["web"],
-    order: 1
+    order: 2
   },
   {
     id: "jenny-ugc",
@@ -101,7 +128,7 @@ export const projects: PortfolioProject[] = [
     caseStudySlug: "jenny-ugc",
     caseStudyPath: "/proyectos/jenny-ugc",
     galleryCategories: ["web"],
-    order: 2
+    order: 3
   },
   {
     id: "gastos-rrhh",
@@ -124,7 +151,7 @@ export const projects: PortfolioProject[] = [
     caseStudySlug: "gastos-rrhh",
     caseStudyPath: "/proyectos/analisis-de-gastos-rrhh",
     galleryCategories: ["data"],
-    order: 3
+    order: 4
   },
   {
     id: "ventas-appol",
@@ -147,7 +174,7 @@ export const projects: PortfolioProject[] = [
     caseStudySlug: "ventas-appol",
     caseStudyPath: "/proyectos/informe-de-ventas-appol",
     galleryCategories: ["data"],
-    order: 4
+    order: 5
   },
   {
     id: "mailing-gcba",
@@ -170,7 +197,7 @@ export const projects: PortfolioProject[] = [
     caseStudySlug: "mailing-gcba",
     caseStudyPath: "/proyectos/metricas-de-mailing-gcba",
     galleryCategories: ["data"],
-    order: 5
+    order: 6
   },
   {
     id: "nomina-rrhh",
@@ -193,7 +220,7 @@ export const projects: PortfolioProject[] = [
     caseStudySlug: "nomina-rrhh",
     caseStudyPath: "/proyectos/gestion-de-nomina-rrhh",
     galleryCategories: ["data"],
-    order: 6
+    order: 7
   },
 
 ];

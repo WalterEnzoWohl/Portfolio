@@ -6,10 +6,16 @@ type LocalizedText = Record<Language, string>;
 export type WebCaseStudyDetail = {
   projectId: string;
   slug: string;
-  variant?: "ugc-platform" | "commercial-landing";
+  variant?: "ugc-platform" | "commercial-landing" | "internal-tool";
+  categoryLabel?: LocalizedText;
+  ctaLabel?: LocalizedText;
+  heroCapture?: ProjectCaptureLetter;
   mainViewLabel?: LocalizedText;
+  journeyTitle?: LocalizedText;
+  highlightsPlacement?: "before-features" | "after-features";
   featuresEyebrow?: LocalizedText;
   featuresTitle?: LocalizedText;
+  leadDescription?: LocalizedText;
   fullDescription: LocalizedText;
   quickFacts: {
     context: LocalizedText;
@@ -25,7 +31,7 @@ export type WebCaseStudyDetail = {
   highlights: LocalizedText[];
   features: Array<{
     id: string;
-    capture: Exclude<ProjectCaptureLetter, "A">;
+    capture: ProjectCaptureLetter;
     title: LocalizedText;
     description: LocalizedText;
   }>;
@@ -33,6 +39,131 @@ export type WebCaseStudyDetail = {
 };
 
 export const webCaseStudies: WebCaseStudyDetail[] = [
+  {
+    projectId: "tablero-eventos-interno",
+    slug: "tablero-eventos-interno",
+    variant: "internal-tool",
+    categoryLabel: { es: "Herramienta interna", en: "Internal tool" },
+    ctaLabel: { es: "Abrir tablero", en: "Open dashboard" },
+    heroCapture: "B",
+    mainViewLabel: { es: "Resumen ejecutivo", en: "Executive summary" },
+    journeyTitle: { es: "Del registro al análisis", en: "From record to analysis" },
+    highlightsPlacement: "after-features",
+    featuresEyebrow: {
+      es: "Registro → organización → seguimiento → análisis",
+      en: "Record → organization → monitoring → analysis"
+    },
+    featuresTitle: { es: "Qué permite hacer", en: "What it enables" },
+    leadDescription: {
+      es: "Herramienta interna para registrar, organizar y analizar eventos, entidades y articulaciones en un solo flujo de trabajo.",
+      en: "Internal tool for recording, organizing and analyzing events, entities and collaborations in a single workflow."
+    },
+    fullDescription: {
+      es: "Centraliza el calendario, la carga de nuevos eventos, el seguimiento operativo y un tablero de métricas con filtros, mapas y reportes exportables.",
+      en: "It centralizes the calendar, new event registration, operational monitoring and a metrics workspace with filters, maps and exportable reports."
+    },
+    quickFacts: {
+      context: {
+        es: "Seguimiento y organización de eventos internos.",
+        en: "Monitoring and organization of internal events."
+      },
+      objective: {
+        es: "Ordenar la operación y facilitar el análisis de eventos, estados, entidades y distribución territorial.",
+        en: "Organize operations and simplify the analysis of events, statuses, entities and territorial distribution."
+      },
+      participation: {
+        es: "Diseño de la herramienta, estructura de datos, desarrollo de interfaz y visualización de métricas.",
+        en: "Tool design, data structure, interface development and metrics visualization."
+      }
+    },
+    journey: [
+      {
+        id: "problem",
+        icon: "fa-solid fa-folder-tree",
+        title: { es: "Problema", en: "Problem" },
+        description: {
+          es: "La información de eventos estaba dispersa en distintos archivos y el seguimiento requería procesos manuales.",
+          en: "Event information was scattered across different files and monitoring required manual processes."
+        }
+      },
+      {
+        id: "process",
+        icon: "fa-solid fa-arrows-to-circle",
+        title: { es: "Proceso", en: "Process" },
+        description: {
+          es: "Se centralizaron el calendario, los formularios de registro, los filtros y los paneles de métricas dentro de una misma herramienta.",
+          en: "The calendar, registration forms, filters and metrics panels were centralized in a single tool."
+        }
+      },
+      {
+        id: "solution",
+        icon: "fa-regular fa-circle-check",
+        title: { es: "Solución", en: "Solution" },
+        description: {
+          es: "Una aplicación interna para registrar, consultar y analizar eventos con información centralizada, métricas y reportes exportables.",
+          en: "An internal application for recording, reviewing and analyzing events with centralized information, metrics and exportable reports."
+        }
+      }
+    ],
+    highlights: [
+      { es: "Calendario mensual, semanal y listado.", en: "Monthly, weekly and list calendar views." },
+      { es: "Registro y edición de eventos.", en: "Event registration and editing." },
+      { es: "Gestión de entidades participantes.", en: "Management of participating entities." },
+      { es: "Búsquedas y filtros combinados.", en: "Combined search and filters." },
+      { es: "Indicadores y evolución temporal.", en: "Indicators and evolution over time." },
+      { es: "Mapas y análisis territorial.", en: "Maps and territorial analysis." },
+      { es: "Exportación de información a PDF y Excel.", en: "Information export to PDF and Excel." },
+      { es: "Vista detallada de cada evento.", en: "Detailed view of each event." }
+    ],
+    features: [
+      {
+        id: "calendar-monitoring",
+        capture: "A",
+        title: { es: "Calendario y seguimiento", en: "Calendar and monitoring" },
+        description: {
+          es: "Vista mensual de eventos con búsqueda, filtros por estado y tipo, y seguimiento de su evolución.",
+          en: "Monthly event view with search, status and type filters, and progress monitoring."
+        }
+      },
+      {
+        id: "executive-metrics",
+        capture: "B",
+        title: { es: "Reporte ejecutivo y métricas", en: "Executive report and metrics" },
+        description: {
+          es: "Resumen de eventos, estados y evolución temporal mediante indicadores y visualizaciones.",
+          en: "Summary of events, statuses and evolution over time through indicators and visualizations."
+        }
+      },
+      {
+        id: "territorial-analysis",
+        capture: "C",
+        title: { es: "Análisis territorial y composición", en: "Territorial and composition analysis" },
+        description: {
+          es: "Distribución territorial, composición de eventos, rankings de entidades y análisis por comuna.",
+          en: "Territorial distribution, event composition, entity rankings and district analysis."
+        }
+      },
+      {
+        id: "event-registration",
+        capture: "D",
+        title: { es: "Registro de nuevos eventos", en: "New event registration" },
+        description: {
+          es: "Formulario estructurado para registrar eventos, clasificarlos y vincular entidades y áreas participantes.",
+          en: "Structured form to register and classify events and link participating entities and areas."
+        }
+      },
+      {
+        id: "event-management",
+        capture: "E",
+        title: { es: "Gestión y detalle", en: "Management and detail" },
+        description: {
+          es: "Listado consultable con filtros y panel de detalle para revisar información, participación e impacto de cada evento.",
+          en: "Searchable list with filters and a detail panel to review each event's information, participation and impact."
+        }
+      }
+    ],
+    relatedProjectIds: []
+  },
   {
     projectId: "jenny-ugc",
     slug: "jenny-ugc",

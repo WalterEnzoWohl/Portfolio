@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AnimatePresence, MotionConfig, motion } from "motion/react";
 import { interactiveMotion, sectionReveal, staggerContainer, staggerItem } from "../animations/motion";
 import type { Language } from "../config/navigation";
+import type { ProjectCaptureLetter } from "../data/projectCaptures";
 import type { WebCaseStudyDetail } from "../data/webCaseStudies";
 import ProjectCapture from "./ProjectCapture";
 import ProjectCaptureCarousel, { type ProjectCaptureSlide } from "./ProjectCaptureCarousel";
@@ -92,9 +93,9 @@ function WebProjectCaseStudy({
   }, [detail, projects]);
   const captureSlides = useMemo<ProjectCaptureSlide[]>(() => {
     if (!detail || !project) return [];
-    return [
+    const candidates: ProjectCaptureSlide[] = [
       {
-        capture: "A",
+        capture: detail.heroCapture ?? "A",
         title: detail.mainViewLabel?.[language] ?? text.mainView,
         description: detail.fullDescription[language],
         alt: project.imageAlt[language]
@@ -106,11 +107,23 @@ function WebProjectCaseStudy({
         alt: `${feature.title[language]}: ${project.title[language]}`
       }))
     ];
+
+    const seen = new Set<ProjectCaptureLetter>();
+    return candidates.filter((slide) => {
+      if (seen.has(slide.capture)) return false;
+      seen.add(slide.capture);
+      return true;
+    });
   }, [detail, language, project, text.mainView]);
 
   if (!detail || !project) return <WebProjectNotFound language={language} />;
 
   const variant = detail.variant ?? "ugc-platform";
+  const heroCapture = detail.heroCapture ?? "A";
+  const getViewerIndex = (capture: ProjectCaptureLetter) => Math.max(
+    captureSlides.findIndex((slide) => slide.capture === capture),
+    0
+  );
 
   const facts = [
     { label: text.facts.context, value: detail.quickFacts.context[language] },
@@ -118,22 +131,36 @@ function WebProjectCaseStudy({
     { label: text.facts.participation, value: detail.quickFacts.participation[language] }
   ];
 
+  const highlightsSection = (
+    <section className="web-case-highlights" aria-labelledby="web-case-highlights-title">
+      <div className="web-case-highlights-heading">
+        <span><i className="fa-solid fa-wand-magic-sparkles" aria-hidden="true" /></span>
+        <div><small>{project.title[language]}</small><h2 id="web-case-highlights-title">{text.highlights}</h2></div>
+      </div>
+      <motion.ul variants={staggerContainer} initial="hidden" animate="visible">
+        {detail.highlights.map((item) => (
+          <motion.li key={item.es} variants={staggerItem}><i className="fa-solid fa-check" aria-hidden="true" /><span>{item[language]}</span></motion.li>
+        ))}
+      </motion.ul>
+    </section>
+  );
+
   return (
     <MotionConfig reducedMotion="user">
       <main className={`web-case-page web-case-page--${variant}`} id="case-study-top">
         <motion.div className="web-case-shell" initial="hidden" animate="visible" variants={sectionReveal}>
           <section className="web-case-hero" aria-labelledby="web-case-title">
             <article className="web-case-intro">
-              <span className="web-case-category">{text.category}</span>
+              <span className="web-case-category">{detail.categoryLabel?.[language] ?? text.category}</span>
               <h1 id="web-case-title">{project.title[language]}</h1>
-              <p className="web-case-lead">{project.description[language]}</p>
+              <p className="web-case-lead">{detail.leadDescription?.[language] ?? project.description[language]}</p>
               <p className="web-case-description">{detail.fullDescription[language]}</p>
               <div className="web-case-tools" aria-label={language === "es" ? "Tecnologías" : "Technologies"}>
                 {project.tools.map((tool) => <span key={tool}>{tool}</span>)}
               </div>
               <div className="web-case-actions">
                 <a href={project.link} target="_blank" rel="noopener noreferrer">
-                  {text.openSite}<i className="fa-solid fa-arrow-up-right-from-square" aria-hidden="true" />
+                  {detail.ctaLabel?.[language] ?? text.openSite}<i className="fa-solid fa-arrow-up-right-from-square" aria-hidden="true" />
                 </a>
                 <Link to="/#portfolio"><i className="fa-solid fa-arrow-left" aria-hidden="true" />{text.back}</Link>
               </div>
@@ -143,7 +170,7 @@ function WebProjectCaseStudy({
               <figcaption>{detail.mainViewLabel?.[language] ?? text.mainView}</figcaption>
               <ProjectCapture
                 projectNumber={project.projectNumber}
-                capture="A"
+                capture={heroCapture}
                 alt={project.imageAlt[language]}
                 fit="contain"
                 loading="eager"
@@ -166,7 +193,7 @@ function WebProjectCaseStudy({
           <section className="web-case-journey" aria-labelledby="web-case-journey-title">
             <header>
               <small>01—03</small>
-              <h2 id="web-case-journey-title">{text.journey}</h2>
+              <h2 id="web-case-journey-title">{detail.journeyTitle?.[language] ?? text.journey}</h2>
             </header>
             <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
               {detail.journey.map((step, index) => (
@@ -180,17 +207,7 @@ function WebProjectCaseStudy({
             </motion.div>
           </section>
 
-          <section className="web-case-highlights" aria-labelledby="web-case-highlights-title">
-            <div className="web-case-highlights-heading">
-              <span><i className="fa-solid fa-wand-magic-sparkles" aria-hidden="true" /></span>
-              <div><small>{project.title[language]}</small><h2 id="web-case-highlights-title">{text.highlights}</h2></div>
-            </div>
-            <motion.ul variants={staggerContainer} initial="hidden" animate="visible">
-              {detail.highlights.map((item) => (
-                <motion.li key={item.es} variants={staggerItem}><i className="fa-solid fa-check" aria-hidden="true" /><span>{item[language]}</span></motion.li>
-              ))}
-            </motion.ul>
-          </section>
+          {detail.highlightsPlacement !== "after-features" ? highlightsSection : null}
 
           <section className="web-case-features" aria-labelledby="web-case-features-title">
             <header>
@@ -210,7 +227,7 @@ function WebProjectCaseStudy({
                   <div className="web-case-feature-copy">
                     <span>{String(index + 1).padStart(2, "0")}</span>
                     <h3>{feature.title[language]}</h3>
-                    <p>{feature.description[language]}</p>
+                    {variant !== "internal-tool" ? <p>{feature.description[language]}</p> : null}
                   </div>
                   <ProjectCapture
                     projectNumber={project.projectNumber}
@@ -218,13 +235,16 @@ function WebProjectCaseStudy({
                     alt={`${feature.title[language]}: ${project.title[language]}`}
                     fit="contain"
                     pendingLabel={text.pendingCapture}
-                    onOpen={() => setViewerIndex(index + 1)}
+                    onOpen={() => setViewerIndex(getViewerIndex(feature.capture))}
                     openLabel={`${text.expandImage}: ${feature.title[language]}`}
                   />
+                  {variant === "internal-tool" ? <p className="web-case-feature-description">{feature.description[language]}</p> : null}
                 </motion.article>
               ))}
             </div>
           </section>
+
+          {detail.highlightsPlacement === "after-features" ? highlightsSection : null}
 
           {relatedProjects.length > 0 ? (
             <section className="web-case-related" aria-labelledby="web-related-projects-title">
