@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState, type ComponentType, type SVGProps } from "react";
-import emailjs from "@emailjs/browser";
 import { MotionConfig, motion, type Variants } from "motion/react";
 import { useForm, type FieldErrors } from "react-hook-form";
 import {
@@ -374,6 +373,7 @@ function ContactForm({ language }: { language: Language }) {
     const selectedReasonCopy = contactReasons.find((reason) => reason.id === values.reason)?.label[language] ?? values.reason;
 
     try {
+      const { default: emailjs } = await import("@emailjs/browser");
       await emailjs.send(
         serviceId,
         templateId,
@@ -505,7 +505,7 @@ function ContactSection({ language }: { language: Language }) {
         <div className="contact-dashboard-shell">
           <motion.header className="contact-dashboard-header" variants={pageReveal}>
             <h2>{copy.title}</h2>
-            <p>{copy.subtitle}</p>
+
             <span className="contact-availability"><i aria-hidden="true" />{copy.availability}</span>
           </motion.header>
 

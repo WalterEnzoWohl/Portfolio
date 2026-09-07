@@ -1,9 +1,10 @@
 import { useState, type CSSProperties } from "react";
 import {
-  getProjectCapture,
+  getProjectCaptureImage,
   getProjectCaptureCode,
   type ProjectCaptureLetter
 } from "../data/projectCaptures";
+import FontIcon from "./FontIcon";
 
 type ProjectCaptureProps = {
   projectNumber: number;
@@ -15,6 +16,8 @@ type ProjectCaptureProps = {
   pendingLabel?: string;
   onOpen?: () => void;
   openLabel?: string;
+  fullResolution?: boolean;
+  sizes?: string;
 };
 
 function ProjectCapture({
@@ -26,15 +29,17 @@ function ProjectCapture({
   loading = "lazy",
   pendingLabel = "Captura pendiente",
   onOpen,
-  openLabel = "Ampliar captura"
+  openLabel = "Ampliar captura",
+  fullResolution = false,
+  sizes = "(max-width: 767px) calc(100vw - 48px), (max-width: 1024px) 65vw, 55vw"
 }: ProjectCaptureProps) {
   const [failed, setFailed] = useState(false);
-  const [naturalRatio, setNaturalRatio] = useState<number>();
   const code = getProjectCaptureCode(projectNumber, capture);
-  const source = getProjectCapture(projectNumber, capture);
+  const image = getProjectCaptureImage(projectNumber, capture);
+  const source = fullResolution ? image?.full : image?.src;
   const isPending = !source || failed;
-  const captureStyle = naturalRatio
-    ? ({ "--project-capture-ratio": naturalRatio } as CSSProperties)
+  const captureStyle = image
+    ? ({ "--project-capture-ratio": image.width / image.height } as CSSProperties)
     : undefined;
 
   const classNames = `project-capture project-capture--${fit}${isPending ? " is-pending" : ""}${onOpen ? " is-interactive" : ""}${className ? ` ${className}` : ""}`;
@@ -48,20 +53,18 @@ function ProjectCapture({
       ) : (
         <img
           src={source}
+          srcSet={fullResolution ? undefined : image?.srcSet}
+          sizes={fullResolution ? undefined : sizes}
+          width={image?.width}
+          height={image?.height}
           alt={alt}
           draggable={false}
           loading={loading}
           decoding="async"
-          onLoad={(event) => {
-            const image = event.currentTarget;
-            if (image.naturalWidth && image.naturalHeight) {
-              setNaturalRatio(image.naturalWidth / image.naturalHeight);
-            }
-          }}
           onError={() => setFailed(true)}
         />
       )}
-      {onOpen ? <span className="project-capture-expand" aria-hidden="true"><i className="fa-solid fa-up-right-and-down-left-from-center" /></span> : null}
+      {onOpen ? <span className="project-capture-expand" aria-hidden="true"><FontIcon className="fa-solid fa-up-right-and-down-left-from-center" /></span> : null}
     </>
   );
 

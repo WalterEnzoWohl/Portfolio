@@ -1,6 +1,6 @@
 import type { ProjectGalleryCategory } from "../components/ProjectsGallery";
 import type { Language } from "../config/navigation";
-import { getProjectCaptureOrPlaceholder, getRequiredProjectCapture } from "./projectCaptures";
+import { getProjectCaptureOrPlaceholder, getProjectCaptureImage, type ProjectCaptureLetter } from "./projectCaptures";
 
 type LocalizedText = Record<Language, string>;
 
@@ -14,6 +14,9 @@ export type PortfolioProject = {
   tools: string[];
   highlights: Record<Language, string[]>;
   image: string;
+  imageSrcSet?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   imageAlt: LocalizedText;
   link: string;
   linkKind?: "project" | "dashboard" | "repository";
@@ -22,6 +25,16 @@ export type PortfolioProject = {
   galleryCategories: ProjectGalleryCategory[];
   order: number;
 };
+
+function projectImage(projectNumber: number, capture: ProjectCaptureLetter) {
+  const image = getProjectCaptureImage(projectNumber, capture);
+  return {
+    image: image?.src ?? getProjectCaptureOrPlaceholder(projectNumber, capture),
+    imageSrcSet: image?.srcSet,
+    imageWidth: image?.width,
+    imageHeight: image?.height
+  };
+}
 
 export const projects: PortfolioProject[] = [
   {
@@ -39,7 +52,7 @@ export const projects: PortfolioProject[] = [
       es: ["Seguimiento de áreas, metas e indicadores clave", "Carga, validación y analítica de avances"],
       en: ["Tracking areas, goals and key indicators", "Progress entry, validation and analytics"]
     },
-    image: getProjectCaptureOrPlaceholder(9, "A"),
+    ...projectImage(9, "A"),
     imageAlt: {
       es: "Inicio de SIGO con resumen de áreas, metas, indicadores clave y cumplimiento global.",
       en: "SIGO home screen with a summary of areas, goals, key indicators and global performance."
@@ -66,7 +79,7 @@ export const projects: PortfolioProject[] = [
       es: ["Registro y seguimiento operativo", "Métricas, mapas y reportes exportables"],
       en: ["Operational recording and monitoring", "Metrics, maps and exportable reports"]
     },
-    image: getProjectCaptureOrPlaceholder(8, "B"),
+    ...projectImage(8, "B"),
     imageAlt: {
       es: "Resumen ejecutivo del Tablero de Eventos Interno con indicadores y visualizaciones.",
       en: "Internal Events Workspace executive summary with indicators and visualizations."
@@ -93,7 +106,7 @@ export const projects: PortfolioProject[] = [
       es: ["Registro offline-first de entrenamientos", "Métricas de progreso y carga muscular"],
       en: ["Offline-first workout logging", "Progress and muscle-load metrics"]
     },
-    image: getRequiredProjectCapture(7, "H"),
+    ...projectImage(7, "H"),
     imageAlt: {
       es: "Presentación de WOHL, aplicación móvil para organizar y analizar entrenamientos.",
       en: "WOHL presentation, a mobile application for organizing and analyzing workouts."
@@ -119,7 +132,7 @@ export const projects: PortfolioProject[] = [
       es: ["Servicios, packs y carta organizados", "Experiencia responsive orientada a consultas"],
       en: ["Organized services, packages and menu", "Responsive experience focused on enquiries"]
     },
-    image: getProjectCaptureOrPlaceholder(6, "A"),
+    ...projectImage(6, "A"),
     imageAlt: {
       es: "Página principal de RikiWohl.com para un servicio de barra móvil y coctelería.",
       en: "RikiWohl.com home page for a mobile bar and cocktail service."
@@ -145,7 +158,7 @@ export const projects: PortfolioProject[] = [
       es: ["Sitio público y administración privada", "Gestión de contenido multimedia sin redespliegues"],
       en: ["Public site and private administration", "Multimedia content management without redeployments"]
     },
-    image: getRequiredProjectCapture(5, "A"),
+    ...projectImage(5, "A"),
     imageAlt: {
       es: "Página principal del portfolio web JennyUGC.com.",
       en: "JennyUGC.com web portfolio home page."
@@ -171,7 +184,7 @@ export const projects: PortfolioProject[] = [
       es: ["Seguimiento de presupuesto vs. gasto real", "Desvíos por categoría y período"],
       en: ["Budget vs. actual spend tracking", "Variance by category and period"]
     },
-    image: getRequiredProjectCapture(1, "A"),
+    ...projectImage(1, "A"),
     imageAlt: { es: "Dashboard de gastos de recursos humanos con indicadores de presupuesto y gasto.", en: "Human resources expense dashboard with budget and spend indicators." },
     link: "https://app.powerbi.com/view?r=eyJrIjoiNzkzN2M5NDctNGFiMC00NmU3LTg1NzQtYjdiZmRlMDU0MzQ4IiwidCI6ImUwODdhZTVmLTQ2YjQtNDBiOS04ZGZkLTE1MTA4MTQwMTc3MyIsImMiOjR9",
     linkKind: "dashboard",
@@ -194,7 +207,7 @@ export const projects: PortfolioProject[] = [
       es: ["Utilidad y margen por mercado", "Seguimiento por producto y período"],
       en: ["Profit and margin by market", "Tracking by product and period"]
     },
-    image: getRequiredProjectCapture(2, "A"),
+    ...projectImage(2, "A"),
     imageAlt: { es: "Dashboard comercial Appol con utilidad, margen y análisis geográfico.", en: "Appol commercial dashboard with profit, margin and geographic analysis." },
     link: "https://app.powerbi.com/view?r=eyJrIjoiYmZkOTYwMDYtNWU1NS00MjZkLTg2MWYtZDAxZmRkYzVhZGUwIiwidCI6ImUwODdhZTVmLTQ2YjQtNDBiOS04ZGZkLTE1MTA4MTQwMTc3MyIsImMiOjR9",
     linkKind: "dashboard",
@@ -217,7 +230,7 @@ export const projects: PortfolioProject[] = [
       es: ["Comparación por campaña, fecha y volumen enviado", "KPIs de aperturas, clics, rebotes y no abiertos"],
       en: ["Comparison by campaign, date and send volume", "Open, click, bounce and unopened KPIs"]
     },
-    image: getRequiredProjectCapture(3, "A"),
+    ...projectImage(3, "A"),
     imageAlt: { es: "Dashboard de mailing del GCBA con métricas de envíos, aperturas, clics y rebotes.", en: "GCBA mailing dashboard with send, open, click and bounce metrics." },
     link: "https://lookerstudio.google.com/reporting/ad58b1c2-d02e-4557-8634-537b8314354a",
     linkKind: "dashboard",
@@ -240,7 +253,7 @@ export const projects: PortfolioProject[] = [
       es: ["Distribución de dotación por género y dirección", "Mapa de empleados y evolución de antigüedad"],
       en: ["Headcount distribution by gender and management", "Employee map and tenure evolution"]
     },
-    image: getRequiredProjectCapture(4, "A"),
+    ...projectImage(4, "A"),
     imageAlt: { es: "Dashboard de nómina de recursos humanos con distribución y antigüedad del personal.", en: "Human resources payroll dashboard with workforce distribution and tenure." },
     link: "https://lookerstudio.google.com/reporting/26b9eca6-822c-41f9-836f-f16b76ab2acd",
     linkKind: "dashboard",

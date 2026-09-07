@@ -1,3 +1,4 @@
+import FontIcon from "./FontIcon";
 import { useMemo, useState, type SyntheticEvent } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, MotionConfig, motion } from "motion/react";
@@ -97,7 +98,7 @@ function FitnessProjectNotFound({ language }: { language: Language }) {
 
   return (
     <main className="data-case-not-found">
-      <i className="fa-regular fa-folder-open" aria-hidden="true" />
+      <FontIcon className="fa-regular fa-folder-open" aria-hidden="true" />
       <h1>{text.notFound}</h1>
       <p>{text.notFoundBody}</p>
       <Link to="/#portfolio">{text.returnToProjects}</Link>
@@ -167,7 +168,7 @@ function FitnessProjectCaseStudy({
               <a className="fitness-case-store-link" href={detail.storeUrl} target="_blank" rel="noopener noreferrer">
                 <SiGoogleplay aria-hidden="true" />
                 <span>{text.openStore}</span>
-                <i className="fa-solid fa-arrow-up-right-from-square" aria-hidden="true" />
+                <FontIcon className="fa-solid fa-arrow-up-right-from-square" aria-hidden="true" />
               </a>
             </article>
 
@@ -203,7 +204,7 @@ function FitnessProjectCaseStudy({
               <section aria-labelledby="fitness-value-title">
                 <h2 id="fitness-value-title">{text.value}</h2>
                 <ul>
-                  {detail.value.map((item) => <li key={item.es}><i className="fa-solid fa-check" aria-hidden="true" /><span>{item[language]}</span></li>)}
+                  {detail.value.map((item) => <li key={item.es}><FontIcon className="fa-solid fa-check" aria-hidden="true" /><span>{item[language]}</span></li>)}
                 </ul>
               </section>
             </aside>
@@ -249,7 +250,7 @@ function FitnessProjectCaseStudy({
               <p>{detail.architecture[language]}</p>
               <ul>
                 {detail.technicalHighlights.map((item) => (
-                  <li key={item.es}><i className="fa-solid fa-check" aria-hidden="true" /><span>{item[language]}</span></li>
+                  <li key={item.es}><FontIcon className="fa-solid fa-check" aria-hidden="true" /><span>{item[language]}</span></li>
                 ))}
               </ul>
             </motion.article>
@@ -289,7 +290,7 @@ function FitnessProjectCaseStudy({
                 {relatedProjects.map((related) => (
                   <Link key={related.id} to={related.caseStudyPath ?? ""}>
                     <img src={related.image} alt={related.imageAlt[language]} loading="lazy" onError={onImageError} />
-                    <span><strong>{related.title[language]}</strong><small>{text.viewRelated}<i className="fa-solid fa-arrow-right" aria-hidden="true" /></small></span>
+                    <span><strong>{related.title[language]}</strong><small>{text.viewRelated}<FontIcon className="fa-solid fa-arrow-right" aria-hidden="true" /></small></span>
                   </Link>
                 ))}
               </div>

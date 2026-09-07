@@ -1,0 +1,1359 @@
+{
+  "proyectos/capturas/1A.png": {
+    "source": "proyectos/capturas/1A.png",
+    "sha256": "d4c32b016438f59fa2d61a5af9a9846c99d5caf91e6acc5118a3ce76478e6015",
+    "sourceBytes": 808476,
+    "width": 1910,
+    "height": 1066,
+    "previews": [
+      {
+        "src": "proyectos/capturas/1A-480.webp",
+        "width": 480,
+        "height": 268,
+        "bytes": 25504,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/1A-960.webp",
+        "width": 960,
+        "height": 536,
+        "bytes": 67250,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/1A-1440.webp",
+        "width": 1440,
+        "height": 804,
+        "bytes": 112316,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/1A-full.webp",
+    "fullBytes": 404072
+  },
+  "proyectos/capturas/1B.png": {
+    "source": "proyectos/capturas/1B.png",
+    "sha256": "f331568aabe9dc25c301be2569faf881e7e9313c2b7d7e1849c8fbeabb3f0448",
+    "sourceBytes": 46917,
+    "width": 1155,
+    "height": 619,
+    "previews": [
+      {
+        "src": "proyectos/capturas/1B-480.webp",
+        "width": 480,
+        "height": 257,
+        "bytes": 8180,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/1B-960.webp",
+        "width": 960,
+        "height": 514,
+        "bytes": 16466,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/1B-1155.webp",
+        "width": 1155,
+        "height": 619,
+        "bytes": 16554,
+        "lossless": true
+      }
+    ],
+    "full": "proyectos/capturas/1B-full.webp",
+    "fullBytes": 16554
+  },
+  "proyectos/capturas/1C.png": {
+    "source": "proyectos/capturas/1C.png",
+    "sha256": "b1243f9c61a036e2e41cf546fc3b0c64fac0b836f420261ca0c911dc0710f119",
+    "sourceBytes": 72047,
+    "width": 547,
+    "height": 297,
+    "previews": [
+      {
+        "src": "proyectos/capturas/1C-480.webp",
+        "width": 480,
+        "height": 261,
+        "bytes": 11202,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/1C-547.webp",
+        "width": 547,
+        "height": 297,
+        "bytes": 13152,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/1C-full.webp",
+    "fullBytes": 33248
+  },
+  "proyectos/capturas/1D.png": {
+    "source": "proyectos/capturas/1D.png",
+    "sha256": "207c4f757c82d3934ca57a59c2a4a5e3e912281dcf8c5b6ab8f625d0ecf421dd",
+    "sourceBytes": 88863,
+    "width": 817,
+    "height": 340,
+    "previews": [
+      {
+        "src": "proyectos/capturas/1D-480.webp",
+        "width": 480,
+        "height": 200,
+        "bytes": 7948,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/1D-817.webp",
+        "width": 817,
+        "height": 340,
+        "bytes": 14836,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/1D-full.webp",
+    "fullBytes": 43882
+  },
+  "proyectos/capturas/2A.png": {
+    "source": "proyectos/capturas/2A.png",
+    "sha256": "14725795d2ecfdc6a87ac405e02aed9abd50af7d69720c653f751914efd00a5c",
+    "sourceBytes": 732588,
+    "width": 1920,
+    "height": 1068,
+    "previews": [
+      {
+        "src": "proyectos/capturas/2A-480.webp",
+        "width": 480,
+        "height": 267,
+        "bytes": 26406,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/2A-960.webp",
+        "width": 960,
+        "height": 534,
+        "bytes": 66548,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/2A-1440.webp",
+        "width": 1440,
+        "height": 801,
+        "bytes": 108092,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/2A-full.webp",
+    "fullBytes": 417374
+  },
+  "proyectos/capturas/2B.png": {
+    "source": "proyectos/capturas/2B.png",
+    "sha256": "a6d3c53fea2d423b8753631ad9930246730114d4f26a6bf1a054b8d7cf1fd9f8",
+    "sourceBytes": 12603,
+    "width": 393,
+    "height": 139,
+    "previews": [
+      {
+        "src": "proyectos/capturas/2B-393.webp",
+        "width": 393,
+        "height": 139,
+        "bytes": 4218,
+        "lossless": true
+      }
+    ],
+    "full": "proyectos/capturas/2B-full.webp",
+    "fullBytes": 4218
+  },
+  "proyectos/capturas/2C.png": {
+    "source": "proyectos/capturas/2C.png",
+    "sha256": "c728d5ee3e2531b1ba1cfb2baa172f04e978ea2a6497564d5c0f4d6e3bf3ccc9",
+    "sourceBytes": 6235,
+    "width": 595,
+    "height": 82,
+    "previews": [
+      {
+        "src": "proyectos/capturas/2C-480.webp",
+        "width": 480,
+        "height": 66,
+        "bytes": 3346,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/2C-595.webp",
+        "width": 595,
+        "height": 82,
+        "bytes": 2138,
+        "lossless": true
+      }
+    ],
+    "full": "proyectos/capturas/2C-full.webp",
+    "fullBytes": 2138
+  },
+  "proyectos/capturas/2D.png": {
+    "source": "proyectos/capturas/2D.png",
+    "sha256": "b75c825d84f0c99045f32785a036d5f996dcdb34ee9a36fe577ecfdba60fc2cb",
+    "sourceBytes": 89244,
+    "width": 646,
+    "height": 424,
+    "previews": [
+      {
+        "src": "proyectos/capturas/2D-480.webp",
+        "width": 480,
+        "height": 315,
+        "bytes": 19928,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/2D-646.webp",
+        "width": 646,
+        "height": 424,
+        "bytes": 28984,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/2D-full.webp",
+    "fullBytes": 43358
+  },
+  "proyectos/capturas/3A.png": {
+    "source": "proyectos/capturas/3A.png",
+    "sha256": "8058da8dd1777f1f394f9b46ce1ececc0e8efda6ca9c4763e24b31c3526796e4",
+    "sourceBytes": 2021842,
+    "width": 1536,
+    "height": 1024,
+    "previews": [
+      {
+        "src": "proyectos/capturas/3A-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 32632,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/3A-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 87282,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/3A-1440.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 152720,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/3A-full.webp",
+    "fullBytes": 1215526
+  },
+  "proyectos/capturas/3B.png": {
+    "source": "proyectos/capturas/3B.png",
+    "sha256": "68d1275aca2e6aa6f5c34152bbca31f2f118f029a431fb783680a261a8464cc2",
+    "sourceBytes": 19358,
+    "width": 436,
+    "height": 202,
+    "previews": [
+      {
+        "src": "proyectos/capturas/3B-436.webp",
+        "width": 436,
+        "height": 202,
+        "bytes": 7100,
+        "lossless": true
+      }
+    ],
+    "full": "proyectos/capturas/3B-full.webp",
+    "fullBytes": 7100
+  },
+  "proyectos/capturas/3C.png": {
+    "source": "proyectos/capturas/3C.png",
+    "sha256": "390aefe612471ee875d25ac16fa8ba573d1ce5d90f794993f7c710565d6c5883",
+    "sourceBytes": 24149,
+    "width": 432,
+    "height": 289,
+    "previews": [
+      {
+        "src": "proyectos/capturas/3C-432.webp",
+        "width": 432,
+        "height": 289,
+        "bytes": 9788,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/3C-full.webp",
+    "fullBytes": 10134
+  },
+  "proyectos/capturas/3D.png": {
+    "source": "proyectos/capturas/3D.png",
+    "sha256": "8f59d9c96a5ef37908793a14d42497b510dd5a5e251a4acae8afff40b27e020d",
+    "sourceBytes": 51749,
+    "width": 991,
+    "height": 304,
+    "previews": [
+      {
+        "src": "proyectos/capturas/3D-480.webp",
+        "width": 480,
+        "height": 147,
+        "bytes": 9698,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/3D-960.webp",
+        "width": 960,
+        "height": 294,
+        "bytes": 24322,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/3D-991.webp",
+        "width": 991,
+        "height": 304,
+        "bytes": 21358,
+        "lossless": true
+      }
+    ],
+    "full": "proyectos/capturas/3D-full.webp",
+    "fullBytes": 21358
+  },
+  "proyectos/capturas/4A.png": {
+    "source": "proyectos/capturas/4A.png",
+    "sha256": "e7ba8926dd0149e1267fab4bc50a89f672dae7dd4415a58ac28cc67b3433ba90",
+    "sourceBytes": 1033156,
+    "width": 1536,
+    "height": 1024,
+    "previews": [
+      {
+        "src": "proyectos/capturas/4A-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 27684,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/4A-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 70850,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/4A-1440.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 120404,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/4A-full.webp",
+    "fullBytes": 663066
+  },
+  "proyectos/capturas/4B.png": {
+    "source": "proyectos/capturas/4B.png",
+    "sha256": "f6f913f8c89238d06a34840a49b087f182a59b901637dd3c69e87c4f1bb6ee29",
+    "sourceBytes": 78722,
+    "width": 1165,
+    "height": 336,
+    "previews": [
+      {
+        "src": "proyectos/capturas/4B-480.webp",
+        "width": 480,
+        "height": 138,
+        "bytes": 11350,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/4B-960.webp",
+        "width": 960,
+        "height": 277,
+        "bytes": 25278,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/4B-1165.webp",
+        "width": 1165,
+        "height": 336,
+        "bytes": 27348,
+        "lossless": true
+      }
+    ],
+    "full": "proyectos/capturas/4B-full.webp",
+    "fullBytes": 27348
+  },
+  "proyectos/capturas/4C.png": {
+    "source": "proyectos/capturas/4C.png",
+    "sha256": "ead5f4305012d67e8e6848465c85bddd69eea5104883445fe4cc3a5d3555aec2",
+    "sourceBytes": 17849,
+    "width": 592,
+    "height": 246,
+    "previews": [
+      {
+        "src": "proyectos/capturas/4C-480.webp",
+        "width": 480,
+        "height": 199,
+        "bytes": 7444,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/4C-592.webp",
+        "width": 592,
+        "height": 246,
+        "bytes": 6854,
+        "lossless": true
+      }
+    ],
+    "full": "proyectos/capturas/4C-full.webp",
+    "fullBytes": 6854
+  },
+  "proyectos/capturas/4D.png": {
+    "source": "proyectos/capturas/4D.png",
+    "sha256": "7583b0ccc067340ebe21426003cc0ea9e73647476ba917f53fc8d5341e0b555e",
+    "sourceBytes": 51481,
+    "width": 604,
+    "height": 519,
+    "previews": [
+      {
+        "src": "proyectos/capturas/4D-480.webp",
+        "width": 480,
+        "height": 412,
+        "bytes": 18444,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/4D-604.webp",
+        "width": 604,
+        "height": 519,
+        "bytes": 20166,
+        "lossless": true
+      }
+    ],
+    "full": "proyectos/capturas/4D-full.webp",
+    "fullBytes": 20166
+  },
+  "proyectos/capturas/5A.png": {
+    "source": "proyectos/capturas/5A.png",
+    "sha256": "bc5f46984d3ad6a6e44a9b2c8f23784d00e42fb1113ade4d299a72d2eb2c9689",
+    "sourceBytes": 1276729,
+    "width": 1909,
+    "height": 933,
+    "previews": [
+      {
+        "src": "proyectos/capturas/5A-480.webp",
+        "width": 480,
+        "height": 235,
+        "bytes": 12348,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/5A-960.webp",
+        "width": 960,
+        "height": 469,
+        "bytes": 32306,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/5A-1440.webp",
+        "width": 1440,
+        "height": 704,
+        "bytes": 53012,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/5A-full.webp",
+    "fullBytes": 825592
+  },
+  "proyectos/capturas/5B.png": {
+    "source": "proyectos/capturas/5B.png",
+    "sha256": "9427eda30ba13b31849c3cc7cb65911753c7c5bdcc66c9b9a7ccfa3902d9e483",
+    "sourceBytes": 1038541,
+    "width": 1906,
+    "height": 936,
+    "previews": [
+      {
+        "src": "proyectos/capturas/5B-480.webp",
+        "width": 480,
+        "height": 236,
+        "bytes": 19338,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/5B-960.webp",
+        "width": 960,
+        "height": 471,
+        "bytes": 53304,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/5B-1440.webp",
+        "width": 1440,
+        "height": 707,
+        "bytes": 91376,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/5B-full.webp",
+    "fullBytes": 615428
+  },
+  "proyectos/capturas/5C.png": {
+    "source": "proyectos/capturas/5C.png",
+    "sha256": "2f50b3c7a5f79103f1c63dda4a6a03c759226a9a3a3709b61052fd4884fd1f5f",
+    "sourceBytes": 759305,
+    "width": 1906,
+    "height": 936,
+    "previews": [
+      {
+        "src": "proyectos/capturas/5C-480.webp",
+        "width": 480,
+        "height": 236,
+        "bytes": 17756,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/5C-960.webp",
+        "width": 960,
+        "height": 471,
+        "bytes": 50616,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/5C-1440.webp",
+        "width": 1440,
+        "height": 707,
+        "bytes": 92266,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/5C-full.webp",
+    "fullBytes": 455274
+  },
+  "proyectos/capturas/5D.png": {
+    "source": "proyectos/capturas/5D.png",
+    "sha256": "62ff6f30402f7aca5ecd6fca2569a58ef269ce98502c7f4654526c245208ce53",
+    "sourceBytes": 527935,
+    "width": 1906,
+    "height": 933,
+    "previews": [
+      {
+        "src": "proyectos/capturas/5D-480.webp",
+        "width": 480,
+        "height": 235,
+        "bytes": 9086,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/5D-960.webp",
+        "width": 960,
+        "height": 470,
+        "bytes": 25544,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/5D-1440.webp",
+        "width": 1440,
+        "height": 705,
+        "bytes": 49842,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/5D-full.webp",
+    "fullBytes": 292340
+  },
+  "proyectos/capturas/6A.png": {
+    "source": "proyectos/capturas/6A.png",
+    "sha256": "9122a1f18c638f8fe8bfeba77b4d3103b546c01df7658fb872639ab0c5a665f5",
+    "sourceBytes": 2459599,
+    "width": 1902,
+    "height": 898,
+    "previews": [
+      {
+        "src": "proyectos/capturas/6A-480.webp",
+        "width": 480,
+        "height": 227,
+        "bytes": 15056,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/6A-960.webp",
+        "width": 960,
+        "height": 453,
+        "bytes": 44470,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/6A-1440.webp",
+        "width": 1440,
+        "height": 680,
+        "bytes": 84028,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/6A-full.webp",
+    "fullBytes": 1760596
+  },
+  "proyectos/capturas/6B.png": {
+    "source": "proyectos/capturas/6B.png",
+    "sha256": "57fb2bdc5dc1605b0ee648dc16a669ace3febf3f2ac16633bf2aab0d8a97ec17",
+    "sourceBytes": 128164,
+    "width": 1900,
+    "height": 901,
+    "previews": [
+      {
+        "src": "proyectos/capturas/6B-480.webp",
+        "width": 480,
+        "height": 228,
+        "bytes": 9414,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/6B-960.webp",
+        "width": 960,
+        "height": 455,
+        "bytes": 28580,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/6B-1440.webp",
+        "width": 1440,
+        "height": 683,
+        "bytes": 53172,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/6B-full.webp",
+    "fullBytes": 51896
+  },
+  "proyectos/capturas/6C.png": {
+    "source": "proyectos/capturas/6C.png",
+    "sha256": "8e972f4b5536ff818854f7e059e45b1d47a7994df8663df345b74369f79cc3eb",
+    "sourceBytes": 1277611,
+    "width": 1900,
+    "height": 904,
+    "previews": [
+      {
+        "src": "proyectos/capturas/6C-480.webp",
+        "width": 480,
+        "height": 228,
+        "bytes": 19196,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/6C-960.webp",
+        "width": 960,
+        "height": 457,
+        "bytes": 60078,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/6C-1440.webp",
+        "width": 1440,
+        "height": 685,
+        "bytes": 118556,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/6C-full.webp",
+    "fullBytes": 953124
+  },
+  "proyectos/capturas/6D.png": {
+    "source": "proyectos/capturas/6D.png",
+    "sha256": "3738467b25fc5bfeca45ddca056364e23fe0b6df8011f1b6f9b23bc931b008b0",
+    "sourceBytes": 70778,
+    "width": 1897,
+    "height": 901,
+    "previews": [
+      {
+        "src": "proyectos/capturas/6D-480.webp",
+        "width": 480,
+        "height": 228,
+        "bytes": 4658,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/6D-960.webp",
+        "width": 960,
+        "height": 456,
+        "bytes": 13484,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/6D-1440.webp",
+        "width": 1440,
+        "height": 684,
+        "bytes": 26648,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/6D-full.webp",
+    "fullBytes": 27958
+  },
+  "proyectos/capturas/7A.png": {
+    "source": "proyectos/capturas/7A.png",
+    "sha256": "43728087e1a4d92a6a378e274a3bfb2e564e16f41c077af0b591d02c05e0e7fc",
+    "sourceBytes": 1777398,
+    "width": 941,
+    "height": 1672,
+    "previews": [
+      {
+        "src": "proyectos/capturas/7A-480.webp",
+        "width": 480,
+        "height": 853,
+        "bytes": 71348,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/7A-941.webp",
+        "width": 941,
+        "height": 1672,
+        "bytes": 184464,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/7A-full.webp",
+    "fullBytes": 1341252
+  },
+  "proyectos/capturas/7B.png": {
+    "source": "proyectos/capturas/7B.png",
+    "sha256": "4a03617df735bb52d16ff846cd79b5b0d7dd4e68aac60ecd3f5262ea81846e8d",
+    "sourceBytes": 1488905,
+    "width": 941,
+    "height": 1672,
+    "previews": [
+      {
+        "src": "proyectos/capturas/7B-480.webp",
+        "width": 480,
+        "height": 853,
+        "bytes": 39198,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/7B-941.webp",
+        "width": 941,
+        "height": 1672,
+        "bytes": 102928,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/7B-full.webp",
+    "fullBytes": 1110928
+  },
+  "proyectos/capturas/7C.png": {
+    "source": "proyectos/capturas/7C.png",
+    "sha256": "03af7a1941412e084788df1f11abf0cfa64f64f59c9edbeb094bb645788dacca",
+    "sourceBytes": 1466383,
+    "width": 941,
+    "height": 1672,
+    "previews": [
+      {
+        "src": "proyectos/capturas/7C-480.webp",
+        "width": 480,
+        "height": 853,
+        "bytes": 43610,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/7C-941.webp",
+        "width": 941,
+        "height": 1672,
+        "bytes": 116490,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/7C-full.webp",
+    "fullBytes": 1090328
+  },
+  "proyectos/capturas/7D.png": {
+    "source": "proyectos/capturas/7D.png",
+    "sha256": "82445a32327dfad8e1736f15d5686464573f7487e22591cb24b2e137def3934c",
+    "sourceBytes": 1493192,
+    "width": 941,
+    "height": 1672,
+    "previews": [
+      {
+        "src": "proyectos/capturas/7D-480.webp",
+        "width": 480,
+        "height": 853,
+        "bytes": 45120,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/7D-941.webp",
+        "width": 941,
+        "height": 1672,
+        "bytes": 110656,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/7D-full.webp",
+    "fullBytes": 1103008
+  },
+  "proyectos/capturas/7E.png": {
+    "source": "proyectos/capturas/7E.png",
+    "sha256": "ab1ba51d1c71dd28e0242db463e05d3561c7ad510552684fa746901b0fddcd71",
+    "sourceBytes": 1340078,
+    "width": 941,
+    "height": 1672,
+    "previews": [
+      {
+        "src": "proyectos/capturas/7E-480.webp",
+        "width": 480,
+        "height": 853,
+        "bytes": 44442,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/7E-941.webp",
+        "width": 941,
+        "height": 1672,
+        "bytes": 105882,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/7E-full.webp",
+    "fullBytes": 1008368
+  },
+  "proyectos/capturas/7F.png": {
+    "source": "proyectos/capturas/7F.png",
+    "sha256": "614831ac433e429c01ef7ead64c4c65fe88cfd3d269cf8b5b94c892886a59203",
+    "sourceBytes": 1537081,
+    "width": 941,
+    "height": 1672,
+    "previews": [
+      {
+        "src": "proyectos/capturas/7F-480.webp",
+        "width": 480,
+        "height": 853,
+        "bytes": 43800,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/7F-941.webp",
+        "width": 941,
+        "height": 1672,
+        "bytes": 112924,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/7F-full.webp",
+    "fullBytes": 1138820
+  },
+  "proyectos/capturas/7G.png": {
+    "source": "proyectos/capturas/7G.png",
+    "sha256": "c54076816e736736ef1d9dee73f6a22edaea060535160cd39f70b7ac41944ae2",
+    "sourceBytes": 1427628,
+    "width": 941,
+    "height": 1672,
+    "previews": [
+      {
+        "src": "proyectos/capturas/7G-480.webp",
+        "width": 480,
+        "height": 853,
+        "bytes": 49392,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/7G-941.webp",
+        "width": 941,
+        "height": 1672,
+        "bytes": 125814,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/7G-full.webp",
+    "fullBytes": 1081916
+  },
+  "proyectos/capturas/7H.png": {
+    "source": "proyectos/capturas/7H.png",
+    "sha256": "db930be417d89ca64ce20a51c38653449417ed7fe8c5acadcc1ffdbf9c5415eb",
+    "sourceBytes": 1745282,
+    "width": 1672,
+    "height": 941,
+    "previews": [
+      {
+        "src": "proyectos/capturas/7H-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 21270,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/7H-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 60320,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/7H-1440.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 109948,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/7H-full.webp",
+    "fullBytes": 1279640
+  },
+  "proyectos/capturas/8A.png": {
+    "source": "proyectos/capturas/8A.png",
+    "sha256": "9844c7410b21deb4b888c83d194b4453a8cfb919bff13015d12524d705b16842",
+    "sourceBytes": 118221,
+    "width": 1919,
+    "height": 900,
+    "previews": [
+      {
+        "src": "proyectos/capturas/8A-480.webp",
+        "width": 480,
+        "height": 225,
+        "bytes": 7124,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/8A-960.webp",
+        "width": 960,
+        "height": 450,
+        "bytes": 21352,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/8A-1440.webp",
+        "width": 1440,
+        "height": 675,
+        "bytes": 38836,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/8A-full.webp",
+    "fullBytes": 47142
+  },
+  "proyectos/capturas/8B.png": {
+    "source": "proyectos/capturas/8B.png",
+    "sha256": "419dfc44e3540608813e70d97bd7b6a6bcc2f129e2524527c300ad1299fb2261",
+    "sourceBytes": 162597,
+    "width": 1904,
+    "height": 900,
+    "previews": [
+      {
+        "src": "proyectos/capturas/8B-480.webp",
+        "width": 480,
+        "height": 227,
+        "bytes": 11080,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/8B-960.webp",
+        "width": 960,
+        "height": 454,
+        "bytes": 32948,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/8B-1440.webp",
+        "width": 1440,
+        "height": 681,
+        "bytes": 60628,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/8B-full.webp",
+    "fullBytes": 75334
+  },
+  "proyectos/capturas/8C.png": {
+    "source": "proyectos/capturas/8C.png",
+    "sha256": "a6b707f7bd3606202a6f0882f2a9979d009a274ec2ff0ef97369f88d6638d4e5",
+    "sourceBytes": 207730,
+    "width": 1919,
+    "height": 911,
+    "previews": [
+      {
+        "src": "proyectos/capturas/8C-480.webp",
+        "width": 480,
+        "height": 228,
+        "bytes": 16752,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/8C-960.webp",
+        "width": 960,
+        "height": 456,
+        "bytes": 43578,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/8C-1440.webp",
+        "width": 1440,
+        "height": 684,
+        "bytes": 78170,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/8C-full.webp",
+    "fullBytes": 79640
+  },
+  "proyectos/capturas/8D.png": {
+    "source": "proyectos/capturas/8D.png",
+    "sha256": "c27fafdd881d8070db8ce33cd0331adcd3cd5570132e6d610421b268f1315a42",
+    "sourceBytes": 162058,
+    "width": 1917,
+    "height": 912,
+    "previews": [
+      {
+        "src": "proyectos/capturas/8D-480.webp",
+        "width": 480,
+        "height": 228,
+        "bytes": 10062,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/8D-960.webp",
+        "width": 960,
+        "height": 457,
+        "bytes": 31324,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/8D-1440.webp",
+        "width": 1440,
+        "height": 685,
+        "bytes": 59784,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/8D-full.webp",
+    "fullBytes": 62460
+  },
+  "proyectos/capturas/8E.png": {
+    "source": "proyectos/capturas/8E.png",
+    "sha256": "15e147b18802a492d9d90efd0a340be67cbcc5e131de10be91fdd0892321b9e6",
+    "sourceBytes": 276443,
+    "width": 1919,
+    "height": 915,
+    "previews": [
+      {
+        "src": "proyectos/capturas/8E-480.webp",
+        "width": 480,
+        "height": 229,
+        "bytes": 16568,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/8E-960.webp",
+        "width": 960,
+        "height": 458,
+        "bytes": 49802,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/8E-1440.webp",
+        "width": 1440,
+        "height": 687,
+        "bytes": 92792,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/8E-full.webp",
+    "fullBytes": 109202
+  },
+  "proyectos/capturas/9A.png": {
+    "source": "proyectos/capturas/9A.png",
+    "sha256": "a66d271174b1f432a95e029b3d5955d00e894fec4caaad10bcc55a91df19bc03",
+    "sourceBytes": 401060,
+    "width": 1918,
+    "height": 904,
+    "previews": [
+      {
+        "src": "proyectos/capturas/9A-480.webp",
+        "width": 480,
+        "height": 226,
+        "bytes": 12472,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/9A-960.webp",
+        "width": 960,
+        "height": 452,
+        "bytes": 35322,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/9A-1440.webp",
+        "width": 1440,
+        "height": 679,
+        "bytes": 65058,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/9A-full.webp",
+    "fullBytes": 209624
+  },
+  "proyectos/capturas/9B.png": {
+    "source": "proyectos/capturas/9B.png",
+    "sha256": "c9fddb4c2ba11c701b0fd09562a507a6620eb67ecff0ae162be88c1504c76a64",
+    "sourceBytes": 284650,
+    "width": 1919,
+    "height": 902,
+    "previews": [
+      {
+        "src": "proyectos/capturas/9B-480.webp",
+        "width": 480,
+        "height": 226,
+        "bytes": 7764,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/9B-960.webp",
+        "width": 960,
+        "height": 451,
+        "bytes": 24300,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/9B-1440.webp",
+        "width": 1440,
+        "height": 677,
+        "bytes": 45468,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/9B-full.webp",
+    "fullBytes": 176112
+  },
+  "proyectos/capturas/9C.png": {
+    "source": "proyectos/capturas/9C.png",
+    "sha256": "caebbb378c54058e3440a16ab1805e2c5c8f62738d930f6ee16321d903202fb9",
+    "sourceBytes": 287631,
+    "width": 1916,
+    "height": 900,
+    "previews": [
+      {
+        "src": "proyectos/capturas/9C-480.webp",
+        "width": 480,
+        "height": 225,
+        "bytes": 10116,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/9C-960.webp",
+        "width": 960,
+        "height": 451,
+        "bytes": 30294,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/9C-1440.webp",
+        "width": 1440,
+        "height": 676,
+        "bytes": 57956,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/9C-full.webp",
+    "fullBytes": 161306
+  },
+  "proyectos/capturas/9D.png": {
+    "source": "proyectos/capturas/9D.png",
+    "sha256": "e384ab22325099df4bc4f2e4eff2060c3d002bdeacb107d2decab2d4833c1a13",
+    "sourceBytes": 303675,
+    "width": 1919,
+    "height": 900,
+    "previews": [
+      {
+        "src": "proyectos/capturas/9D-480.webp",
+        "width": 480,
+        "height": 225,
+        "bytes": 12724,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/9D-960.webp",
+        "width": 960,
+        "height": 450,
+        "bytes": 33654,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/9D-1440.webp",
+        "width": 1440,
+        "height": 675,
+        "bytes": 62538,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/9D-full.webp",
+    "fullBytes": 204356
+  },
+  "proyectos/capturas/9E.png": {
+    "source": "proyectos/capturas/9E.png",
+    "sha256": "3714a66d02564281f15938120d2b97be217609e70255a21c899bafac8e0bef25",
+    "sourceBytes": 299185,
+    "width": 1919,
+    "height": 901,
+    "previews": [
+      {
+        "src": "proyectos/capturas/9E-480.webp",
+        "width": 480,
+        "height": 225,
+        "bytes": 13680,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/9E-960.webp",
+        "width": 960,
+        "height": 451,
+        "bytes": 38914,
+        "lossless": false
+      },
+      {
+        "src": "proyectos/capturas/9E-1440.webp",
+        "width": 1440,
+        "height": 676,
+        "bytes": 77334,
+        "lossless": false
+      }
+    ],
+    "full": "proyectos/capturas/9E-full.webp",
+    "fullBytes": 169366
+  },
+  "certificaciones/crehana.png": {
+    "source": "certificaciones/crehana.png",
+    "sha256": "968333de455e8f9714e517ed5c937d14f3616c590652cb7bb4533ff90c8bd733",
+    "sourceBytes": 891338,
+    "width": 1254,
+    "height": 1254,
+    "previews": [
+      {
+        "src": "certificaciones/crehana-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 1210,
+        "lossless": false
+      }
+    ]
+  },
+  "certificaciones/google.png": {
+    "source": "certificaciones/google.png",
+    "sha256": "5b1a0b1470f348ed27e51ce4fdaf6f9fd01dc0ef6e7d94d3b856e92f4ffda179",
+    "sourceBytes": 826178,
+    "width": 1254,
+    "height": 1254,
+    "previews": [
+      {
+        "src": "certificaciones/google-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 4670,
+        "lossless": false
+      }
+    ]
+  },
+  "certificaciones/utn.png": {
+    "source": "certificaciones/utn.png",
+    "sha256": "1d28996a148642868b14c0151f9ca1170502eb51a1adae0997db43e3cd81ac43",
+    "sourceBytes": 1103975,
+    "width": 1254,
+    "height": 1254,
+    "previews": [
+      {
+        "src": "certificaciones/utn-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 12054,
+        "lossless": false
+      }
+    ]
+  },
+  "experiencia/arbusta-logo.png": {
+    "source": "experiencia/arbusta-logo.png",
+    "sha256": "7881f439ed5f2c8eb322628fa2b68ceeced243d878fafdae85d94b782fe7b68e",
+    "sourceBytes": 1197215,
+    "width": 1536,
+    "height": 1024,
+    "previews": [
+      {
+        "src": "experiencia/arbusta-logo-384.webp",
+        "width": 384,
+        "height": 256,
+        "bytes": 14732,
+        "lossless": false
+      }
+    ]
+  },
+  "experiencia/msa-logo.png": {
+    "source": "experiencia/msa-logo.png",
+    "sha256": "0c2e54b9b3c1cabf8cf4e9a02aa1143c0cfaf7c39f1371cd91ec6841943da295",
+    "sourceBytes": 463820,
+    "width": 2172,
+    "height": 724,
+    "previews": [
+      {
+        "src": "experiencia/msa-logo-384.webp",
+        "width": 384,
+        "height": 128,
+        "bytes": 11810,
+        "lossless": false
+      }
+    ]
+  },
+  "certificaciones/crehana_certificado.jpg": {
+    "source": "certificaciones/crehana_certificado.jpg",
+    "sha256": "a2db9ab1dda4ac2fd636a9e87a4b1aebb7620bb748ea1c7d165f71f292e4b455",
+    "sourceBytes": 131066,
+    "width": 1286,
+    "height": 909,
+    "previews": [
+      {
+        "src": "certificaciones/crehana_certificado-480.webp",
+        "width": 480,
+        "height": 339,
+        "bytes": 12212,
+        "lossless": false
+      },
+      {
+        "src": "certificaciones/crehana_certificado-960.webp",
+        "width": 960,
+        "height": 679,
+        "bytes": 36116,
+        "lossless": false
+      }
+    ],
+    "full": "certificaciones/crehana_certificado-full.jpg",
+    "fullBytes": 131066
+  },
+  "certificaciones/utn_certificado.png": {
+    "source": "certificaciones/utn_certificado.png",
+    "sha256": "d254143dd2e6ff462108fca46392da73323e0a1c92d2b0aff55c4ddfbb2dd4c6",
+    "sourceBytes": 249066,
+    "width": 1158,
+    "height": 805,
+    "previews": [
+      {
+        "src": "certificaciones/utn_certificado-480.webp",
+        "width": 480,
+        "height": 334,
+        "bytes": 22848,
+        "lossless": false
+      },
+      {
+        "src": "certificaciones/utn_certificado-960.webp",
+        "width": 960,
+        "height": 667,
+        "bytes": 60498,
+        "lossless": false
+      }
+    ],
+    "full": "certificaciones/utn_certificado-full.webp",
+    "fullBytes": 125106
+  },
+  "placeholders/wip.png": {
+    "source": "placeholders/wip.png",
+    "sha256": "36f5212d6784738cf84699537f7ac66887df5d61a6ddd7c2de13de5619ef7f7e",
+    "sourceBytes": 1469835,
+    "width": 1024,
+    "height": 1024,
+    "previews": [
+      {
+        "src": "placeholders/wip-480.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 52754,
+        "lossless": false
+      }
+    ]
+  }
+}

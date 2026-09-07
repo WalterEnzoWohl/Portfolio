@@ -1,3 +1,4 @@
+import FontIcon from "./FontIcon";
 import { useEffect, useMemo, useRef, useState, type SyntheticEvent } from "react";
 import { createPortal } from "react-dom";
 import { Link } from "react-router-dom";
@@ -17,6 +18,9 @@ export type ProjectGalleryItem = {
   categoryLabel?: LocalizedText;
   description: LocalizedText;
   image: string;
+  imageSrcSet?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   imageAlt: LocalizedText;
   tools: string[];
   galleryCategories: ProjectGalleryCategory[];
@@ -59,13 +63,11 @@ function ProjectCard({
   project,
   language,
   copy,
-  index,
   onImageError
 }: {
   project: ProjectGalleryItem;
   language: Language;
   copy: ProjectsGalleryCopy;
-  index: number;
   onImageError: (event: SyntheticEvent<HTMLImageElement>) => void;
 }) {
   const visibleTools = project.tools.slice(0, 3);
@@ -88,12 +90,12 @@ function ProjectCard({
         <Link className="project-gallery-card-link" to={project.caseStudyPath} aria-label={`${copy.viewCaseStudy}: ${project.title[language]}`}>
           <span className="project-gallery-media">
             <img
-              src={project.image}
+              src={project.image} srcSet={project.imageSrcSet} sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1024px) 45vw, 25vw"
               alt={project.imageAlt[language]}
-              loading={index < 3 ? "eager" : "lazy"}
+              loading="lazy"
               decoding="async"
-              width="960"
-              height="540"
+              width={project.imageWidth}
+              height={project.imageHeight}
               onError={onImageError}
             />
             <span className="project-gallery-category">{category}</span>
@@ -105,12 +107,12 @@ function ProjectCard({
               {visibleTools.map((tool) => <span key={tool}>{tool}</span>)}
               {hiddenTools > 0 ? <span aria-label={`${hiddenTools} ${language === "es" ? "tecnologías adicionales" : "additional technologies"}`}>+{hiddenTools}</span> : null}
             </span>
-            <span className="project-gallery-action">{copy.viewCaseStudy}<i className="fa-solid fa-arrow-right" aria-hidden="true" /></span>
+            <span className="project-gallery-action">{copy.viewCaseStudy}<FontIcon className="fa-solid fa-arrow-right" aria-hidden="true" /></span>
           </span>
         </Link>
       ) : (
         <div className="project-gallery-card-link is-disabled" aria-disabled="true">
-          <span className="project-gallery-media"><img src={project.image} alt={project.imageAlt[language]} loading="lazy" decoding="async" width="960" height="540" onError={onImageError} /><span className="project-gallery-category">{category}</span></span>
+          <span className="project-gallery-media"><img src={project.image} srcSet={project.imageSrcSet} sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1024px) 45vw, 25vw" alt={project.imageAlt[language]} loading="lazy" decoding="async" width={project.imageWidth} height={project.imageHeight} onError={onImageError} /><span className="project-gallery-category">{category}</span></span>
           <span className="project-gallery-content"><strong className="project-gallery-title">{project.title[language]}</strong><span className="project-gallery-description">{project.description[language]}</span><span className="project-gallery-action">{copy.comingSoon}</span></span>
         </div>
       )}
@@ -121,7 +123,7 @@ function ProjectCard({
 function EmptyProjectsState({ copy, onReset }: { copy: ProjectsGalleryCopy; onReset: () => void }) {
   return (
     <motion.div className="projects-empty-state" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} role="status">
-      <i className="fa-regular fa-folder-open" aria-hidden="true" />
+      <FontIcon className="fa-regular fa-folder-open" aria-hidden="true" />
       <p>{copy.empty}</p>
       <button type="button" onClick={onReset}>{copy.clearFilters}</button>
     </motion.div>
@@ -206,15 +208,15 @@ function ProjectsToolbar({
     <div className="projects-toolbar">
       <div className="projects-search">
         <label htmlFor="projects-search-input">{copy.searchLabel}</label>
-        <i className="fa-solid fa-magnifying-glass" aria-hidden="true" />
+        <FontIcon className="fa-solid fa-magnifying-glass" aria-hidden="true" />
         <input id="projects-search-input" type="search" value={query} placeholder={copy.searchPlaceholder} onChange={(event) => onQueryChange(event.target.value)} />
-        {query ? <button type="button" onClick={() => onQueryChange("")} aria-label={copy.clearSearch}><i className="fa-solid fa-xmark" aria-hidden="true" /></button> : null}
+        {query ? <button type="button" onClick={() => onQueryChange("")} aria-label={copy.clearSearch}><FontIcon className="fa-solid fa-xmark" aria-hidden="true" /></button> : null}
       </div>
 
       <div className="projects-filter-list" role="group" aria-label={copy.filtersLabel}>
         {availableFilters.map((item) => (
           <button key={item} type="button" className={filter === item ? "is-active" : ""} aria-pressed={filter === item} onClick={() => onFilterChange(item)}>
-            <i className={filterIcons[item]} aria-hidden="true" />{copy.filters[item]}
+            <FontIcon className={filterIcons[item]} aria-hidden="true" />{copy.filters[item]}
           </button>
         ))}
       </div>
@@ -227,7 +229,7 @@ function ProjectsToolbar({
         aria-expanded={filtersOpen}
         onClick={() => setFiltersOpen(true)}
       >
-        <i className="fa-solid fa-filter" aria-hidden="true" />
+        <FontIcon className="fa-solid fa-filter" aria-hidden="true" />
         <span>{language === "es" ? "Filtrar" : "Filter"}</span>
         {filter !== "all" ? <i className="projects-filter-indicator" aria-hidden="true" /> : null}
       </button>
@@ -239,7 +241,7 @@ function ProjectsToolbar({
           <option value="alphabetical-asc">{copy.sortOptions["alphabetical-asc"]}</option>
           <option value="alphabetical-desc">{copy.sortOptions["alphabetical-desc"]}</option>
         </select>
-        <i className="fa-solid fa-chevron-down" aria-hidden="true" />
+        <FontIcon className="fa-solid fa-chevron-down" aria-hidden="true" />
       </div>
 
       {createPortal(
@@ -271,7 +273,7 @@ function ProjectsToolbar({
                 <header>
                   <h2 id="projects-mobile-filter-title">{copy.filtersLabel}</h2>
                   <button type="button" onClick={() => setFiltersOpen(false)} aria-label={language === "es" ? "Cerrar filtros" : "Close filters"}>
-                    <i className="fa-solid fa-xmark" aria-hidden="true" />
+                    <FontIcon className="fa-solid fa-xmark" aria-hidden="true" />
                   </button>
                 </header>
                 <div className="projects-mobile-filter-options" role="group" aria-label={copy.filtersLabel}>
@@ -286,9 +288,9 @@ function ProjectsToolbar({
                         setFiltersOpen(false);
                       }}
                     >
-                      <i className={filterIcons[item]} aria-hidden="true" />
+                      <FontIcon className={filterIcons[item]} aria-hidden="true" />
                       <span>{copy.filters[item]}</span>
-                      {filter === item ? <i className="fa-solid fa-check" aria-hidden="true" /> : null}
+                      {filter === item ? <FontIcon className="fa-solid fa-check" aria-hidden="true" /> : null}
                     </button>
                   ))}
                 </div>
@@ -344,14 +346,14 @@ function ProjectsGallery({ language, projects, copy, onImageError }: { language:
         <div className="projects-gallery-shell">
           <header className="projects-page-header">
             <div><h2 id="projects-title">{copy.title}</h2></div>
-            <aside className="projects-count" aria-label={`${copy.published}: ${projects.length}`}><i className="fa-regular fa-folder" aria-hidden="true" /><span><small>{copy.published}</small><strong>{projects.length}</strong></span></aside>
+            <aside className="projects-count" aria-label={`${copy.published}: ${projects.length}`}><FontIcon className="fa-regular fa-folder" aria-hidden="true" /><span><small>{copy.published}</small><strong>{projects.length}</strong></span></aside>
           </header>
 
           <ProjectsToolbar language={language} copy={copy} query={query} filter={filter} sortOrder={sortOrder} availableFilters={availableFilters} onQueryChange={setQuery} onFilterChange={setFilter} onSortChange={setSortOrder} />
 
           <motion.div className="projects-gallery-grid" variants={staggerContainer} initial="hidden" animate="visible" aria-live="polite">
             <AnimatePresence mode="popLayout">
-              {visibleProjects.map((project, index) => <ProjectCard key={project.id} project={project} language={language} copy={copy} index={index} onImageError={onImageError} />)}
+              {visibleProjects.map((project) => <ProjectCard key={project.id} project={project} language={language} copy={copy} onImageError={onImageError} />)}
             </AnimatePresence>
           </motion.div>
           {!visibleProjects.length ? <EmptyProjectsState copy={copy} onReset={reset} /> : null}

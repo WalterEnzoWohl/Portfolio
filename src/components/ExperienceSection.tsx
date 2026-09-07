@@ -141,7 +141,7 @@ function CompanyLogo({ experience, language }: { experience: ProfessionalExperie
   return (
     <motion.div className={logoClassName} variants={logoReveal}>
       {experience.logo.image ? (
-        <img src={experience.logo.image} alt={experience.logo.alt[language]} width="112" height="76" decoding="async" />
+        <img src={experience.logo.image} loading="lazy" alt={experience.logo.alt[language]} width="112" height="76" decoding="async" />
       ) : (
         <span role="img" aria-label={experience.logo.alt[language]}>
           <span aria-hidden="true">{experience.logo.initials}</span>
@@ -277,7 +277,7 @@ function ExperienceSection({ language }: ExperienceSectionProps) {
           <motion.header className="experience-dashboard-header" variants={headerReveal} initial={reduceMotion ? false : "hidden"} whileInView="visible" viewport={{ once: true, amount: 0.7 }}>
             <div>
               <h2 id="experience-title">{copy.title}</h2>
-              <p>{copy.subtitle}</p>
+
             </div>
             <a className="experience-download" href="/img/Walter Enzo Wohl CV.pdf" download="WalterEnzoWohl.pdf">
               <span>{copy.downloadCv}</span>

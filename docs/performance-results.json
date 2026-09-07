@@ -1,0 +1,736 @@
+{
+  "environment": "Local Vite production preview, Chrome headless, cold browser contexts; not production field data. Resource bytes exclude HTML and count encoded bodies (external resources without timing permission can report zero).",
+  "baseline": {
+    "lighthouse": {
+      "lighthouseVersion": "13.4.1",
+      "fetchTime": "2026-09-07T11:40:07.193Z",
+      "performance": 63,
+      "formFactor": "mobile",
+      "throttlingMethod": "simulate",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "metrics": {
+        "first-contentful-paint": 4160.704449999999,
+        "largest-contentful-paint": 7012.627449999998,
+        "speed-index": 5493.103832011804,
+        "total-blocking-time": 125.5,
+        "cumulative-layout-shift": 0
+      }
+    },
+    "network": [
+      {
+        "width": 1366,
+        "encodedResourceBytes": 16002505,
+        "requests": 28,
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "width": 390,
+        "encodedResourceBytes": 13428285,
+        "requests": 25,
+        "overflow": false,
+        "errors": []
+      }
+    ]
+  },
+  "optimized": {
+    "lighthouse": {
+      "lighthouseVersion": "13.4.1",
+      "fetchTime": "2026-09-07T11:52:42.593Z",
+      "performance": 92,
+      "formFactor": "mobile",
+      "throttlingMethod": "simulate",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "metrics": {
+        "first-contentful-paint": 2084.13425,
+        "largest-contentful-paint": 3038.38795,
+        "speed-index": 2180.6454412815756,
+        "total-blocking-time": 89,
+        "cumulative-layout-shift": 0
+      }
+    },
+    "network": [
+      {
+        "width": 1366,
+        "encodedResourceBytes": 461340,
+        "requests": 19,
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "width": 390,
+        "encodedResourceBytes": 358194,
+        "requests": 14,
+        "overflow": false,
+        "errors": []
+      }
+    ]
+  },
+  "functionalChecks": [
+    {
+      "name": "Direct anchor portfolio",
+      "ok": true,
+      "detail": {
+        "hash": "#portfolio",
+        "top": 50,
+        "scroll": 760
+      }
+    },
+    {
+      "name": "Direct anchor curriculum",
+      "ok": true,
+      "detail": {
+        "hash": "#curriculum",
+        "top": 127.28125,
+        "scroll": 1925
+      }
+    },
+    {
+      "name": "Direct anchor certifications",
+      "ok": true,
+      "detail": {
+        "hash": "#certifications",
+        "top": 50.28125,
+        "scroll": 2720
+      }
+    },
+    {
+      "name": "Direct anchor contacto",
+      "ok": true,
+      "detail": {
+        "hash": "#contacto",
+        "top": 49.625,
+        "scroll": 3727
+      }
+    },
+    {
+      "name": "Overflow 360 home",
+      "ok": true,
+      "detail": {
+        "actual": 360,
+        "viewport": 360
+      }
+    },
+    {
+      "name": "Overflow 360 portfolio",
+      "ok": true,
+      "detail": {
+        "actual": 360,
+        "viewport": 360
+      }
+    },
+    {
+      "name": "Overflow 360 curriculum",
+      "ok": true,
+      "detail": {
+        "actual": 360,
+        "viewport": 360
+      }
+    },
+    {
+      "name": "Overflow 360 certifications",
+      "ok": true,
+      "detail": {
+        "actual": 360,
+        "viewport": 360
+      }
+    },
+    {
+      "name": "Overflow 360 contacto",
+      "ok": true,
+      "detail": {
+        "actual": 360,
+        "viewport": 360
+      }
+    },
+    {
+      "name": "Certificate proportions 360",
+      "ok": true,
+      "detail": [
+        {
+          "width": 218,
+          "height": 175,
+          "fit": "contain"
+        },
+        {
+          "width": 218,
+          "height": 175,
+          "fit": "contain"
+        }
+      ]
+    },
+    {
+      "name": "Overflow 390 home",
+      "ok": true,
+      "detail": {
+        "actual": 390,
+        "viewport": 390
+      }
+    },
+    {
+      "name": "Overflow 390 portfolio",
+      "ok": true,
+      "detail": {
+        "actual": 390,
+        "viewport": 390
+      }
+    },
+    {
+      "name": "Overflow 390 curriculum",
+      "ok": true,
+      "detail": {
+        "actual": 390,
+        "viewport": 390
+      }
+    },
+    {
+      "name": "Overflow 390 certifications",
+      "ok": true,
+      "detail": {
+        "actual": 390,
+        "viewport": 390
+      }
+    },
+    {
+      "name": "Overflow 390 contacto",
+      "ok": true,
+      "detail": {
+        "actual": 390,
+        "viewport": 390
+      }
+    },
+    {
+      "name": "Certificate proportions 390",
+      "ok": true,
+      "detail": [
+        {
+          "width": 218,
+          "height": 175,
+          "fit": "contain"
+        },
+        {
+          "width": 218,
+          "height": 175,
+          "fit": "contain"
+        }
+      ]
+    },
+    {
+      "name": "Overflow 430 home",
+      "ok": true,
+      "detail": {
+        "actual": 430,
+        "viewport": 430
+      }
+    },
+    {
+      "name": "Overflow 430 portfolio",
+      "ok": true,
+      "detail": {
+        "actual": 430,
+        "viewport": 430
+      }
+    },
+    {
+      "name": "Overflow 430 curriculum",
+      "ok": true,
+      "detail": {
+        "actual": 430,
+        "viewport": 430
+      }
+    },
+    {
+      "name": "Overflow 430 certifications",
+      "ok": true,
+      "detail": {
+        "actual": 430,
+        "viewport": 430
+      }
+    },
+    {
+      "name": "Overflow 430 contacto",
+      "ok": true,
+      "detail": {
+        "actual": 430,
+        "viewport": 430
+      }
+    },
+    {
+      "name": "Certificate proportions 430",
+      "ok": true,
+      "detail": [
+        {
+          "width": 218,
+          "height": 175,
+          "fit": "contain"
+        },
+        {
+          "width": 218,
+          "height": 175,
+          "fit": "contain"
+        }
+      ]
+    },
+    {
+      "name": "Overflow 768 home",
+      "ok": true,
+      "detail": {
+        "actual": 768,
+        "viewport": 768
+      }
+    },
+    {
+      "name": "Overflow 768 portfolio",
+      "ok": true,
+      "detail": {
+        "actual": 768,
+        "viewport": 768
+      }
+    },
+    {
+      "name": "Overflow 768 curriculum",
+      "ok": true,
+      "detail": {
+        "actual": 768,
+        "viewport": 768
+      }
+    },
+    {
+      "name": "Overflow 768 certifications",
+      "ok": true,
+      "detail": {
+        "actual": 768,
+        "viewport": 768
+      }
+    },
+    {
+      "name": "Overflow 768 contacto",
+      "ok": true,
+      "detail": {
+        "actual": 768,
+        "viewport": 768
+      }
+    },
+    {
+      "name": "Certificate proportions 768",
+      "ok": true,
+      "detail": [
+        {
+          "width": 128,
+          "height": 103,
+          "fit": "contain"
+        },
+        {
+          "width": 128,
+          "height": 103,
+          "fit": "contain"
+        }
+      ]
+    },
+    {
+      "name": "Overflow 1024 home",
+      "ok": true,
+      "detail": {
+        "actual": 1024,
+        "viewport": 1024
+      }
+    },
+    {
+      "name": "Overflow 1024 portfolio",
+      "ok": true,
+      "detail": {
+        "actual": 1024,
+        "viewport": 1024
+      }
+    },
+    {
+      "name": "Overflow 1024 curriculum",
+      "ok": true,
+      "detail": {
+        "actual": 1024,
+        "viewport": 1024
+      }
+    },
+    {
+      "name": "Overflow 1024 certifications",
+      "ok": true,
+      "detail": {
+        "actual": 1024,
+        "viewport": 1024
+      }
+    },
+    {
+      "name": "Overflow 1024 contacto",
+      "ok": true,
+      "detail": {
+        "actual": 1024,
+        "viewport": 1024
+      }
+    },
+    {
+      "name": "Certificate proportions 1024",
+      "ok": true,
+      "detail": [
+        {
+          "width": 128,
+          "height": 103,
+          "fit": "contain"
+        },
+        {
+          "width": 128,
+          "height": 103,
+          "fit": "contain"
+        }
+      ]
+    },
+    {
+      "name": "Overflow 1366 home",
+      "ok": true,
+      "detail": {
+        "actual": 1366,
+        "viewport": 1366
+      }
+    },
+    {
+      "name": "Overflow 1366 portfolio",
+      "ok": true,
+      "detail": {
+        "actual": 1366,
+        "viewport": 1366
+      }
+    },
+    {
+      "name": "Overflow 1366 curriculum",
+      "ok": true,
+      "detail": {
+        "actual": 1366,
+        "viewport": 1366
+      }
+    },
+    {
+      "name": "Overflow 1366 certifications",
+      "ok": true,
+      "detail": {
+        "actual": 1366,
+        "viewport": 1366
+      }
+    },
+    {
+      "name": "Overflow 1366 contacto",
+      "ok": true,
+      "detail": {
+        "actual": 1366,
+        "viewport": 1366
+      }
+    },
+    {
+      "name": "Certificate proportions 1366",
+      "ok": true,
+      "detail": [
+        {
+          "width": 110,
+          "height": 88,
+          "fit": "contain"
+        },
+        {
+          "width": 110,
+          "height": 88,
+          "fit": "contain"
+        }
+      ]
+    },
+    {
+      "name": "Overflow 1440 home",
+      "ok": true,
+      "detail": {
+        "actual": 1440,
+        "viewport": 1440
+      }
+    },
+    {
+      "name": "Overflow 1440 portfolio",
+      "ok": true,
+      "detail": {
+        "actual": 1440,
+        "viewport": 1440
+      }
+    },
+    {
+      "name": "Overflow 1440 curriculum",
+      "ok": true,
+      "detail": {
+        "actual": 1440,
+        "viewport": 1440
+      }
+    },
+    {
+      "name": "Overflow 1440 certifications",
+      "ok": true,
+      "detail": {
+        "actual": 1440,
+        "viewport": 1440
+      }
+    },
+    {
+      "name": "Overflow 1440 contacto",
+      "ok": true,
+      "detail": {
+        "actual": 1440,
+        "viewport": 1440
+      }
+    },
+    {
+      "name": "Certificate proportions 1440",
+      "ok": true,
+      "detail": [
+        {
+          "width": 110,
+          "height": 88,
+          "fit": "contain"
+        },
+        {
+          "width": 110,
+          "height": 88,
+          "fit": "contain"
+        }
+      ]
+    },
+    {
+      "name": "Overflow 1920 home",
+      "ok": true,
+      "detail": {
+        "actual": 1920,
+        "viewport": 1920
+      }
+    },
+    {
+      "name": "Overflow 1920 portfolio",
+      "ok": true,
+      "detail": {
+        "actual": 1920,
+        "viewport": 1920
+      }
+    },
+    {
+      "name": "Overflow 1920 curriculum",
+      "ok": true,
+      "detail": {
+        "actual": 1920,
+        "viewport": 1920
+      }
+    },
+    {
+      "name": "Overflow 1920 certifications",
+      "ok": true,
+      "detail": {
+        "actual": 1920,
+        "viewport": 1920
+      }
+    },
+    {
+      "name": "Overflow 1920 contacto",
+      "ok": true,
+      "detail": {
+        "actual": 1920,
+        "viewport": 1920
+      }
+    },
+    {
+      "name": "Certificate proportions 1920",
+      "ok": true,
+      "detail": [
+        {
+          "width": 110,
+          "height": 88,
+          "fit": "contain"
+        },
+        {
+          "width": 110,
+          "height": 88,
+          "fit": "contain"
+        }
+      ]
+    },
+    {
+      "name": "Search projects",
+      "ok": true
+    },
+    {
+      "name": "English",
+      "ok": true
+    },
+    {
+      "name": "Language persists",
+      "ok": true
+    },
+    {
+      "name": "Theme persists",
+      "ok": true
+    },
+    {
+      "name": "Form validates locally",
+      "ok": true
+    },
+    {
+      "name": "Form focuses first error",
+      "ok": true
+    },
+    {
+      "name": "Home returns to top",
+      "ok": true
+    },
+    {
+      "name": "Route analisis-de-gastos-rrhh",
+      "ok": true,
+      "detail": "AnÃ¡lisis de Gastos RRHH"
+    },
+    {
+      "name": "Zoom full image analisis-de-gastos-rrhh",
+      "ok": true,
+      "detail": "1A-full-D5B5M33d.webp"
+    },
+    {
+      "name": "Zoom control analisis-de-gastos-rrhh",
+      "ok": true
+    },
+    {
+      "name": "Route informe-de-ventas-appol",
+      "ok": true,
+      "detail": "Informe de Ventas Appol"
+    },
+    {
+      "name": "Zoom full image informe-de-ventas-appol",
+      "ok": true,
+      "detail": "2A-full-D8gcIOEm.webp"
+    },
+    {
+      "name": "Zoom control informe-de-ventas-appol",
+      "ok": true
+    },
+    {
+      "name": "Route metricas-de-mailing-gcba",
+      "ok": true,
+      "detail": "MÃ©tricas de Mailing GCBA"
+    },
+    {
+      "name": "Zoom full image metricas-de-mailing-gcba",
+      "ok": true,
+      "detail": "3A-full-b-_sFhX8.webp"
+    },
+    {
+      "name": "Zoom control metricas-de-mailing-gcba",
+      "ok": true
+    },
+    {
+      "name": "Route gestion-de-nomina-rrhh",
+      "ok": true,
+      "detail": "GestiÃ³n de NÃ³mina RRHH"
+    },
+    {
+      "name": "Zoom full image gestion-de-nomina-rrhh",
+      "ok": true,
+      "detail": "4A-full-vyrSJwPA.webp"
+    },
+    {
+      "name": "Zoom control gestion-de-nomina-rrhh",
+      "ok": true
+    },
+    {
+      "name": "Route jenny-ugc",
+      "ok": true,
+      "detail": "JennyUGC.com"
+    },
+    {
+      "name": "Zoom full image jenny-ugc",
+      "ok": true,
+      "detail": "5A-full-DpE9TcYo.webp"
+    },
+    {
+      "name": "Zoom control jenny-ugc",
+      "ok": true
+    },
+    {
+      "name": "Route riki-wohl",
+      "ok": true,
+      "detail": "RikiWohl.com"
+    },
+    {
+      "name": "Zoom full image riki-wohl",
+      "ok": true,
+      "detail": "6A-full-Be33Qih-.webp"
+    },
+    {
+      "name": "Zoom control riki-wohl",
+      "ok": true
+    },
+    {
+      "name": "Route wohl-fitness",
+      "ok": true,
+      "detail": "WOHL â€” App fitness"
+    },
+    {
+      "name": "Zoom full image wohl-fitness",
+      "ok": true,
+      "detail": "7A-full-qotHXkxK.webp"
+    },
+    {
+      "name": "Zoom control wohl-fitness",
+      "ok": true
+    },
+    {
+      "name": "Route tablero-eventos-interno",
+      "ok": true,
+      "detail": "Tablero de Eventos Interno"
+    },
+    {
+      "name": "Zoom full image tablero-eventos-interno",
+      "ok": true,
+      "detail": "8B-full-CMIN5nHF.webp"
+    },
+    {
+      "name": "Zoom control tablero-eventos-interno",
+      "ok": true
+    },
+    {
+      "name": "Route sigo",
+      "ok": true,
+      "detail": "SIGO"
+    },
+    {
+      "name": "Zoom full image sigo",
+      "ok": true,
+      "detail": "9A-full-C1KzsD03.webp"
+    },
+    {
+      "name": "Zoom control sigo",
+      "ok": true
+    },
+    {
+      "name": "Certificate zoom",
+      "ok": true
+    },
+    {
+      "name": "Certificate focus restored",
+      "ok": true
+    },
+    {
+      "name": "No JS errors",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

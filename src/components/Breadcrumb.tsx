@@ -1,3 +1,4 @@
+import FontIcon from "./FontIcon";
 import { getNavigationItem, type Language, type NavigationSectionId } from "../config/navigation";
 import { Link } from "react-router-dom";
 
@@ -27,7 +28,7 @@ function Breadcrumb({ activeSection, language, details = [] }: BreadcrumbProps) 
           const isCurrent = index === items.length - 1;
           return (
             <li key={`${item.label}-${index}`}>
-              {index > 0 ? <i className="fa-solid fa-chevron-right" aria-hidden="true" /> : null}
+              {index > 0 ? <FontIcon className="fa-solid fa-chevron-right" aria-hidden="true" /> : null}
               {item.href && !isCurrent ? <Link to={item.href}>{item.label}</Link> : <span aria-current={isCurrent ? "page" : undefined}>{item.label}</span>}
             </li>
           );

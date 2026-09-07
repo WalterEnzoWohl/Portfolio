@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { TbChevronLeft, TbChevronRight, TbPlayerPause, TbPlayerPlay } from "react-icons/tb";
+import { AnimatePresence, motion, useInView } from "motion/react";
+import { TbChevronLeft, TbChevronRight } from "react-icons/tb";
 import type { Language } from "../config/navigation";
 import { workAreas, type WorkArea } from "../data/workAreas";
 import WorkAreaCard from "./WorkAreaCard";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 
 type MobileWorkAreasCarouselProps = {
   language: Language;
@@ -15,9 +16,6 @@ const carouselCopy = {
     label: "Áreas de trabajo",
     previous: "Ver área anterior",
     next: "Ver área siguiente",
-    pause: "Pausar rotación automática",
-    play: "Reanudar rotación automática",
-    reduced: "La rotación automática está desactivada por la preferencia de movimiento reducido",
     goTo: "Ir al área",
     slide: "diapositiva"
   },
@@ -25,9 +23,6 @@ const carouselCopy = {
     label: "Work areas",
     previous: "Show previous area",
     next: "Show next area",
-    pause: "Pause automatic rotation",
-    play: "Resume automatic rotation",
-    reduced: "Automatic rotation is disabled by the reduced motion preference",
     goTo: "Go to area",
     slide: "slide"
   }
@@ -42,7 +37,9 @@ function wrapIndex(index: number) {
 
 function MobileWorkAreasCarousel({ language, onOpen }: MobileWorkAreasCarouselProps) {
   const copy = carouselCopy[language];
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(carouselRef);
   const manualResumeTimerRef = useRef<number | null>(null);
   const suppressClickTimerRef = useRef<number | null>(null);
   const suppressCardClickRef = useRef(false);
@@ -52,12 +49,7 @@ function MobileWorkAreasCarousel({ language, onOpen }: MobileWorkAreasCarouselPr
   const [isPointerActive, setIsPointerActive] = useState(false);
   const [isManualPause, setIsManualPause] = useState(false);
   const [isFocusPaused, setIsFocusPaused] = useState(false);
-  const [autoplayEnabled, setAutoplayEnabled] = useState(!reduceMotion);
   const [announcement, setAnnouncement] = useState("");
-
-  useEffect(() => {
-    if (reduceMotion) setAutoplayEnabled(false);
-  }, [reduceMotion]);
 
   useEffect(() => {
     const handleVisibility = () => setIsPageVisible(!document.hidden);
@@ -95,9 +87,9 @@ function MobileWorkAreasCarousel({ language, onOpen }: MobileWorkAreasCarouselPr
   }, [announceArea, scheduleManualResume]);
 
   useEffect(() => {
-    const canRotate = autoplayEnabled
-      && !reduceMotion
+    const canRotate = !reduceMotion
       && isPageVisible
+      && isInView
       && !isPointerActive
       && !isManualPause
       && !isFocusPaused;
@@ -108,7 +100,7 @@ function MobileWorkAreasCarousel({ language, onOpen }: MobileWorkAreasCarouselPr
       setActiveIndex((current) => wrapIndex(current + 1));
     }, AUTO_ROTATION_MS);
     return () => window.clearInterval(timer);
-  }, [autoplayEnabled, isFocusPaused, isManualPause, isPageVisible, isPointerActive, reduceMotion]);
+  }, [isFocusPaused, isManualPause, isPageVisible, isPointerActive, isInView, reduceMotion]);
 
   const suppressNextCardClick = () => {
     suppressCardClickRef.current = true;
@@ -128,29 +120,13 @@ function MobileWorkAreasCarousel({ language, onOpen }: MobileWorkAreasCarouselPr
     else moveTo(activeIndex - 1, -1);
   };
 
-  const rotationIsPaused = !autoplayEnabled || isFocusPaused || isManualPause;
-
-  const toggleAutoplay = () => {
-    if (reduceMotion) return;
-    if (manualResumeTimerRef.current !== null) {
-      window.clearTimeout(manualResumeTimerRef.current);
-      manualResumeTimerRef.current = null;
-    }
-    if (rotationIsPaused) {
-      setIsManualPause(false);
-      setIsFocusPaused(false);
-      setAutoplayEnabled(true);
-    } else {
-      setAutoplayEnabled(false);
-    }
-  };
-
   const activeArea = workAreas[activeIndex];
   const animationDistance = reduceMotion ? 0 : 34;
 
   return (
     <div
       className="mobile-work-carousel"
+      ref={carouselRef}
       role="region"
       aria-roledescription={language === "es" ? "carrusel" : "carousel"}
       aria-label={copy.label}
@@ -223,16 +199,6 @@ function MobileWorkAreasCarousel({ language, onOpen }: MobileWorkAreasCarouselPr
 
         <button type="button" className="mobile-carousel-arrow" onClick={() => moveTo(activeIndex + 1, 1)} aria-label={copy.next}>
           <TbChevronRight aria-hidden="true" />
-        </button>
-        <button
-          type="button"
-          className="mobile-carousel-toggle"
-          onClick={toggleAutoplay}
-          disabled={Boolean(reduceMotion)}
-          aria-label={reduceMotion ? copy.reduced : rotationIsPaused ? copy.play : copy.pause}
-          title={reduceMotion ? copy.reduced : rotationIsPaused ? copy.play : copy.pause}
-        >
-          {!rotationIsPaused && !reduceMotion ? <TbPlayerPause aria-hidden="true" /> : <TbPlayerPlay aria-hidden="true" />}
         </button>
       </div>
 

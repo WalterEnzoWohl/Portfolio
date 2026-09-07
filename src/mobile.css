@@ -557,14 +557,13 @@ body.mobile-project-filters-open {
 
     .mobile-work-carousel-controls {
         display: grid;
-        grid-template-columns: 44px minmax(0, 1fr) 44px 44px;
+        grid-template-columns: 44px minmax(0, 1fr) 44px;
         align-items: center;
         gap: 5px;
         margin-top: 8px;
     }
 
-    .mobile-carousel-arrow,
-    .mobile-carousel-toggle {
+    .mobile-carousel-arrow {
         width: 44px;
         height: 44px;
         display: grid;
@@ -574,11 +573,6 @@ body.mobile-project-filters-open {
         color: var(--dash-accent-strong);
         background: var(--dash-card-subtle);
         font-size: 21px;
-    }
-
-    .mobile-carousel-toggle:disabled {
-        color: var(--dash-muted);
-        opacity: 0.58;
     }
 
     .mobile-carousel-dots {
@@ -1567,11 +1561,6 @@ body.mobile-project-filters-open {
 
     .mobile-work-carousel-controls {
         grid-template-columns: 44px minmax(0, 1fr) 44px;
-    }
-
-    .mobile-carousel-toggle {
-        grid-column: 1 / -1;
-        justify-self: center;
     }
 
     .projects-page-header {

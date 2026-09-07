@@ -1,19 +1,10 @@
-import { useEffect, useMemo, useRef, useState, type SyntheticEvent } from "react";
-import { Navigate, Route, Routes, useLocation, useParams } from "react-router-dom";
+import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useRef, useState, type SyntheticEvent } from "react";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import DashboardLayout from "./components/DashboardLayout";
 import OverviewDashboard from "./components/OverviewDashboard";
-import ProjectsGallery from "./components/ProjectsGallery";
-import ProjectCaseStudy from "./components/ProjectCaseStudy";
-import WebProjectCaseStudy from "./components/WebProjectCaseStudy";
-import FitnessProjectCaseStudy from "./components/FitnessProjectCaseStudy";
-import ExperienceSection from "./components/ExperienceSection";
-import CertificationsSection from "./components/CertificationsSection";
-import ContactSection from "./components/ContactSection";
-import wipImage from "./assets/placeholders/wip.png";
-import { getDataCaseStudy } from "./data/projectCaseStudies";
+import FontIcon from "./components/FontIcon";
+import wipImage from "./assets/optimized/placeholders/wip-480.webp";
 import { featuredOverviewProjectSlug, projects, recentOverviewProjectSlugs } from "./data/projects";
-import { getWebCaseStudy } from "./data/webCaseStudies";
-import { getFitnessCaseStudy } from "./data/fitnessCaseStudy";
 import "./style.css";
 import "./dashboard.css";
 import "./overview.css";
@@ -31,6 +22,14 @@ import "./mobile.css";
 
 type Language = "es" | "en";
 type Theme = "dark" | "light";
+
+const ProjectCaseStudyPage = lazy(() => import("./components/ProjectCaseStudyPage"));
+const LandingSections = lazy(() => import("./components/LandingSections"));
+const featuredProject = projects.find((project) => project.caseStudySlug === featuredOverviewProjectSlug) ?? projects[0];
+const recentProjects = recentOverviewProjectSlugs.flatMap((slug) => {
+  const project = projects.find((item) => item.caseStudySlug === slug);
+  return project ? [project] : [];
+});
 
 type ViewTransitionDocument = Document & {
   startViewTransition?: (callback: () => void) => {
@@ -240,21 +239,33 @@ function ScrollManager() {
     const state = location.state as { fromScrollSpy?: boolean } | null;
     if (state?.fromScrollSpy) return;
 
-    const frame = window.requestAnimationFrame(() => {
+    let observer: MutationObserver | undefined;
+    const scrollToLocation = () => {
       if (location.hash) {
         const element = document.getElementById(location.hash.slice(1));
 
         if (element) {
-          element.scrollIntoView({ behavior: "smooth", block: "start" });
-          return;
+          element.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "start" });
+          return true;
         }
+        return false;
       }
 
-      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      return true;
+    };
+    const frame = window.requestAnimationFrame(() => {
+      if (scrollToLocation() || !location.hash) return;
+      // A directly opened case study may still be loading its route chunk.
+      observer = new MutationObserver(() => {
+        if (scrollToLocation()) observer?.disconnect();
+      });
+      observer.observe(document.getElementById("root")!, { childList: true, subtree: true });
     });
 
     return () => {
       window.cancelAnimationFrame(frame);
+      observer?.disconnect();
     };
   }, [location.hash, location.key, location.pathname, location.state]);
 
@@ -266,16 +277,11 @@ type LandingPageProps = {
   copy: (typeof uiCopy)[Language];
   handleProjectImageError: (event: SyntheticEvent<HTMLImageElement>) => void;
 };
-function LandingPage({
+const LandingPage = memo(function LandingPage({
   language,
   copy,
   handleProjectImageError
 }: LandingPageProps) {
-  const featuredProject = projects.find((project) => project.caseStudySlug === featuredOverviewProjectSlug) ?? projects[0];
-  const recentProjects = recentOverviewProjectSlugs.flatMap((slug) => {
-    const project = projects.find((item) => item.caseStudySlug === slug);
-    return project ? [project] : [];
-  });
   return (
     <main className="dashboard-main">
       <OverviewDashboard
@@ -286,52 +292,12 @@ function LandingPage({
         onImageError={handleProjectImageError}
       />
 
-      <ProjectsGallery language={language} projects={projects} copy={copy.portfolio} onImageError={handleProjectImageError} />
-
-      <ExperienceSection language={language} />
-      <CertificationsSection language={language} />
-      <ContactSection language={language} />
+      <Suspense fallback={<div style={{ minHeight: "100vh" }} aria-busy="true" />}>
+        <LandingSections language={language} copy={copy.portfolio} onImageError={handleProjectImageError} />
+      </Suspense>
     </main>
   );
-}
-type ProjectCaseStudyPageProps = {
-  language: Language;
-  handleProjectImageError: (event: SyntheticEvent<HTMLImageElement>) => void;
-  theme: Theme;
-  themeToggleRef: React.RefObject<HTMLButtonElement | null>;
-  themeToggleLabel: string;
-  onThemeToggle: () => void;
-  onLanguageChange: (language: Language) => void;
-};
-
-function ProjectCaseStudyPage({ language, theme, themeToggleRef, themeToggleLabel, onThemeToggle, onLanguageChange, handleProjectImageError }: ProjectCaseStudyPageProps) {
-  const { slug } = useParams();
-  const dataDetail = getDataCaseStudy(slug);
-  const webDetail = getWebCaseStudy(slug);
-  const fitnessDetail = getFitnessCaseStudy(slug);
-  const projectId = dataDetail?.projectId ?? webDetail?.projectId ?? fitnessDetail?.projectId;
-  const project = projectId ? projects.find((item) => item.id === projectId) : undefined;
-
-  return (
-    <DashboardLayout
-      language={language}
-      theme={theme}
-      themeToggleRef={themeToggleRef}
-      themeToggleLabel={themeToggleLabel}
-      onThemeToggle={onThemeToggle}
-      onLanguageChange={onLanguageChange}
-      breadcrumbDetails={project ? [{ label: project.title[language] }] : []}
-    >
-      {fitnessDetail ? (
-        <FitnessProjectCaseStudy detail={fitnessDetail} project={project} projects={projects} language={language} onImageError={handleProjectImageError} />
-      ) : webDetail ? (
-        <WebProjectCaseStudy detail={webDetail} project={project} projects={projects} language={language} onImageError={handleProjectImageError} />
-      ) : (
-        <ProjectCaseStudy detail={dataDetail} project={project} projects={projects} language={language} onImageError={handleProjectImageError} />
-      )}
-    </DashboardLayout>
-  );
-}
+});
 
 function App() {
   const location = useLocation();
@@ -358,9 +324,8 @@ function App() {
   const isCaseStudyRoute = location.pathname.startsWith("/proyectos/");
   const currentCaseStudyProject = useMemo(() => {
     if (!isCaseStudyRoute) return null;
-    const slug = location.pathname.split("/").filter(Boolean).at(-1);
-    const detail = getDataCaseStudy(slug) ?? getWebCaseStudy(slug) ?? getFitnessCaseStudy(slug);
-    return detail ? projects.find((item) => item.id === detail.projectId) ?? null : null;
+    const pathname = location.pathname.replace(/\/+$/, "");
+    return projects.find((item) => item.caseStudyPath === pathname) ?? null;
   }, [isCaseStudyRoute, location.pathname]);
 
   useEffect(() => {
@@ -380,12 +345,15 @@ function App() {
       : `Portfolio | Walter Enzo Wohl`;
   }, [currentCaseStudyProject, language]);
 
-  const handleProjectImageError = (event: SyntheticEvent<HTMLImageElement>) => {
+  const handleProjectImageError = useCallback((event: SyntheticEvent<HTMLImageElement>) => {
     const image = event.currentTarget;
 
-    image.onerror = null;
+    if (image.dataset.fallbackApplied) return;
+    image.dataset.fallbackApplied = "true";
+    image.removeAttribute("srcset");
+    image.removeAttribute("sizes");
     image.src = wipImage;
-  };
+  }, []);
 
   const switchThemeWithTransition = async () => {
     const nextTheme: Theme = theme === "dark" ? "light" : "dark";
@@ -457,15 +425,21 @@ function App() {
             </DashboardLayout>
           }
         />
-        <Route path="/proyectos/:slug" element={<ProjectCaseStudyPage language={language} theme={theme} themeToggleRef={themeToggleRef} themeToggleLabel={themeToggleLabel} onThemeToggle={() => void switchThemeWithTransition()} onLanguageChange={setLanguage} handleProjectImageError={handleProjectImageError} />} />
+        <Route path="/proyectos/:slug" element={
+          <DashboardLayout language={language} theme={theme} themeToggleRef={themeToggleRef} themeToggleLabel={themeToggleLabel} onThemeToggle={() => void switchThemeWithTransition()} onLanguageChange={setLanguage} breadcrumbDetails={currentCaseStudyProject ? [{ label: currentCaseStudyProject.title[language] }] : []}>
+            <Suspense fallback={<main className="dashboard-main" aria-busy="true"><p role="status">{language === "es" ? "Cargando proyecto…" : "Loading project…"}</p></main>}>
+              <ProjectCaseStudyPage language={language} onImageError={handleProjectImageError} />
+            </Suspense>
+          </DashboardLayout>
+        } />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 
       <footer className="dashboard-page-footer">
-        <a href={isCaseStudyRoute ? "#case-study-top" : "#home"} className="arriba"><i className="fa-solid fa-angles-up" /></a>
+        <a href={isCaseStudyRoute ? "#case-study-top" : "#home"} className="arriba" aria-label={language === "es" ? "Volver arriba" : "Back to top"}><FontIcon className="fa-solid fa-angles-up" /></a>
         <div className="redes">
-          <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/walterenzowohl" aria-label="LinkedIn de Walter Enzo Wohl"><i className="fa-brands fa-linkedin" /></a>
-          <a target="_blank" rel="noopener noreferrer" href="https://github.com/WalterEnzoWohl" aria-label="GitHub de Walter Enzo Wohl"><i className="fa-brands fa-github" /></a>
+          <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/walterenzowohl" aria-label="LinkedIn de Walter Enzo Wohl"><FontIcon className="fa-brands fa-linkedin" /></a>
+          <a target="_blank" rel="noopener noreferrer" href="https://github.com/WalterEnzoWohl" aria-label="GitHub de Walter Enzo Wohl"><FontIcon className="fa-brands fa-github" /></a>
         </div>
         <p className="copyright">
           &copy; {new Date().getFullYear()} Walter Enzo Wohl. {copy.footer}

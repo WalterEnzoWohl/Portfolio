@@ -1,7 +1,7 @@
 import type { Language } from "../config/navigation";
-import arbustaLogo from "../assets/experiencia/arbusta-logo.png";
+import arbustaLogo from "../assets/optimized/experiencia/arbusta-logo-384.webp";
 import gcbaLogo from "../assets/experiencia/gcba-logo.svg";
-import msaLogo from "../assets/experiencia/msa-logo.png";
+import msaLogo from "../assets/optimized/experiencia/msa-logo-384.webp";
 
 export type LocalizedExperienceText = Record<Language, string>;
 

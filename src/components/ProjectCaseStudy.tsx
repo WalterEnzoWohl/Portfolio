@@ -1,3 +1,4 @@
+import FontIcon from "./FontIcon";
 import { useMemo, useState, type SyntheticEvent } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, MotionConfig, motion } from "motion/react";
@@ -63,7 +64,7 @@ const caseCopy = {
 
 function ProjectNotFound({ language }: { language: Language }) {
   const copy = caseCopy[language];
-  return <main className="data-case-not-found"><i className="fa-regular fa-folder-open" aria-hidden="true" /><h1>{copy.notFound}</h1><p>{copy.notFoundBody}</p><Link to="/#portfolio">{copy.returnToProjects}</Link></main>;
+  return <main className="data-case-not-found"><FontIcon className="fa-regular fa-folder-open" aria-hidden="true" /><h1>{copy.notFound}</h1><p>{copy.notFoundBody}</p><Link to="/#portfolio">{copy.returnToProjects}</Link></main>;
 }
 
 function ProjectCaseStudy({ detail, project, projects, language, onImageError }: { detail?: DataCaseStudyDetail; project?: CaseStudyProject; projects: CaseStudyProject[]; language: Language; onImageError: (event: SyntheticEvent<HTMLImageElement>) => void }) {
@@ -115,8 +116,8 @@ function ProjectCaseStudy({ detail, project, projects, language, onImageError }:
               <p className="data-case-description">{detail.fullDescription[language]}</p>
               <div className="data-case-tools">{project.tools.map((tool) => <span key={tool}>{tool}</span>)}</div>
               <div className="data-case-actions">
-                {project.link ? <a href={project.link} target="_blank" rel="noopener noreferrer">{copy.openDashboard}<i className="fa-solid fa-arrow-up-right-from-square" aria-hidden="true" /></a> : null}
-                <Link to="/#portfolio"><i className="fa-solid fa-arrow-left" aria-hidden="true" />{copy.back}</Link>
+                {project.link ? <a href={project.link} target="_blank" rel="noopener noreferrer">{copy.openDashboard}<FontIcon className="fa-solid fa-arrow-up-right-from-square" aria-hidden="true" /></a> : null}
+                <Link to="/#portfolio"><FontIcon className="fa-solid fa-arrow-left" aria-hidden="true" />{copy.back}</Link>
               </div>
             </article>
 
@@ -136,7 +137,7 @@ function ProjectCaseStudy({ detail, project, projects, language, onImageError }:
           </section>
 
           <motion.section className="data-case-facts" variants={staggerContainer} initial="hidden" animate="visible" aria-label={language === "es" ? "Ficha rápida" : "Quick facts"}>
-            {facts.map((fact) => <motion.article key={fact.label} variants={staggerItem}><i className={fact.icon} aria-hidden="true" /><div><small>{fact.label}</small><p>{fact.value}</p></div></motion.article>)}
+            {facts.map((fact) => <motion.article key={fact.label} variants={staggerItem}><FontIcon className={fact.icon} aria-hidden="true" /><div><small>{fact.label}</small><p>{fact.value}</p></div></motion.article>)}
           </motion.section>
 
           <section className="data-case-journey" aria-labelledby="data-case-journey-title">
@@ -144,9 +145,9 @@ function ProjectCaseStudy({ detail, project, projects, language, onImageError }:
             <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
               {detail.journey.map((step, index) => (
                 <motion.article key={step.id} variants={staggerItem} whileHover={interactiveMotion.hover}>
-                  <i className={step.icon} aria-hidden="true" />
+                  <FontIcon className={step.icon} aria-hidden="true" />
                   <div><small>{String(index + 1).padStart(2, "0")} · {step.title[language]}</small><p>{step.description[language]}</p></div>
-                  {index < detail.journey.length - 1 ? <i className="data-case-connector fa-solid fa-arrow-right" aria-hidden="true" /> : null}
+                  {index < detail.journey.length - 1 ? <FontIcon className="data-case-connector fa-solid fa-arrow-right" aria-hidden="true" /> : null}
                 </motion.article>
               ))}
             </motion.div>
@@ -175,10 +176,10 @@ function ProjectCaseStudy({ detail, project, projects, language, onImageError }:
                 ))}
               </div>
             </section>
-            <section className="data-case-detection" aria-labelledby="data-case-detection-title"><h2 id="data-case-detection-title">{copy.detection}</h2><ul>{detail.detectionItems[language].map((item) => <li key={item}><i className="fa-solid fa-circle-check" aria-hidden="true" /><span>{item}</span></li>)}</ul></section>
+            <section className="data-case-detection" aria-labelledby="data-case-detection-title"><h2 id="data-case-detection-title">{copy.detection}</h2><ul>{detail.detectionItems[language].map((item) => <li key={item}><FontIcon className="fa-solid fa-circle-check" aria-hidden="true" /><span>{item}</span></li>)}</ul></section>
           </div>
 
-          {relatedProjects.length ? <section className="data-case-related" aria-labelledby="related-projects-title"><h2 id="related-projects-title">{copy.related}</h2><div>{relatedProjects.map((related) => <Link key={related.id} to={related.caseStudyPath ?? ""}><img src={related.image} alt={related.imageAlt[language]} loading="lazy" onError={onImageError} /><span><strong>{related.title[language]}</strong><small>{copy.openRelated}<i className="fa-solid fa-arrow-right" aria-hidden="true" /></small></span></Link>)}</div></section> : null}
+          {relatedProjects.length ? <section className="data-case-related" aria-labelledby="related-projects-title"><h2 id="related-projects-title">{copy.related}</h2><div>{relatedProjects.map((related) => <Link key={related.id} to={related.caseStudyPath ?? ""}><img src={related.image} alt={related.imageAlt[language]} loading="lazy" onError={onImageError} /><span><strong>{related.title[language]}</strong><small>{copy.openRelated}<FontIcon className="fa-solid fa-arrow-right" aria-hidden="true" /></small></span></Link>)}</div></section> : null}
         </motion.div>
 
         <AnimatePresence>

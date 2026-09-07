@@ -1,3 +1,4 @@
+import FontIcon from "./FontIcon";
 import { useMemo, useState, type SyntheticEvent } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, MotionConfig, motion } from "motion/react";
@@ -63,7 +64,7 @@ function WebProjectNotFound({ language }: { language: Language }) {
 
   return (
     <main className="data-case-not-found">
-      <i className="fa-regular fa-folder-open" aria-hidden="true" />
+      <FontIcon className="fa-regular fa-folder-open" aria-hidden="true" />
       <h1>{text.notFound}</h1>
       <p>{text.notFoundBody}</p>
       <Link to="/#portfolio">{text.returnToProjects}</Link>
@@ -134,12 +135,12 @@ function WebProjectCaseStudy({
   const highlightsSection = (
     <section className="web-case-highlights" aria-labelledby="web-case-highlights-title">
       <div className="web-case-highlights-heading">
-        <span><i className="fa-solid fa-wand-magic-sparkles" aria-hidden="true" /></span>
+        <span><FontIcon className="fa-solid fa-wand-magic-sparkles" aria-hidden="true" /></span>
         <div><small>{project.title[language]}</small><h2 id="web-case-highlights-title">{text.highlights}</h2></div>
       </div>
       <motion.ul variants={staggerContainer} initial="hidden" animate="visible">
         {detail.highlights.map((item) => (
-          <motion.li key={item.es} variants={staggerItem}><i className="fa-solid fa-check" aria-hidden="true" /><span>{item[language]}</span></motion.li>
+          <motion.li key={item.es} variants={staggerItem}><FontIcon className="fa-solid fa-check" aria-hidden="true" /><span>{item[language]}</span></motion.li>
         ))}
       </motion.ul>
     </section>
@@ -160,9 +161,9 @@ function WebProjectCaseStudy({
               </div>
               <div className="web-case-actions">
                 <a href={project.link} target="_blank" rel="noopener noreferrer">
-                  {detail.ctaLabel?.[language] ?? text.openSite}<i className="fa-solid fa-arrow-up-right-from-square" aria-hidden="true" />
+                  {detail.ctaLabel?.[language] ?? text.openSite}<FontIcon className="fa-solid fa-arrow-up-right-from-square" aria-hidden="true" />
                 </a>
-                <Link to="/#portfolio"><i className="fa-solid fa-arrow-left" aria-hidden="true" />{text.back}</Link>
+                <Link to="/#portfolio"><FontIcon className="fa-solid fa-arrow-left" aria-hidden="true" />{text.back}</Link>
               </div>
             </article>
 
@@ -184,7 +185,7 @@ function WebProjectCaseStudy({
           <motion.section className="web-case-facts" variants={staggerContainer} initial="hidden" animate="visible" aria-label={language === "es" ? "Información general" : "General information"}>
             {facts.map((fact, index) => (
               <motion.article key={fact.label} variants={staggerItem}>
-                <i className={factIcons[index]} aria-hidden="true" />
+                <FontIcon className={factIcons[index]} aria-hidden="true" />
                 <div><small>{fact.label}</small><p>{fact.value}</p></div>
               </motion.article>
             ))}
@@ -199,9 +200,9 @@ function WebProjectCaseStudy({
               {detail.journey.map((step, index) => (
                 <motion.article key={step.id} variants={staggerItem} whileHover={interactiveMotion.hover}>
                   <span className="web-case-step-number">{String(index + 1).padStart(2, "0")}</span>
-                  <i className={step.icon} aria-hidden="true" />
+                  <FontIcon className={step.icon} aria-hidden="true" />
                   <div><h3>{step.title[language]}</h3><p>{step.description[language]}</p></div>
-                  {index < detail.journey.length - 1 ? <i className="web-case-step-connector fa-solid fa-arrow-right" aria-hidden="true" /> : null}
+                  {index < detail.journey.length - 1 ? <FontIcon className="web-case-step-connector fa-solid fa-arrow-right" aria-hidden="true" /> : null}
                 </motion.article>
               ))}
             </motion.div>
@@ -253,7 +254,7 @@ function WebProjectCaseStudy({
                 {relatedProjects.map((related) => (
                   <Link key={related.id} to={related.caseStudyPath ?? ""}>
                     <img src={related.image} alt={related.imageAlt[language]} loading="lazy" onError={onImageError} />
-                    <span><strong>{related.title[language]}</strong><small>{text.openRelated}<i className="fa-solid fa-arrow-right" aria-hidden="true" /></small></span>
+                    <span><strong>{related.title[language]}</strong><small>{text.openRelated}<FontIcon className="fa-solid fa-arrow-right" aria-hidden="true" /></small></span>
                   </Link>
                 ))}
               </div>

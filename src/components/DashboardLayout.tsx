@@ -1,3 +1,4 @@
+import FontIcon from "./FontIcon";
 import { useEffect, useRef, useState, type ReactNode, type RefObject } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, useReducedMotion } from "motion/react";
@@ -7,6 +8,7 @@ import MobileNavigation from "./MobileNavigation";
 import {
   getNavigationSectionFromLocation,
   getNavigationItem,
+  isNavigationSection,
   navigationItems,
   type Language,
   type NavigationSectionId
@@ -59,7 +61,10 @@ function DashboardLayout({
   const navigate = useNavigate();
   const reduceMotion = useReducedMotion();
   const syncedHashRef = useRef(location.hash);
-  const pendingSectionRef = useRef<NavigationSectionId | null>(null);
+  const initialSection = location.hash.slice(1);
+  const pendingSectionRef = useRef<NavigationSectionId | null>(
+    location.pathname === "/" && isNavigationSection(initialSection) ? initialSection : null
+  );
   const copy = layoutCopy[language];
   const displayedSection = getNavigationSectionFromLocation(location.pathname, location.hash);
 
@@ -81,9 +86,10 @@ function DashboardLayout({
   useEffect(() => {
     if (location.pathname !== "/") return;
 
-    const sections = navigationItems
+    const findSections = () => navigationItems
       .map((item) => document.getElementById(item.id))
       .filter((section): section is HTMLElement => Boolean(section));
+    let sections = findSections();
 
     let frame = 0;
     const updateActiveSection = () => {
@@ -115,11 +121,23 @@ function DashboardLayout({
     };
 
     scheduleUpdate();
+    // Refresh the cached nodes once the deferred landing sections mount.
+    const observer = new MutationObserver(() => {
+      sections = findSections();
+      if (sections.length === navigationItems.length) {
+        observer.disconnect();
+        scheduleUpdate();
+      }
+    });
+    if (sections.length < navigationItems.length) {
+      observer.observe(document.getElementById("root")!, { childList: true, subtree: true });
+    }
     window.addEventListener("scroll", scheduleUpdate, { passive: true });
     window.addEventListener("resize", scheduleUpdate);
 
     return () => {
       cancelAnimationFrame(frame);
+      observer.disconnect();
       window.removeEventListener("scroll", scheduleUpdate);
       window.removeEventListener("resize", scheduleUpdate);
     };
@@ -127,7 +145,11 @@ function DashboardLayout({
 
   useEffect(() => {
     syncedHashRef.current = location.hash;
-  }, [location.hash]);
+    const section = location.hash.slice(1);
+    if (!(location.state as { fromScrollSpy?: boolean } | null)?.fromScrollSpy && location.pathname === "/" && isNavigationSection(section)) {
+      pendingSectionRef.current = section;
+    }
+  }, [location.hash, location.pathname, location.state]);
 
   const displayedNavigationItem = getNavigationItem(displayedSection);
 
@@ -154,7 +176,7 @@ function DashboardLayout({
 
       <aside id="portfolio-sidebar" className={`dashboard-sidebar ${isSidebarOpen ? "is-open" : ""}`} aria-label={copy.navigation}>
         <button type="button" className="dashboard-sidebar-close" onClick={closeSidebar} aria-label={copy.closeMenu}>
-          <i className="fa-solid fa-xmark" aria-hidden="true" />
+          <FontIcon className="fa-solid fa-xmark" aria-hidden="true" />
         </button>
 
         <Link className="dashboard-brand" to={{ pathname: "/", hash: "#home" }} onClick={() => handleSectionActivation("home")} aria-label="Ir al resumen">
@@ -184,7 +206,7 @@ function DashboardLayout({
                         transition={{ duration: reduceMotion ? 0 : 0.18, ease: [0.22, 1, 0.36, 1] }}
                       />
                     ) : null}
-                    <i className={item.icon} aria-hidden="true" />
+                    <FontIcon className={item.icon} aria-hidden="true" />
                     <span>{item.label[language]}</span>
                   </Link>
                 </li>
@@ -195,7 +217,7 @@ function DashboardLayout({
 
         <div className="dashboard-sidebar-footer">
           <a className="dashboard-cv-link" href="/img/Walter Enzo Wohl CV.pdf" download="WalterEnzoWohl.pdf">
-            <i className="fa-solid fa-download" aria-hidden="true" />
+            <FontIcon className="fa-solid fa-download" aria-hidden="true" />
             <span>{copy.download}</span>
           </a>
           <p className="dashboard-availability">
@@ -225,7 +247,7 @@ function DashboardLayout({
               aria-expanded={isSidebarOpen}
               onClick={() => setIsSidebarOpen(true)}
             >
-              <i className="fa-solid fa-bars" aria-hidden="true" />
+              <FontIcon className="fa-solid fa-bars" aria-hidden="true" />
             </button>
 
             <button
@@ -236,7 +258,7 @@ function DashboardLayout({
               title={themeToggleLabel}
               onClick={onThemeToggle}
             >
-              <i className={`fa-solid ${theme === "light" ? "fa-sun" : "fa-moon"}`} aria-hidden="true" />
+              <FontIcon className={`fa-solid ${theme === "light" ? "fa-sun" : "fa-moon"}`} aria-hidden="true" />
             </button>
 
             <button

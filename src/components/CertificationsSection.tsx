@@ -57,7 +57,7 @@ function InstitutionLogo({ certification, language }: { certification: Certifica
   return (
     <motion.div className="certification-institution-logo" variants={staggerItem} aria-label={certification.institution[language]}>
       {certification.logo ? (
-        <img src={certification.logo.src} alt={certification.logo.alt[language]} />
+        <img src={certification.logo.src} loading="lazy" decoding="async" alt={certification.logo.alt[language]} />
       ) : (
         <span aria-hidden="true">{certification.logoFallback}</span>
       )}
@@ -87,7 +87,7 @@ function CertificatePreview({ certification, language }: { certification: Certif
   const copy = certificationSectionCopy[language];
 
   return certification.certificateImage ? (
-    <img src={certification.certificateImage} alt={`${copy.certificatePreview}: ${certification.title[language]}`} />
+    <img src={certification.certificateThumbnail} srcSet={certification.certificateSrcSet} sizes="(max-width: 767px) calc(100vw - 48px), 400px" width={certification.certificateWidth} height={certification.certificateHeight} loading="lazy" decoding="async" alt={`${copy.certificatePreview}: ${certification.title[language]}`} />
   ) : certification.certificateUrl ? (
     <div className="certificate-placeholder certificate-placeholder--available" aria-label={`${copy.certificatePreview}: ${certification.title[language]}`}>
       <TbFileCertificate aria-hidden="true" />

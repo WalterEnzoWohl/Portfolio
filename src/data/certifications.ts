@@ -1,9 +1,11 @@
 import type { Language } from "../config/navigation";
-import crehanaLogo from "../assets/certificaciones/crehana.png";
-import crehanaCertificate from "../assets/certificaciones/crehana_certificado.jpg";
-import googleLogo from "../assets/certificaciones/google.png";
-import utnLogo from "../assets/certificaciones/utn.png";
-import utnCertificate from "../assets/certificaciones/utn_certificado.png";
+import crehanaLogo from "../assets/optimized/certificaciones/crehana-320.webp";
+import { getRequiredOptimizedImage } from "./optimizedImages";
+import googleLogo from "../assets/optimized/certificaciones/google-320.webp";
+import utnLogo from "../assets/optimized/certificaciones/utn-320.webp";
+
+const crehanaCertificate = getRequiredOptimizedImage("certificaciones/crehana_certificado.jpg");
+const utnCertificate = getRequiredOptimizedImage("certificaciones/utn_certificado.png");
 
 type LocalizedText = Record<Language, string>;
 
@@ -34,6 +36,10 @@ export type Certification = {
   programUrl?: string;
   certificateUrl?: string;
   certificateImage?: string;
+  certificateThumbnail?: string;
+  certificateSrcSet?: string;
+  certificateWidth?: number;
+  certificateHeight?: number;
 };
 
 export const certificationSectionCopy = {
@@ -145,7 +151,11 @@ export const certifications: Certification[] = [
       alt: { es: "Logo del Centro de e-Learning de UTN.BA", en: "UTN.BA e-Learning Center logo" }
     },
     logoFallback: "UTN",
-    certificateImage: utnCertificate,
+    certificateThumbnail: utnCertificate.src,
+    certificateSrcSet: utnCertificate.srcSet,
+    certificateWidth: utnCertificate.width,
+    certificateHeight: utnCertificate.height,
+    certificateImage: utnCertificate.full,
     technologies: ["HTML", "CSS", "JavaScript", "React", "Node.js", "MySQL"],
     competencies: [
       { icon: "frontend", title: { es: "Desarrollo frontend", en: "Frontend development" } },
@@ -170,7 +180,11 @@ export const certifications: Certification[] = [
       alt: { es: "Logo de Crehana", en: "Crehana logo" }
     },
     logoFallback: "C",
-    certificateImage: crehanaCertificate,
+    certificateThumbnail: crehanaCertificate.src,
+    certificateSrcSet: crehanaCertificate.srcSet,
+    certificateWidth: crehanaCertificate.width,
+    certificateHeight: crehanaCertificate.height,
+    certificateImage: crehanaCertificate.full,
     technologies: ["Excel avanzado", "Macros", "Power BI", "SQL"],
     competencies: [
       { icon: "excel", title: { es: "Análisis con Excel", en: "Excel analysis" } },

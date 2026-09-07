@@ -1,3 +1,4 @@
+import FontIcon from "./FontIcon";
 import { useEffect, useRef, useState, type SyntheticEvent } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, MotionConfig, motion, useReducedMotion } from "motion/react";
@@ -8,11 +9,16 @@ import { useMediaQuery } from "../hooks/useMediaQuery";
 import MobileWorkAreasCarousel from "./MobileWorkAreasCarousel";
 import WorkAreaCard from "./WorkAreaCard";
 import profileImage from "../assets/branding/foto-perfil.webp";
+import ProfileModal from "./ProfileModal";
+import { profile } from "../data/profile";
 
 export type OverviewProject = {
   title: { es: string; en: string };
   description: { es: string; en: string };
   image: string;
+  imageSrcSet?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   tools: string[];
   category: "powerbi" | "web";
   caseStudySlug?: string;
@@ -69,7 +75,7 @@ function ProjectLink({ project, label, className }: { project: OverviewProject; 
   return (
     <Link className={className} to={project.caseStudyPath}>
       <span>{label}</span>
-      <i className="fa-solid fa-arrow-right" aria-hidden="true" />
+      <FontIcon className="fa-solid fa-arrow-right" aria-hidden="true" />
     </Link>
   );
 }
@@ -94,13 +100,13 @@ function AreaPanel({
   return (
     <>
       <header className="area-panel-header">
-        <span className="area-panel-icon"><i className={area.icon} aria-hidden="true" /></span>
+        <span className="area-panel-icon"><FontIcon className={area.icon} aria-hidden="true" /></span>
         <div>
           <span>{copy.workAreas}</span>
           <h2 id="area-panel-title">{area.title[language]}</h2>
         </div>
         <button type="button" className="area-panel-close" onClick={onClose} aria-label={copy.closePanel}>
-          <i className="fa-solid fa-xmark" aria-hidden="true" />
+          <FontIcon className="fa-solid fa-xmark" aria-hidden="true" />
         </button>
       </header>
 
@@ -134,6 +140,7 @@ function AreaPanel({
 function OverviewDashboard({ language, featuredProject, recentProjects, projects, onImageError }: OverviewDashboardProps) {
   const copy = overviewCopy[language];
   const [selectedArea, setSelectedArea] = useState<WorkArea | null>(null);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const panelRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const openerRef = useRef<HTMLButtonElement | null>(null);
@@ -190,7 +197,7 @@ function OverviewDashboard({ language, featuredProject, recentProjects, projects
     <MotionConfig reducedMotion="user">
       <section className="overview-dashboard" id="home" aria-labelledby="overview-title">
         <div ref={contentRef} className="overview-dashboard-content">
-          <motion.div className="overview-hero-grid" initial="hidden" animate="visible" variants={staggerContainer}>
+          <motion.div className="overview-hero-grid" initial={false} animate="visible" variants={staggerContainer}>
             <motion.article className="overview-hero" variants={sectionReveal}>
               <div className="overview-data-art" aria-hidden="true">
                 <svg viewBox="0 0 640 240" focusable="false">
@@ -220,31 +227,31 @@ function OverviewDashboard({ language, featuredProject, recentProjects, projects
               <div className="overview-hero-copy">
                 <h1 id="overview-title">{copy.title}</h1>
                 <div className="overview-actions">
-                  <a className="overview-primary-action" href="#portfolio">{copy.projects}<i className="fa-solid fa-arrow-right" aria-hidden="true" /></a>
-                  <a className="overview-secondary-action" href="#contacto">{copy.contact}<i className="fa-regular fa-envelope" aria-hidden="true" /></a>
+                  <a className="overview-primary-action" href="#portfolio">{copy.projects}<FontIcon className="fa-solid fa-arrow-right" aria-hidden="true" /></a>
+                  <a className="overview-secondary-action" href="#contacto">{copy.contact}<FontIcon className="fa-regular fa-envelope" aria-hidden="true" /></a>
                 </div>
               </div>
             </motion.article>
 
             <motion.aside className="overview-profile" variants={sectionReveal}>
-              <div className="overview-profile-image">
+              <button type="button" className="overview-profile-image overview-profile-trigger" aria-label={profile[language].open} aria-haspopup="dialog" onClick={() => setIsProfileOpen(true)}>
                 <img src={profileImage} alt="Walter Enzo Wohl" width="220" height="220" fetchPriority="high" />
-              </div>
+              </button>
               <div className="overview-profile-copy">
                 <h2>Walter Enzo Wohl</h2>
                 <p className="overview-profile-location">Buenos Aires, Argentina</p>
                 <p className="overview-profile-availability"><span aria-hidden="true" />{language === "es" ? "Disponible para propuestas" : "Available for opportunities"}</p>
               </div>
               <div className="overview-profile-links">
-                <a href="https://www.linkedin.com/in/walterenzowohl" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i className="fa-brands fa-linkedin" aria-hidden="true" /><span>LinkedIn</span></a>
-                <a href="https://github.com/WalterEnzoWohl" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i className="fa-brands fa-github" aria-hidden="true" /><span>GitHub</span></a>
+                <a href="https://www.linkedin.com/in/walterenzowohl" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FontIcon className="fa-brands fa-linkedin" aria-hidden="true" /><span>LinkedIn</span></a>
+                <a href="https://github.com/WalterEnzoWohl" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><FontIcon className="fa-brands fa-github" aria-hidden="true" /><span>GitHub</span></a>
               </div>
             </motion.aside>
           </motion.div>
 
           <motion.section className="overview-panel overview-areas" aria-labelledby="work-areas-title" initial="hidden" animate="visible" variants={sectionReveal}>
             <header className="overview-panel-heading">
-              <span className="overview-heading-icon"><i className="fa-solid fa-briefcase" aria-hidden="true" /></span>
+              <span className="overview-heading-icon"><FontIcon className="fa-solid fa-briefcase" aria-hidden="true" /></span>
               <h2 id="work-areas-title">{copy.workAreas}</h2>
             </header>
             {isMobileSheet ? (
@@ -266,11 +273,11 @@ function OverviewDashboard({ language, featuredProject, recentProjects, projects
           <motion.div className="overview-project-grid" initial="hidden" animate="visible" variants={staggerContainer}>
             <motion.article className="overview-panel overview-featured" variants={staggerItem}>
               <header className="overview-panel-heading">
-                <span className="overview-heading-icon"><i className="fa-regular fa-star" aria-hidden="true" /></span>
+                <span className="overview-heading-icon"><FontIcon className="fa-regular fa-star" aria-hidden="true" /></span>
                 <h2>{copy.featured}</h2>
               </header>
               <div className="overview-featured-content">
-                <div className="overview-featured-media"><img src={featuredProject.image} alt={featuredProject.title[language]} loading="eager" onError={onImageError} /></div>
+                <div className="overview-featured-media"><img src={featuredProject.image} srcSet={featuredProject.imageSrcSet} sizes="(max-width: 767px) calc(100vw - 48px), 260px" width={featuredProject.imageWidth} height={featuredProject.imageHeight} decoding="async" alt={featuredProject.title[language]} loading="eager" onError={onImageError} /></div>
                 <div className="overview-featured-copy">
                   <h3>{featuredProject.title[language]}</h3>
                   <p>{featuredProject.description[language]}</p>
@@ -282,13 +289,13 @@ function OverviewDashboard({ language, featuredProject, recentProjects, projects
 
             <motion.article className="overview-panel overview-recent" variants={staggerItem}>
               <header className="overview-panel-heading">
-                <span className="overview-heading-icon"><i className="fa-regular fa-folder" aria-hidden="true" /></span>
+                <span className="overview-heading-icon"><FontIcon className="fa-regular fa-folder" aria-hidden="true" /></span>
                 <h2>{copy.recent}</h2>
               </header>
               <div className="overview-recent-list">
                 {recentProjects.map((project) => (
                   <div className="overview-recent-card" key={project.title.en}>
-                    <div className="overview-recent-image"><img src={project.image} alt={project.title[language]} loading="lazy" decoding="async" onError={onImageError} /></div>
+                    <div className="overview-recent-image"><img src={project.image} srcSet={project.imageSrcSet} sizes="100px" width={project.imageWidth} height={project.imageHeight} alt={project.title[language]} loading="lazy" decoding="async" onError={onImageError} /></div>
                     <div className="overview-recent-copy"><h3>{project.title[language]}</h3><span>{copy.categories[project.category]}</span></div>
                     <ProjectLink project={project} label={copy.openProject} className="overview-project-arrow" />
                   </div>
@@ -297,6 +304,8 @@ function OverviewDashboard({ language, featuredProject, recentProjects, projects
             </motion.article>
           </motion.div>
         </div>
+
+        {isProfileOpen ? <ProfileModal language={language} onClose={() => setIsProfileOpen(false)} /> : null}
 
         <AnimatePresence>
           {selectedArea ? (

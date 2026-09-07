@@ -1,3 +1,4 @@
+import FontIcon from "./FontIcon";
 import type { ComponentType, SVGAttributes } from "react";
 import { motion } from "motion/react";
 import {
@@ -83,13 +84,13 @@ function WorkAreaCard({ area, language, onOpen, standalone = false }: WorkAreaCa
       aria-label={accessibleLabel}
     >
       <span className="work-area-card-heading">
-        <span className="overview-area-icon"><i className={area.icon} aria-hidden="true" /></span>
+        <span className="overview-area-icon"><FontIcon className={area.icon} aria-hidden="true" /></span>
         <strong>{area.title[language]}</strong>
       </span>
       <span className="work-area-technologies">
         {area.technologies.map((technology) => <TechnologyItem key={technology.name} technology={technology} />)}
       </span>
-      <i className="work-area-arrow fa-solid fa-arrow-right" aria-hidden="true" />
+      <FontIcon className="work-area-arrow fa-solid fa-arrow-right" aria-hidden="true" />
     </motion.button>
   );
 }

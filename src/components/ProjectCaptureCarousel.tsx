@@ -1,3 +1,4 @@
+import FontIcon from "./FontIcon";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion, useReducedMotion } from "motion/react";
@@ -172,14 +173,14 @@ function ProjectCaptureCarousel({
           </div>
           <span aria-live="polite">{activeIndex + 1} / {slides.length}</span>
           <button ref={closeRef} type="button" onClick={onClose} aria-label={text.close}>
-            <i className="fa-solid fa-xmark" aria-hidden="true" />
+            <FontIcon className="fa-solid fa-xmark" aria-hidden="true" />
           </button>
         </header>
 
         <div className="project-gallery-stage">
           {slides.length > 1 ? (
             <button className="project-gallery-control is-previous" type="button" onClick={() => move(-1)} aria-label={text.previous}>
-              <i className="fa-solid fa-chevron-left" aria-hidden="true" />
+              <FontIcon className="fa-solid fa-chevron-left" aria-hidden="true" />
             </button>
           ) : null}
 
@@ -208,6 +209,7 @@ function ProjectCaptureCarousel({
               onZoomChange={handleZoomChange}
             >
               <ProjectCapture
+                fullResolution
                 projectNumber={projectNumber}
                 capture={slide.capture}
                 alt={slide.alt}
@@ -220,7 +222,7 @@ function ProjectCaptureCarousel({
 
           {slides.length > 1 ? (
             <button className="project-gallery-control is-next" type="button" onClick={() => move(1)} aria-label={text.next}>
-              <i className="fa-solid fa-chevron-right" aria-hidden="true" />
+              <FontIcon className="fa-solid fa-chevron-right" aria-hidden="true" />
             </button>
           ) : null}
         </div>

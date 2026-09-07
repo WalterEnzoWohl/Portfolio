@@ -1105,6 +1105,11 @@ html[data-theme="dark"] .dashboard-app {
 
 .dashboard-page-footer {
     margin-left: var(--dash-sidebar-width, 280px);
+    padding-top: 86px;
+}
+
+.dashboard-page-footer .arriba {
+    top: 16px;
 }
 
 @keyframes overview-reveal {
