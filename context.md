@@ -79,7 +79,7 @@ Detalles de datos: `projectCaseStudies.ts` (1-4), `webCaseStudies.ts` (5, 6, 8, 
 ## Secciones y assets
 
 - Branding: `src/assets/branding/`; experiencia: `src/assets/experiencia/`; certificados: `src/assets/certificaciones/`; fondos y placeholders en carpetas propias.
-- CV: `public/img/Walter Enzo Wohl CV.pdf`.
+- CV actualizados al 2026-09-17: español en `public/img/Walter Enzo Wohl CV.pdf`, inglés en `public/img/Walter Enzo Wohl Resume.pdf`. Los botones de sidebar y Experiencia usan `src/data/resume.ts` según el idioma seleccionado.
 - Experiencia y logos: `src/data/experience.ts` + `ExperienceSection.tsx`; logos usan encuadre/zoom CSS para no chocar con texto.
 - Certificaciones: `src/data/certifications.ts`; Google en curso, UTN y Crehana completadas. Certificados reales: `utn_certificado.png` y `crehana_certificado.jpg`.
 - Contacto: `ContactSection.tsx`, datos en `contact.ts`. Email `walterenzowohl@gmail.com`, teléfono `+54 11 4141 9407`, LinkedIn `/in/walterenzowohl`, GitHub `WalterEnzoWohl`.

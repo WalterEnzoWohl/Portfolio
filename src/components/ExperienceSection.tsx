@@ -1,5 +1,6 @@
 import { MotionConfig, motion, useReducedMotion, type Variants } from "motion/react";
 import type { IconType } from "react-icons";
+import { resumeDownloads } from "../data/resume";
 import {
   TbArrowRight,
   TbBrandCss3,
@@ -279,7 +280,7 @@ function ExperienceSection({ language }: ExperienceSectionProps) {
               <h2 id="experience-title">{copy.title}</h2>
 
             </div>
-            <a className="experience-download" href="/img/Walter Enzo Wohl CV.pdf" download="WalterEnzoWohl.pdf">
+            <a className="experience-download" href={resumeDownloads[language].href} download={resumeDownloads[language].filename}>
               <span>{copy.downloadCv}</span>
               <TbDownload aria-hidden="true" focusable="false" />
             </a>

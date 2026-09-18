@@ -1,4 +1,5 @@
 import FontIcon from "./FontIcon";
+import { resumeDownloads } from "../data/resume";
 import { useEffect, useRef, useState, type ReactNode, type RefObject } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, useReducedMotion } from "motion/react";
@@ -216,7 +217,7 @@ function DashboardLayout({
         </nav>
 
         <div className="dashboard-sidebar-footer">
-          <a className="dashboard-cv-link" href="/img/Walter Enzo Wohl CV.pdf" download="WalterEnzoWohl.pdf">
+          <a className="dashboard-cv-link" href={resumeDownloads[language].href} download={resumeDownloads[language].filename}>
             <FontIcon className="fa-solid fa-download" aria-hidden="true" />
             <span>{copy.download}</span>
           </a>
